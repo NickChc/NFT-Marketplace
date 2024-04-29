@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import { TLocale } from "../../../../i18n.config";
 import { Navigation } from "@/app/[lang]/_components/Navigation";
+import { ToggleTheme } from "@/app/[lang]/_components/ToggleTheme";
 
 interface AdminLayoutProps {
   params: {
@@ -16,6 +17,7 @@ export default function AdminLayout({
     <>
       <Navigation lang={lang} />
       {children}
+      <ToggleTheme />
     </>
   );
 }
