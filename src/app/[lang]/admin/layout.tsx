@@ -17,7 +17,6 @@ export default function AdminLayout({
     <>
       <Navigation lang={lang} />
       {children}
-      <ToggleTheme />
     </>
   );
 }
