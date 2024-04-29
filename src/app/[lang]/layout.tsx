@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { TLocale, i18n } from "../../../i18n.config";
 import "./globals.css";
 import { PropsWithChildren } from "react";
+import { Providers } from "@/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,11 +22,13 @@ interface RootLayoutProps {
 export default function RootLayout({
   children,
   params,
-}: Readonly<PropsWithChildren<RootLayoutProps>>) {
+}: PropsWithChildren<RootLayoutProps>) {
   return (
-    <html lang={params.lang}>
-      <body className={`w-full flex flex-col ${inter.className}`}>
-        {children}
+    <html lang={params.lang} suppressHydrationWarning>
+      <body
+        className={`w-full bg-white dark:bg-black relative ${inter.className}`}
+      >
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
