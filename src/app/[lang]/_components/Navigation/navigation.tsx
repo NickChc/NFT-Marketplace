@@ -1,6 +1,8 @@
 import { getDictionaries } from "@/lib/dictionary";
 import { NavLink } from "@/app/[lang]/_components/NavLink";
 import { TLocale } from "../../../../../i18n.config";
+import { LangSelect } from "@/app/[lang]/_components/LangSelect";
+import { ToggleTheme } from "@/app/[lang]/_components/ToggleTheme";
 
 interface NavigationProps {
   lang: TLocale;
@@ -9,10 +11,12 @@ interface NavigationProps {
 export async function Navigation({ lang }: NavigationProps) {
   const { page } = await getDictionaries(lang);
   return (
-    <nav className="w-full flex items-center justify-center gap-x-4 sm:gap-x-6 lg:gap-x-9 bg-purple-800 ">
-      <NavLink path={`/${lang}/admin`} title="Dashboard" />
-      <NavLink path={`/${lang}/sales`} title="Sales" />
-      <NavLink path={`/${lang}/customers`} title="Customers" />
+    <nav className="w-full flex items-center justify-center gap-x-4 sm:gap-x-6 lg:gap-x-9 bg-purple-800 relative">
+      <LangSelect lang={lang} />
+      <NavLink path={`/${lang}/admin`} title={page.dashboard} />
+      <NavLink path={`/${lang}/sales`} title={page.sales} />
+      <NavLink path={`/${lang}/customers`} title={page.customers} />
+      <ToggleTheme />
     </nav>
   );
 }

@@ -1,5 +1,8 @@
 {
   "page": {
-    "home": "HOME"
+    "home": "HOME",
+    "dashboard": "Dashboard",
+    "sales": "Sales",
+    "customers": "Customers"
   }
 }

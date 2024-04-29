@@ -34,9 +34,9 @@ export function ToggleTheme() {
     return (
       <span
         suppressHydrationWarning
-        className="absolute top-4 right-3 text-xl text-purple-700 bg-white rounded-full p-1.5 opacity-50"
+        className="opacity-50 absolute top-1/2 -translate-y-1/2 right-3 text-xl bg-white rounded-full w-10 aspect-square text-purple-700 cursor-pointer"
       >
-        <MoonIcon />
+        <MoonIcon className="absolute right-1/2 top-1/2 -translate-y-1/2 translate-x-1/2 " />
       </span>
     );
   }
@@ -44,7 +44,7 @@ export function ToggleTheme() {
   return (
     <span
       suppressHydrationWarning
-      className={`absolute top-4 right-3 text-xl bg-white rounded-full w-10 grid place-items-center aspect-square text-purple-700 cursor-pointer `}
+      className={`absolute top-1/2 -translate-y-1/2 right-3 text-xl bg-white rounded-full w-10 aspect-square text-purple-700 cursor-pointer `}
       onClick={memoizeToggleTheme}
     >
       <SunIcon
