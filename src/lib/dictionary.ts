@@ -7,6 +7,6 @@ const dictionaries = {
   ka: () => import("@/dictionaries/ka.json").then((module) => module.default),
 };
 
-export async function getDictionaries(locale: TLocale) {
-  return dictionaries[locale]();
-}
+
+export const getDictionaries = async (locale: TLocale) =>
+  dictionaries[locale]();
