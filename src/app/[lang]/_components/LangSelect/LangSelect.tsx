@@ -40,7 +40,7 @@ export function LangSelect({ lang }: LangSelectProps) {
   return (
     <div className="absolute top-1/2 -translate-y-1/2 left-4">
       <button
-        className="w-10 h-10 p-2 rounded-md bg-white font-semibold"
+        className="w-10 h-10 p-2 rounded-md bg-white text-black dark:bg-gray-900 dark:text-white font-semibold"
         onClick={() => setOpenSelect((prev) => !prev)}
       >
         {lang.toUpperCase()}

@@ -15,7 +15,7 @@ export function NavLink({ path, title }: NavLinkProps) {
     <Link
       className={`no-underline font-bold text-md sm:text-xl md:text-2xl lg:text-3xl min-h-full  duration-75 p-4 ${
         pathname === path
-          ? "cursor-default bg-white text-purple-800"
+          ? "cursor-default bg-white dark:bg-gray-900 text-purple-800 "
           : "text-white bg-purple-800 hover:opacity-75"
       }`}
       href={path}
