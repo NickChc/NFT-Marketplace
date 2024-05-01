@@ -3,6 +3,12 @@
     "home": "HOME",
     "dashboard": "Dashboard",
     "sales": "Sales",
-    "customers": "Customers"
+    "customers": "Customers",
+    "products": "Products",
+    "users": "Users",
+    "avarageSpent": "Avarage Spent",
+    "orders": "Orders",
+    "available": "Available",
+    "inactive": "Inactive"
   }
 }
