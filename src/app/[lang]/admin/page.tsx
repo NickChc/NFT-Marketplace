@@ -96,22 +96,24 @@ export default async function AdminDashboard({
 
   return (
     <div className="w-full md:w-[90%] lg:w-[80%] flex flex-col pt-9 mx-auto">
-      <PageHeader>{page.dashboard}</PageHeader>
+      <PageHeader>
+        {lang === "en" ? page.dashboard.toUpperCase() : page.dashboard}
+      </PageHeader>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mx-auto mt-9 gap-x-4 ">
         <DashboardCard
-          title="Sales"
-          subtitle={`${formatNumber(orders?.length || 0)} Orders`}
+          title={page.sales}
+          subtitle={`${formatNumber(orders?.length || 0)} ${page.orders}`}
           body={`${formatCurrency((totalPrice || 0) / 100)}`}
         />
         <DashboardCard
-          title="Customers"
-          subtitle={`${formatCurrency(avarageSpent)} Avarage Spent`}
-          body={`${formatNumber(users?.length || 0)} Users`}
+          title={page.customers}
+          subtitle={`${formatCurrency(avarageSpent)} ${page.avarageSpent}`}
+          body={`${formatNumber(users?.length || 0)} ${page.users}`}
         />
         <DashboardCard
-          title="Products"
-          subtitle={`${formatNumber(availableProducts)} Available`}
-          body={`${formatNumber(notAvailable)} Inactive`}
+          title={page.products}
+          subtitle={`${formatNumber(availableProducts)} ${page.available}`}
+          body={`${formatNumber(notAvailable)} ${page.inactive}`}
         />
       </div>
     </div>
