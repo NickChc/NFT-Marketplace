@@ -11,11 +11,11 @@ interface NavigationProps {
 export async function Navigation({ lang }: NavigationProps) {
   const { page } = await getDictionaries(lang);
   return (
-    <nav className="w-full flex items-center justify-center gap-x-4 sm:gap-x-6 lg:gap-x-9 bg-purple-800 relative">
+    <nav className="w-full flex items-center justify-center gap-x-2 sm:gap-x-6 lg:gap-x-9 bg-purple-800 relative">
       <LangSelect lang={lang} />
       <NavLink path={`/${lang}/admin`} title={page.dashboard} />
-      <NavLink path={`/${lang}/sales`} title={page.sales} />
-      <NavLink path={`/${lang}/customers`} title={page.customers} />
+      <NavLink path={`/${lang}/admin/products`} title={page.products} />
+      <NavLink path={`/${lang}/admin/customers`} title={page.customers} />
       <ToggleTheme />
     </nav>
   );
