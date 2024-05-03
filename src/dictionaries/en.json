@@ -9,6 +9,13 @@
     "avarageSpent": "Avarage Spent",
     "orders": "Orders",
     "available": "Available",
-    "inactive": "Inactive"
+    "inactive": "Inactive",
+    "addProduct": "ADD PRODUCT",
+    "name": "Name",
+    "price": "Price",
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "edit": "Edit",
+    "deleteProduct": "Delete"
   }
 }

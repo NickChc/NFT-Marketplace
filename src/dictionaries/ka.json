@@ -9,6 +9,13 @@
     "avarageSpent": "საშუალო ხარჯი",
     "orders": "შეკვეთები",
     "available": "ხელმისაწვდომია",
-    "inactive": "დეაქტივირებული"
+    "inactive": "დეაქტივირებული",
+    "addProduct": "პროდუქტის დამატება",
+    "name": "სახელი",
+    "price": "ფასი",
+    "activate": "აქტივირება",
+    "deactivate": "დეაქტივირება",
+    "edit": "განახლება",
+    "deleteProduct": "წაშლა"
   }
 }

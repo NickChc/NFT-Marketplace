@@ -8,9 +8,15 @@ import { toggleAvailability } from "../../../_actions/products";
 
 interface DropdownMenuProps {
   product: TProduct;
+  text: {
+    deleteProduct: string;
+    edit: string;
+    deactivate: string;
+    activate: string;
+  };
 }
 
-export function DropdownMenu({ product }: DropdownMenuProps) {
+export function DropdownMenu({ product, text }: DropdownMenuProps) {
   const [open, setOpen] = useState<boolean>(false);
   const router = useRouter();
 
@@ -35,22 +41,25 @@ export function DropdownMenu({ product }: DropdownMenuProps) {
 
   return (
     <div className="relative">
-      <button onClick={() => setOpen((prev) => !prev)} className="p-2">
+      <button
+        onClick={() => setOpen((prev) => !prev)}
+        className={`p-2 ${open ? "cursor-default" : "cursor-pointer"}`}
+      >
         <DotsIcon />
       </button>
       {open && (
-        <div className="absolute top-4 right-6 p-1 flex flex-col items-start z-50 bg-white rounded-md">
+        <div className="absolute top-6 right-6 p-1 flex flex-col items-start z-50 bg-white rounded-md">
           <button
-            className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 rounded-t-md"
+            className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 rounded-t-md dark:text-black "
             onClick={toggleAvailable}
           >
-            {product.isAvailable ? "Deactivate" : "Activate"}
+            {product.isAvailable ? text.deactivate : text.activate}
           </button>
-          <button className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300">
-            Edit
+          <button className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 dark:text-black">
+            {text.edit}
           </button>
-          <button className="w-full cursor-pointer disabled:cursor-default bg-red-300 text-left p-1 hover:text-red-800 rounded-b-md">
-            Delete
+          <button className="w-full cursor-pointer disabled:cursor-default bg-red-300 text-left p-1 hover:text-red-800 rounded-b-md dark:text-black dark:hover:text-red-800">
+            {text.deleteProduct}
           </button>
         </div>
       )}
