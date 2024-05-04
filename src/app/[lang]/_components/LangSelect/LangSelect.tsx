@@ -49,10 +49,10 @@ export function LangSelect({ lang }: LangSelectProps) {
         <ul className="flex flex-col gap-y-2 absolute top-[120%] bg-white border-solid border border-purple-500 p-1.5 rounded-md">
           {i18n.locales.map((loc) => {
             return (
-              <li key={loc} className="w-full ">
+              <li key={loc} className="w-full">
                 <Link
                   href={redirectPathname(loc)}
-                  className={`px-2 py-1 flex items-center gap-x-3 ${
+                  className={`px-2 py-1 flex items-center gap-x-3 text-black dark:text-black first:rounded-t-md last:rounded-b-md last:rounded-t-none first:rounded-b-none ${
                     lang === loc
                       ? "cursor-default opacity-50 brightness-20"
                       : "hover:bg-purple-300"
