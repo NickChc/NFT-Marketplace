@@ -24,7 +24,7 @@ export default async function AdminProductsPage({
     : [];
 
   return (
-    <div className="w-full sm:w-[90%] md:w-[80%] flex flex-col mx-auto">
+    <div className="w-full sm:w-[90%] md:w-[80%] flex flex-col mx-auto min-h-[50dvh]">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <PageHeader>{page.products}</PageHeader>
         <button className="rounded-md bg-purple-800 dark:bg-white dark:text-black text-white px-2 py-1 font-semibold whitespace-nowrap text-xs sm:text-sm">

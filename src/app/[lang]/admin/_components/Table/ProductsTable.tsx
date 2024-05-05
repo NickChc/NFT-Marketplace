@@ -17,7 +17,7 @@ export async function ProductsTable({ lang }: TableProps) {
   return (
     <table className="max-w-full w-full mt-9 mx-auto text-[.7rem] sm:text-sm md:text-base">
       <thead>
-        <tr className="mb-14 text-sm md:text-xl">
+        <tr className="text-sm md:text-xl">
           <th>
             <span className="sr-only">Available For Purchase</span>
           </th>
@@ -29,27 +29,27 @@ export async function ProductsTable({ lang }: TableProps) {
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="min-h-96">
         {products?.map((product) => {
           return (
-            <tr key={product.id} className="p-2 mt-9">
-              <td className="text-base sm:text-lg md:text-2xl">
+            <tr key={product.id}>
+              <td className="text-base sm:text-lg md:text-2xl py-4">
                 {product.isAvailable ? (
                   <CheckIcon className="text-green-500" />
                 ) : (
                   <CrossIcon className="text-red-500" />
                 )}
               </td>
-              <td className="truncate max-w-14 sm:max-w-24 text-center">
+              <td className="truncate max-w-14 sm:max-w-24 text-center py-4">
                 {product.name}
               </td>
-              <td className="truncate text-center">
+              <td className="truncate text-center py-4">
                 {formatCurrency(product.priceInCents / 100)}
               </td>
-              <td className="truncate max-w-30 sm:max-w-auto text-center">
+              <td className="truncate max-w-30 sm:max-w-auto text-center py-4">
                 {product.orders}
               </td>
-              <td className="max-w-30 sm:max-w-auto text-center">
+              <td className="max-w-30 sm:max-w-auto text-center py-4">
                 <DropdownMenu
                   product={product}
                   text={{ activate, deactivate, edit, deleteProduct }}
