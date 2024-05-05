@@ -4,7 +4,10 @@ import { TProduct } from "@/@types/general";
 import { DotsIcon } from "@/assets/icons";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { toggleAvailability } from "../../../_actions/products";
+import {
+  deleteProduct,
+  toggleAvailability,
+} from "@/app/[lang]/admin/_actions/products";
 
 interface DropdownMenuProps {
   product: TProduct;
@@ -23,6 +26,16 @@ export function DropdownMenu({ product, text }: DropdownMenuProps) {
   async function toggleAvailable() {
     await toggleAvailability(product, !product.isAvailable);
     router.refresh();
+  }
+
+  async function handleDelete() {
+    try {
+      await deleteProduct(product);
+    } catch (error: any) {
+      console.log(error.message);
+    } finally {
+      router.refresh();
+    }
   }
 
   function closePopup() {
@@ -58,7 +71,11 @@ export function DropdownMenu({ product, text }: DropdownMenuProps) {
           <button className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 dark:text-black">
             {text.edit}
           </button>
-          <button className="w-full cursor-pointer disabled:cursor-default bg-red-300 text-left p-1 hover:text-red-800 rounded-b-md dark:text-black dark:hover:text-red-800">
+          <button
+            disabled={product.orders > 0}
+            className="w-full cursor-pointer disabled:cursor-default bg-red-300 text-left p-1 hover:text-red-800 rounded-b-md dark:text-black dark:hover:text-red-800"
+            onClick={handleDelete}
+          >
             {text.deleteProduct}
           </button>
         </div>

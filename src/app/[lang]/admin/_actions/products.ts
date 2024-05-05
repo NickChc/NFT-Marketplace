@@ -2,9 +2,20 @@
 
 import { TProduct } from "@/@types/general";
 import { db, storage } from "@/firebase";
-import { Timestamp, addDoc, doc, updateDoc } from "firebase/firestore";
+import {
+  Timestamp,
+  addDoc,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { productCollectionRef } from "@/firebase";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 import { randomUUID } from "crypto";
 import { z } from "zod";
 import { File } from "buffer";
@@ -68,9 +79,41 @@ export async function createProduct(prevState: unknown, formData: FormData) {
     imagePath: imageURL,
     orders: 0,
     isAvailable: false,
-    createdAt: Timestamp.fromDate(new Date()),
+    createdAt: Timestamp.fromDate(new Date()) as any,
   };
 
   await addDoc(productCollectionRef, newProduct);
   redirect("/en/admin/products");
+}
+
+export async function deleteProduct(product: TProduct) {
+  const productDoc = doc(db, "product", product.id);
+
+  const decodedFileUrl = decodeURIComponent(product.filePath);
+  const filePathStartIndex = decodedFileUrl.lastIndexOf("/") + 1;
+  const filePathEndIndex = decodedFileUrl.indexOf("?");
+  const file = decodedFileUrl.substring(
+    filePathStartIndex,
+    filePathEndIndex !== -1 ? filePathEndIndex : undefined
+  );
+
+  const decodedImageUrl = decodeURIComponent(product.imagePath);
+  const imagePathStartIndex = decodedImageUrl.lastIndexOf("/") + 1;
+  const imagePathEndIndex = decodedImageUrl.indexOf("?");
+  const image = decodedImageUrl.substring(
+    imagePathStartIndex,
+    imagePathEndIndex !== -1 ? imagePathEndIndex : undefined
+  );
+
+  console.log(file);
+  console.log(image);
+
+  const fileRef = ref(storage, `NFT's/${file}`);
+  const imageRef = ref(storage, `NFT's/${image}`);
+
+  await Promise.all([
+    deleteObject(fileRef),
+    deleteObject(imageRef),
+    deleteDoc(productDoc),
+  ]);
 }
