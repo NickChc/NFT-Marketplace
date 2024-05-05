@@ -1,10 +1,11 @@
 interface FormInputProps {
   name: string;
   label: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus: () => void;
   type?: "text" | "password" | "file";
+  required?: boolean;
 }
 
 export function FormInput({
@@ -14,6 +15,7 @@ export function FormInput({
   onChange,
   onFocus,
   type,
+  required,
 }: FormInputProps) {
   return (
     <>
@@ -24,6 +26,7 @@ export function FormInput({
         {label}
       </label>
       <input
+        required={required}
         type={type}
         value={value}
         onChange={onChange}
