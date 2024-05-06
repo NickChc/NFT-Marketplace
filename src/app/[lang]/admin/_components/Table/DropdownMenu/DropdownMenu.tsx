@@ -8,8 +8,11 @@ import {
   deleteProduct,
   toggleAvailability,
 } from "@/app/[lang]/admin/_actions/products";
+import { TLocale } from "../../../../../../../i18n.config";
+import Link from "next/link";
 
 interface DropdownMenuProps {
+  lang: TLocale;
   product: TProduct;
   text: {
     deleteProduct: string;
@@ -19,13 +22,18 @@ interface DropdownMenuProps {
   };
 }
 
-export function DropdownMenu({ product, text }: DropdownMenuProps) {
+export function DropdownMenu({ product, text, lang }: DropdownMenuProps) {
   const [open, setOpen] = useState<boolean>(false);
   const router = useRouter();
 
   async function toggleAvailable() {
-    await toggleAvailability(product, !product.isAvailable);
-    router.refresh();
+    try {
+      await toggleAvailability(product, !product.isAvailable);
+    } catch (error: any) {
+      console.log(error.message);
+    } finally {
+      router.refresh();
+    }
   }
 
   async function handleDelete() {
@@ -69,7 +77,7 @@ export function DropdownMenu({ product, text }: DropdownMenuProps) {
             {product.isAvailable ? text.deactivate : text.activate}
           </button>
           <button className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 dark:text-black">
-            {text.edit}
+            <Link href={`/admin/products/${product.id}/edit`}>{text.edit}</Link>
           </button>
           <button
             disabled={product.orders > 0}
