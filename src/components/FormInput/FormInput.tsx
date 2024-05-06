@@ -6,6 +6,7 @@ interface FormInputProps {
   onFocus: () => void;
   type?: "text" | "password" | "file";
   required?: boolean;
+  defaultValue?: string;
 }
 
 export function FormInput({
@@ -16,6 +17,7 @@ export function FormInput({
   onFocus,
   type,
   required,
+  defaultValue,
 }: FormInputProps) {
   return (
     <>
@@ -34,6 +36,7 @@ export function FormInput({
         onFocus={onFocus}
         id={name}
         className={`p-2 outline-none border border-solid border-blue-300 rounded-md`}
+        defaultValue={defaultValue}
       />
     </>
   );

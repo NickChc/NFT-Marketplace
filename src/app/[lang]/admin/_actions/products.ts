@@ -19,8 +19,9 @@ import {
 import { randomUUID } from "crypto";
 import { z } from "zod";
 import { File } from "buffer";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import firebase from "firebase/compat/app";
+import { getProduct } from "@/app/[lang]/_api/getProduct";
 
 export async function toggleAvailability(
   product: TProduct,
@@ -105,9 +106,6 @@ export async function deleteProduct(product: TProduct) {
     imagePathEndIndex !== -1 ? imagePathEndIndex : undefined
   );
 
-  console.log(file);
-  console.log(image);
-
   const fileRef = ref(storage, `NFT's/${file}`);
   const imageRef = ref(storage, `NFT's/${image}`);
 
@@ -116,4 +114,76 @@ export async function deleteProduct(product: TProduct) {
     deleteObject(imageRef),
     deleteDoc(productDoc),
   ]);
+}
+
+const editSchema = createSchema.extend({
+  filePath: fileSchema.optional(),
+  imagePath: imageSchema.optional(),
+});
+
+export async function editProduct(
+  id: string,
+  prevState: unknown,
+  formData: FormData
+) {
+  const result = editSchema.safeParse(Object.fromEntries(formData.entries()));
+  if (result.success === false) {
+    return result.error.formErrors.fieldErrors;
+  }
+  const data = result.data;
+
+  const product = await getProduct(id);
+
+  if (product == null) return notFound();
+
+  let filePath = product.filePath;
+  if (data.filePath != null && data.filePath.size > 0) {
+    const decodedFileUrl = decodeURIComponent(product.filePath);
+    const filePathStartIndex = decodedFileUrl.lastIndexOf("/") + 1;
+    const filePathEndIndex = decodedFileUrl.indexOf("?");
+    const file = decodedFileUrl.substring(
+      filePathStartIndex,
+      filePathEndIndex !== -1 ? filePathEndIndex : undefined
+    );
+    const fileRef = ref(storage, `NFT's/${randomUUID()}_${file}`);
+    await Promise.all([
+      uploadBytes(fileRef, await data.filePath.arrayBuffer()),
+      deleteObject(fileRef),
+    ]);
+
+    filePath = await getDownloadURL(fileRef);
+  }
+
+  let imagePath = product.imagePath;
+  if (data.imagePath != null && data.imagePath.size > 0) {
+    const decodedImageUrl = decodeURIComponent(product.imagePath);
+    const imagePathStartIndex = decodedImageUrl.lastIndexOf("/") + 1;
+    const imagePathEndIndex = decodedImageUrl.indexOf("?");
+    const image = decodedImageUrl.substring(
+      imagePathStartIndex,
+      imagePathEndIndex !== -1 ? imagePathEndIndex : undefined
+    );
+
+    const imageRef = ref(storage, `NFT's/${randomUUID()}_${image}`);
+
+    await Promise.all([
+      uploadBytes(imageRef, await data.imagePath.arrayBuffer()),
+      deleteObject(imageRef),
+    ]);
+
+    imagePath = await getDownloadURL(imageRef);
+  }
+
+  const productDoc = doc(db, "product", id);
+
+  await updateDoc(productDoc, {
+    name: data.name,
+    description: data.description,
+    isAvailable: product.isAvailable,
+    priceInCents: data.priceInCents,
+    filePath,
+    imagePath,
+  });
+
+  redirect("/admin/products");
 }
