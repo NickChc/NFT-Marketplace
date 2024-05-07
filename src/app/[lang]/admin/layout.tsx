@@ -1,13 +1,14 @@
 import { PropsWithChildren } from "react";
 import { TLocale } from "../../../../i18n.config";
 import { Navigation } from "@/app/[lang]/_components/Navigation";
-import { ToggleTheme } from "@/app/[lang]/_components/ToggleTheme";
 
 interface AdminLayoutProps {
   params: {
     lang: TLocale;
   };
 }
+
+export const dynamic = "force-dynamic";
 
 export default function AdminLayout({
   children,
