@@ -12,7 +12,6 @@ interface TableProps {
 export async function ProductsTable({ lang }: TableProps) {
   const products = await getProducts();
   const { page } = await getDictionaries(lang);
-  const { activate, deactivate, edit, deleteProduct } = page;
 
   return (
     <table className="max-w-full w-full mt-9 mx-auto text-[.7rem] sm:text-sm md:text-base">
@@ -50,9 +49,8 @@ export async function ProductsTable({ lang }: TableProps) {
                 {product.orders}
               </td>
               <td className="max-w-30 sm:max-w-auto text-center py-4">
-                <DropdownMenu
+                <DropdownMenu lang={lang}
                   product={product}
-                  text={{ activate, deactivate, edit, deleteProduct }}
                 />
               </td>
             </tr>

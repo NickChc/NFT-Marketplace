@@ -10,21 +10,18 @@ import {
 } from "@/app/[lang]/admin/_actions/products";
 import { TLocale } from "../../../../../../../i18n.config";
 import Link from "next/link";
+import { useDictionary } from "@/hooks/useDictionary";
 
 interface DropdownMenuProps {
   lang: TLocale;
   product: TProduct;
-  text: {
-    deleteProduct: string;
-    edit: string;
-    deactivate: string;
-    activate: string;
-  };
 }
 
-export function DropdownMenu({ product, text, lang }: DropdownMenuProps) {
+export function DropdownMenu({ product, lang }: DropdownMenuProps) {
   const [open, setOpen] = useState<boolean>(false);
   const router = useRouter();
+
+  const translations = useDictionary();
 
   async function toggleAvailable() {
     try {
@@ -74,17 +71,17 @@ export function DropdownMenu({ product, text, lang }: DropdownMenuProps) {
             className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 rounded-t-md dark:text-black "
             onClick={toggleAvailable}
           >
-            {product.isAvailable ? text.deactivate : text.activate}
+            {product.isAvailable ? translations.page.deactivate : translations.page.activate}
           </button>
           <button className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 dark:text-black">
-            <Link href={`/admin/products/${product.id}/edit`}>{text.edit}</Link>
+            <Link href={`/${lang}/admin/products/${product.id}/edit`}>{translations.page.edit}</Link>
           </button>
           <button
             disabled={product.orders > 0}
             className="w-full cursor-pointer disabled:cursor-default bg-red-300 text-left p-1 hover:text-red-800 rounded-b-md dark:text-black dark:hover:text-red-800"
             onClick={handleDelete}
           >
-            {text.deleteProduct}
+            {translations.page.deleteProduct}
           </button>
         </div>
       )}

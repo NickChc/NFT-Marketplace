@@ -2,11 +2,19 @@
 
 import { ThemeProvider } from "next-themes";
 import { PropsWithChildren } from "react";
+import { LocaleProvider } from "@/providers/LocaleProvider";
+import { getDictionaries } from "@/lib/dictionary";
 
-export function Providers({ children }: PropsWithChildren) {
+interface ProvidersProps {
+  dictionary: Awaited<ReturnType<typeof getDictionaries>>;
+}
+
+export function Providers({ children, dictionary }: PropsWithChildren<ProvidersProps>) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system">
-      {children}
-    </ThemeProvider>
+    <LocaleProvider dictionary={dictionary}>
+      <ThemeProvider attribute="class" defaultTheme="system">
+        {children}
+      </ThemeProvider>
+    </LocaleProvider>
   );
 }
