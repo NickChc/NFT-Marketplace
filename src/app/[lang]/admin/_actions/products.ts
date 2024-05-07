@@ -90,7 +90,15 @@ export async function createProduct(prevState: unknown, formData: FormData) {
 export async function deleteProduct(product: TProduct) {
   const productDoc = doc(db, "product", product.id);
 
-  const decodedFileUrl = decodeURIComponent(product.filePath);
+  await Promise.all([
+    deleteFile(product.filePath),
+    deleteImage(product.imagePath),
+    deleteDoc(productDoc),
+  ]);
+}
+
+async function deleteFile(filePath: string) {
+  const decodedFileUrl = decodeURIComponent(filePath);
   const filePathStartIndex = decodedFileUrl.lastIndexOf("/") + 1;
   const filePathEndIndex = decodedFileUrl.indexOf("?");
   const file = decodedFileUrl.substring(
@@ -98,7 +106,13 @@ export async function deleteProduct(product: TProduct) {
     filePathEndIndex !== -1 ? filePathEndIndex : undefined
   );
 
-  const decodedImageUrl = decodeURIComponent(product.imagePath);
+  const fileRef = ref(storage, `NFT's/${file}`);
+
+  await deleteObject(fileRef);
+}
+
+async function deleteImage(imagePath: string) {
+  const decodedImageUrl = decodeURIComponent(imagePath);
   const imagePathStartIndex = decodedImageUrl.lastIndexOf("/") + 1;
   const imagePathEndIndex = decodedImageUrl.indexOf("?");
   const image = decodedImageUrl.substring(
@@ -106,14 +120,9 @@ export async function deleteProduct(product: TProduct) {
     imagePathEndIndex !== -1 ? imagePathEndIndex : undefined
   );
 
-  const fileRef = ref(storage, `NFT's/${file}`);
   const imageRef = ref(storage, `NFT's/${image}`);
 
-  await Promise.all([
-    deleteObject(fileRef),
-    deleteObject(imageRef),
-    deleteDoc(productDoc),
-  ]);
+  await deleteObject(imageRef);
 }
 
 const editSchema = createSchema.extend({
@@ -138,38 +147,25 @@ export async function editProduct(
 
   let filePath = product.filePath;
   if (data.filePath != null && data.filePath.size > 0) {
-    const decodedFileUrl = decodeURIComponent(product.filePath);
-    const filePathStartIndex = decodedFileUrl.lastIndexOf("/") + 1;
-    const filePathEndIndex = decodedFileUrl.indexOf("?");
-    const file = decodedFileUrl.substring(
-      filePathStartIndex,
-      filePathEndIndex !== -1 ? filePathEndIndex : undefined
-    );
-    const fileRef = ref(storage, `NFT's/${randomUUID()}_${file}`);
-    await Promise.all([
-      uploadBytes(fileRef, await data.filePath.arrayBuffer()),
-      deleteObject(fileRef),
-    ]);
+    await deleteFile(product.filePath);
+
+    const fileRef = ref(storage, `NFT's/${randomUUID()}_${data.filePath.name}`);
+
+    await uploadBytes(fileRef, await data.filePath.arrayBuffer());
 
     filePath = await getDownloadURL(fileRef);
   }
 
   let imagePath = product.imagePath;
   if (data.imagePath != null && data.imagePath.size > 0) {
-    const decodedImageUrl = decodeURIComponent(product.imagePath);
-    const imagePathStartIndex = decodedImageUrl.lastIndexOf("/") + 1;
-    const imagePathEndIndex = decodedImageUrl.indexOf("?");
-    const image = decodedImageUrl.substring(
-      imagePathStartIndex,
-      imagePathEndIndex !== -1 ? imagePathEndIndex : undefined
+    await deleteImage(product.imagePath);
+
+    const imageRef = ref(
+      storage,
+      `NFT's/${randomUUID()}_${data.imagePath.name}`
     );
 
-    const imageRef = ref(storage, `NFT's/${randomUUID()}_${image}`);
-
-    await Promise.all([
-      uploadBytes(imageRef, await data.imagePath.arrayBuffer()),
-      deleteObject(imageRef),
-    ]);
+    await uploadBytes(imageRef, await data.imagePath.arrayBuffer());
 
     imagePath = await getDownloadURL(imageRef);
   }

@@ -112,7 +112,7 @@ export function ProductsForm({ product }: ProductsFormProps) {
         />
       )}
 
-      <SubmitButton />
+      <SubmitButton isEdit={product != null} />
     </form>
   );
 }
