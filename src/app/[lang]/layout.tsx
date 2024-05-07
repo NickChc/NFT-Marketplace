@@ -4,6 +4,7 @@ import { TLocale, i18n } from "../../../i18n.config";
 import "./globals.css";
 import { PropsWithChildren } from "react";
 import { Providers } from "@/providers";
+import { getDictionaries } from "@/lib/dictionary";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,16 +20,18 @@ interface RootLayoutProps {
   params: { lang: TLocale };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: PropsWithChildren<RootLayoutProps>) {
+  const { page } = await getDictionaries(params.lang);
+
   return (
     <html lang={params.lang} suppressHydrationWarning>
       <body
         className={`w-full bg-white dark:bg-gray-900 relative ${inter.className}`}
       >
-        <Providers>{children}</Providers>
+        <Providers dictionary={{ page }}>{children}</Providers>
       </body>
     </html>
   );

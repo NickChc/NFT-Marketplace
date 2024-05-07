@@ -11,6 +11,7 @@ import { useFormState } from "react-dom";
 import { SubmitButton } from "@/app/[lang]/admin/products/_components/ProductsForm/SubmitButton";
 import { TProduct } from "@/@types/general";
 import Image from "next/image";
+import { useDictionary } from "@/hooks/useDictionary";
 
 interface ProductsFormProps {
   product?: TProduct;
@@ -25,10 +26,12 @@ export function ProductsForm({ product }: ProductsFormProps) {
     product ? product.priceInCents.toString() : ""
   );
 
+  const dictionary = useDictionary();
+
   return (
     <form action={action} className="flex flex-col gap-y-4 max-w-4xl mt-9">
       <FormInput
-        label="Name"
+        label={dictionary.page.name}
         name="name"
         onFocus={() => {}}
         required={product == null}
@@ -41,7 +44,7 @@ export function ProductsForm({ product }: ProductsFormProps) {
           htmlFor="description"
           className="font-semibold text-lg sm:text-xl md:text-2xl lg:text-3xl"
         >
-          Description
+          {dictionary.page.description}
         </label>
         <textarea
           name="description"
@@ -56,7 +59,7 @@ export function ProductsForm({ product }: ProductsFormProps) {
       )}
 
       <FormInput
-        label="Price In Cents"
+        label={dictionary.page.priceInCents}
         name="priceInCents"
         value={priceInCents}
         onChange={(e) => setPriceInCents(e.target.value)}
@@ -72,7 +75,7 @@ export function ProductsForm({ product }: ProductsFormProps) {
         htmlFor="filePath"
         className="font-semibold text-lg sm:text-xl md:text-2xl lg:text-3xl"
       >
-        Choose File
+        {dictionary.page.chooseFile}
       </label>
       <input
         type="file"
@@ -89,7 +92,7 @@ export function ProductsForm({ product }: ProductsFormProps) {
           htmlFor="imagePath"
           className="font-semibold text-lg sm:text-xl md:text-2xl lg:text-3xl"
         >
-          Choose Image
+          {dictionary.page.chooseImage}
         </label>
         <input
           name="imagePath"

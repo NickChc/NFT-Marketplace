@@ -16,6 +16,16 @@
     "activate": "Activate",
     "deactivate": "Deactivate",
     "edit": "Edit",
-    "deleteProduct": "Delete"
+    "deleteProduct": "Delete",
+    "description": "Description",
+    "priceInCents": "Price In Cents",
+    "chooseFile": "Choose File",
+    "chooseImage": "Choose Image",
+    "adding": "ADDING",
+    "add": "ADD",
+    "editing": "EDITING",
+    "editCap": "EDIT",
+    "createProduct": "CREATE PRODUCT",
+    "editProduct": "EDIT PRODUCT"
   }
 }

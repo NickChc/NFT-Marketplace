@@ -16,6 +16,16 @@
     "activate": "აქტივირება",
     "deactivate": "დეაქტივირება",
     "edit": "განახლება",
-    "deleteProduct": "წაშლა"
+    "deleteProduct": "წაშლა",
+    "description": "აღწერა",
+    "priceInCents": "ფასი ცენტებში",
+    "chooseFile": "აირჩიეთ ფაილი",
+    "chooseImage": "აირჩიეთ სურათი",
+    "adding": "ემატება",
+    "add": "დამატება",
+    "editing": "იცვლება",
+    "editCap": "შეცვლა",
+    "createProduct": "პროდუქტის დამატება",
+    "editProduct": "პროდუქტის შეცვლა"
   }
 }

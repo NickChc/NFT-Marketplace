@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import { TLocale } from "../../../../i18n.config";
 import { Navigation } from "@/app/[lang]/_components/Navigation";
+import { Metadata } from "next";
 
 interface AdminLayoutProps {
   params: {
@@ -9,6 +10,10 @@ interface AdminLayoutProps {
 }
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "NFT Marketplace | Admin",
+};
 
 export default function AdminLayout({
   children,

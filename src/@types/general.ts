@@ -1,3 +1,4 @@
+import { getDictionaries } from "@/lib/dictionary";
 import { Timestamp } from "firebase/firestore";
 
 export interface TOrder {
@@ -31,3 +32,7 @@ export interface TCreateProduct {
   filePath: File | null;
   imagePath: File | null;
 }
+
+
+
+export type TTranslations = Awaited<ReturnType<typeof getDictionaries>>;
