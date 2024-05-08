@@ -106,6 +106,7 @@ async function deleteFile(filePath: string) {
     filePathEndIndex !== -1 ? filePathEndIndex : undefined
   );
 
+
   const fileRef = ref(storage, `NFT's/${file}`);
 
   await deleteObject(fileRef);
@@ -168,6 +169,19 @@ export async function editProduct(
     await uploadBytes(imageRef, await data.imagePath.arrayBuffer());
 
     imagePath = await getDownloadURL(imageRef);
+  }
+
+  const compareObjects =
+    data.name === product.name &&
+    data.description === product.description &&
+    data.priceInCents === product.priceInCents;
+
+  if (
+    filePath === product.filePath &&
+    imagePath === product.imagePath &&
+    compareObjects
+  ) {
+    return redirect("/admin/products");
   }
 
   const productDoc = doc(db, "product", id);

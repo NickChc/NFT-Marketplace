@@ -6,6 +6,7 @@ import { formatCurrency, formatNumber } from "@/lib/formatters";
 import { getOrders } from "@/app/[lang]/_api/getOrders";
 import { getUsers } from "@/app/[lang]/_api/getUsers";
 import { getProducts } from "@/app/[lang]/_api/getProducts";
+import { LoadingIcon } from "@/assets/icons";
 
 interface AdminDashboardProps {
   params: {

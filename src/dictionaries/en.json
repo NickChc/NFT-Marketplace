@@ -26,6 +26,7 @@
     "editing": "EDITING",
     "editCap": "EDIT",
     "createProduct": "CREATE PRODUCT",
-    "editProduct": "EDIT PRODUCT"
+    "editProduct": "EDIT PRODUCT",
+    "download": "Download"
   }
 }

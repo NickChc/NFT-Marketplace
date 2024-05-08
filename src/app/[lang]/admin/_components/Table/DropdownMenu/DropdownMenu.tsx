@@ -71,10 +71,19 @@ export function DropdownMenu({ product, lang }: DropdownMenuProps) {
             className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 rounded-t-md dark:text-black "
             onClick={toggleAvailable}
           >
-            {product.isAvailable ? translations.page.deactivate : translations.page.activate}
+            {product.isAvailable
+              ? translations.page.deactivate
+              : translations.page.activate}
           </button>
           <button className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 dark:text-black">
-            <Link href={`/${lang}/admin/products/${product.id}/edit`}>{translations.page.edit}</Link>
+            <Link href={`/${lang}/admin/products/${product.id}/edit`}>
+              {translations.page.edit}
+            </Link>
+          </button>
+          <button className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 dark:text-black">
+            <Link href={`/${lang}/admin/products/${product.id}/download`}>
+              {translations.page.download}
+            </Link>
           </button>
           <button
             disabled={product.orders > 0}
