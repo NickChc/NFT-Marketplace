@@ -8,4 +8,7 @@ export {
 } from "react-icons/rx";
 export { HiDotsHorizontal as DotsIcon } from "react-icons/hi";
 export { AiOutlineLoading3Quarters as LoadingIcon } from "react-icons/ai";
-
+export {
+  FaRegCircle as EmptyCircleIcon,
+  FaCircle as FilledCircleIcon,
+} from "react-icons/fa";

@@ -8,8 +8,12 @@ export interface TOrder {
 }
 
 export interface TUser {
-  pricePaidInCents: number;
+  spentInCents: number;
   id: string;
+  email: string;
+  name: string;
+  surname: string;
+  ownings: TProduct[];
 }
 
 export interface TProduct {
@@ -24,7 +28,6 @@ export interface TProduct {
   imagePath: string;
 }
 
-
 export interface TCreateProduct {
   name: string;
   description: string;
@@ -32,7 +35,5 @@ export interface TCreateProduct {
   filePath: File | null;
   imagePath: File | null;
 }
-
-
 
 export type TTranslations = Awaited<ReturnType<typeof getDictionaries>>;

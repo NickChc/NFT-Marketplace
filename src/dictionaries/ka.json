@@ -27,6 +27,11 @@
     "editCap": "შეცვლა",
     "createProduct": "პროდუქტის დამატება",
     "editProduct": "პროდუქტის შეცვლა",
-    "download": "გადმოწერა"
+    "download": "გადმოწერა",
+    "noUsersFound": "მომხმარებლები ვერ მოიძებნა",
+    "email": "ელ. ფოსტა",
+    "totalSpent": "სულ ხარჯი",
+    "owns": "ფლობს",
+    "ownsNothing": "ცარიელია"
   }
 }
