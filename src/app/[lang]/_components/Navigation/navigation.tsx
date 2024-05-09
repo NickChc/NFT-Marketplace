@@ -16,6 +16,7 @@ export async function Navigation({ lang }: NavigationProps) {
       <NavLink path={`/${lang}/admin`} title={page.dashboard} />
       <NavLink path={`/${lang}/admin/products`} title={page.products} />
       <NavLink path={`/${lang}/admin/customers`} title={page.customers} />
+      <NavLink path={`/${lang}/admin/orders`} title={page.customers} />
       <ToggleTheme />
     </nav>
   );

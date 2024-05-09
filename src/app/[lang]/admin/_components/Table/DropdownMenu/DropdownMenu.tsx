@@ -90,7 +90,7 @@ export function DropdownMenu({ product, lang }: DropdownMenuProps) {
             className="w-full cursor-pointer disabled:cursor-default bg-red-300 text-left p-1 hover:text-red-800 rounded-b-md dark:text-black dark:hover:text-red-800"
             onClick={handleDelete}
           >
-            {translations.page.deleteProduct}
+            {translations.page.delete}
           </button>
         </div>
       )}

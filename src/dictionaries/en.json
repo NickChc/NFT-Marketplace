@@ -16,7 +16,7 @@
     "activate": "Activate",
     "deactivate": "Deactivate",
     "edit": "Edit",
-    "deleteProduct": "Delete",
+    "delete": "Delete",
     "description": "Description",
     "priceInCents": "Price In Cents",
     "chooseFile": "Choose File",

@@ -6,7 +6,7 @@ import { formatCurrency, formatNumber } from "@/lib/formatters";
 import { getOrders } from "@/app/[lang]/_api/getOrders";
 import { getUsers } from "@/app/[lang]/_api/getUsers";
 import { getProducts } from "@/app/[lang]/_api/getProducts";
-import { LoadingIcon } from "@/assets/icons";
+
 
 interface AdminDashboardProps {
   params: {
@@ -29,7 +29,7 @@ export default async function AdminDashboard({
   );
 
   const avarageSpent = users
-    ? users.reduce((acc, curr) => acc + curr.pricePaidInCents, 0) / users.length
+    ? users.reduce((acc, curr) => acc + curr.spentInCents, 0) / users.length
     : 0;
 
   const availableProducts =
@@ -45,7 +45,7 @@ export default async function AdminDashboard({
       <PageHeader>
         {lang === "en" ? page.dashboard.toUpperCase() : page.dashboard}
       </PageHeader>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mx-auto mt-9 gap-x-4 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mx-auto mt-9 gap-x-4 place-items-center w-full">
         <DashboardCard
           title={page.sales}
           subtitle={`${formatNumber(orders?.length || 0)} ${page.orders}`}

@@ -50,10 +50,12 @@ export async function UsersTable({ lang }: UsersTableProps) {
                 {formatCurrency(user.spentInCents / 100)}
               </td>
               <td className="truncate text-center py-4">
-                {user.ownings.length > 0 ? user.ownings[0].name : page.ownsNothing}
+                {user.ownings.length > 0
+                  ? user.ownings[0].name
+                  : page.ownsNothing}
               </td>
               <td className="max-w-30 sm:max-w-auto text-center py-4">
-                <UsersDropdownMenu />
+                <UsersDropdownMenu user={user} />
               </td>
             </tr>
           );
