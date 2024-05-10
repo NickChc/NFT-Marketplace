@@ -32,6 +32,9 @@
     "email": "Email",
     "totalSpent": "Total Spent",
     "owns": "Owns",
-    "ownsNothing": "Empty"
+    "ownsNothing": "Empty",
+    "owner": "Owner",
+    "freezeActives": "Freeze Actives",
+    "unfreezeActives": "Unfreeze Actives"
   }
 }

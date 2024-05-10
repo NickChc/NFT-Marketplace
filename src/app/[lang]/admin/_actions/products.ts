@@ -20,8 +20,8 @@ import { randomUUID } from "crypto";
 import { z } from "zod";
 import { File } from "buffer";
 import { notFound, redirect } from "next/navigation";
-import firebase from "firebase/compat/app";
 import { getProduct } from "@/app/[lang]/_api/getProduct";
+
 
 export async function toggleAvailability(
   product: TProduct,
@@ -78,7 +78,7 @@ export async function createProduct(prevState: unknown, formData: FormData) {
     priceInCents,
     filePath: fileURL,
     imagePath: imageURL,
-    orders: 0,
+    owner: undefined,
     isAvailable: false,
     createdAt: Timestamp.fromDate(new Date()) as any,
   };

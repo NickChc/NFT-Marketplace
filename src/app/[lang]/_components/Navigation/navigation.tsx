@@ -1,6 +1,6 @@
+import { TLocale } from "../../../../../i18n.config";
 import { getDictionaries } from "@/lib/dictionary";
 import { NavLink } from "@/app/[lang]/_components/NavLink";
-import { TLocale } from "../../../../../i18n.config";
 import { LangSelect } from "@/app/[lang]/_components/LangSelect";
 import { ToggleTheme } from "@/app/[lang]/_components/ToggleTheme";
 
@@ -16,7 +16,6 @@ export async function Navigation({ lang }: NavigationProps) {
       <NavLink path={`/${lang}/admin`} title={page.dashboard} />
       <NavLink path={`/${lang}/admin/products`} title={page.products} />
       <NavLink path={`/${lang}/admin/customers`} title={page.customers} />
-      <NavLink path={`/${lang}/admin/orders`} title={page.customers} />
       <ToggleTheme />
     </nav>
   );

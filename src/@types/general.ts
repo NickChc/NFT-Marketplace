@@ -1,8 +1,7 @@
 import { getDictionaries } from "@/lib/dictionary";
-import { Timestamp } from "firebase/firestore";
 
 export interface TOrder {
-  pricePaidInCents: number;
+  paidInCents: number;
   id: string;
   productId: string;
 }
@@ -13,7 +12,14 @@ export interface TUser {
   email: string;
   name: string;
   surname: string;
-  ownings: TProduct[];
+  ownings: TOwnedProduct[];
+  isFrozen: boolean;
+}
+
+interface TOwnedProduct {
+  paidInCents: number;
+  productId: string;
+  productName: string;
 }
 
 export interface TProduct {
@@ -23,7 +29,10 @@ export interface TProduct {
   name: string;
   description: string;
   priceInCents: number;
-  orders: number;
+  owner?: {
+    fullName: string;
+    userId: string;
+  };
   filePath: string;
   imagePath: string;
 }

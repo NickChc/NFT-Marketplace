@@ -68,7 +68,7 @@ export function DropdownMenu({ product, lang }: DropdownMenuProps) {
       {open && (
         <div className="absolute top-6 right-6 p-1 flex flex-col items-start z-50 bg-white rounded-md">
           <button
-            className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 rounded-t-md dark:text-black "
+            className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 rounded-t-md dark:text-black"
             onClick={toggleAvailable}
           >
             {product.isAvailable
@@ -86,8 +86,8 @@ export function DropdownMenu({ product, lang }: DropdownMenuProps) {
             </Link>
           </button>
           <button
-            disabled={product.orders > 0}
-            className="w-full cursor-pointer disabled:cursor-default bg-red-300 text-left p-1 hover:text-red-800 rounded-b-md dark:text-black dark:hover:text-red-800"
+            disabled={product.owner != null}
+            className="w-full cursor-pointer disabled:cursor-default bg-red-300 text-left p-1 hover:text-red-800 disabled:hover:text-black dark:disabled:hover:text-black rounded-b-md dark:text-black dark:hover:text-red-800"
             onClick={handleDelete}
           >
             {translations.page.delete}

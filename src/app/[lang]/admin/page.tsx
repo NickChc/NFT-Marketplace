@@ -7,7 +7,6 @@ import { getOrders } from "@/app/[lang]/_api/getOrders";
 import { getUsers } from "@/app/[lang]/_api/getUsers";
 import { getProducts } from "@/app/[lang]/_api/getProducts";
 
-
 interface AdminDashboardProps {
   params: {
     lang: TLocale;
@@ -23,10 +22,7 @@ export default async function AdminDashboard({
     getProducts(),
   ]);
 
-  const totalPrice = orders?.reduce(
-    (acc, curr) => acc + curr.pricePaidInCents,
-    0
-  );
+  const totalPrice = orders?.reduce((acc, curr) => acc + curr.paidInCents, 0);
 
   const avarageSpent = users
     ? users.reduce((acc, curr) => acc + curr.spentInCents, 0) / users.length
