@@ -32,6 +32,9 @@
     "email": "ელ. ფოსტა",
     "totalSpent": "სულ ხარჯი",
     "owns": "ფლობს",
-    "ownsNothing": "ცარიელია"
+    "ownsNothing": "ცარიელია",
+    "owner": "მფლობელი",
+    "freezeActives": "აქტივების გაყინვა",
+    "unfreezeActives": "აქტივების დაბრუნება"
   }
 }
