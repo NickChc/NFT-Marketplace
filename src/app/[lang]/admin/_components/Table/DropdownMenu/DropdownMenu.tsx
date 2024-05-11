@@ -86,7 +86,7 @@ export function DropdownMenu({ product, lang }: DropdownMenuProps) {
             </Link>
           </button>
           <button
-            disabled={product.owner != null}
+            disabled={product.owner?.userId != null}
             className="w-full cursor-pointer disabled:cursor-default bg-red-300 text-left p-1 hover:text-red-800 disabled:hover:text-black dark:disabled:hover:text-black rounded-b-md dark:text-black dark:hover:text-red-800"
             onClick={handleDelete}
           >

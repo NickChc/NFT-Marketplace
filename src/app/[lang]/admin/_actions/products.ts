@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { TProduct } from "@/@types/general";
 import { db, storage } from "@/firebase";
 import {
@@ -21,7 +22,13 @@ import { z } from "zod";
 import { File } from "buffer";
 import { notFound, redirect } from "next/navigation";
 import { getProduct } from "@/app/[lang]/_api/getProduct";
+import { TLocale, i18n } from "../../../../../i18n.config";
 
+const headerList = headers();
+const pathname = headerList.get("referer") || "";
+const segments = pathname.split("/");
+
+const locale: TLocale = i18n.locales.find((loc) => segments.includes(loc))!;
 
 export async function toggleAvailability(
   product: TProduct,
@@ -78,13 +85,16 @@ export async function createProduct(prevState: unknown, formData: FormData) {
     priceInCents,
     filePath: fileURL,
     imagePath: imageURL,
-    owner: undefined,
+    owner: {
+      fullName: "",
+      userId: "",
+    },
     isAvailable: false,
     createdAt: Timestamp.fromDate(new Date()) as any,
   };
 
   await addDoc(productCollectionRef, newProduct);
-  redirect("/en/admin/products");
+  redirect(`/${locale}/admin/products`);
 }
 
 export async function deleteProduct(product: TProduct) {
@@ -105,7 +115,6 @@ async function deleteFile(filePath: string) {
     filePathStartIndex,
     filePathEndIndex !== -1 ? filePathEndIndex : undefined
   );
-
 
   const fileRef = ref(storage, `NFT's/${file}`);
 
@@ -181,7 +190,7 @@ export async function editProduct(
     imagePath === product.imagePath &&
     compareObjects
   ) {
-    return redirect("/admin/products");
+    return redirect(`/${locale}/admin/products`);
   }
 
   const productDoc = doc(db, "product", id);
@@ -195,5 +204,5 @@ export async function editProduct(
     imagePath,
   });
 
-  redirect("/admin/products");
+  redirect(`/${locale}/admin/products`);
 }

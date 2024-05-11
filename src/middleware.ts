@@ -5,6 +5,7 @@ import { i18n } from "../i18n.config";
 
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
+import { hashPassword, isValidPassword } from "@/lib/isValidPassword";
 
 function getLocale(req: NextRequest): string | undefined {
   const negotiatorHeaders: Record<string, string> = {};
@@ -20,20 +21,47 @@ function getLocale(req: NextRequest): string | undefined {
   return locale;
 }
 
-export function middleware(req: NextRequest) {
+async function isAuthenticated(req: NextRequest) {
+  const pathname = req.nextUrl.pathname;
+  const authHeader =
+    req.headers.get("Authorization") || req.headers.get("authorization");
+
+  if (authHeader == null) return false;
+
+  const [username, password] = Buffer.from(authHeader.split(" ")[1], "base64")
+    .toString()
+    .split(":");
+
+  return (
+    username === process.env.ADMIN_USERNAME &&
+    isValidPassword(password, process.env.HASHED_ADMIN_PASSWORD as string)
+  );
+}
+
+export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const pathnameisMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
 
+  const locale = getLocale(req);
   if (pathnameisMissingLocale) {
-    const locale = getLocale(req);
     return NextResponse.redirect(
       new URL(
         `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
         req.url
       )
     );
+  }
+
+  if (
+    pathname.startsWith(`/${locale}/admin`) &&
+    (await isAuthenticated(req)) === false
+  ) {
+    return new NextResponse("Unauthorized", {
+      status: 401,
+      headers: { "WWW-Authenticate": "Basic" },
+    });
   }
 }
 

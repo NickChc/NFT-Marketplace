@@ -35,7 +35,7 @@ export function ProductsForm({ product }: ProductsFormProps) {
         name="name"
         onFocus={() => {}}
         required={product == null}
-        defaultValue={product?.description}
+        defaultValue={product?.name}
       />
       {error?.name && <div className="text-red-700">{error.name}</div>}
 
