@@ -26,7 +26,7 @@ export default async function ClientLayout({
         <NavLink title={page.myCollection} path={`/${lang}/collection`} />
         <ToggleTheme />
       </Navigation>
-      <div className="mx-6 container">{children}</div>
+      <div className="mx-auto container">{children}</div>
     </>
   );
 }

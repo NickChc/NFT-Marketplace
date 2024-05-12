@@ -13,7 +13,7 @@ export function NavLink({ path, title }: NavLinkProps) {
 
   return (
     <Link
-      className={`no-underline font-bold text-sm sm:text-xl md:text-2xl lg:text-3xl min-h-full  duration-75 p-4 ${
+      className={`whitespace-nowrap no-underline font-bold text-sm sm:text-xl md:text-2xl lg:text-3xl min-h-full  duration-75 p-4 ${
         pathname.endsWith(path)
           ? "cursor-default bg-white dark:bg-gray-900 text-purple-800 "
           : "text-white bg-purple-800 hover:opacity-75"
