@@ -36,6 +36,10 @@
     "owner": "Owner",
     "freezeActives": "Freeze Actives",
     "unfreezeActives": "Unfreeze Actives",
-    "myCollection": "My Collection"
+    "myCollection": "My Collection",
+    "newest": "Newest",
+    "forSale": "For Sale",
+    "buy": "BUY",
+    "bid": "BID"
   }
 }

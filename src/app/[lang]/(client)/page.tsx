@@ -14,19 +14,48 @@ export default async function HomePage({
   params: { lang },
 }: AdminProductsPageProps) {
   const { page } = await getDictionaries(lang);
-  const newest = await getProducts(3, true);
+  const [newest, withoutOwner] = await Promise.all([
+    getProducts(3, true),
+    getProducts(undefined, false, true),
+  ]);
+
+  const { price, buy, bid, owner } = page;
 
   return (
-    <div className="w-full sm:w-[90%] md:w-[80%] flex flex-col mx-auto">
+    <div className="w-full sm:w-[90%] md:w-[80%] flex flex-col mx-auto py-9">
       <PageHeader>{page.home}</PageHeader>
 
-      <h2 className="text-3xl font-semibold">Newest</h2>
+      <div className="mt-9">
+        <h2 className="text-3xl font-semibold ml-2">{page.newest}</h2>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-9">
         {newest?.map((product) => {
-          return <ProductCard key={product.id} product={product} />;
+          return (
+            <ProductCard
+              key={product.id}
+              product={product}
+              lang={lang}
+              text={{ price, buy, bid, owner }}
+            />
+          );
         })}
       </div>
-      <div className="flex gap-x-4"></div>
+
+      <div className="mt-20">
+        <h2 className="text-3xl font-semibold ml-2">{page.forSale}</h2>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-9">
+        {withoutOwner?.map((product) => {
+          return (
+            <ProductCard
+              key={product.id}
+              product={product}
+              lang={lang}
+              text={{ price, buy, bid, owner }}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
