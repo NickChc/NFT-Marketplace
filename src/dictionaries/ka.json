@@ -35,6 +35,7 @@
     "ownsNothing": "ცარიელია",
     "owner": "მფლობელი",
     "freezeActives": "აქტივების გაყინვა",
-    "unfreezeActives": "აქტივების დაბრუნება"
+    "unfreezeActives": "აქტივების დაბრუნება",
+    "myCollection": "ჩემი კოლექცია"
   }
 }

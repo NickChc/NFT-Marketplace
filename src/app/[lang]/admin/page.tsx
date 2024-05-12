@@ -25,7 +25,9 @@ export default async function AdminDashboard({
   const totalPrice = orders?.reduce((acc, curr) => acc + curr.paidInCents, 0);
 
   const avarageSpent = users
-    ? users.reduce((acc, curr) => acc + curr.spentInCents, 0) / users.length
+    ? users.reduce((acc, curr) => acc + curr.spentInCents, 0) /
+      users.length /
+      100
     : 0;
 
   const availableProducts =

@@ -1,7 +1,8 @@
+import { TLocale } from "../../../../i18n.config";
 import { getProducts } from "@/app/[lang]/_api/getProducts";
 import { PageHeader } from "@/app/[lang]/_components/PageHeader";
-import { TLocale } from "../../../../i18n.config";
 import { getDictionaries } from "@/lib/dictionary";
+import { ProductCard } from "@/app/[lang]/_components/ProductCard";
 
 interface AdminProductsPageProps {
   params: {
@@ -19,14 +20,10 @@ export default async function HomePage({
     <div className="w-full sm:w-[90%] md:w-[80%] flex flex-col mx-auto">
       <PageHeader>{page.home}</PageHeader>
 
-      <div className="flex gap-x-4 mt-9">
+      <h2 className="text-3xl font-semibold">Newest</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-9">
         {newest?.map((product) => {
-          return (
-            <div key={product.id} className="flex flex-col p-3">
-              <h2>{product.name}</h2>
-              <p>{product.description}</p>
-            </div>
-          );
+          return <ProductCard key={product.id} product={product} />;
         })}
       </div>
       <div className="flex gap-x-4"></div>
