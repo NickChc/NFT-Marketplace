@@ -32,7 +32,7 @@ export interface TProduct {
   owner?: {
     fullName: string;
     userId: string;
-  };
+  } | null;
   filePath: string;
   imagePath: string;
 }
