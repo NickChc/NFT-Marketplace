@@ -35,6 +35,7 @@
     "ownsNothing": "Empty",
     "owner": "Owner",
     "freezeActives": "Freeze Actives",
-    "unfreezeActives": "Unfreeze Actives"
+    "unfreezeActives": "Unfreeze Actives",
+    "myCollection": "My Collection"
   }
 }

@@ -48,7 +48,7 @@ export async function ProductsTable({ lang }: TableProps) {
               <td className="truncate max-w-30 sm:max-w-auto text-center py-4">
                 {product.owner?.fullName || (
                   <span className="font-semibold text-green-500">
-                    Available
+                    {page.available}
                   </span>
                 )}
               </td>
