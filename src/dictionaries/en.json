@@ -41,6 +41,7 @@
     "forSale": "For Sale",
     "buy": "BUY",
     "bid": "BID",
-    "viewAll": "View All"
+    "viewAll": "View All",
+    "notAvailable": "Not Available"
   }
 }

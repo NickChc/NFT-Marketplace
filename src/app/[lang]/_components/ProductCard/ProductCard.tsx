@@ -12,6 +12,7 @@ interface ProductCardProps {
     buy: string;
     bid: string;
     owner: string;
+    notAvailable: string;
   };
 }
 
@@ -26,8 +27,12 @@ export async function ProductCard({ product, lang, text }: ProductCardProps) {
           className="object-cover"
         />
       </div>
-      <h3 className="text-2xl md:text-xl lg:text-2xl font-semibold my-1 truncate">{product.name}</h3>
-      <p className="line-clamp-3 min-h-12 sm:min-h-20 mt-2">{product.description}</p>
+      <h3 className="text-2xl md:text-xl lg:text-2xl font-semibold my-1 truncate">
+        {product.name}
+      </h3>
+      <p className="line-clamp-3 min-h-12 sm:min-h-20 mt-2">
+        {product.description}
+      </p>
       <div className="min-h-16">
         <h4 className="text-gray-500 font-semibold text-xl md:text-lg lg:text-xl">
           {text.price} - {formatCurrency(product.priceInCents / 100)}
@@ -39,14 +44,21 @@ export async function ProductCard({ product, lang, text }: ProductCardProps) {
         )}
       </div>
 
-      <button className="bg-purple-800 text-white  w-full mt-4 rounded-md hover:opacity-75 duration-100 flex items-stretch">
+      <button
+        disabled={product.owner?.isFrozen}
+        className="bg-purple-800 text-white w-full mt-4 rounded-md hover:opacity-75 duration-100 disabled:cursor-default disabled:opacity-50 disabled:px-2 disabled:py-1 flex justify-center"
+      >
         {product.owner ? (
-          <Link
-            href={`/${lang}/products/${product.id}/bid`}
-            className="min-w-full min-h-full px-2 py-1 rounded-md"
-          >
-            {text.bid}
-          </Link>
+          product.owner.isFrozen ? (
+            text.notAvailable
+          ) : (
+            <Link
+              href={`/${lang}/products/${product.id}/bid`}
+              className="min-w-full min-h-full px-2 py-1 rounded-md"
+            >
+              {text.bid}
+            </Link>
+          )
         ) : (
           <Link
             href={`/${lang}/products/${product.id}/buy`}
