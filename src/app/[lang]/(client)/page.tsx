@@ -21,8 +21,6 @@ export default async function HomePage({
     getProducts(undefined, false, true),
   ]);
 
-  const { price, buy, bid, owner, notAvailable } = page;
-
   return (
     <div className="w-full flex flex-col py-9">
       <PageHeader>{page.home}</PageHeader>
@@ -49,7 +47,7 @@ export default async function HomePage({
                 key={product.id}
                 product={product}
                 lang={lang}
-                text={{ price, buy, bid, owner, notAvailable }}
+                text={{ ...page }}
               />
             );
           })}
@@ -76,7 +74,7 @@ export default async function HomePage({
                 key={product.id}
                 product={product}
                 lang={lang}
-                text={{ price, buy, bid, owner, notAvailable }}
+                text={{ ...page }}
               />
             );
           })}
