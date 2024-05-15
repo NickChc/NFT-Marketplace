@@ -5,7 +5,8 @@ import { getDocs, orderBy, query, limit, where } from "firebase/firestore";
 export async function getProducts(
   limitAt?: number,
   activeOnly?: boolean,
-  withoutOwner?: boolean
+  withoutOwner?: boolean,
+  userId?: string
 ) {
   try {
     let data;
@@ -22,7 +23,15 @@ export async function getProducts(
       data = await getDocs(
         query(
           productCollectionRef,
-          where("owner", "!=", null),
+          where("owner", "==", null),
+          orderBy("createdAt", "asc")
+        )
+      );
+    } else if (userId) {
+      data = await getDocs(
+        query(
+          productCollectionRef,
+          where("owner.userId", "==", userId),
           orderBy("createdAt", "asc")
         )
       );

@@ -32,6 +32,7 @@ export interface TProduct {
   owner?: {
     fullName: string;
     userId: string;
+    isFrozen: boolean;
   } | null;
   filePath: string;
   imagePath: string;
