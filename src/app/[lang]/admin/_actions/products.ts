@@ -85,10 +85,7 @@ export async function createProduct(prevState: unknown, formData: FormData) {
     priceInCents,
     filePath: fileURL,
     imagePath: imageURL,
-    owner: {
-      fullName: "",
-      userId: "",
-    },
+    owner: null,
     isAvailable: false,
     createdAt: Timestamp.fromDate(new Date()) as any,
   };

@@ -1,6 +1,6 @@
 {
   "page": {
-    "home": "HOME",
+    "home": "Home",
     "dashboard": "Dashboard",
     "sales": "Sales",
     "customers": "Customers",
@@ -42,6 +42,7 @@
     "buy": "BUY",
     "bid": "BID",
     "viewAll": "View All",
-    "notAvailable": "Not Available"
+    "notAvailable": "Not Available",
+    "homeCap": "HOME"
   }
 }

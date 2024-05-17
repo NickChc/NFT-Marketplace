@@ -15,8 +15,16 @@ export async function getProducts(
         query(
           productCollectionRef,
           where("isAvailable", "==", true),
-          orderBy("createdAt", "asc"),
+          orderBy("createdAt", "desc"),
           limit(limitAt)
+        )
+      );
+    } else if (activeOnly) {
+      data = await getDocs(
+        query(
+          productCollectionRef,
+          where("isAvailable", "==", true),
+          orderBy("createdAt", "desc")
         )
       );
     } else if (withoutOwner) {
@@ -24,7 +32,7 @@ export async function getProducts(
         query(
           productCollectionRef,
           where("owner", "==", null),
-          orderBy("createdAt", "asc")
+          orderBy("createdAt", "desc")
         )
       );
     } else if (userId) {
@@ -32,7 +40,7 @@ export async function getProducts(
         query(
           productCollectionRef,
           where("owner.userId", "==", userId),
-          orderBy("createdAt", "asc")
+          orderBy("createdAt", "desc")
         )
       );
     } else {
