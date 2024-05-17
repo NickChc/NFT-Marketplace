@@ -43,6 +43,9 @@
     "bid": "BID",
     "viewAll": "View All",
     "notAvailable": "Not Available",
-    "homeCap": "HOME"
+    "homeCap": "HOME",
+    "signUpCap": "SIGN UP",
+    "signInCap": "SIGN IN",
+    "forgotPasswordCap": "FORGOR PASSWORD"
   }
 }
