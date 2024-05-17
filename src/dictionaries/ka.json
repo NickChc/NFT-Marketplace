@@ -46,6 +46,21 @@
     "homeCap": "მთავარი",
     "signUpCap": "რეგისტრაცია",
     "signInCap": "შესვლა",
-    "forgotPasswordCap": "დაგავიწყდა პაროლი"
+    "forgotPasswordCap": "დაგავიწყდა პაროლი",
+    "surname": "გვარი",
+    "password": "პაროლი",
+    "repeatPassword": "გაიმეორეთ პაროლი",
+    "register": "დარეგისტრირდით",
+    "registering": "რეგისტრაცია",
+    "registerValidation": {
+      "passwordTooShort": "პაროლი უნდა შეიცავდეს მინიმუმ 8 სიმბოლოს",
+      "passwordTooLong": "პაროლი უნდა შეიცავდეს მაქსიმუმ 50 სიმბოლოს",
+      "passwordLowercase": "პაროლი უნდა შეიცავდეს მინიმუმ 1 პატარა სიმბოლოს",
+      "passwordUppercase": "პაროლი უნდა შეიცავდეს მინიმუმ 1 დიდ სიმბოლოს",
+      "passwordDigit": "პაროლი უნდა შეიცავდეს მინიმუმ 1 ციფრს",
+      "passwordSymbol": "პაროლი უნდა შეიცავდეს მინიმუმ 1 სპეციალურ სიმბოლოს (@$!%*?&)",
+      "passwordsMatch": "პაროლები არ ემთხვევა",
+      "emptyField": "ველი ცარიელია"
+    }
   }
 }

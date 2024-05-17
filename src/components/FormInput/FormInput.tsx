@@ -3,8 +3,8 @@ interface FormInputProps {
   label: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onFocus: () => void;
-  type?: "text" | "password" | "file";
+  onFocus?: () => void;
+  type?: "text" | "password" | "file" | "email";
   required?: boolean;
   defaultValue?: string;
 }
