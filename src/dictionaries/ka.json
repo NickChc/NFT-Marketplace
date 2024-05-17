@@ -43,6 +43,9 @@
     "bid": "თანხის შეთავაზება",
     "viewAll": "ყველას ნახვა",
     "notAvailable": "მიუწვდომელია",
-    "homeCap": "მთავარი"
+    "homeCap": "მთავარი",
+    "signUpCap": "რეგისტრაცია",
+    "signInCap": "შესვლა",
+    "forgotPasswordCap": "დაგავიწყდა პაროლი"
   }
 }
