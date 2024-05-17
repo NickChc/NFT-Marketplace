@@ -6,8 +6,7 @@ import { getDictionaries } from "@/lib/dictionary";
 import { LangSelect } from "@/app/[lang]/_components/LangSelect";
 import { NavLink } from "@/app/[lang]/_components/NavLink";
 import { ToggleTheme } from "@/app/[lang]/_components/ToggleTheme";
-
-
+import { Header } from "../_components/Header";
 
 interface AdminLayoutProps {
   params: {
@@ -28,13 +27,11 @@ export default async function AdminLayout({
   const { page } = await getDictionaries(lang);
   return (
     <>
-      <Navigation>
-        <LangSelect lang={lang} />
+      <Header lang={lang}>
         <NavLink path={`/${lang}/admin`} title={page.dashboard} />
         <NavLink path={`/${lang}/admin/products`} title={page.products} />
         <NavLink path={`/${lang}/admin/customers`} title={page.customers} />
-        <ToggleTheme />
-      </Navigation>
+      </Header>
       {children}
     </>
   );

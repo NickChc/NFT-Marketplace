@@ -34,7 +34,7 @@ export function ToggleTheme() {
     return (
       <span
         suppressHydrationWarning
-        className="opacity-50 absolute top-1/2 -translate-y-1/2 right-3 text-xl bg-white rounded-full w-10 aspect-square text-purple-700"
+        className="opacity-50 relative sm:absolute top-1/2 sm:-translate-y-1/2 right-3 text-sm sm:text-lg md:text-xl bg-white rounded-full w-7 sm:w-8 md:w-10 aspect-square text-purple-700"
       >
         <MoonIcon className="absolute right-1/2 top-1/2 -translate-y-1/2 translate-x-1/2 " />
       </span>
@@ -44,19 +44,19 @@ export function ToggleTheme() {
   return (
     <span
       suppressHydrationWarning
-      className={`absolute top-1/2 -translate-y-1/2 right-3 text-xl bg-white rounded-full w-10 aspect-square text-purple-700 cursor-pointer `}
+      className={`relative sm:absolute top-1/2 sm:-translate-y-1/2 right-3 text-sm sm:text-lg md:text-xl bg-white rounded-full w-7 sm:w-8 md:w-10 aspect-square text-purple-700 cursor-pointer `}
       onClick={memoizeToggleTheme}
     >
       <SunIcon
         className={`duration-500 absolute right-1/2 top-1/2 -translate-y-1/2 translate-x-1/2 ${
-          resolvedTheme === TThemeMode_Enum.DARK
+          resolvedTheme === TThemeMode_Enum.LIGHT
             ? "rotate-90 scale-0 opacity-0 "
             : ""
         }`}
       />
       <MoonIcon
         className={`duration-500 absolute right-1/2 top-1/2 -translate-y-1/2 translate-x-1/2 ${
-          resolvedTheme === TThemeMode_Enum.LIGHT
+          resolvedTheme === TThemeMode_Enum.DARK
             ? "rotate-90 scale-0 opacity-0 "
             : ""
         }`}

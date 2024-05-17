@@ -1,8 +1,8 @@
-import { getDictionaries } from "@/lib/dictionary";
 import { TLocale } from "../../../../../i18n.config";
-import { PageHeader } from "../../_components/PageHeader";
-import { getProducts } from "../../_api/getProducts";
-import { ProductCard } from "../../_components/ProductCard";
+import { getDictionaries } from "@/lib/dictionary";
+import { PageHeader } from "@/app/[lang]/_components/PageHeader";
+import { getProducts } from "@/app/[lang]/_api/getProducts";
+import { ProductCard } from "@/app/[lang]/_components/ProductCard";
 
 interface ProductsPageProps {
   params: {
@@ -15,7 +15,7 @@ export default async function ProductsPage({
 }: ProductsPageProps) {
   const [{ page }, products] = await Promise.all([
     getDictionaries(lang),
-    getProducts(),
+    getProducts(undefined, true),
   ]);
 
   return (

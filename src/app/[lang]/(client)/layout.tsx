@@ -1,10 +1,8 @@
 import { TLocale } from "../../../../i18n.config";
-import { Navigation } from "@/app/[lang]/_components/Navigation";
-import { LangSelect } from "@/app/[lang]/_components/LangSelect";
-import { ToggleTheme } from "@/app/[lang]/_components/ToggleTheme";
-import { NavLink } from "@/app/[lang]/_components/NavLink";
-import { getDictionaries } from "@/lib/dictionary";
 import { PropsWithChildren } from "react";
+import { getDictionaries } from "@/lib/dictionary";
+import { Header } from "@/app/[lang]/_components/Header";
+import { NavLink } from "../_components/NavLink";
 
 interface ClientLayoutProps {
   params: {
@@ -19,13 +17,11 @@ export default async function ClientLayout({
   const { page } = await getDictionaries(lang);
   return (
     <>
-      <Navigation>
-        <LangSelect lang={lang} />
+      <Header lang={lang}>
         <NavLink title={page.home} path={`/${lang}`} />
         <NavLink title={page.products} path={`/${lang}/products`} />
         <NavLink title={page.myCollection} path={`/${lang}/collection`} />
-        <ToggleTheme />
-      </Navigation>
+      </Header>
       <div className="mx-auto container">{children}</div>
     </>
   );

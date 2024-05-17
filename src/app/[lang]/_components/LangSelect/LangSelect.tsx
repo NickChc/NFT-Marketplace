@@ -38,15 +38,15 @@ export function LangSelect({ lang }: LangSelectProps) {
   }, [openSelect]);
 
   return (
-    <div className="absolute top-1/2 -translate-y-1/2 left-4">
+    <div className="relative sm:static">
       <button
-        className="w-10 h-10 p-2 rounded-md bg-white text-black dark:bg-gray-900 dark:text-white font-semibold"
+        className="w-8 md:w-10 sm:aspect-square py-0.5 px-0 sm:py-0 rounded-md bg-white text-black dark:bg-gray-900 dark:text-white font-semibold text-sm sm:text-base flex items-center justify-center sm:absolute sm:top-1/2 sm:-translate-y-1/2 sm:left-4"
         onClick={() => setOpenSelect((prev) => !prev)}
       >
         {lang.toUpperCase()}
       </button>
       {openSelect && (
-        <ul className="flex flex-col gap-y-2 absolute top-[120%] bg-white border-solid border border-purple-500 p-1.5 rounded-md">
+        <ul className="z-50 flex flex-col gap-y-2 absolute top-[130%] sm:top-[110%] left-1 sm:left-4 bg-white border-solid border border-purple-500 p-1.5 rounded-md">
           {i18n.locales.map((loc) => {
             return (
               <li
