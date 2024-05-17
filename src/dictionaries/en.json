@@ -46,6 +46,21 @@
     "homeCap": "HOME",
     "signUpCap": "SIGN UP",
     "signInCap": "SIGN IN",
-    "forgotPasswordCap": "FORGOR PASSWORD"
+    "forgotPasswordCap": "FORGOR PASSWORD",
+    "surname": "Surname",
+    "password": "Password",
+    "repeatPassword": "Repeat Password",
+    "register": "Register",
+    "registering": "Registering",
+    "registerValidation": {
+      "passwordTooShort": "Password must be at least 8 characters long",
+      "passwordTooLong": "Password must not ecxeed 50 characters",
+      "passwordLowercase": "Password must include at least one lowercase letter",
+      "passwordUppercase": "Password must include at least one uppercase letter",
+      "passwordDigit": "Password must include at least one digit",
+      "passwordSymbol": "Password must include at least one special character (@$!%*?&)",
+      "passwordsMatch": "Passords don't match",
+      "emptyField": "This field can't be empty"
+    }
   }
 }

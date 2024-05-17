@@ -5,7 +5,7 @@ import { i18n } from "../i18n.config";
 
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-import { hashPassword, isValidPassword } from "@/lib/isValidPassword";
+import { isValidPassword } from "@/lib/isValidPassword";
 
 function getLocale(req: NextRequest): string | undefined {
   const negotiatorHeaders: Record<string, string> = {};
