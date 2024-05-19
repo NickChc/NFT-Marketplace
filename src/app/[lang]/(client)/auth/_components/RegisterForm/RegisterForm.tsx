@@ -12,7 +12,7 @@ export function RegisterForm() {
   const { page } = translations;
 
   return (
-    <form action={action} className="flex flex-col gap-y-4 mx-auto mt-9">
+    <form action={action} className="flex flex-col gap-y-4 mx-auto mt-9 p-3">
       <FormInput name="name" label={page.name} required />
       {error?.name && <div className="text-red-700">{error.name}</div>}
       <FormInput name="surname" label={page.surname} required />
