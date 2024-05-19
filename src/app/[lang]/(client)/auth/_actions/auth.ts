@@ -5,6 +5,10 @@ import { headers } from "next/headers";
 import { z } from "zod";
 import en from "@/dictionaries/en.json";
 import ka from "@/dictionaries/ka.json";
+import { auth, usersCollectionRef } from "@/firebase";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { addDoc } from "firebase/firestore";
+import { TUser } from "@/@types/general";
 
 function getTranslations() {
   const headerList = headers();
@@ -99,4 +103,21 @@ export async function register(prevState: unknown, formData: FormData) {
   }
 
   const data = result.data;
+  console.log(data);
+
+  const newUser: Omit<TUser, "id"> = {
+    name: data.name,
+    surname: data.surname,
+    email: data.email,
+    isFrozen: false,
+    spentInCents: 0,
+    ownings: [],
+  };
+
+  await Promise.all([
+    createUserWithEmailAndPassword(auth, data.email, data.password),
+    addDoc(usersCollectionRef, newUser),
+  ]);
+  
+
 }
