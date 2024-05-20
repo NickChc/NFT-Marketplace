@@ -1,5 +1,6 @@
 "use client";
 
+import { AuthProvider } from "@/providers/AuthProvider";
 import { ThemeProvider } from "next-themes";
 import { PropsWithChildren } from "react";
 import { LocaleProvider } from "@/providers/LocaleProvider";
@@ -9,12 +10,17 @@ interface ProvidersProps {
   dictionary: Awaited<ReturnType<typeof getDictionaries>>;
 }
 
-export function Providers({ children, dictionary }: PropsWithChildren<ProvidersProps>) {
+export function Providers({
+  children,
+  dictionary,
+}: PropsWithChildren<ProvidersProps>) {
   return (
-    <LocaleProvider dictionary={dictionary}>
-      <ThemeProvider attribute="class" defaultTheme="system">
-        {children}
-      </ThemeProvider>
-    </LocaleProvider>
+    <AuthProvider>
+      <LocaleProvider dictionary={dictionary}>
+        <ThemeProvider attribute="class" defaultTheme="system">
+          {children}
+        </ThemeProvider>
+      </LocaleProvider>
+    </AuthProvider>
   );
 }
