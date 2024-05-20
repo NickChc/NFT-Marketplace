@@ -4,12 +4,18 @@ import { LangSelect } from "@/app/[lang]/_components/LangSelect";
 import { Navigation } from "@/app/[lang]/_components/Navigation";
 import { ToggleTheme } from "@/app/[lang]/_components/ToggleTheme";
 import { getDictionaries } from "@/lib/dictionary";
+import { AuthButton } from "@/app/[lang]/(client)/_component/AuthButton";
 
-interface Headerprops {
+interface HeaderProps {
   lang: TLocale;
+  forAdmin?: boolean;
 }
 
-export async function Header({ children, lang }: PropsWithChildren<Headerprops>) {
+export async function Header({
+  children,
+  lang,
+  forAdmin,
+}: PropsWithChildren<HeaderProps>) {
   const { page } = await getDictionaries(lang);
   return (
     <>
@@ -23,10 +29,18 @@ export async function Header({ children, lang }: PropsWithChildren<Headerprops>)
         <span className="hidden sm:block">
           <ToggleTheme />
         </span>
+        {!forAdmin && (
+          <span className="hidden sm:block">
+            <AuthButton lang={lang} />
+          </span>
+        )}
       </Navigation>
-      <div className="flex sm:hidden px-4 py-1 sm:p-0 bg-purple-800 w-full items-center gap-x-6">
-        <LangSelect lang={lang} />
-        <ToggleTheme />
+      <div className="flex justify-between sm:hidden px-4 py-1 sm:p-0 bg-purple-800 w-full items-center">
+        <div className="flex items-center gap-x-6">
+          <LangSelect lang={lang} />
+          <ToggleTheme />
+        </div>
+        {!forAdmin && <AuthButton lang={lang} />}
       </div>
     </>
   );

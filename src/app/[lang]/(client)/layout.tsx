@@ -2,7 +2,7 @@ import { TLocale } from "../../../../i18n.config";
 import { PropsWithChildren } from "react";
 import { getDictionaries } from "@/lib/dictionary";
 import { Header } from "@/app/[lang]/_components/Header";
-import { NavLink } from "../_components/NavLink";
+import { NavLink } from "@/app/[lang]/_components/NavLink";
 
 interface ClientLayoutProps {
   params: {

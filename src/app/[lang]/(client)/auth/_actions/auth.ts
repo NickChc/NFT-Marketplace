@@ -1,18 +1,14 @@
-"use server";
-
 import { TLocale, i18n } from "../../../../../../i18n.config";
-import { headers } from "next/headers";
 import { z } from "zod";
 import en from "@/dictionaries/en.json";
 import ka from "@/dictionaries/ka.json";
 import { auth, usersCollectionRef } from "@/firebase";
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addDoc } from "firebase/firestore";
 import { TUser } from "@/@types/general";
 
 function getTranslations() {
-  const headerList = headers();
-  const pathname = headerList.get("referer") || "";
+  const pathname = window.location.pathname;
   const segments = pathname.split("/");
 
   const locale: TLocale = i18n.locales.find((loc) => segments.includes(loc))!;
@@ -82,7 +78,12 @@ function createRegisterSchema() {
     .object({
       name: z.string().trim().min(1, { message: translations.emptyField }),
       surname: z.string().trim().min(1, { message: translations.emptyField }),
-      email: z.string().email(),
+      email: z
+        .string()
+        .email()
+        .refine((email) => email === email.toLowerCase(), {
+          message: translations.lowerCaseEmail,
+        }),
       password: passwordSchema,
       repeatPassword: z.string(),
     })
@@ -92,7 +93,11 @@ function createRegisterSchema() {
     });
 }
 
-export async function register(prevState: unknown, formData: FormData) {
+export async function register(
+  redirect: (path: string) => void,
+  prevState: unknown,
+  formData: FormData
+) {
   const registerSchema = createRegisterSchema();
   const result = registerSchema.safeParse(
     Object.fromEntries(formData.entries())
@@ -103,7 +108,6 @@ export async function register(prevState: unknown, formData: FormData) {
   }
 
   const data = result.data;
-  console.log(data);
 
   const newUser: Omit<TUser, "id"> = {
     name: data.name,
@@ -118,6 +122,11 @@ export async function register(prevState: unknown, formData: FormData) {
     createUserWithEmailAndPassword(auth, data.email, data.password),
     addDoc(usersCollectionRef, newUser),
   ]);
-  
 
+  const pathname = window.location.pathname;
+  const segments = pathname.split("/");
+
+  const locale: TLocale = i18n.locales.find((loc) => segments.includes(loc))!;
+
+  redirect(`/${locale}`);
 }

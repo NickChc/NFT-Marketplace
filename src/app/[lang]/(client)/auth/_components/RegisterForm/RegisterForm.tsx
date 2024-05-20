@@ -5,11 +5,20 @@ import { SubmitBtn } from "@/components/SubmitBtn";
 import { useFormState } from "react-dom";
 import { register } from "@/app/[lang]/(client)/auth/_actions/auth";
 import { useDictionary } from "@/hooks/useDictionary";
+import { useRouter } from "next/navigation";
 
 export function RegisterForm() {
-  const [error, action] = useFormState(register, {});
+  const [error, action] = useFormState(
+    register.bind(null, redirectAfterRegister),
+    {}
+  );
   const translations = useDictionary();
   const { page } = translations;
+  const router = useRouter();
+
+  function redirectAfterRegister(path: string) {
+    router.push(path);
+  }
 
   return (
     <form action={action} className="flex flex-col gap-y-4 mx-auto mt-9 p-3">

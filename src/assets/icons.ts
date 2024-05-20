@@ -13,4 +13,4 @@ export {
   FaCircle as FilledCircleIcon,
 } from "react-icons/fa";
 export { FaArrowRight as RightArrowIcon } from "react-icons/fa";
-
+export { FaRegUser as UserIcon } from "react-icons/fa";

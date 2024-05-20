@@ -59,8 +59,9 @@
       "passwordUppercase": "Password must include at least one uppercase letter",
       "passwordDigit": "Password must include at least one digit",
       "passwordSymbol": "Password must include at least one special character (@$!%*?&)",
-      "passwordsMatch": "Passords don't match",
-      "emptyField": "This field can't be empty"
+      "passwordsMatch": "Passwords don't match",
+      "emptyField": "This field can't be empty",
+      "lowerCaseEmail": "Email must consist of lower case letters only"
     }
   }
 }

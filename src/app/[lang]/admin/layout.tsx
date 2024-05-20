@@ -27,7 +27,7 @@ export default async function AdminLayout({
   const { page } = await getDictionaries(lang);
   return (
     <>
-      <Header lang={lang}>
+      <Header lang={lang} forAdmin>
         <NavLink path={`/${lang}/admin`} title={page.dashboard} />
         <NavLink path={`/${lang}/admin/products`} title={page.products} />
         <NavLink path={`/${lang}/admin/customers`} title={page.customers} />
