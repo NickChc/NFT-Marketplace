@@ -3,7 +3,10 @@ import { z } from "zod";
 import en from "@/dictionaries/en.json";
 import ka from "@/dictionaries/ka.json";
 import { auth, usersCollectionRef } from "@/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { addDoc } from "firebase/firestore";
 import { TUser } from "@/@types/general";
 
@@ -14,9 +17,9 @@ function getTranslations() {
   const locale: TLocale = i18n.locales.find((loc) => segments.includes(loc))!;
 
   if (locale === "en") {
-    return en.page.registerValidation;
+    return en.page.authValidation;
   } else if (locale === "ka") {
-    return ka.page.registerValidation;
+    return ka.page.authValidation;
   } else {
     throw new Error("Unsopported locale");
   }
@@ -91,6 +94,50 @@ function createRegisterSchema() {
       message: translations.passwordsMatch,
       path: ["repeatPassword"],
     });
+}
+
+function createLoginSchema() {
+  const translations = getTranslations();
+
+  return z.object({
+    email: z.string().trim().min(1, { message: translations.emptyField }),
+    password: z.string().min(1, { message: translations.emptyField }),
+  });
+}
+
+const loginSchema = createLoginSchema();
+
+export async function login(
+  redirect: (path: string) => void,
+  prevState: unknown,
+  formData: FormData
+) {
+  const result = loginSchema.safeParse(Object.fromEntries(formData.entries()));
+
+  if (result.success === false) {
+    return result.error.formErrors.fieldErrors;
+  }
+
+  const data = result.data;
+
+  try {
+    await signInWithEmailAndPassword(auth, data.email, data.password);
+
+    const pathname = window.location.pathname;
+    const segments = pathname.split("/");
+
+    const locale: TLocale = i18n.locales.find((loc) => segments.includes(loc))!;
+
+    redirect(`/${locale}`);
+  } catch (error: any) {
+    if (error.message.includes("invalid-credential")) {
+      const translations = getTranslations();
+
+      return { auth: [translations.invalidCredentials] };
+    }
+
+    return { auth: "Problem occured trying to log in" };
+  }
 }
 
 export async function register(

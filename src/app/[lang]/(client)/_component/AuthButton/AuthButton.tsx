@@ -28,9 +28,8 @@ export function AuthButton({ lang }: AuthButtonProps) {
     }
   }
 
-  
   useEffect(() => {
-  setMounted(true);
+    setMounted(true);
   }, []);
 
   if (pathname.includes("auth")) return <></>;
@@ -57,7 +56,7 @@ export function AuthButton({ lang }: AuthButtonProps) {
         </span>
       ) : (
         <Link
-          href={`/${lang}/auth`}
+          href={`/${lang}/auth/sign-in`}
           className="bg-white text-purple-800 w-7 sm:w-8 md:w-10 aspect-square grid place-items-center"
         >
           <UserIcon />

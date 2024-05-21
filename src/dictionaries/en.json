@@ -52,7 +52,7 @@
     "repeatPassword": "Repeat Password",
     "register": "Register",
     "registering": "Registering",
-    "registerValidation": {
+    "authValidation": {
       "passwordTooShort": "Password must be at least 8 characters long",
       "passwordTooLong": "Password must not ecxeed 50 characters",
       "passwordLowercase": "Password must include at least one lowercase letter",
@@ -61,7 +61,11 @@
       "passwordSymbol": "Password must include at least one special character (@$!%*?&)",
       "passwordsMatch": "Passwords don't match",
       "emptyField": "This field can't be empty",
-      "lowerCaseEmail": "Email must consist of lower case letters only"
-    }
+      "lowerCaseEmail": "Email must consist of lower case letters only",
+      "invalidCredentials": "Invalid email or password"
+    },
+    "loginCap": "LOG IN",
+    "login": "Log In",
+    "loggingIn": "Logging In"
   }
 }
