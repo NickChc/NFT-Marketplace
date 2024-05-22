@@ -6,6 +6,11 @@ import { useFormState } from "react-dom";
 import { login } from "@/app/[lang]/(client)/auth/_actions/auth";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useRouter } from "next/navigation";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "@/firebase";
+import { TLocale } from "../../../../../../../i18n.config";
+import { GoogleIcon } from "@/assets/icons";
+import { useState } from "react";
 
 interface FieldErrors {
   email?: string[];
@@ -24,7 +29,12 @@ function isAuthError(error: any): error is AuthError {
   return error.auth;
 }
 
-export function LoginForm() {
+interface LoginFormProps {
+  lang: TLocale;
+}
+
+export function LoginForm({ lang }: LoginFormProps) {
+  const [loading, setLoading] = useState(false);
   const [error, action] = useFormState(
     login.bind(null, redirectAfterLogin),
     {}
@@ -35,6 +45,18 @@ export function LoginForm() {
 
   function redirectAfterLogin(path: string) {
     router.push(path);
+  }
+
+  async function handleGoogleLogin() {
+    try {
+      setLoading(true);
+      await signInWithPopup(auth, googleProvider);
+      router.push(`/${lang}`);
+    } catch (error: any) {
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -59,6 +81,15 @@ export function LoginForm() {
       )}
 
       <SubmitBtn pendingText={`${page.loggingIn}...`}>{page.login}</SubmitBtn>
+      <button
+        type="button"
+        disabled={loading}
+        className="bg-white border border-solid border-blue-500 text-black font-semibold rounded-md p-3 my-2 hover:opacity-75 duration-150 disabled:bg-blue-500 disabled:hover:opacity-50 disabled:opacity-50 disabled:text-blue-300 disabled:hover:text-blue-300 flex items-center justify-center gap-x-3"
+        onClick={handleGoogleLogin}
+      >
+        {loading ? "Loading..." : "Sign In With Google"}{" "}
+        <GoogleIcon className="text-xl sm:text-2xl" />
+      </button>
     </form>
   );
 }
