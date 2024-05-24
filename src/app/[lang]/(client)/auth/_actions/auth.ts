@@ -145,6 +145,7 @@ export async function login(
 export async function register(
   redirect: (path: string) => void,
   verificationStatusChange: () => void,
+  setVerificationError: React.Dispatch<React.SetStateAction<string>>,
   prevState: unknown,
   formData: FormData
 ) {
@@ -183,29 +184,19 @@ export async function register(
     verificationStatusChange();
   } catch (error: any) {
     console.log(error.message);
-  }
-
-  // try {
-  //   await Promise.all([
-  //     createUserWithEmailAndPassword(auth, data.email, data.password),
-  //     createUser(newUser),
-  //   ]);
-
-  //   redirect(`/${locale}`);
-  // } catch (error: any) {
-  //   if (error.message.includes("auth/email-already-in-use")) {
-  //     // redirect(`/${locale}`);
-  //   }
-  // }
-}
-
-async function handleExistingAccount(email: string) {
-  try {
-    const result = await signInWithPopup(auth, googleProvider);
-    if (result.user.email !== email) return;
-  } catch (error: any) {
-    if (error.message.includes("")) {
-      return { auth: "" };
+    if (error.message.includes("email-already-in-use")) {
+      setVerificationError("This email is already used");
     }
   }
 }
+
+// async function handleExistingAccount(email: string) {
+//   try {
+//     const result = await signInWithPopup(auth, googleProvider);
+//     if (result.user.email !== email) return;
+//   } catch (error: any) {
+//     if (error.message.includes("")) {
+//       return { auth: "" };
+//     }
+//   }
+// }
