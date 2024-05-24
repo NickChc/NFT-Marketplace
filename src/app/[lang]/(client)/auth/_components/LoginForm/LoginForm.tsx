@@ -11,6 +11,7 @@ import { auth, googleProvider } from "@/firebase";
 import { TLocale } from "../../../../../../../i18n.config";
 import { GoogleIcon } from "@/assets/icons";
 import { useState } from "react";
+import { LoginFormPopup } from "./LoginFormPopup";
 
 interface FieldErrors {
   email?: string[];
@@ -34,6 +35,7 @@ interface LoginFormProps {
 }
 
 export function LoginForm({ lang }: LoginFormProps) {
+  const [loginError, setLoginError] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, action] = useFormState(
     login.bind(null, redirectAfterLogin),
@@ -54,6 +56,7 @@ export function LoginForm({ lang }: LoginFormProps) {
       router.push(`/${lang}`);
     } catch (error: any) {
       console.log(error.message);
+      setLoginError(translations.page.problemOccuredTryAgain);
     } finally {
       setLoading(false);
     }
@@ -90,6 +93,12 @@ export function LoginForm({ lang }: LoginFormProps) {
         {loading ? "Loading..." : "Sign In With Google"}{" "}
         <GoogleIcon className="text-xl sm:text-2xl" />
       </button>
+      {loginError !== "" && (
+        <LoginFormPopup
+          error={loginError}
+          closePopup={() => setLoginError("")}
+        />
+      )}
     </form>
   );
 }

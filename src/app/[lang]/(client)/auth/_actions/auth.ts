@@ -5,9 +5,11 @@ import ka from "@/dictionaries/ka.json";
 import { auth, googleProvider } from "@/firebase";
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 import { TUser } from "@/@types/general";
 import { createUser } from "@/app/[lang]/_api/createUser";
@@ -185,20 +187,48 @@ export async function register(
   } catch (error: any) {
     console.log(error.message);
     if (error.message.includes("email-already-in-use")) {
+      const result = await handleExistingAccount(
+        data,
+        newUser,
+        verificationStatusChange
+      );
       const translations = getTranslations();
-
+      if (result) return;
       setVerificationError(translations.emailAlreadyUsed);
     }
   }
 }
 
-// async function handleExistingAccount(email: string) {
-//   try {
-//     const result = await signInWithPopup(auth, googleProvider);
-//     if (result.user.email !== email) return;
-//   } catch (error: any) {
-//     if (error.message.includes("")) {
-//       return { auth: "" };
-//     }
-//   }
-// }
+interface TData {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
+}
+
+async function handleExistingAccount(
+  data: TData,
+  newUser: Omit<TUser, "id">,
+  verificationStatusChange: () => void
+) {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    await deleteUser(result.user);
+    await signOut(auth);
+    if (result.user.email === data.email) {
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      const user = userCredentials.user;
+      await Promise.all([createUser(newUser), sendEmailVerification(user)]);
+      verificationStatusChange();
+      return true;
+    }
+    return false;
+  } catch (error: any) {
+    console.log(error.message);
+  }
+}

@@ -34,7 +34,7 @@ export function RegisterFormPopup({
         </div>
       )}
       {verification === "sent" && (
-        <div className="text-black flex items-center justify-around gap-x-4">
+        <div className="text-purple-800 flex items-center justify-around gap-x-4">
           {translations.page.authValidation.verificationSent}
           <button
             className="border-solid border border-purple-800 text-purple-800 rounded-md px-2 py-0.5 font-semibold disabled:opacity-75"
