@@ -49,7 +49,7 @@ export function AuthButton({ lang }: AuthButtonProps) {
     <button className="rounded-full overflow-hidden  absolute top-1/2 -translate-y-1/2 right-20">
       {loadingUser ? (
         <span className="font-semibold bg-white w-7 sm:w-8 md:w-10 aspect-square grid place-items-center">
-          <LoadingIcon className="animate-spin text-xl" />
+          <LoadingIcon className="animate-spin text-xl text-purple-800" />
         </span>
       ) : currentUser ? (
         <span

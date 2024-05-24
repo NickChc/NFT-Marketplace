@@ -1,18 +1,12 @@
+import { PropsWithChildren, useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { TUser } from "@/@types/general";
 import { createUser } from "@/app/[lang]/_api/createUser";
 import { getUser } from "@/app/[lang]/_api/getUser";
-import { auth, db, googleProvider } from "@/firebase";
+import { auth, db } from "@/firebase";
 import { AuthContext } from "@/providers/AuthProvider";
-import {
-  Auth,
-  User,
-  deleteUser,
-  onAuthStateChanged,
-  signInWithPopup,
-} from "firebase/auth";
+import { User, deleteUser, onAuthStateChanged } from "firebase/auth";
 import { deleteDoc, doc } from "firebase/firestore";
-import { usePathname } from "next/navigation";
-import { PropsWithChildren, useState, useEffect } from "react";
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const [loadingUser, setLoadingUser] = useState<boolean>(false);
@@ -65,26 +59,40 @@ export function AuthProvider({ children }: PropsWithChildren) {
         return await deleteUser(user);
       } else {
         const userDoc = doc(db, "users", userToDelete.id);
-        return await Promise.all([deleteUser(user), deleteDoc(userDoc)]);
+        await deleteDoc(userDoc);
+        await deleteUser(user);
       }
     } catch (error: any) {
       console.log(error.message);
     }
   }
 
-  useEffect(() => {
-    if (
-      !pathname.includes("sign-up") &&
-      auth.currentUser &&
-      !auth.currentUser.emailVerified
-    ) {
-      handleUserDelete(auth.currentUser);
+  async function controlUnverifiedUser() {
+    try {
+      setLoadingUser(true);
+      if (
+        !pathname.includes("sign-up") &&
+        auth.currentUser &&
+        !auth.currentUser.emailVerified
+      ) {
+        await handleUserDelete(auth.currentUser);
+      }
+
+      if (auth.currentUser == null) {
+        return setCurrentUser(null);
+      }
+
+      checkUser(auth.currentUser.email);
+    } catch (error: any) {
+      console.log(error.message);
+    } finally {
+      setLoadingUser(false);
     }
+  }
 
-    if (auth.currentUser == null) return;
-
-    checkUser(auth.currentUser.email);
-  }, [auth.currentUser]);
+  useEffect(() => {
+    controlUnverifiedUser();
+  }, [auth.currentUser, pathname]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -104,6 +112,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         currentUser,
         setCurrentUser,
         loadingUser,
+        handleUserDelete,
       }}
     >
       {loading ? null : children}
