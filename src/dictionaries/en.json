@@ -72,6 +72,9 @@
     "loggingIn": "Logging In",
     "problemOccuredTryAgain": "Some problem occured, please try again",
     "checkingCap": "CHECKING",
-    "verifiedCap": "VERIFIED"
+    "verifiedCap": "VERIFIED",
+    "alreadyHaveAnAccount": "Already have an account",
+    "dontHaveAnAccount": "Don't have an account",
+    "forgotPassword": "Forgot Password"
   }
 }

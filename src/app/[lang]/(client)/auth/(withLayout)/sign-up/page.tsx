@@ -1,4 +1,4 @@
-import { TLocale } from "../../../../../../i18n.config";
+import { TLocale } from "../../../../../../../i18n.config";
 import { getDictionaries } from "@/lib/dictionary";
 import { PageHeader } from "@/app/[lang]/_components/PageHeader";
 import { RegisterForm } from "@/app/[lang]/(client)/auth/_components/RegisterForm";

@@ -72,6 +72,9 @@
     "loggingIn": "მიმდინარეობს",
     "problemOccuredTryAgain": "შეფერხება, გთხოვთ სცადოთ ახლიდან",
     "checkingCap": "მოწმდება",
-    "verifiedCap": "დადასტურებულია"
+    "verifiedCap": "დადასტურებულია",
+    "alreadyHaveAnAccount": "ხართ ავტორიზებული",
+    "dontHaveAnAccount": "არ ხართ ავტორიზებული",
+    "forgotPassword": "დაგავიწყდა პაროლი"
   }
 }
