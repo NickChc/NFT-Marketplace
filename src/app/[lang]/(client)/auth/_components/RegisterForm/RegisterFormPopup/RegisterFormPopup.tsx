@@ -1,6 +1,7 @@
 "use client";
 
 import { CloseIcon } from "@/assets/icons";
+import { useDictionary } from "@/hooks/useDictionary";
 
 interface RegisterFormPopupProps {
   verificationError: string;
@@ -17,6 +18,8 @@ export function RegisterFormPopup({
   loadingVerify,
   confirmVerified,
 }: RegisterFormPopupProps) {
+  const translations = useDictionary();
+
   return (
     <div className="bg-gray-300 flex flex-col items-stretch gap-y-4 absolute bottom-14 right-0 left-0 p-4 overflow-hidden rounded-sm border-solid border border-purple-800">
       {verificationError !== "" && (
@@ -32,7 +35,7 @@ export function RegisterFormPopup({
       )}
       {verification === "sent" && (
         <div className="text-black flex items-center justify-around gap-x-4">
-          Email verification sent to your inbox, please verify to continue
+          {translations.page.authValidation.verificationSent}
           <button
             className="border-solid border border-purple-800 text-purple-800 rounded-md px-2 py-0.5 font-semibold disabled:opacity-75"
             disabled={loadingVerify}
@@ -41,7 +44,9 @@ export function RegisterFormPopup({
               confirmVerified();
             }}
           >
-            {loadingVerify ? "CHECKING..." : "VERIFIED!"}
+            {loadingVerify
+              ? `${translations.page.checkingCap}...`
+              : `${translations.page.verifiedCap}!`}
           </button>
         </div>
       )}
