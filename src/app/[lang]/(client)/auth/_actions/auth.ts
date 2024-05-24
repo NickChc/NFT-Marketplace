@@ -2,13 +2,15 @@ import { TLocale, i18n } from "../../../../../../i18n.config";
 import { z } from "zod";
 import en from "@/dictionaries/en.json";
 import ka from "@/dictionaries/ka.json";
-import { auth, usersCollectionRef } from "@/firebase";
+import { auth, googleProvider } from "@/firebase";
 import {
   createUserWithEmailAndPassword,
+  sendEmailVerification,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
-import { addDoc } from "firebase/firestore";
 import { TUser } from "@/@types/general";
+import { createUser } from "@/app/[lang]/_api/createUser";
 
 function getTranslations() {
   const pathname = window.location.pathname;
@@ -142,6 +144,7 @@ export async function login(
 
 export async function register(
   redirect: (path: string) => void,
+  verificationStatusChange: () => void,
   prevState: unknown,
   formData: FormData
 ) {
@@ -164,16 +167,45 @@ export async function register(
     spentInCents: 0,
     ownings: [],
   };
-
-  await Promise.all([
-    createUserWithEmailAndPassword(auth, data.email, data.password),
-    addDoc(usersCollectionRef, newUser),
-  ]);
-
   const pathname = window.location.pathname;
   const segments = pathname.split("/");
 
   const locale: TLocale = i18n.locales.find((loc) => segments.includes(loc))!;
 
-  redirect(`/${locale}`);
+  try {
+    const userCredentials = await createUserWithEmailAndPassword(
+      auth,
+      data.email,
+      data.password
+    );
+    const user = userCredentials.user;
+    await Promise.all([createUser(newUser), sendEmailVerification(user)]);
+    verificationStatusChange();
+  } catch (error: any) {
+    console.log(error.message);
+  }
+
+  // try {
+  //   await Promise.all([
+  //     createUserWithEmailAndPassword(auth, data.email, data.password),
+  //     createUser(newUser),
+  //   ]);
+
+  //   redirect(`/${locale}`);
+  // } catch (error: any) {
+  //   if (error.message.includes("auth/email-already-in-use")) {
+  //     // redirect(`/${locale}`);
+  //   }
+  // }
+}
+
+async function handleExistingAccount(email: string) {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    if (result.user.email !== email) return;
+  } catch (error: any) {
+    if (error.message.includes("")) {
+      return { auth: "" };
+    }
+  }
 }

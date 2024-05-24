@@ -15,7 +15,7 @@ export default async function SignInPage({ params: { lang }}: SignInPageProps) {
     return (
       <div className="mx-auto max-w-4xl">
         <PageHeader>{page.loginCap}</PageHeader>
-        <LoginForm />
+        <LoginForm lang={lang} />
       </div>
     );
 }
