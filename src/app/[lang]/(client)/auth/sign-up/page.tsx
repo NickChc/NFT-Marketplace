@@ -16,7 +16,7 @@ export default async function SignUpPage({
   return (
     <div className="mx-auto max-w-4xl">
       <PageHeader>{page.signUpCap}</PageHeader>
-      <RegisterForm />
+      <RegisterForm lang={lang} />
     </div>
   );
 }

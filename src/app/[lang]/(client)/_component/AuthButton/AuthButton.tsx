@@ -3,7 +3,7 @@
 import { TLocale } from "../../../../../../i18n.config";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { UserIcon } from "@/assets/icons";
+import { LoadingIcon, UserIcon } from "@/assets/icons";
 import { usePathname } from "next/navigation";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { signOut } from "firebase/auth";
@@ -17,7 +17,7 @@ export function AuthButton({ lang }: AuthButtonProps) {
   const [mounted, setMounted] = useState<boolean>(false);
 
   const pathname = usePathname();
-  const { currentUser, setCurrentUser } = useAuthProvider();
+  const { currentUser, setCurrentUser, loadingUser } = useAuthProvider();
 
   async function handleLogOut() {
     try {
@@ -47,12 +47,18 @@ export function AuthButton({ lang }: AuthButtonProps) {
 
   return (
     <button className="rounded-full overflow-hidden  absolute top-1/2 -translate-y-1/2 right-20">
-      {currentUser ? (
+      {loadingUser ? (
+        <span className="font-semibold bg-white w-7 sm:w-8 md:w-10 aspect-square grid place-items-center">
+          <LoadingIcon className="animate-spin text-xl" />
+        </span>
+      ) : currentUser ? (
         <span
           className="font-semibold bg-white text-purple-800 w-7 sm:w-8 md:w-10 aspect-square grid place-items-center"
           onClick={handleLogOut}
         >
-          {currentUser.name[0].toUpperCase()}
+          {currentUser.name === ""
+            ? currentUser.email[0].toLocaleUpperCase()
+            : currentUser.name[0].toUpperCase()}
         </span>
       ) : (
         <Link
