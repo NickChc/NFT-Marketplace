@@ -8,9 +8,7 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { auth } from "@/firebase";
-import { deleteUser } from "firebase/auth";
 import { TLocale } from "../../../../../../../i18n.config";
-import { CloseIcon } from "@/assets/icons";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { RegisterFormPopup } from "./RegisterFormPopup";
 
@@ -54,7 +52,7 @@ export function RegisterForm({ lang }: RegisterFormProps) {
         router.replace(`/${lang}`);
       } else {
         await handleUserDelete(auth.currentUser);
-        setVerificationError("Some problem occured, please try again");
+        setVerificationError(page.problemOccuredTryAgain);
       }
     } catch (error: any) {
       console.log(error.message);

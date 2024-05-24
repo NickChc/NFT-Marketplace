@@ -114,6 +114,8 @@ export async function login(
   prevState: unknown,
   formData: FormData
 ) {
+  const translations = getTranslations();
+
   const result = loginSchema.safeParse(Object.fromEntries(formData.entries()));
 
   if (result.success === false) {
@@ -133,12 +135,10 @@ export async function login(
     redirect(`/${locale}`);
   } catch (error: any) {
     if (error.message.includes("invalid-credential")) {
-      const translations = getTranslations();
-
       return { auth: [translations.invalidCredentials] };
     }
 
-    return { auth: "Problem occured trying to log in" };
+    return { auth: [translations.loginProblem] };
   }
 }
 
@@ -185,7 +185,9 @@ export async function register(
   } catch (error: any) {
     console.log(error.message);
     if (error.message.includes("email-already-in-use")) {
-      setVerificationError("This email is already used");
+      const translations = getTranslations();
+
+      setVerificationError(translations.emailAlreadyUsed);
     }
   }
 }

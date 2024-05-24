@@ -62,10 +62,16 @@
       "passwordsMatch": "პაროლები არ ემთხვევა",
       "emptyField": "ველი ცარიელია",
       "lowerCaseEmail": "ელ. ფოსტა უნდა შედგებოდეს მხოლოდ პატარა ასოებისაგან",
-      "invalidCredentials": "ელ. ფოსტა ან პაროლი არასწორია"
+      "invalidCredentials": "ელ. ფოსტა ან პაროლი არასწორია",
+      "verificationSent": "გთხოვთ შეამოწმოთ მეილი რათა დაადასტუროდ თქვენი ვინაობა ელ. ფოსტა",
+      "emailAlreadyUsed": "მოცემული ელ. ფოსტა უკვე გამოყენებულია",
+      "loginProblem": "ავტორიზაცია ვერ მოხერხდა"
     },
     "loginCap": "შესვლა",
     "login": "შესვლა",
-    "loggingIn": "მიმდინარეობს"
+    "loggingIn": "მიმდინარეობს",
+    "problemOccuredTryAgain": "შეფერხება, გთხოვთ სცადოთ ახლიდან",
+    "checkingCap": "მოწმდება",
+    "verifiedCap": "დადასტურებულია"
   }
 }

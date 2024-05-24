@@ -62,10 +62,16 @@
       "passwordsMatch": "Passwords don't match",
       "emptyField": "This field can't be empty",
       "lowerCaseEmail": "Email must consist of lower case letters only",
-      "invalidCredentials": "Invalid email or password"
+      "invalidCredentials": "Invalid email or password",
+      "verificationSent": "Email verification sent to your inbox, please verify to continue",
+      "emailAlreadyUsed": "This email is already used",
+      "loginProblem": "Problem occured while trying to log in"
     },
     "loginCap": "LOG IN",
     "login": "Log In",
-    "loggingIn": "Logging In"
+    "loggingIn": "Logging In",
+    "problemOccuredTryAgain": "Some problem occured, please try again",
+    "checkingCap": "CHECKING",
+    "verifiedCap": "VERIFIED"
   }
 }
