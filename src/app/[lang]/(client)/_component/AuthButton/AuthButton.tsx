@@ -6,7 +6,7 @@ import Link from "next/link";
 import { LoadingIcon, UserIcon } from "@/assets/icons";
 import { usePathname } from "next/navigation";
 import { useAuthProvider } from "@/providers/AuthProvider";
-import { signOut } from "firebase/auth";
+import { fetchSignInMethodsForEmail, signOut } from "firebase/auth";
 import { auth } from "@/firebase";
 
 interface AuthButtonProps {

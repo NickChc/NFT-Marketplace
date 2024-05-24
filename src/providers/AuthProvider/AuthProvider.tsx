@@ -82,7 +82,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         return setCurrentUser(null);
       }
 
-      checkUser(auth.currentUser.email);
+      // checkUser(auth.currentUser.email);
     } catch (error: any) {
       console.log(error.message);
     } finally {
@@ -92,6 +92,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   useEffect(() => {
     controlUnverifiedUser();
+    if (auth.currentUser != null && currentUser == null) {
+      getCurrentUser(auth.currentUser?.email!);
+    }
   }, [auth.currentUser, pathname]);
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import { useFormStatus } from "react-dom";
 
 interface SubmitBtnProps {
   pendingText: string;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export function SubmitBtn({
