@@ -63,7 +63,7 @@ export function LoginForm({ lang }: LoginFormProps) {
   }
 
   return (
-    <form action={action} className="flex flex-col gap-y-4 mx-auto mt-9 p-3">
+    <form action={action} className="flex flex-col gap-y-4 mx-auto mt-3 sm:mt-9 p-3">
       <FormInput name="email" label={page.email} type="email" required />
       {isFieldErrors(error) && error.email && (
         <div className="text-red-700">{error.email.join(", ")}</div>
