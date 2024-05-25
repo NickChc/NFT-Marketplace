@@ -75,6 +75,8 @@
     "verifiedCap": "VERIFIED",
     "alreadyHaveAnAccount": "Already have an account",
     "dontHaveAnAccount": "Don't have an account",
-    "forgotPassword": "Forgot Password"
+    "forgotPassword": "Forgot Password",
+    "send": "Send",
+    "sending": "Sending"
   }
 }

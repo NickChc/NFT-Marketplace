@@ -75,6 +75,8 @@
     "verifiedCap": "დადასტურებულია",
     "alreadyHaveAnAccount": "ხართ ავტორიზებული",
     "dontHaveAnAccount": "არ ხართ ავტორიზებული",
-    "forgotPassword": "დაგავიწყდა პაროლი"
+    "forgotPassword": "დაგავიწყდა პაროლი",
+    "send": "გაგზავნა",
+    "sending": "იგზავნება"
   }
 }
