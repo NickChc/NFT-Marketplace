@@ -1,6 +1,6 @@
+import { TLocale } from "../../../../../../i18n.config";
 import { PageHeader } from "@/app/[lang]/_components/PageHeader";
 import { ForgotPasswordForm } from "@/app/[lang]/(client)/auth/_components/ForgotPasswordForm";
-import { TLocale } from "../../../../../../i18n.config";
 
 interface ForgotPasswordPageProps {
   params: {

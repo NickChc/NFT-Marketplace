@@ -1,17 +1,17 @@
 "use client";
 
-import { FormInput } from "@/components/FormInput";
-import { SubmitBtn } from "@/components/SubmitBtn";
+import { useState } from "react";
 import { useFormState } from "react-dom";
-import { login } from "@/app/[lang]/(client)/auth/_actions/auth";
-import { useDictionary } from "@/hooks/useDictionary";
 import { useRouter } from "next/navigation";
 import { signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "@/firebase";
 import { TLocale } from "../../../../../../../i18n.config";
+import { FormInput } from "@/components/FormInput";
+import { SubmitBtn } from "@/components/SubmitBtn";
+import { login } from "@/app/[lang]/(client)/auth/_actions/auth";
+import { useDictionary } from "@/hooks/useDictionary";
+import { auth, googleProvider } from "@/firebase";
 import { GoogleIcon } from "@/assets/icons";
-import { useState } from "react";
-import { LoginFormPopup } from "./LoginFormPopup";
+import { LoginFormPopup } from "@/app/[lang]/(client)/auth/_components/LoginForm/LoginFormPopup";
 
 interface FieldErrors {
   email?: string[];
@@ -63,7 +63,10 @@ export function LoginForm({ lang }: LoginFormProps) {
   }
 
   return (
-    <form action={action} className="flex flex-col gap-y-4 mx-auto mt-3 sm:mt-9 p-3">
+    <form
+      action={action}
+      className="flex flex-col gap-y-4 mx-auto mt-3 sm:mt-9 p-3"
+    >
       <FormInput name="email" label={page.email} type="email" required />
       {isFieldErrors(error) && error.email && (
         <div className="text-red-700">{error.email.join(", ")}</div>
@@ -90,7 +93,7 @@ export function LoginForm({ lang }: LoginFormProps) {
         className="bg-white border border-solid border-blue-500 text-black font-semibold rounded-md p-3 my-2 hover:opacity-75 duration-150 disabled:bg-blue-500 disabled:hover:opacity-50 disabled:opacity-50 disabled:text-blue-300 disabled:hover:text-blue-300 flex items-center justify-center gap-x-3"
         onClick={handleGoogleLogin}
       >
-        {loading ? "Loading..." : "Sign In With Google"}{" "}
+        {loading ? `${page.loading}...` : page.signInWithGoogle}{" "}
         <GoogleIcon className="text-xl sm:text-2xl" />
       </button>
       {loginError !== "" && (

@@ -1,10 +1,10 @@
 "use client";
 
+import { TLocale } from "../../../../../../../../i18n.config";
+import { useState } from "react";
+import Link from "next/link";
 import { CloseIcon } from "@/assets/icons";
 import { useDictionary } from "@/hooks/useDictionary";
-import { TLocale } from "../../../../../../../../i18n.config";
-import Link from "next/link";
-import { useState } from "react";
 
 interface ForgotPasswordFormPopupProps {
   error: string;
@@ -34,7 +34,7 @@ export function ForgotPasswordFormPopup({
   }
 
   return (
-    <div className="bg-gray-300 relative flex flex-col items-stretch gap-y-4 w-full mt-4 sm:mt-9 p-4 overflow-hidden rounded-sm border-solid border border-purple-800">
+    <div className="bg-gray-300 relative flex flex-col items-stretch gap-y-4 w-full sm:mt-9 p-4 overflow-hidden rounded-sm border-solid border border-purple-800">
       {error !== "" ? (
         <div className="text-red-500 text-center">
           {error}
@@ -46,8 +46,8 @@ export function ForgotPasswordFormPopup({
           </span>
         </div>
       ) : (
-        <div className="text-purple-800 flex flex-col gap-y-2 sm:flex-row items-center justify-between">
-          Password recovery sent to you inbox, please check your mail
+        <div className="text-purple-800 flex flex-col gap-y-2 sm:flex-row text-center items-center justify-between">
+          {translations.page.passwordRecoverySent}
           <div className="flex flex-col gap-y-2 items-stretch w-40">
             <button
               type="button"

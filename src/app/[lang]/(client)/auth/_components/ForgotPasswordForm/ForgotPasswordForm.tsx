@@ -1,13 +1,13 @@
 "use client";
 
+import { TLocale } from "../../../../../../../i18n.config";
+import { useState } from "react";
+import { sendPasswordResetEmail } from "firebase/auth";
 import { FormInput } from "@/components/FormInput";
 import { SubmitBtn } from "@/components/SubmitBtn";
 import { useDictionary } from "@/hooks/useDictionary";
-import { useState } from "react";
-import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "@/firebase";
-import { ForgotPasswordFormPopup } from "./ForgotPasswordFormPopup";
-import { TLocale } from "../../../../../../../i18n.config";
+import { ForgotPasswordFormPopup } from "@/app/[lang]/(client)/auth/_components/ForgotPasswordForm/ForgotPasswordFormPopup";
 
 interface ForgotPasswordFormProps {
   lang: TLocale;
@@ -49,7 +49,7 @@ export function ForgotPasswordForm({ lang }: ForgotPasswordFormProps) {
 
   return (
     <form
-      className="flex flex-col gap-y-4 mx-auto mt-3 sm:mt-9 p-3 relative"
+      className="flex flex-col gap-y-4 mx-auto mt-3 sm:mt-9 px-3 relative"
       onSubmit={handleSubmit}
     >
       <FormInput

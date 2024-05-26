@@ -1,16 +1,16 @@
 "use client";
 
+import { useState } from "react";
+import { useFormState } from "react-dom";
+import { TLocale } from "../../../../../../../i18n.config";
 import { FormInput } from "@/components/FormInput";
 import { SubmitBtn } from "@/components/SubmitBtn";
-import { useFormState } from "react-dom";
 import { register } from "@/app/[lang]/(client)/auth/_actions/auth";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { auth } from "@/firebase";
-import { TLocale } from "../../../../../../../i18n.config";
 import { useAuthProvider } from "@/providers/AuthProvider";
-import { RegisterFormPopup } from "./RegisterFormPopup";
+import { RegisterFormPopup } from "@/app/[lang]/(client)/auth/_components/RegisterForm/RegisterFormPopup";
 
 interface RegisterFormProps {
   lang: TLocale;
