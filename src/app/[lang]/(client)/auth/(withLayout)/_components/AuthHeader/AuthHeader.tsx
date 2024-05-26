@@ -30,12 +30,12 @@ export function AuthHeader({ lang }: AuthHeaderProps) {
           </div>
         </div>
       ) : pathname.endsWith("sign-up") ? (
-        <>
+        <div className="flex flex-col sm:flex-row text-end sm:justify-between w-full">
           <h3>{translations.page.alreadyHaveAnAccount}?</h3>
-          <Link className="underline" href={`/${lang}/auth/sign-in`}>
+          <Link className="underline whitespace-nowrap" href={`/${lang}/auth/sign-in`}>
             {translations.page.signInCap}
           </Link>
-        </>
+        </div>
       ) : null}
     </div>
   );
