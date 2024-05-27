@@ -18,8 +18,6 @@ const serviceAccount = {
     process.env.NEXT_PUBLIC_FIREBASE_ADMIN_CLIENT_X509_CERT_URL,
 };
 
-console.log(serviceAccount);
-
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(
