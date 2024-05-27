@@ -162,18 +162,11 @@ export async function register(
 
   const data = result.data;
 
-  const newUser: Omit<TUser, "id"> = {
-    name: data.name,
-    surname: data.surname,
-    email: data.email,
-    isFrozen: false,
-    spentInCents: 0,
-    ownings: [],
-  };
-  const pathname = window.location.pathname;
-  const segments = pathname.split("/");
+  // const pathname = window.location.pathname;
+  // const segments = pathname.split("/");
 
-  const locale: TLocale = i18n.locales.find((loc) => segments.includes(loc))!;
+  // const locale: TLocale = i18n.locales.find((loc) => segments.includes(loc))!;
+  let userId;
 
   try {
     const userCredentials = await createUserWithEmailAndPassword(
@@ -181,12 +174,33 @@ export async function register(
       data.email,
       data.password
     );
+
     const user = userCredentials.user;
+    userId = user.uid;
+
+    const newUser: Omit<TUser, "id"> = {
+      uid: user.uid,
+      name: data.name,
+      surname: data.surname,
+      email: data.email,
+      isFrozen: false,
+      spentInCents: 0,
+      ownings: [],
+    };
     await Promise.all([createUser(newUser), sendEmailVerification(user)]);
     verificationStatusChange();
   } catch (error: any) {
     console.log(error.message);
     if (error.message.includes("email-already-in-use")) {
+      const newUser: Omit<TUser, "id"> = {
+        uid: userId!,
+        name: data.name,
+        surname: data.surname,
+        email: data.email,
+        isFrozen: false,
+        spentInCents: 0,
+        ownings: [],
+      };
       const result = await handleExistingAccount(
         data,
         newUser,

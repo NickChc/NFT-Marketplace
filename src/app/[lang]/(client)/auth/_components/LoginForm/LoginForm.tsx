@@ -46,14 +46,14 @@ export function LoginForm({ lang }: LoginFormProps) {
   const router = useRouter();
 
   function redirectAfterLogin(path: string) {
-    router.push(path);
+    router.replace(path);
   }
 
   async function handleGoogleLogin() {
     try {
       setLoading(true);
       await signInWithPopup(auth, googleProvider);
-      router.push(`/${lang}`);
+      router.replace(`/${lang}`);
     } catch (error: any) {
       console.log(error.message);
       setLoginError(translations.page.problemOccuredTryAgain);

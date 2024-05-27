@@ -36,12 +36,10 @@ export async function UsersTable({ lang }: UsersTableProps) {
           return (
             <tr key={user.id}>
               <td className="text-base sm:text-lg md:text-2xl py-4">
-                {user.ownings.length > 0 ? (
-                  <FilledCircleIcon
-                    className={`${
-                      user.isFrozen ? "text-red-500" : "text-green-500"
-                    }`}
-                  />
+                {user.isFrozen ? (
+                  <FilledCircleIcon className="text-red-500" />
+                ) : user.ownings.length > 0 ? (
+                  <FilledCircleIcon className="text-green-500" />
                 ) : (
                   <EmptyCircleIcon />
                 )}

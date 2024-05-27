@@ -19,7 +19,7 @@ export default async function ProductsPage({
   ]);
 
   return (
-    <div className="container xl:w-[90%] xl:mx-auto">
+    <div className="container xl:w-[90%] xl:mx-auto pb-9">
       <PageHeader>{page.products}</PageHeader>
       <div className="p-1 gap-x-3 gap-y-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-14">
         {products?.map((product) => {
