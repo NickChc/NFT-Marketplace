@@ -1,8 +1,8 @@
 "use client";
 
+import { TLocale } from "../../../../../../../../i18n.config";
 import { DotsIcon } from "@/assets/icons";
 import { useEffect, useState, useTransition } from "react";
-import { TLocale } from "../../../../../../../../i18n.config";
 import { useDictionary } from "@/hooks/useDictionary";
 import { deleteUser, toggleFreeze } from "@/app/[lang]/admin/_actions/users";
 import { TUser } from "@/@types/general";

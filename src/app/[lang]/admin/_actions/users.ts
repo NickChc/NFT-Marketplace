@@ -4,6 +4,8 @@ import { TUser } from "@/@types/general";
 import { db } from "@/firebase";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { getProducts } from "@/app/[lang]/_api/getProducts";
+import firebaseAdmin from "@/firebaseAdmin";
+
 
 export async function toggleFreeze(user: TUser, isFrozen: boolean) {
   let promises: any[] = [];
@@ -39,4 +41,5 @@ export async function deleteUser(user: TUser) {
   const userDoc = doc(db, "users", user.id);
 
   await deleteDoc(userDoc);
+  await firebaseAdmin.auth().deleteUser(user.id);
 }

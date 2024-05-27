@@ -21,6 +21,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }
 
   async function checkUser(email?: string | null) {
+    console.log("CHECKING USER");
+    console.log("CHECKING USER");
     try {
       setLoadingUser(true);
       if (email == null) return;
@@ -28,9 +30,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
       const user = await getUser(email);
 
       if (user) {
+        console.log("HAVE USER");
+        console.log("HAVE USER");
         return setCurrentUser(user);
       } else {
         const newUser: Omit<TUser, "id"> = {
+          uid: auth.currentUser?.uid!,
           name: "",
           surname: "",
           email,
@@ -38,6 +43,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
           ownings: [],
           isFrozen: false,
         };
+        console.log(newUser);
+        console.log(newUser);
 
         await createUser(newUser);
         getCurrentUser(email);
@@ -81,8 +88,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
       if (auth.currentUser == null) {
         return setCurrentUser(null);
       }
-
-      // checkUser(auth.currentUser.email);
     } catch (error: any) {
       console.log(error.message);
     } finally {
@@ -101,7 +106,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user?.emailVerified) {
         checkUser(user?.email);
+        console.log("GOOD EMAIL");
       }
+      console.log("UNVERIFIED EMAIL");
     });
 
     setLoading(false);
