@@ -40,6 +40,6 @@ export async function deleteUser(user: TUser) {
 
   const userDoc = doc(db, "users", user.id);
 
+  await firebaseAdmin.auth().deleteUser(user.uid);
   await deleteDoc(userDoc);
-  await firebaseAdmin.auth().deleteUser(user.id);
 }
