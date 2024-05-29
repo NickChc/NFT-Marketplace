@@ -1,0 +1,1 @@
+export { InfoPageCard } from "./InfoPageCard";
