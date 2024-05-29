@@ -80,6 +80,7 @@
     "sending": "Sending",
     "passwordRecoverySent": "Password recovery sent to you inbox, please check your mail",
     "loading": "Loading",
-    "signInWithGoogle": "Sign In With Google"
+    "signInWithGoogle": "Sign In With Google",
+    "info": "Info"
   }
 }

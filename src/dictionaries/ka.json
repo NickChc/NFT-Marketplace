@@ -80,6 +80,7 @@
     "sending": "იგზავნება",
     "passwordRecoverySent": "პაროლის შესაცვლელად გთხოვთ შეამოწმოთ ელ. ფოსტა",
     "loading": "იტვირთება",
-    "signInWithGoogle": "Google- ით ავტორიზება"
+    "signInWithGoogle": "Google- ით ავტორიზება",
+    "info": "ინფორმაცია"
   }
 }
