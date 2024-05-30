@@ -4,6 +4,8 @@ import { getDictionaries } from "@/lib/dictionary";
 import { Header } from "@/app/[lang]/_components/Header";
 import { NavLink } from "@/app/[lang]/_components/NavLink";
 import { CollectionLink } from "@/app/[lang]/(client)/_component/CollectionLink";
+import Image from "next/image";
+import BackgroundImage from "@/assets/images/TestBackground2.jpg";
 
 interface ClientLayoutProps {
   params: {
@@ -28,7 +30,21 @@ export default async function ClientLayout({
           path={`/${lang}/collection`}
         />
       </Header>
-      <div className="mx-auto container">{children}</div>
+      <div className="w-full relative">
+        <div className="absolute z-0 inset-0">
+          <Image
+            src={BackgroundImage}
+            alt="test image"
+            objectFit="cover"
+            layout="fill"
+            className="pointer-events-none"
+          />
+        </div>
+
+        <div className="mx-auto w-full md:w-[90%] lg:w-[80%] bg-white dark:bg-gray-900 z-50 relative">
+          {children}
+        </div>
+      </div>
     </>
   );
 }
