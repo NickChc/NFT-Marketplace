@@ -1,7 +1,7 @@
+import { TLocale } from "../../../../../i18n.config";
 import { TProduct } from "@/@types/general";
 import { formatCurrency } from "@/lib/formatters";
 import Image from "next/image";
-import { TLocale } from "../../../../../i18n.config";
 import Link from "next/link";
 
 interface ProductCardProps {
