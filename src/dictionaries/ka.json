@@ -82,6 +82,13 @@
     "loading": "იტვირთება",
     "signInWithGoogle": "Google- ით ავტორიზება",
     "info": "ინფორმაცია",
-    "learnAboutNFT": "მეტი NFT-ის შესახებ"
+    "learnAboutNFT": "მეტი NFT-ის შესახებ",
+    "whatIsNFT": "რა არის NFT",
+    "smartContracts": "ჭკვიანი კონტრაქტები",
+    "diverseUseCases": "სხვადასხვა გამოყენება",
+    "gaming": "გეიმინგი",
+    "collectibles": "კოლექტირება",
+    "virtualRealEstate": "ვირტუალური უძრავი ქონება",
+    "musicAndEntertainment": "მუსიკა და გართობა"
   }
 }

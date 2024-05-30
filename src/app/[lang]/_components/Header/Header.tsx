@@ -18,7 +18,7 @@ export async function Header({
 }: PropsWithChildren<HeaderProps>) {
   const { page } = await getDictionaries(lang);
   return (
-    <>
+    <header className="sticky top-0 right-0 left-0 z-50  ">
       <Navigation>
         <span className="hidden sm:block">
           <LangSelect lang={lang} />
@@ -42,6 +42,6 @@ export async function Header({
         </div>
         {!forAdmin && <AuthButton lang={lang} />}
       </div>
-    </>
+    </header>
   );
 }

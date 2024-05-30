@@ -82,6 +82,13 @@
     "loading": "Loading",
     "signInWithGoogle": "Sign In With Google",
     "info": "Info",
-    "learnAboutNFT": "LEARN ABOUT NFT"
+    "learnAboutNFT": "LEARN ABOUT NFT",
+    "whatIsNFT": "What Is NFT",
+    "smartContracts": "Smart Contracts",
+    "diverseUseCases": "Diverse Use Cases",
+    "gaming": "Gaming",
+    "collectibles": "Collectibles",
+    "virtualRealEstate": "Virtual Real Estate",
+    "musicAndEntertainment": "Music and Entertainment"
   }
 }
