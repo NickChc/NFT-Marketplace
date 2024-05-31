@@ -1,1 +1,0 @@
-export { CollectionLink } from "./CollectionLink";

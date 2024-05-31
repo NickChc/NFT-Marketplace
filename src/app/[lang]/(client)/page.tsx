@@ -24,13 +24,13 @@ export default async function HomePage({
   return (
     <div className="mx-auto flex flex-col w-full sm:w-[90%] md:w-[80%] py-9">
       <PageHeader>{page.homeCap}</PageHeader>
-      <div className="mt-9 flex items-center gap-x-6 sm:gap-x-14">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold ml-2">
+      <div className="mt-9 flex items-center gap-x-3 sm:gap-x-14">
+        <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold ml-2">
           {page.newest}
         </h2>
         <Link
           href={`/${lang}/products`}
-          className="flex items-center gap-x-4 text-xl sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"
+          className="flex items-center gap-x-4 text-lg sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"
         >
           {page.viewAll}
           <span className="duration-200 group-hover:ml-4">
@@ -51,13 +51,13 @@ export default async function HomePage({
         })}
       </div>
 
-      <div className="mt-20 flex items-center gap-x-6 sm:gap-x-14">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold ml-2">
+      <div className="mt-20 flex items-center gap-x-3 sm:gap-x-14">
+        <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold ml-2">
           {page.forSale}
         </h2>
         <Link
           href={`/${lang}/products`}
-          className="flex items-center gap-x-4 text-xl sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"
+          className="flex items-center gap-x-4 text-lg sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"
         >
           {page.viewAll}
           <span className="duration-200 group-hover:ml-4">

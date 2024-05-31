@@ -1,24 +1,32 @@
 import { PropsWithChildren, useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { TUser } from "@/@types/general";
 import { createUser } from "@/app/[lang]/_api/createUser";
 import { getUser } from "@/app/[lang]/_api/getUser";
 import { auth, db } from "@/firebase";
 import { AuthContext } from "@/providers/AuthProvider";
-import { User, deleteUser, onAuthStateChanged } from "firebase/auth";
+import { User, deleteUser, onAuthStateChanged, signOut } from "firebase/auth";
 import { deleteDoc, doc } from "firebase/firestore";
+import { TLocale } from "../../../i18n.config";
 
-export function AuthProvider({ children }: PropsWithChildren) {
+
+interface AuthProviderprops {
+  lang: TLocale;
+}
+
+export function AuthProvider({ children, lang }: PropsWithChildren<AuthProviderprops>) {
   const [loadingUser, setLoadingUser] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<TUser | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   const pathname = usePathname();
+  const router = useRouter();
 
   async function getCurrentUser(email: string) {
     const currUser = await getUser(email);
     setCurrentUser(currUser ? currUser : null);
   }
+
 
   async function checkUser(email?: string | null) {
     try {
@@ -89,10 +97,22 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
   }
 
+  async function handleLogOut() {
+    try {
+      setCurrentUser(null);
+      return await signOut(auth);
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  }
+
   useEffect(() => {
     controlUnverifiedUser();
     if (auth.currentUser != null && currentUser == null) {
       getCurrentUser(auth.currentUser?.email!);
+    }
+    if (pathname.includes("profile") && auth.currentUser == null) {
+      router.replace(`/${lang}`);
     }
   }, [auth.currentUser, pathname]);
 
@@ -115,6 +135,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         setCurrentUser,
         loadingUser,
         handleUserDelete,
+        handleLogOut,
       }}
     >
       {loading ? null : children}

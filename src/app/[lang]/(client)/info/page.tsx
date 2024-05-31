@@ -16,12 +16,12 @@ export default async function InfoPage({ params: { lang } }: InfoPageProps) {
   const { page } = await getDictionaries(lang);
 
   return (
-    <div className="container xl:w-[80%] xl:mx-auto pb-9">
+    <div className="container xl:w-[80%] xl:mx-auto pb-9 px-1">
       <PageHeader>{page.learnAboutNFT}</PageHeader>
       <div className="mt-14 flex flex-col gap-6">
         <InfoPageCard image={WhatIsNFTImage} title={page.whatIsNFT}>
           {lang === "ka"
-            ? "NFT, ანუ Non-Fungible Tokens ე.წ ჩაუნაცვლებელი ტოკენი, არის უნიკალური ციფრული ქონება რომელიც ვერიფიცირებულია ბლოქჩეინ ტექნოლოგიით. კრიპტოვალუტისგან განსხვავებით, (ბითქოინი, ეთერიუმი და სხვა), რომელიც იცვლება, NFT ატარებს გამანსხვავებელ ინფორმაციას და ატრიბუტებს, რაც მას უნიკალურად აქცევს."
+            ? "NFT, ანუ Non-Fungible Tokens ე.წ ჩაუნაცვლებელი ტოკენი, არის უნიკალური ციფრული ქონება, რომელიც ვერიფიცირებულია ბლოქჩეინ ტექნოლოგიით. კრიპტოვალუტისგან განსხვავებით, (ბითქოინი, ეთერიუმი და სხვა, რომელიც იცვლება) NFT ატარებს გამომარჩეველ ინფორმაციას და ატრიბუტებს, რაც მას უნიკალურად აქცევს."
             : "NFTs, or Non-Fungible Tokens, are unique digital assets verified using blockchain technology. Unlike cryptocurrencies such as Bitcoin or Ethereum, which are fungible and can be exchanged on a one-to-one basis, each NFT has distinct information or attributes that make it unique."}
         </InfoPageCard>
 
