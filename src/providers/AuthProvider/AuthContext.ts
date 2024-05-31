@@ -7,6 +7,7 @@ interface AuthContextProps {
   setCurrentUser: React.Dispatch<React.SetStateAction<TUser | null>>;
   loadingUser: boolean;
   handleUserDelete: (user: User | null) => Promise<void | [void, void]>;
+  handleLogOut: () => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextProps>({
@@ -14,4 +15,5 @@ export const AuthContext = createContext<AuthContextProps>({
   setCurrentUser: () => {},
   loadingUser: false,
   handleUserDelete: async () => {},
+  handleLogOut: async () => {},
 });

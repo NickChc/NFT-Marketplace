@@ -6,7 +6,7 @@ import { i18n } from "../i18n.config";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { isValidPassword } from "@/lib/isValidPassword";
-import { auth } from "./firebase";
+import { auth } from "@/firebase";
 
 function getLocale(req: NextRequest): string | undefined {
   const negotiatorHeaders: Record<string, string> = {};
@@ -53,10 +53,6 @@ export async function middleware(req: NextRequest) {
         req.url
       )
     );
-  }
-
-  if (pathname.includes("collection") && auth.currentUser == null) {
-    return NextResponse.redirect(new URL(`/${locale}`, req.url));
   }
 
   if (

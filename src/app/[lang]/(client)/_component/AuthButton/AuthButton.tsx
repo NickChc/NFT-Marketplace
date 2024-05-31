@@ -6,8 +6,6 @@ import Link from "next/link";
 import { LoadingIcon, UserIcon } from "@/assets/icons";
 import { usePathname } from "next/navigation";
 import { useAuthProvider } from "@/providers/AuthProvider";
-import { fetchSignInMethodsForEmail, signOut } from "firebase/auth";
-import { auth } from "@/firebase";
 
 interface AuthButtonProps {
   lang: TLocale;
@@ -17,22 +15,13 @@ export function AuthButton({ lang }: AuthButtonProps) {
   const [mounted, setMounted] = useState<boolean>(false);
 
   const pathname = usePathname();
-  const { currentUser, setCurrentUser, loadingUser } = useAuthProvider();
-
-  async function handleLogOut() {
-    try {
-      setCurrentUser(null);
-      return await signOut(auth);
-    } catch (error: any) {
-      console.log(error.message);
-    }
-  }
+  const { currentUser, loadingUser } = useAuthProvider();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (pathname.includes("auth")) return <></>;
+  if (pathname.includes("auth") || pathname.includes("profile")) return <></>;
 
   if (!mounted) {
     return (
@@ -52,14 +41,14 @@ export function AuthButton({ lang }: AuthButtonProps) {
           <LoadingIcon className="animate-spin text-xl text-purple-800" />
         </span>
       ) : currentUser ? (
-        <span
-          className="font-semibold bg-white text-purple-800 w-7 sm:w-8 md:w-10 aspect-square grid place-items-center"
-          onClick={handleLogOut}
+        <Link
+          href={`/${lang}/profile`}
+          className="bg-white text-purple-800 w-7 sm:w-8 md:w-10 aspect-square grid place-items-center"
         >
           {currentUser.name === ""
             ? currentUser.email[0].toLocaleUpperCase()
             : currentUser.name[0].toUpperCase()}
-        </span>
+        </Link>
       ) : (
         <Link
           href={`/${lang}/auth/sign-in`}

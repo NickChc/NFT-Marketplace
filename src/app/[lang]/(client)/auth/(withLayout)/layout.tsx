@@ -13,9 +13,9 @@ export default async function ClientAuthLayout({
   params: { lang },
 }: PropsWithChildren<ClientAuthLayoutProps>) {
   return (
-    <>
+    <div className="min-h-full">
       {children}
       <AuthHeader lang={lang} />
-    </>
+    </div>
   );
 }

@@ -31,7 +31,9 @@ export default async function RootLayout({
       <body
         className={`w-full bg-white dark:bg-gray-900 relative  ${inter.className}`}
       >
-        <Providers dictionary={{ page }}>{children}</Providers>
+        <Providers lang={params.lang} dictionary={{ page }}>
+          {children}
+        </Providers>
       </body>
     </html>
   );
