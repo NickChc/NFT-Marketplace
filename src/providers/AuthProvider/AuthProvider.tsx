@@ -9,12 +9,14 @@ import { User, deleteUser, onAuthStateChanged, signOut } from "firebase/auth";
 import { deleteDoc, doc } from "firebase/firestore";
 import { TLocale } from "../../../i18n.config";
 
-
 interface AuthProviderprops {
   lang: TLocale;
 }
 
-export function AuthProvider({ children, lang }: PropsWithChildren<AuthProviderprops>) {
+export function AuthProvider({
+  children,
+  lang,
+}: PropsWithChildren<AuthProviderprops>) {
   const [loadingUser, setLoadingUser] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<TUser | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -26,7 +28,6 @@ export function AuthProvider({ children, lang }: PropsWithChildren<AuthProviderp
     const currUser = await getUser(email);
     setCurrentUser(currUser ? currUser : null);
   }
-
 
   async function checkUser(email?: string | null) {
     try {
@@ -111,7 +112,13 @@ export function AuthProvider({ children, lang }: PropsWithChildren<AuthProviderp
     if (auth.currentUser != null && currentUser == null) {
       getCurrentUser(auth.currentUser?.email!);
     }
-    if (pathname.includes("profile") && auth.currentUser == null) {
+    if (
+      !loadingUser &&
+      !loading &&
+      pathname.includes("profile") &&
+      auth.currentUser == null &&
+      currentUser == null
+    ) {
       router.replace(`/${lang}`);
     }
   }, [auth.currentUser, pathname]);
