@@ -23,7 +23,6 @@ export default async function ClientLayout({
         <NavLink title={page.home} path={`/${lang}`} />
         <NavLink title={page.products} path={`/${lang}/products`} />
         <NavLink title={page.info} path={`/${lang}/info`} />
-
       </Header>
       <div className="w-full relative">
         <BackgroundImage />

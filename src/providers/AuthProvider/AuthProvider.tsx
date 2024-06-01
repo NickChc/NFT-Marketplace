@@ -25,8 +25,12 @@ export function AuthProvider({
   const router = useRouter();
 
   async function getCurrentUser(email: string) {
-    const currUser = await getUser(email);
-    setCurrentUser(currUser ? currUser : null);
+    try {
+      const currUser = await getUser(email);
+      setCurrentUser(currUser ? currUser : null);
+    } catch (error: any) {
+      console.log(error.message);
+    }
   }
 
   async function checkUser(email?: string | null) {
@@ -112,13 +116,7 @@ export function AuthProvider({
     if (auth.currentUser != null && currentUser == null) {
       getCurrentUser(auth.currentUser?.email!);
     }
-    if (
-      !loadingUser &&
-      !loading &&
-      pathname.includes("profile") &&
-      auth.currentUser == null &&
-      currentUser == null
-    ) {
+    if (!loadingUser && !loading && pathname.includes("profile") && currentUser == null) {
       router.replace(`/${lang}`);
     }
   }, [auth.currentUser, pathname]);
