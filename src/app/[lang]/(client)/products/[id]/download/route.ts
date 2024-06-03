@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getProduct } from "@/app/[lang]/_api/getProduct";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "@/firebase";
+import { getUser } from "@/app/[lang]/_api/getUser";
 
 interface GETProps {
   params: {
@@ -10,10 +11,20 @@ interface GETProps {
   };
 }
 
-export async function GET(req: NextRequest, { params: { id } }: GETProps) {
-  const product = await getProduct(id);
+export async function GET(req: NextRequest, { params }: GETProps) {
+  const url = new URL(req.url);
+
+  const encodedEmail = url.searchParams.get("email");
+  const decodedEmail = encodedEmail ? decodeURIComponent(encodedEmail) : "";
+
+  const product = await getProduct(params.id);
+  const user = await getUser(decodedEmail);
 
   if (product == null) return notFound();
+
+  if (user == null || product.owner?.userId !== user.id) {
+    return redirect("/");
+  }
 
   const decodedFileUrl = decodeURIComponent(product.filePath);
   const filePathStartIndex = decodedFileUrl.lastIndexOf("/") + 1;

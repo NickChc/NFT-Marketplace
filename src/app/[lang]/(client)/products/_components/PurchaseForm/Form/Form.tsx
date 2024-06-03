@@ -1,7 +1,9 @@
 "use client";
 
+import { TProduct } from "@/@types/general";
 import { auth } from "@/firebase";
 import { formatCurrency } from "@/lib/formatters";
+import { useAuthProvider } from "@/providers/AuthProvider";
 import {
   PaymentElement,
   useElements,
@@ -10,11 +12,11 @@ import {
 import { useState } from "react";
 
 interface FormProps {
-  priceInCents: number;
-  productId: string;
+  product: TProduct;
 }
 
-export function Form({ priceInCents }: FormProps) {
+export function Form({ product }: FormProps) {
+  const { currentUser } = useAuthProvider();
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState<string>();
@@ -23,6 +25,10 @@ export function Form({ priceInCents }: FormProps) {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     try {
       e.preventDefault();
+
+      if (product.owner?.userId === currentUser?.id) {
+        return setErrorMessage("You already own this product");
+      }
 
       setLoading(true);
 
@@ -64,7 +70,7 @@ export function Form({ priceInCents }: FormProps) {
     >
       <div>
         <h2>Checkout</h2>
-        {errorMessage && <div>{errorMessage}</div>}
+        {errorMessage && <div className="text-red-500">{errorMessage}</div>}
       </div>
       <div>
         <PaymentElement />
@@ -73,7 +79,7 @@ export function Form({ priceInCents }: FormProps) {
         disabled={loading || stripe == null || elements == null}
         className="bg-purple-800 rounded-sm p-2 hover:opacity-75 duration-100 disabled:cursor-default disabled:opacity-50 mt-6"
       >
-        Purchase - {formatCurrency(priceInCents / 100)}
+        Purchase - {formatCurrency(product.priceInCents / 100)}
       </button>
     </form>
   );

@@ -30,6 +30,7 @@ export interface TProduct {
   name: string;
   description: string;
   priceInCents: number;
+  orders: number;
   owner?: {
     fullName: string;
     userId: string;

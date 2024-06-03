@@ -86,6 +86,7 @@ export async function createProduct(prevState: unknown, formData: FormData) {
     filePath: fileURL,
     imagePath: imageURL,
     owner: null,
+    orders: 0,
     isAvailable: false,
     createdAt: Timestamp.fromDate(new Date()) as any,
   };
