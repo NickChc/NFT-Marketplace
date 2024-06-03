@@ -37,7 +37,7 @@ export function PurchaseForm({ product, clientSecret }: PurchaseFormProps) {
         </div>
       </div>
       <Elements options={{ clientSecret }} stripe={stripePromise}>
-        <Form priceInCents={product.priceInCents} productId={product.id} />
+        <Form product={product} />
       </Elements>
     </div>
   );

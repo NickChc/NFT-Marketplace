@@ -2,7 +2,7 @@ import { TLocale } from "../../../../../i18n.config";
 import { TProduct } from "@/@types/general";
 import { formatCurrency } from "@/lib/formatters";
 import Image from "next/image";
-import Link from "next/link";
+import { ProductCardButton } from "@/app/[lang]/_components/ProductCard/ProductCardButton";
 
 interface ProductCardProps {
   product: TProduct;
@@ -44,30 +44,7 @@ export async function ProductCard({ product, lang, text }: ProductCardProps) {
         )}
       </div>
 
-      <button
-        disabled={product.owner?.isFrozen}
-        className="bg-purple-800 text-white w-full mt-4 rounded-md hover:opacity-75 duration-100 disabled:cursor-default disabled:opacity-50 disabled:px-2 disabled:py-1 flex justify-center"
-      >
-        {product.owner ? (
-          product.owner.isFrozen ? (
-            text.notAvailable
-          ) : (
-            <Link
-              href={`/${lang}/products/${product.id}/bid`}
-              className="min-w-full min-h-full px-2 py-1 rounded-md"
-            >
-              {text.bid}
-            </Link>
-          )
-        ) : (
-          <Link
-            href={`/${lang}/products/${product.id}/buy`}
-            className="min-w-full min-h-full px-2 py-1 rounded-md"
-          >
-            {text.buy}
-          </Link>
-        )}
-      </button>
+      <ProductCardButton product={product} lang={lang} />
     </div>
   );
 }
