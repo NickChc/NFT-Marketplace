@@ -1,7 +1,8 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { TLocale, i18n } from "../../../../../i18n.config";
+import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,12 +16,18 @@ interface LangSelectProps {
 export function LangSelect({ lang }: LangSelectProps) {
   const [openSelect, setOpenSelect] = useState<boolean>(false);
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   function redirectPathname(locale: TLocale) {
     if (pathname == null) return "/";
     const segments = pathname.split("/");
     segments[1] = locale;
-    return segments.join("/");
+    const urlParams = searchParams.toString();
+    if (urlParams === "") {
+      return segments.join("/");
+    } else {
+      return `${segments.join("/")}?${urlParams}`;
+    }
   }
 
   function closePopup() {

@@ -9,6 +9,10 @@ export async function buyProduct(product: TProduct, currentUser: TUser) {
     const { name, surname, email } = currentUser;
     const fullName = name !== "" ? `${name} ${surname}` : email;
 
+    if (currentUser.ownings.map((o) => o.productId).includes(product.id)) {
+      return;
+    }
+
     return await Promise.all([
       updateDoc(userDoc, {
         ...currentUser,
