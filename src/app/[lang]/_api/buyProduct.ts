@@ -13,7 +13,7 @@ export async function buyProduct(product: TProduct, currentUser: TUser) {
       return;
     }
 
-    return await Promise.all([
+    await Promise.all([
       updateDoc(userDoc, {
         ...currentUser,
         spentInCents: currentUser.spentInCents + product.priceInCents,

@@ -11,12 +11,14 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { useState } from "react";
+import { TLocale } from "../../../../../../../../i18n.config";
 
 interface FormProps {
   product: TProduct;
+  lang: TLocale;
 }
 
-export function Form({ product }: FormProps) {
+export function Form({ product, lang }: FormProps) {
   const translations = useDictionary();
   const { page } = translations;
   const { currentUser } = useAuthProvider();
@@ -42,7 +44,7 @@ export function Form({ product }: FormProps) {
         .confirmPayment({
           elements,
           confirmParams: {
-            return_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/en/stripe/purchase-success`,
+            return_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/${lang}/stripe/purchase-success`,
             payment_method_data: {
               billing_details: {
                 email: auth.currentUser?.email!,
@@ -77,7 +79,11 @@ export function Form({ product }: FormProps) {
     >
       <div>
         <h2>{page.checkout}</h2>
-        {errorMessage && <div className="text-red-500 text-lg sm:text-xl md:text-2xl">{errorMessage}</div>}
+        {errorMessage && (
+          <div className="text-red-500 text-lg sm:text-xl md:text-2xl">
+            {errorMessage}
+          </div>
+        )}
       </div>
       <div>
         <PaymentElement className="bg-blue-500 p-3 rounded-md" />
@@ -86,7 +92,9 @@ export function Form({ product }: FormProps) {
         disabled={loading || stripe == null || elements == null}
         className="bg-purple-800 rounded-sm p-2 hover:opacity-75 duration-100 disabled:cursor-default disabled:opacity-50 mt-6"
       >
-        {page.purchase} - {formatCurrency(product.priceInCents / 100)}
+        {loading
+          ? `${page.processing}...`
+          : `${page.purchase} - ${formatCurrency(product.priceInCents / 100)}`}
       </button>
     </form>
   );

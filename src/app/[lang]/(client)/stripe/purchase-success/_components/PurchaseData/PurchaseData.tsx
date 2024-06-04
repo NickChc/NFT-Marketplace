@@ -8,7 +8,7 @@ import { useAuthProvider } from "@/providers/AuthProvider";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { auth } from "@/firebase";
 import { useDictionary } from "@/hooks/useDictionary";
 
@@ -19,22 +19,24 @@ interface PurchaseDataProps {
 }
 
 export function PurchaseData({ product, isSuccess, lang }: PurchaseDataProps) {
+  const hasPurchased = useRef(false);
   const translations = useDictionary();
   const { currentUser } = useAuthProvider();
   const router = useRouter();
 
+  const encodedEmail = encodeURIComponent(currentUser?.email || "");
+
   useEffect(() => {
-    if (isSuccess && currentUser) {
-      buyProduct(product, currentUser);
-    }
-  }, [isSuccess, currentUser]);
+    if (!isSuccess || currentUser == null || hasPurchased.current) return;
+
+    buyProduct(product, currentUser);
+    hasPurchased.current = true;
+  }, [currentUser, product, isSuccess]);
 
   if (auth.currentUser == null && currentUser == null) {
     router.replace("/");
     return;
   }
-
-  const encodedEmail = encodeURIComponent(currentUser?.email || "");
 
   return (
     <>

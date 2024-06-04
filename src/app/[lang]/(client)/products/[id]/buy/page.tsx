@@ -34,14 +34,14 @@ export default async function BuyPage({ params }: BuyPageProps) {
   }
 
   return (
-    <>
+    <div className="w-full max-w-5xl mx-auto p-1 min-h-dvh">
       <PageHeader>
         {page.purchaseCap} {product?.name.toUpperCase()}
       </PageHeader>
-      <PurchaseForm
+      <PurchaseForm lang={params.lang}
         product={product}
         clientSecret={paymentIntent.client_secret}
       />
-    </>
+    </div>
   );
 }
