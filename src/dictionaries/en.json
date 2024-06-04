@@ -90,6 +90,15 @@
     "collectibles": "Collectibles",
     "virtualRealEstate": "Virtual Real Estate",
     "musicAndEntertainment": "Music and Entertainment",
-    "profile": "PROFILE"
+    "profile": "PROFILE",
+    "success": "Success",
+    "error": "Error",
+    "tryAgain": "Try Again",
+    "purchaseCap": "PURCHASE",
+    "purchase": "Purchase",
+    "checkout": "Checkout",
+    "alreadyOwn": "You already own this product",
+    "cardNumberInvalid": "Your card number is invalid",
+    "congratulations": "Congratulations! You are now the proud owner of the"
   }
 }

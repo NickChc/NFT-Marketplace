@@ -37,9 +37,9 @@ export default async function PurchaseSuccessPage({
   const isSuccess = paymentIntent.status === "succeeded";
 
   return (
-    <>
-      <PageHeader>{isSuccess ? "Success!" : "Error!"}</PageHeader>
+    <div className="min-h-dvh">
+      <PageHeader>{isSuccess ? `${page.success}!` : `${page.error}!`}</PageHeader>
       <PurchaseData product={product} isSuccess={isSuccess} lang={params.lang} />
-    </>
+    </div>
   );
 }
