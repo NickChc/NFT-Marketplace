@@ -6,39 +6,47 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import { Form } from "@/app/[lang]/(client)/products/_components/PurchaseForm/Form";
+import { useDictionary } from "@/hooks/useDictionary";
+import { TLocale } from "../../../../../../../i18n.config";
 
 interface PurchaseFormProps {
   product: TProduct;
   clientSecret: string;
+  lang: TLocale;
 }
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string
 );
 
-export function PurchaseForm({ product, clientSecret }: PurchaseFormProps) {
+export function PurchaseForm({ product, clientSecret, lang }: PurchaseFormProps) {
+  const translations = useDictionary();
+
   return (
-    <div className="w-full max-w-5xl mx-auto p-1">
-      <div className="aspect-video flex-shrink-0 w-full relative">
-        <Image
-          src={product.imagePath}
-          alt={`Image for ${product.name}`}
-          fill
-          className="object-cover"
-        />
-      </div>
-      <div>
-        <h1 className="text-2xl font-bold">{product.name}</h1>
-        <div className="text-lg">
-          {formatCurrency(product.priceInCents / 100)}
+    <>
+      <div className="flex flex-col md:flex-row gap-4 mt-6">
+        <div className="aspect-video flex-shrink-0 w-full md:w-1/2 relative">
+          <Image
+            src={product.imagePath}
+            alt={`Image for ${product.name}`}
+            fill
+            className="object-cover"
+          />
         </div>
-        <div className="line-clamp-3 text-muted-foreground">
-          {product.description}
+        <div className="flex flex-col gap-3 sm:text-xl">
+          <h1 className="text-2xl font-bold">{product.name}</h1>
+          <div className="line-clamp-5 text-muted-foreground">
+            {product.description}
+          </div>
+          <div className="text-lg">
+            {translations.page.cost} -{" "}
+            {formatCurrency(product.priceInCents / 100)}
+          </div>
         </div>
       </div>
       <Elements options={{ clientSecret }} stripe={stripePromise}>
-        <Form product={product} />
+        <Form product={product} lang={lang} />
       </Elements>
-    </div>
+    </>
   );
 }

@@ -36,6 +36,7 @@ export default async function PurchaseSuccessPage({
 
   const isSuccess = paymentIntent.status === "succeeded";
 
+  
   return (
     <div className="min-h-dvh">
       <PageHeader>{isSuccess ? `${page.success}!` : `${page.error}!`}</PageHeader>
