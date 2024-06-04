@@ -90,6 +90,15 @@
     "collectibles": "კოლექტირება",
     "virtualRealEstate": "ვირტუალური უძრავი ქონება",
     "musicAndEntertainment": "მუსიკა და გართობა",
-    "profile": "პროფილი"
+    "profile": "პროფილი",
+    "success": "წარმატება",
+    "error": "შეცდომა",
+    "tryAgain": "სცადეთ თავიდან",
+    "purchaseCap": "შეიძინეთ",
+    "purchase": "შეიძინეთ",
+    "checkout": "გადახდა",
+    "alreadyOwn": "თქვენ უკვე ფლობთ ამ ნივთს",
+    "cardNumberInvalid": "თქვენი ბარათის ნომერი არასწორია",
+    "congratulations": "გილოცავთ! თქვენს კოლექციას შეემატა"
   }
 }

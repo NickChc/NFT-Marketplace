@@ -17,8 +17,10 @@ export async function GET(req: NextRequest, { params }: GETProps) {
   const encodedEmail = url.searchParams.get("email");
   const decodedEmail = encodedEmail ? decodeURIComponent(encodedEmail) : "";
 
-  const product = await getProduct(params.id);
-  const user = await getUser(decodedEmail);
+  const [product, user] = await Promise.all([
+    getProduct(params.id),
+    getUser(decodedEmail),
+  ]);
 
   if (product == null) return notFound();
 

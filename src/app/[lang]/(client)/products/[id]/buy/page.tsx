@@ -16,8 +16,10 @@ interface BuyPageProps {
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 export default async function BuyPage({ params }: BuyPageProps) {
-  const { page } = await getDictionaries(params.lang);
-  const product = await getProduct(params.id);
+  const [{ page }, product] = await Promise.all([
+    getDictionaries(params.lang),
+    getProduct(params.id),
+  ]);
 
   if (product == null) return notFound();
 
@@ -33,8 +35,13 @@ export default async function BuyPage({ params }: BuyPageProps) {
 
   return (
     <>
-      <PageHeader>BUY {product?.name.toUpperCase()}</PageHeader>
-      <PurchaseForm product={product} clientSecret={paymentIntent.client_secret} />
+      <PageHeader>
+        {page.purchaseCap} {product?.name.toUpperCase()}
+      </PageHeader>
+      <PurchaseForm
+        product={product}
+        clientSecret={paymentIntent.client_secret}
+      />
     </>
   );
 }

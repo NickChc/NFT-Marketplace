@@ -2,6 +2,7 @@
 
 import { TProduct } from "@/@types/general";
 import { auth } from "@/firebase";
+import { useDictionary } from "@/hooks/useDictionary";
 import { formatCurrency } from "@/lib/formatters";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import {
@@ -16,6 +17,8 @@ interface FormProps {
 }
 
 export function Form({ product }: FormProps) {
+  const translations = useDictionary();
+  const { page } = translations;
   const { currentUser } = useAuthProvider();
   const stripe = useStripe();
   const elements = useElements();
@@ -27,7 +30,7 @@ export function Form({ product }: FormProps) {
       e.preventDefault();
 
       if (product.owner?.userId === currentUser?.id) {
-        return setErrorMessage("You already own this product");
+        return setErrorMessage(page.alreadyOwn);
       }
 
       setLoading(true);
@@ -52,9 +55,13 @@ export function Form({ product }: FormProps) {
             error.type === "card_error" ||
             error.type === "validation_error"
           ) {
-            setErrorMessage(error.message);
+            if (error.message?.includes("card number is invalid")) {
+              setErrorMessage(page.cardNumberInvalid);
+            } else {
+              setErrorMessage(error.message);
+            }
           } else {
-            setErrorMessage("Some Problem Occured");
+            setErrorMessage(page.problemOccuredTryAgain);
           }
         })
         .finally(() => setLoading(false));
@@ -69,17 +76,17 @@ export function Form({ product }: FormProps) {
       onSubmit={handleSubmit}
     >
       <div>
-        <h2>Checkout</h2>
-        {errorMessage && <div className="text-red-500">{errorMessage}</div>}
+        <h2>{page.checkout}</h2>
+        {errorMessage && <div className="text-red-500 text-lg sm:text-xl md:text-2xl">{errorMessage}</div>}
       </div>
       <div>
-        <PaymentElement />
+        <PaymentElement className="bg-blue-500 p-3 rounded-md" />
       </div>
       <button
         disabled={loading || stripe == null || elements == null}
         className="bg-purple-800 rounded-sm p-2 hover:opacity-75 duration-100 disabled:cursor-default disabled:opacity-50 mt-6"
       >
-        Purchase - {formatCurrency(product.priceInCents / 100)}
+        {page.purchase} - {formatCurrency(product.priceInCents / 100)}
       </button>
     </form>
   );
