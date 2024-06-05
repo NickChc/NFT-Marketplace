@@ -14,7 +14,6 @@ export {
 } from "react-icons/fa";
 export { FaArrowRight as RightArrowIcon } from "react-icons/fa";
 export { FaRegUser as UserIcon } from "react-icons/fa";
-export  { FcGoogle as GoogleIcon } from "react-icons/fc";
+export { FcGoogle as GoogleIcon } from "react-icons/fc";
 export { IoMdCloseCircle as CloseIcon } from "react-icons/io";
-
-
+export { RiLogoutBoxLine as LogOutIcon } from "react-icons/ri";

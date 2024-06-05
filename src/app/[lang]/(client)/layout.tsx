@@ -27,7 +27,7 @@ export default async function ClientLayout({
       <div className="w-full relative">
         <BackgroundImage />
 
-        <div className="mx-auto w-full md:w-[90%] lg:w-[80%] bg-white dark:bg-gray-900 z-20 relative">
+        <div className="mx-auto w-full md:w-[90%] lg:w-[80%] bg-white dark:bg-gray-900 z-20 relative border-solid border border-purple-100 dark:border-gray-800 border-x-0 border-b-0">
           {children}
         </div>
       </div>

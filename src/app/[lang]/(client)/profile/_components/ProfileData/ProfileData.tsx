@@ -22,7 +22,7 @@ export function ProfileData() {
         <span className="font-semibold">{translations.page.email} -</span>{" "}
         {currentUser?.email}
       </h3>
-      <button className="p-1 w-full bg-purple-800 font-semibold rounded-md duration-100 hover:opacity-75">
+      <button className="text-white p-1 w-full bg-purple-800 font-semibold rounded-md duration-100 hover:opacity-75">
         {translations.page.edit}
       </button>
       <hr className="w-full my-3" />
