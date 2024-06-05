@@ -101,6 +101,12 @@
     "cardNumberInvalid": "Your card number is invalid",
     "congratulations": "Congratulations! You are now the proud owner of the",
     "cost": "Cost",
-    "processing": "Processing"
+    "processing": "Processing",
+    "noCollection": "Your collection is empty.",
+    "more": "More",
+    "sell": "Sell",
+    "return": "Return",
+    "logOut": "Log Out",
+    "loggingOut": "Logging Out"
   }
 }

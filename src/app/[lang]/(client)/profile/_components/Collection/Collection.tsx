@@ -1,22 +1,42 @@
 "use client";
 
+import { TLocale } from "../../../../../../../i18n.config";
+import { CollectionCard } from "@/app/[lang]/(client)/profile/_components/Collection/CollectionCard";
+import { useDictionary } from "@/hooks/useDictionary";
 import { useUserCollection } from "@/hooks/useUserCollection";
-import Image from "next/image";
+import { useAuthProvider } from "@/providers/AuthProvider";
 
-export function Collection() {
+interface CollectionProps {
+  lang: TLocale;
+}
+
+export function Collection({ lang }: CollectionProps) {
   const { collection } = useUserCollection();
+  const { currentUser } = useAuthProvider();
+  const translations = useDictionary();
+
+  const encodedEmail = encodeURIComponent(currentUser?.email || "");
 
   return (
-    <div>
-      {collection.map((item) => {
-        return (
-          <div key={item.id} className="flex flex-col p-3">
-            <div className="min-w-20 aspect-video relative">
-              <Image src={item.imagePath} fill alt={`Image of ${item.name}`} />
-            </div>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <hr className="my-4 w-full" />
+      <h1 className="text-2xl font-semibold">
+        {collection.length > 0
+          ? translations.page.myCollection
+          : translations.page.noCollection}
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-4">
+        {collection.map((item) => {
+          return (
+            <CollectionCard
+              key={item.id}
+              product={item}
+              lang={lang}
+              encodedEmail={encodedEmail}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 }
