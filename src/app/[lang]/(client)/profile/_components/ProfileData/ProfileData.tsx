@@ -28,7 +28,7 @@ export function ProfileData() {
       <hr className="w-full my-3" />
       <h3 className="truncate max-w-[95%]">
         <span className="font-semibold">{translations.page.totalSpent}</span> -{" "}
-        {formatCurrency(currentUser?.spentInCents || 0 / 100)}
+        {formatCurrency((currentUser?.spentInCents || 0) / 100)}
       </h3>
     </div>
   );

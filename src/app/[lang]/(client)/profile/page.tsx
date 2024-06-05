@@ -3,6 +3,7 @@ import { getDictionaries } from "@/lib/dictionary";
 import { PageHeader } from "@/app/[lang]/_components/PageHeader";
 import { LogOutButton } from "@/app/[lang]/(client)/profile/_components/LogOutButton";
 import { ProfileData } from "@/app/[lang]/(client)/profile/_components/ProfileData";
+import { Collection } from "@/app/[lang]/(client)/profile/_components/Collection";
 
 interface ProfilePageProps {
   params: {
@@ -19,6 +20,7 @@ export default async function ProfilePage({
     <div className="mx-auto md:w-[70%] xl:max-w-4xl">
       <PageHeader>{page.profile}</PageHeader>
       <div className="mt-6 p-2 sm:p-3 ">
+        <Collection />
         <ProfileData />
         <LogOutButton lang={lang} />
       </div>
