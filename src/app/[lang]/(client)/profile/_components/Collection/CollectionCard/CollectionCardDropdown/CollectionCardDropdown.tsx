@@ -3,10 +3,32 @@
 import { RightArrowIcon } from "@/assets/icons";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useEffect, useState } from "react";
+import { returnProduct } from "@/app/[lang]/(client)/_actions/product";
+import { TProduct } from "@/@types/general";
+import { useAuthProvider } from "@/providers/AuthProvider";
+import { useUserCollection } from "@/hooks/useUserCollection";
 
-export function CollectionCardDropdown() {
+interface CollectionCardDropdownProps {
+  product: TProduct;
+}
+
+export function CollectionCardDropdown({
+  product,
+}: CollectionCardDropdownProps) {
   const [open, setOpen] = useState<boolean>(false);
   const translations = useDictionary();
+  const { currentUser } = useAuthProvider();
+  const { getUserCollection } = useUserCollection();
+
+  async function handleReturn() {
+    try {
+      if (currentUser == null) return;
+      await returnProduct(product, currentUser.email);
+      getUserCollection();
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  }
 
   function closePopup() {
     setOpen(false);
@@ -34,11 +56,14 @@ export function CollectionCardDropdown() {
         <RightArrowIcon />
       </span>
       {open && (
-        <div className="absolute bottom-6 right-6 sm:-right-9 p-1 flex flex-col items-start z-50 bg-white border-solid border border-purple-800 rounded-md">
+        <div className="absolute bottom-6 right-9 sm:-right-9 p-1 flex flex-col items-start z-50 bg-white border-solid border border-purple-800 rounded-md">
           <button className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 rounded-t-md dark:text-black">
             {translations.page.sell}
           </button>
-          <button className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 dark:text-black rounded-b-md">
+          <button
+            className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 dark:text-black rounded-b-md"
+            onClick={handleReturn}
+          >
             {translations.page.return}
           </button>
         </div>

@@ -1,11 +1,12 @@
 import { TProduct } from "@/@types/general";
 import { getProducts } from "@/app/[lang]/_api/getProducts";
 import { useAuthProvider } from "@/providers/AuthProvider";
+import { useGlobalProvider } from "@/providers/GlobalProvider";
 import { useCallback, useEffect, useState } from "react";
 
 export function useUserCollection() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [collection, setCollection] = useState<TProduct[]>([]);
+  const { setCollection, collection } = useGlobalProvider();
   const { currentUser } = useAuthProvider();
 
   const getUserCollection = useCallback(async () => {
@@ -28,7 +29,12 @@ export function useUserCollection() {
 
   useEffect(() => {
     getUserCollection();
-  }, [currentUser]);
+  }, [currentUser, getUserCollection]);
 
-  return { collection, collectionLoading: loading };
+  return {
+    collection,
+    collectionLoading: loading,
+    getUserCollection,
+    setCollection,
+  };
 }
