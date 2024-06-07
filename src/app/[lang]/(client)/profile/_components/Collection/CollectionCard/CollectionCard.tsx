@@ -27,6 +27,7 @@ export function CollectionCard({
       <div>
         <div className="min-w-20 lg:min-w-40 aspect-video relative">
           <Image
+            objectFit="cover"
             src={product.imagePath}
             fill
             alt={`Image of ${product.name}`}

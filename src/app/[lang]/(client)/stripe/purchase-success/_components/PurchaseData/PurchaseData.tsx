@@ -8,7 +8,7 @@ import { useAuthProvider } from "@/providers/AuthProvider";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { auth } from "@/firebase";
 import { useDictionary } from "@/hooks/useDictionary";
 
@@ -59,16 +59,20 @@ export function PurchaseData({ product, isSuccess, lang }: PurchaseDataProps) {
           <div className="text-lg">
             {formatCurrency(product.priceInCents / 100)}
           </div>
-          <button className="font-semibold bg-purple-800 rounded-sm p-2 hover:opacity-75 duration-100 disabled:cursor-default disabled:opacity-50 mt-6 w-full">
+          <button className="font-semibold bg-purple-800 rounded-sm overflow-hidden hover:opacity-75 duration-100 disabled:cursor-default disabled:opacity-50 mt-6 w-full flex ">
             {isSuccess ? (
               <a
+                className="w-full h-full p-2"
                 download
                 href={`/${lang}/products/${product.id}/download?email=${encodedEmail}`}
               >
                 {translations.page.download}
               </a>
             ) : (
-              <Link href={`/products/${product.id}/buy`}>
+              <Link
+                className="w-full h-full p-2"
+                href={`/products/${product.id}/buy`}
+              >
                 {translations.page.tryAgain}
               </Link>
             )}
