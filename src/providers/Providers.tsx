@@ -1,11 +1,12 @@
 "use client";
 
+import { TLocale } from "../../i18n.config";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { ThemeProvider } from "next-themes";
+import { GlobalProvider } from "@/providers/GlobalProvider";
 import { PropsWithChildren, useEffect } from "react";
 import { LocaleProvider } from "@/providers/LocaleProvider";
 import { getDictionaries } from "@/lib/dictionary";
-import { TLocale } from "../../i18n.config";
 import { usePathname } from "next/navigation";
 
 interface ProvidersProps {
@@ -25,12 +26,14 @@ export function Providers({
   }, [pathname]);
 
   return (
-    <AuthProvider lang={lang}>
-      <LocaleProvider dictionary={dictionary}>
-        <ThemeProvider attribute="class" defaultTheme="system">
-          {children}
-        </ThemeProvider>
-      </LocaleProvider>
-    </AuthProvider>
+    <GlobalProvider>
+      <AuthProvider lang={lang}>
+        <LocaleProvider dictionary={dictionary}>
+          <ThemeProvider attribute="class" defaultTheme="system">
+            {children}
+          </ThemeProvider>
+        </LocaleProvider>
+      </AuthProvider>
+    </GlobalProvider>
   );
 }
