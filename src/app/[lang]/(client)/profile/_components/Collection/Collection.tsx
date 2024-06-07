@@ -20,7 +20,7 @@ export function Collection({ lang }: CollectionProps) {
   return (
     <>
       <hr className="my-4 w-full" />
-      <h1 className="text-2xl font-semibold">
+      <h1 className="text-lg sm:text-2xl font-semibold text-center">
         {collection.length > 0
           ? translations.page.myCollection
           : translations.page.noCollection}

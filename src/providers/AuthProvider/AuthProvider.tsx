@@ -104,8 +104,8 @@ export function AuthProvider({
 
   async function handleLogOut() {
     try {
+      await signOut(auth);
       setCurrentUser(null);
-      return await signOut(auth);
     } catch (error: any) {
       console.log(error.message);
     }
