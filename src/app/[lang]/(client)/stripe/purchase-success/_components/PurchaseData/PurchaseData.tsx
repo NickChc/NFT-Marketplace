@@ -35,7 +35,6 @@ export function PurchaseData({ product, isSuccess, lang }: PurchaseDataProps) {
 
   if (auth.currentUser == null && currentUser == null) {
     router.replace("/");
-    return;
   }
 
   return (
