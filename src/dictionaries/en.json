@@ -107,6 +107,8 @@
     "sell": "Sell",
     "return": "Return",
     "logOut": "Log Out",
-    "loggingOut": "Logging Out"
+    "loggingOut": "Logging Out",
+    "agree": "Agree",
+    "cancel": "Cancel"
   }
 }

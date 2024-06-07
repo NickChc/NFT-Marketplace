@@ -1,10 +1,15 @@
 "use client";
 
+import { TLocale } from "../../../../../i18n.config";
 import { useGlobalProvider } from "@/providers/GlobalProvider";
 import { ConfirmReturn } from "@/app/[lang]/(client)/profile/_components/ConfirmReturn";
 import { useEffect } from "react";
 
-export function Modal() {
+interface ModalProps {
+  lang: TLocale;
+}
+
+export function Modal({ lang }: ModalProps) {
   const { returnItem, setReturnItem } = useGlobalProvider();
 
   function closeModal() {
@@ -31,7 +36,11 @@ export function Modal() {
         }
       }}
     >
-      <ConfirmReturn closeModal={closeModal} returnItem={returnItem!} />
+      <ConfirmReturn
+        closeModal={closeModal}
+        returnItem={returnItem}
+        lang={lang}
+      />
     </div>
   );
 }
