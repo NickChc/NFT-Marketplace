@@ -15,9 +15,7 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
   const { currentUser } = useAuthProvider();
   const translations = useDictionary();
 
-  const encodedEmail = currentUser
-    ? encodeURIComponent(currentUser.email)
-    : "";
+  const encodedEmail = currentUser ? encodeURIComponent(currentUser.email) : "";
 
   return (
     <button
@@ -36,7 +34,11 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
           translations.page.notAvailable
         ) : (
           <Link
-            href={`/${lang}/products/${product.id}/bid`}
+            href={
+              currentUser
+                ? `/${lang}/products/${product.id}/bid`
+                : `/${lang}/auth/sign-in`
+            }
             className="min-w-full min-h-full px-2 py-1 rounded-md"
           >
             {translations.page.bid}
@@ -44,7 +46,11 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
         )
       ) : (
         <Link
-          href={`/${lang}/products/${product.id}/buy`}
+          href={
+            currentUser
+              ? `/${lang}/products/${product.id}/buy`
+              : `/${lang}/auth/sign-in`
+          }
           className="min-w-full min-h-full px-2 py-1 rounded-md"
         >
           {translations.page.buy}

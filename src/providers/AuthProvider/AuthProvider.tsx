@@ -1,3 +1,4 @@
+import { TLocale } from "../../../i18n.config";
 import { PropsWithChildren, useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { TUser } from "@/@types/general";
@@ -7,7 +8,6 @@ import { auth, db } from "@/firebase";
 import { AuthContext } from "@/providers/AuthProvider";
 import { User, deleteUser, onAuthStateChanged, signOut } from "firebase/auth";
 import { deleteDoc, doc } from "firebase/firestore";
-import { TLocale } from "../../../i18n.config";
 
 interface AuthProviderprops {
   lang: TLocale;
@@ -92,7 +92,7 @@ export function AuthProvider({
         await handleUserDelete(auth.currentUser);
       }
 
-      if (auth.currentUser == null) {
+      if (auth.currentUser == null && currentUser != null) {
         return setCurrentUser(null);
       }
     } catch (error: any) {
@@ -105,21 +105,33 @@ export function AuthProvider({
   async function handleLogOut() {
     try {
       await signOut(auth);
-      setCurrentUser(null);
+      router.replace(`/${lang}`);
     } catch (error: any) {
       console.log(error.message);
     }
   }
+
+  function privateRoutes(pathname: string) {
+    const proviateURLS = ["profile", "buy"];
+
+    return proviateURLS.some((route) => pathname.includes(route));
+  }
+
+  useEffect(() => {
+    const isPrivateRoute = privateRoutes(pathname);
+    if (!isPrivateRoute) return;
+
+    if (!loading && !loadingUser && auth.currentUser == null) {
+      router.replace(`/${lang}`);
+    }
+  }, [auth.currentUser, loading, loadingUser, pathname]);
 
   useEffect(() => {
     controlUnverifiedUser();
     if (auth.currentUser != null && currentUser == null) {
       getCurrentUser(auth.currentUser?.email!);
     }
-    if (!loadingUser && !loading && pathname.includes("profile") && currentUser == null) {
-      router.replace(`/${lang}`);
-    }
-  }, [auth.currentUser, pathname]);
+  }, [auth.currentUser, pathname, loading]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
