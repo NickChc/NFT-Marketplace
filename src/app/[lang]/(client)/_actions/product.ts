@@ -3,7 +3,7 @@
 import { TProduct, TUser } from "@/@types/general";
 import { db } from "@/firebase";
 import { doc, updateDoc } from "firebase/firestore";
-import { getUser } from "../../_api/getUser";
+import { getUser } from "@/app/[lang]/_api/getUser";
 
 export async function returnProduct(product: TProduct, email: string) {
   const user = await getUser(email);
