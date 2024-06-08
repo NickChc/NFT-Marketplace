@@ -109,6 +109,10 @@
     "logOut": "Log Out",
     "loggingOut": "Logging Out",
     "agree": "Agree",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "sellFor": "Sell For",
+    "selectPrice": "Select Price",
+    "priceTooLow": "The price is too low",
+    "stopSelling": "Stop Selling"
   }
 }

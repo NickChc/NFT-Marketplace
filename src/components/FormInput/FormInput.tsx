@@ -1,10 +1,10 @@
 interface FormInputProps {
   name: string;
   label: string;
-  value?: string;
+  value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: () => void;
-  type?: "text" | "password" | "file" | "email";
+  type?: "text" | "password" | "file" | "email" | "number";
   required?: boolean;
   defaultValue?: string;
 }
@@ -35,7 +35,9 @@ export function FormInput({
         name={name}
         onFocus={onFocus}
         id={name}
-        className={`p-2 outline-none border border-solid border-blue-300 rounded-md`}
+        className={`p-2 outline-none border border-solid border-blue-300 rounded-md ${
+          type === "number" ? "appearance-none" : ""
+        }`}
         defaultValue={defaultValue}
       />
     </>
