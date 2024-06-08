@@ -1,0 +1,1 @@
+export { SubmitUpdateUser } from "./SubmitUpdateUser";

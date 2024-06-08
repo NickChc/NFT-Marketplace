@@ -1,4 +1,4 @@
-import { TProduct } from "@/@types/general";
+import { TProduct, TUser } from "@/@types/general";
 import { createContext } from "react";
 
 interface GlobalContextProps {
@@ -10,6 +10,8 @@ interface GlobalContextProps {
   setSellProduct: React.Dispatch<React.SetStateAction<TProduct | null>>;
   stopSellingProduct: TProduct | null;
   setStopSellingProduct: React.Dispatch<React.SetStateAction<TProduct | null>>;
+  updateUser: TUser | null;
+  setUpdateUser: React.Dispatch<React.SetStateAction<TUser | null>>;
 }
 
 export const GlobalContext = createContext<GlobalContextProps>({
@@ -21,4 +23,6 @@ export const GlobalContext = createContext<GlobalContextProps>({
   setSellProduct: () => {},
   stopSellingProduct: null,
   setStopSellingProduct: () => {},
+  updateUser: null,
+  setUpdateUser: () => {},
 });

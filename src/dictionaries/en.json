@@ -113,6 +113,11 @@
     "sellFor": "Sell For",
     "selectPrice": "Select Price",
     "priceTooLow": "The price is too low",
-    "stopSelling": "Stop Selling"
+    "stopSelling": "Stop Selling",
+    "change": "Change",
+    "noChangeFields": "Leave fields you do not intent to change",
+    "reLogin": "Please, re-login to update email",
+    "resetPasswordCap": "RESET PASSWORD",
+    "verifyNewEmail": "Please, verify new email"
   }
 }

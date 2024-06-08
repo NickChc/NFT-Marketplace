@@ -3,9 +3,11 @@
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { formatCurrency } from "@/lib/formatters";
 import { useDictionary } from "@/hooks/useDictionary";
+import { useGlobalProvider } from "@/providers/GlobalProvider";
 
 export function ProfileData() {
   const { currentUser } = useAuthProvider();
+  const { setUpdateUser } = useGlobalProvider();
   const translations = useDictionary();
 
   return (
@@ -22,7 +24,10 @@ export function ProfileData() {
         <span className="font-semibold">{translations.page.email} -</span>{" "}
         {currentUser?.email}
       </h3>
-      <button className="text-white p-1 w-full bg-purple-800 font-semibold rounded-md duration-100 hover:opacity-75">
+      <button
+        className="text-white p-1 w-full bg-purple-800 font-semibold rounded-md duration-100 hover:opacity-75 mt-3"
+        onClick={() => setUpdateUser(currentUser)}
+      >
         {translations.page.edit}
       </button>
       <hr className="w-full my-3" />
