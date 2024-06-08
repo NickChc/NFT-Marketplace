@@ -1,19 +1,30 @@
 "use client";
 
 import { TLocale } from "../../../../../i18n.config";
+import { useEffect } from "react";
 import { useGlobalProvider } from "@/providers/GlobalProvider";
 import { ConfirmReturn } from "@/app/[lang]/(client)/profile/_components/ConfirmReturn";
-import { useEffect } from "react";
+import { SellForm } from "@/app/[lang]/(client)/profile/_components/SellForm";
+import { ConfirmStopSelling } from "../../(client)/profile/_components/ConfirmStopSelling";
 
 interface ModalProps {
   lang: TLocale;
 }
 
 export function Modal({ lang }: ModalProps) {
-  const { returnItem, setReturnItem } = useGlobalProvider();
+  const {
+    returnItem,
+    setReturnItem,
+    sellProduct,
+    setSellProduct,
+    stopSellingProduct,
+    setStopSellingProduct,
+  } = useGlobalProvider();
 
   function closeModal() {
     setReturnItem(null);
+    setSellProduct(null);
+    setStopSellingProduct(null);
   }
 
   useEffect(() => {
@@ -25,7 +36,9 @@ export function Modal({ lang }: ModalProps) {
     }
   }, [returnItem]);
 
-  if (returnItem == null) return null;
+  if (returnItem == null && sellProduct == null && stopSellingProduct == null) {
+    return null;
+  }
 
   return (
     <div
@@ -41,6 +54,12 @@ export function Modal({ lang }: ModalProps) {
         returnItem={returnItem}
         lang={lang}
       />
+      <ConfirmStopSelling
+        lang={lang}
+        stopSellingProduct={stopSellingProduct}
+        closeModal={closeModal}
+      />
+      <SellForm product={sellProduct} closeModal={closeModal} />
     </div>
   );
 }

@@ -15,9 +15,16 @@ export function CollectionCardDropdown({
 }: CollectionCardDropdownProps) {
   const [open, setOpen] = useState<boolean>(false);
   const translations = useDictionary();
-  const { setReturnItem } = useGlobalProvider();
+  const { setReturnItem, setSellProduct, setStopSellingProduct } =
+    useGlobalProvider();
 
-  
+  function handleSellButton() {
+    if (product.isAvailable) {
+      setStopSellingProduct(product);
+    } else {
+      setSellProduct(product);
+    }
+  }
 
   function closePopup() {
     setOpen(false);
@@ -46,8 +53,13 @@ export function CollectionCardDropdown({
       </span>
       {open && (
         <div className="absolute bottom-6 right-9 sm:-right-9 p-1 flex flex-col items-start z-50 bg-white border-solid border border-purple-800 rounded-md">
-          <button className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 rounded-t-md dark:text-black">
-            {translations.page.sell}
+          <button
+            className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 rounded-t-md dark:text-black whitespace-nowrap"
+            onClick={handleSellButton}
+          >
+            {product.isAvailable
+              ? translations.page.stopSelling
+              : translations.page.sell}
           </button>
           <button
             className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 dark:text-black rounded-b-md"

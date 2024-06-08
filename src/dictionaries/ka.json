@@ -109,6 +109,10 @@
     "logOut": "გამოსვლა",
     "loggingOut": "დაელოდეთ",
     "agree": "თანახმა ვარ",
-    "cancel": "უკან"
+    "cancel": "უკან",
+    "sellFor": "გაყიდვა",
+    "selectPrice": "შეარჩიეთ ფასი",
+    "priceTooLow": "ფასი ზედმეტად დაბალია",
+    "stopSelling": "გაყიდვის შეჩერება"
   }
 }
