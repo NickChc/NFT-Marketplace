@@ -5,6 +5,7 @@ import { Navigation } from "@/app/[lang]/_components/Navigation";
 import { ToggleTheme } from "@/app/[lang]/_components/ToggleTheme";
 import { getDictionaries } from "@/lib/dictionary";
 import { AuthButton } from "@/app/[lang]/(client)/_component/AuthButton";
+import { Modal } from "../Modal";
 
 interface HeaderProps {
   lang: TLocale;
@@ -18,7 +19,7 @@ export async function Header({
 }: PropsWithChildren<HeaderProps>) {
   const { page } = await getDictionaries(lang);
   return (
-    <header className="sticky top-0 right-0 left-0 z-50  ">
+    <header className="sticky top-0 right-0 left-0 z-50">
       <Navigation>
         <span className="hidden sm:block">
           <LangSelect lang={lang} />

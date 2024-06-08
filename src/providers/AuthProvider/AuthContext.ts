@@ -8,6 +8,7 @@ interface AuthContextProps {
   loadingUser: boolean;
   handleUserDelete: (user: User | null) => Promise<void | [void, void]>;
   handleLogOut: () => Promise<void>;
+  getCurrentUser: (email?: string, uid?: string) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextProps>({
@@ -16,4 +17,5 @@ export const AuthContext = createContext<AuthContextProps>({
   loadingUser: false,
   handleUserDelete: async () => {},
   handleLogOut: async () => {},
+  getCurrentUser: async () => {},
 });

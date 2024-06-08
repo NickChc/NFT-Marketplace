@@ -33,7 +33,6 @@ export function ProductsForm({ product }: ProductsFormProps) {
       <FormInput
         label={dictionary.page.name}
         name="name"
-        onFocus={() => {}}
         required={product == null}
         defaultValue={product?.name}
       />

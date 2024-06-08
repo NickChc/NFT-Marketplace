@@ -7,7 +7,7 @@ import { getUser } from "@/app/[lang]/_api/getUser";
 import { auth, db } from "@/firebase";
 import { AuthContext } from "@/providers/AuthProvider";
 import { User, deleteUser, onAuthStateChanged, signOut } from "firebase/auth";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 
 interface AuthProviderprops {
   lang: TLocale;
@@ -24,23 +24,36 @@ export function AuthProvider({
   const pathname = usePathname();
   const router = useRouter();
 
-  async function getCurrentUser(email: string) {
+  async function getCurrentUser(email?: string, uid?: string) {
     try {
-      const currUser = await getUser(email);
+      let currUser;
+      if (email) {
+        currUser = await getUser(email);
+      } else if (uid) {
+        currUser = await getUser(undefined, uid);
+      }
       setCurrentUser(currUser ? currUser : null);
     } catch (error: any) {
       console.log(error.message);
     }
   }
 
-  async function checkUser(email?: string | null) {
+  async function checkUser(uid: string, email?: string | null) {
     try {
       setLoadingUser(true);
       if (email == null) return;
 
-      const user = await getUser(email);
+      const user = await getUser(undefined, uid);
 
       if (user) {
+        if (user.email !== email) {
+          const userDoc = doc(db, "users", user.id);
+
+          await updateDoc(userDoc, {
+            email,
+          });
+          getCurrentUser(email);
+        }
         return setCurrentUser(user);
       } else {
         const newUser: Omit<TUser, "id"> = {
@@ -121,13 +134,21 @@ export function AuthProvider({
     const isPrivateRoute = privateRoutes(pathname);
     if (!isPrivateRoute) return;
 
-    if (!loading && !loadingUser && auth.currentUser == null) {
+    if (
+      !loading &&
+      !loadingUser &&
+      auth.currentUser == null &&
+      currentUser == null
+    ) {
       router.replace(`/${lang}`);
     }
-  }, [auth.currentUser, loading, loadingUser, pathname]);
+  }, [auth.currentUser, loading, loadingUser, pathname, currentUser]);
 
   useEffect(() => {
     controlUnverifiedUser();
+    if (auth.currentUser == null) {
+      setCurrentUser(null);
+    }
     if (auth.currentUser != null && currentUser == null) {
       getCurrentUser(auth.currentUser?.email!);
     }
@@ -136,7 +157,7 @@ export function AuthProvider({
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user?.emailVerified) {
-        checkUser(user?.email);
+        checkUser(user?.uid, user?.email);
       }
     });
 
@@ -153,6 +174,7 @@ export function AuthProvider({
         loadingUser,
         handleUserDelete,
         handleLogOut,
+        getCurrentUser,
       }}
     >
       {loading ? null : children}
