@@ -40,12 +40,22 @@ async function isAuthenticated(req: NextRequest) {
 }
 
 export async function middleware(req: NextRequest) {
+  const locale = getLocale(req);
+  const protectedRoutes = ["profile", "buy", "bid"];
+
   const pathname = req.nextUrl.pathname;
   const pathnameisMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
 
-  const locale = getLocale(req);
+  const tokenCookie = req.cookies.get("auth");
+  const token = tokenCookie?.value;
+
+  if (protectedRoutes.some((route) => pathname.includes(route))) {
+    if (!token) {
+      return NextResponse.redirect(new URL(`/${locale}/auth/sign-in`, req.url));
+    }
+  }
   if (pathnameisMissingLocale) {
     return NextResponse.redirect(
       new URL(
@@ -64,6 +74,8 @@ export async function middleware(req: NextRequest) {
       headers: { "WWW-Authenticate": "Basic" },
     });
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
