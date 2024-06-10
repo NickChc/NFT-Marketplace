@@ -32,6 +32,7 @@ export async function buyProduct(product: TProduct, currentUser: TUser) {
           fullName,
           isFrozen: currentUser.isFrozen,
           userId: currentUser.id,
+          paidInCents: product.priceInCents,
         },
         isAvailable: false,
         orders: product.orders + 1,

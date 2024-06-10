@@ -36,6 +36,7 @@ export interface TProduct {
     fullName: string;
     userId: string;
     isFrozen: boolean;
+    paidInCents: number;
   } | null;
   filePath: string;
   imagePath: string;

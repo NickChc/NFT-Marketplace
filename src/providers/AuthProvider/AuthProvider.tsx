@@ -82,21 +82,26 @@ export function AuthProvider({
     }
   }
 
-  async function handleUserDelete(user: User | null) {
+  async function handleUserDelete(user: User | null, callback?: () => void) {
     try {
       if (user == null) return;
 
       const userToDelete = await getUser(user?.email!);
 
+      if (userToDelete && userToDelete.ownings.length > 0) return;
+
       if (userToDelete == null) {
         return await deleteUser(user);
       } else {
         const userDoc = doc(db, "users", userToDelete.id);
-        await deleteDoc(userDoc);
         await deleteUser(user);
+        await deleteDoc(userDoc);
       }
     } catch (error: any) {
       console.log(error.message);
+      if (callback && error.message.includes("requires-recent-login")) {
+        callback();
+      }
     }
   }
 

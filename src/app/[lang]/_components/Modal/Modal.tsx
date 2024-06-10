@@ -8,6 +8,7 @@ import { SellForm } from "@/app/[lang]/(client)/profile/_components/SellForm";
 import { ConfirmStopSelling } from "@/app/[lang]/(client)/profile/_components/ConfirmStopSelling";
 import { UpdateUserForm } from "@/app/[lang]/(client)/profile/_components/UpdateUserForm";
 import { ConfirmBiddingToggle } from "../../(client)/profile/_components/ConfirmBiddingToggle";
+import { ConfirmDeleteAcc } from "../../(client)/profile/_components/ConfirmDeleteAcc";
 
 interface ModalProps {
   lang: TLocale;
@@ -25,15 +26,9 @@ export function Modal({ lang }: ModalProps) {
     setUpdateUser,
     bidItem,
     setBidItem,
+    deleteUser,
+    setDeleteUser,
   } = useGlobalProvider();
-
-  const values = [
-    returnItem,
-    sellProduct,
-    stopSellingProduct,
-    updateUser,
-    bidItem,
-  ];
 
   function closeModal() {
     setReturnItem(null);
@@ -41,18 +36,28 @@ export function Modal({ lang }: ModalProps) {
     setStopSellingProduct(null);
     setUpdateUser(null);
     setBidItem(null);
+    setDeleteUser(null);
   }
 
+  const dependencies = [
+    returnItem,
+    sellProduct,
+    stopSellingProduct,
+    updateUser,
+    bidItem,
+    deleteUser,
+  ];
+
   useEffect(() => {
-    const open = values.some((value) => value !== null);
+    const open = dependencies.some((dep) => dep !== null);
     if (open) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-  }, [returnItem, sellProduct, stopSellingProduct, updateUser, bidItem]);
+  }, [...dependencies]);
 
-  if (!values.some((value) => value != null)) {
+  if (!dependencies.some((dep) => dep != null)) {
     return null;
   }
 
@@ -65,6 +70,7 @@ export function Modal({ lang }: ModalProps) {
         }
       }}
     >
+      <ConfirmDeleteAcc lang={lang} closeModal={closeModal} deleteUser={deleteUser} />
       <ConfirmReturn
         closeModal={closeModal}
         returnItem={returnItem}
