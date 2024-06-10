@@ -53,8 +53,8 @@ export function UpdateUserForm({
 
   return (
     <form
-      className=" flex flex-col p-3 bg-white dark:bg-gray-900 border-solid border border-purple-700 rounded-md w-[90%] sm:w-auto gap-3"
       action={action}
+      className=" flex flex-col p-3 bg-white dark:bg-gray-900 border-solid border border-purple-700 rounded-md w-[90%] sm:w-auto gap-3"
     >
       <h3 className="text-sm sm:text-lg text-center">
         {translations.page.noChangeFields}

@@ -123,6 +123,8 @@
     "setForBidding": "Set For Bidding",
     "removeFromBidding": "Stop Bidding",
     "forBidding": "Open For Bidding",
-    "paid": "Paid"
+    "paid": "Paid",
+    "deleteAccount": "Delete Account",
+    "reLoginToDelete": "Please, re-login to delete account."
   }
 }

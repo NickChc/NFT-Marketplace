@@ -36,8 +36,11 @@ export async function ProductCard({ product, lang, text }: ProductCardProps) {
       </p>
       <div className="min-h-16">
         <h4 className="text-gray-500 font-semibold text-xl md:text-lg lg:text-xl">
-          {product.openForBidding ? text.paid : text.price} -{" "}
-          {formatCurrency(product.priceInCents / 100)}
+          {product.openForBidding
+            ? `${text.paid} - ${formatCurrency(
+                product.owner?.paidInCents! / 100
+              )}`
+            : `${text.price} - ${formatCurrency(product.priceInCents)}`}
         </h4>
         {product.owner && (
           <h4 className="">

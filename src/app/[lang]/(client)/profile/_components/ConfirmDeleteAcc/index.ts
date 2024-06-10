@@ -1,0 +1,1 @@
+export { ConfirmDeleteAcc } from "./ConfirmDeleteAcc";
