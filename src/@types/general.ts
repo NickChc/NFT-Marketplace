@@ -26,6 +26,7 @@ interface TOwnedProduct {
 export interface TProduct {
   id: string;
   isAvailable: boolean;
+  openForBidding: boolean;
   createdAt: Date;
   name: string;
   description: string;

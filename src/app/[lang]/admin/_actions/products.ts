@@ -88,6 +88,7 @@ export async function createProduct(prevState: unknown, formData: FormData) {
     owner: null,
     orders: 0,
     isAvailable: false,
+    openForBidding: false,
     createdAt: Timestamp.fromDate(new Date()) as any,
   };
 

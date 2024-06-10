@@ -6,7 +6,13 @@ import { createUser } from "@/app/[lang]/_api/createUser";
 import { getUser } from "@/app/[lang]/_api/getUser";
 import { auth, db } from "@/firebase";
 import { AuthContext } from "@/providers/AuthProvider";
-import { User, deleteUser, onAuthStateChanged, signOut } from "firebase/auth";
+import {
+  User,
+  deleteUser,
+  onAuthStateChanged,
+  onIdTokenChanged,
+  signOut,
+} from "firebase/auth";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 
 interface AuthProviderprops {
@@ -147,13 +153,20 @@ export function AuthProvider({
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCookie(user);
       if (user?.emailVerified) {
         checkUser(user?.uid, user?.email);
       }
     });
 
     setLoading(false);
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = onIdTokenChanged(auth, async (user) => {
+      setCookie(user);
+    });
 
     return () => unsubscribe();
   }, []);

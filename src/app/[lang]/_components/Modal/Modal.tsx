@@ -7,6 +7,7 @@ import { ConfirmReturn } from "@/app/[lang]/(client)/profile/_components/Confirm
 import { SellForm } from "@/app/[lang]/(client)/profile/_components/SellForm";
 import { ConfirmStopSelling } from "@/app/[lang]/(client)/profile/_components/ConfirmStopSelling";
 import { UpdateUserForm } from "@/app/[lang]/(client)/profile/_components/UpdateUserForm";
+import { ConfirmBiddingToggle } from "../../(client)/profile/_components/ConfirmBiddingToggle";
 
 interface ModalProps {
   lang: TLocale;
@@ -22,31 +23,36 @@ export function Modal({ lang }: ModalProps) {
     setStopSellingProduct,
     updateUser,
     setUpdateUser,
+    bidItem,
+    setBidItem,
   } = useGlobalProvider();
+
+  const values = [
+    returnItem,
+    sellProduct,
+    stopSellingProduct,
+    updateUser,
+    bidItem,
+  ];
 
   function closeModal() {
     setReturnItem(null);
     setSellProduct(null);
     setStopSellingProduct(null);
     setUpdateUser(null);
+    setBidItem(null);
   }
 
   useEffect(() => {
-    const values = [returnItem, sellProduct, stopSellingProduct, updateUser];
     const open = values.some((value) => value !== null);
     if (open) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-  }, [returnItem, sellProduct, stopSellingProduct, updateUser]);
+  }, [returnItem, sellProduct, stopSellingProduct, updateUser, bidItem]);
 
-  if (
-    returnItem == null &&
-    sellProduct == null &&
-    stopSellingProduct == null &&
-    updateUser == null
-  ) {
+  if (!values.some((value) => value != null)) {
     return null;
   }
 
@@ -68,6 +74,11 @@ export function Modal({ lang }: ModalProps) {
         lang={lang}
         stopSellingProduct={stopSellingProduct}
         closeModal={closeModal}
+      />
+      <ConfirmBiddingToggle
+        lang={lang}
+        closeModal={closeModal}
+        bidItem={bidItem}
       />
       <SellForm product={sellProduct} closeModal={closeModal} />
       <UpdateUserForm updateUser={updateUser} closeModal={closeModal} />

@@ -13,10 +13,16 @@ interface ProductsPageProps {
 export default async function ProductsPage({
   params: { lang },
 }: ProductsPageProps) {
-  const [{ page }, products] = await Promise.all([
+  const [{ page }, allProducts] = await Promise.all([
     getDictionaries(lang),
-    getProducts(undefined, true),
+    getProducts(),
   ]);
+
+  const products = allProducts?.filter((product) => {
+    if (product.isAvailable || product.openForBidding) {
+      return product;
+    }
+  });
 
   return (
     <div className="container xl:w-[90%] xl:mx-auto pb-9 min-h-dvh">

@@ -12,6 +12,8 @@ interface GlobalContextProps {
   setStopSellingProduct: React.Dispatch<React.SetStateAction<TProduct | null>>;
   updateUser: TUser | null;
   setUpdateUser: React.Dispatch<React.SetStateAction<TUser | null>>;
+  bidItem: TProduct | null;
+  setBidItem: React.Dispatch<React.SetStateAction<TProduct | null>>;
 }
 
 export const GlobalContext = createContext<GlobalContextProps>({
@@ -25,4 +27,6 @@ export const GlobalContext = createContext<GlobalContextProps>({
   setStopSellingProduct: () => {},
   updateUser: null,
   setUpdateUser: () => {},
+  bidItem: null,
+  setBidItem: () => {},
 });
