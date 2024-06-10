@@ -16,9 +16,10 @@ export default async function HomePage({
   params: { lang },
 }: AdminProductsPageProps) {
   const { page } = await getDictionaries(lang);
-  const [newest, withoutOwner] = await Promise.all([
+  const [newest, withoutOwner, forBidding] = await Promise.all([
     getProducts(3, true),
     getProducts(undefined, false, true),
+    getProducts(3, false, false, undefined, true),
   ]);
 
   return (
@@ -40,6 +41,33 @@ export default async function HomePage({
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-9 mx-auto">
         {newest?.map((product) => {
+          return (
+            <ProductCard
+              key={product.id}
+              product={product}
+              lang={lang}
+              text={{ ...page }}
+            />
+          );
+        })}
+      </div>
+
+      <div className="mt-20 flex items-center gap-x-3 sm:gap-x-14">
+        <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold ml-2">
+          {page.forBidding}
+        </h2>
+        <Link
+          href={`/${lang}/products`}
+          className="flex items-center gap-x-4 text-lg sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"
+        >
+          {page.viewAll}
+          <span className="duration-200 group-hover:ml-4">
+            <RightArrowIcon />
+          </span>
+        </Link>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-9">
+        {forBidding?.map((product) => {
           return (
             <ProductCard
               key={product.id}

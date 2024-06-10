@@ -118,6 +118,11 @@
     "noChangeFields": "Leave fields you do not intent to change",
     "reLogin": "Please, re-login to update email",
     "resetPasswordCap": "RESET PASSWORD",
-    "verifyNewEmail": "Please, verify new email"
+    "verifyNewEmail": "Please, verify new email",
+    "frozenAccount": "You account has been frozen. This means you can't buy, sell or update your account for now.",
+    "setForBidding": "Set For Bidding",
+    "removeFromBidding": "Stop Bidding",
+    "forBidding": "Open For Bidding",
+    "paid": "Paid"
   }
 }

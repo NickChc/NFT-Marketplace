@@ -6,7 +6,6 @@ import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { getProducts } from "@/app/[lang]/_api/getProducts";
 import firebaseAdmin from "@/firebaseAdmin";
 
-
 export async function toggleFreeze(user: TUser, isFrozen: boolean) {
   let promises: any[] = [];
 
@@ -20,12 +19,13 @@ export async function toggleFreeze(user: TUser, isFrozen: boolean) {
     user.id
   );
 
-  if (userProducts?.length! > 0) {
+  if (userProducts?.length! > 0 && !isFrozen) {
     userProducts?.forEach((product) => {
       const productDoc = doc(db, "product", product.id);
       promises.push(
         updateDoc(productDoc, {
-          ...product,
+          isAvailable: false,
+          openForBidding: false,
           owner: { ...product.owner, isFrozen },
         })
       );
@@ -44,6 +44,6 @@ export async function deleteUser(user: TUser) {
 
   await Promise.all([
     firebaseAdmin.auth().deleteUser(user.uid),
-    deleteDoc(userDoc)
-  ])
+    deleteDoc(userDoc),
+  ]);
 }

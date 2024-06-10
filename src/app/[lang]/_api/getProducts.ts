@@ -6,7 +6,8 @@ export async function getProducts(
   limitAt?: number,
   activeOnly?: boolean,
   withoutOwner?: boolean,
-  userId?: string
+  userId?: string,
+  forBidding?: boolean
 ) {
   try {
     let data;
@@ -40,6 +41,23 @@ export async function getProducts(
         query(
           productCollectionRef,
           where("owner.userId", "==", userId),
+          orderBy("createdAt", "desc")
+        )
+      );
+    } else if (forBidding && limitAt) {
+      data = await getDocs(
+        query(
+          productCollectionRef,
+          where("openForBidding", "==", true),
+          orderBy("createdAt", "desc"),
+          limit(limitAt)
+        )
+      );
+    } else if (forBidding) {
+      data = await getDocs(
+        query(
+          productCollectionRef,
+          where("openForBidding", "==", true),
           orderBy("createdAt", "desc")
         )
       );

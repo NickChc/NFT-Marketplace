@@ -5,6 +5,7 @@ import { PropsWithChildren, useState } from "react";
 export function GlobalProvider({ children }: PropsWithChildren) {
   const [collection, setCollection] = useState<TProduct[]>([]);
   const [returnItem, setReturnItem] = useState<null | TProduct>(null);
+  const [bidItem, setBidItem] = useState<null | TProduct>(null);
   const [sellProduct, setSellProduct] = useState<TProduct | null>(null);
   const [stopSellingProduct, setStopSellingProduct] = useState<TProduct | null>(
     null
@@ -24,6 +25,8 @@ export function GlobalProvider({ children }: PropsWithChildren) {
         setStopSellingProduct,
         updateUser,
         setUpdateUser,
+        bidItem,
+        setBidItem,
       }}
     >
       {children}

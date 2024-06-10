@@ -42,7 +42,7 @@ export function ConfirmStopSelling({
   if (stopSellingProduct == null) return null;
 
   return (
-    <div className="bg-[#fff] p-3 text-black w-[90%] sm:w-auto rounded-sm">
+    <div className="bg-[#fff] p-3 text-black w-[90%] sm:w-auto rounded-sm border-solid border border-purple-800">
       <h4 className="font-semibold sm:text-lg md:text-xl text-center">
         {lang === "ka"
           ? `დარწმუნებული ხართ, რომ აღარ გსურთ ${stopSellingProduct.name} -ის გაყიდვა?`
