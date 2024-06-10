@@ -124,25 +124,16 @@ export function AuthProvider({
     }
   }
 
-  function privateRoutes(pathname: string) {
-    const proviateURLS = ["profile", "buy"];
-
-    return proviateURLS.some((route) => pathname.includes(route));
-  }
-
-  useEffect(() => {
-    const isPrivateRoute = privateRoutes(pathname);
-    if (!isPrivateRoute) return;
-
-    if (
-      !loading &&
-      !loadingUser &&
-      auth.currentUser == null &&
-      currentUser == null
-    ) {
-      router.replace(`/${lang}`);
+  async function setCookie(user: User | null) {
+    if (user) {
+      const token = await user.getIdToken();
+      const expiryDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+      document.cookie = `auth=${token}; expires=${expiryDate}; path=/`;
+    } else {
+      const expiryDate = new Date(0);
+      document.cookie = `auth=; expires=${expiryDate}; path=/`;
     }
-  }, [auth.currentUser, loading, loadingUser, pathname, currentUser]);
+  }
 
   useEffect(() => {
     controlUnverifiedUser();
@@ -156,6 +147,7 @@ export function AuthProvider({
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCookie(user);
       if (user?.emailVerified) {
         checkUser(user?.uid, user?.email);
       }
