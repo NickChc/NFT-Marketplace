@@ -32,7 +32,7 @@ export function ConfirmDeleteAcc({
       );
       closeModal();
       await handleLogOut();
-    } catch (error: any) {
+     } catch (error: any) {
       console.log(error.message);
       if (error.message.incluides("requires-recent-login")) {
       }

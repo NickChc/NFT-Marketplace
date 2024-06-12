@@ -3,6 +3,7 @@ import { GlobalContext } from "@/providers/GlobalProvider/GlobalContext";
 import { PropsWithChildren, useState } from "react";
 
 export function GlobalProvider({ children }: PropsWithChildren) {
+  const [offerItem, setOfferItem] = useState<TProduct | null>(null);
   const [deleteUser, setDeleteUser] = useState<TUser | null>(null);
   const [collection, setCollection] = useState<TProduct[]>([]);
   const [returnItem, setReturnItem] = useState<null | TProduct>(null);
@@ -30,6 +31,8 @@ export function GlobalProvider({ children }: PropsWithChildren) {
         setBidItem,
         deleteUser,
         setDeleteUser,
+        offerItem,
+        setOfferItem,
       }}
     >
       {children}

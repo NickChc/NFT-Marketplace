@@ -23,12 +23,13 @@ export default async function HomePage({
   ]);
 
   return (
-    <div className="mx-auto flex flex-col w-full sm:w-[90%] md:w-[80%] py-9">
+    <div className="mx-auto flex flex-col w-full sm:w-[90%] md:w-[80%] pb-4 sm:py-9">
       <PageHeader>{page.homeCap}</PageHeader>
-      <div className="mt-9 flex items-center gap-x-3 sm:gap-x-14">
+      <div className="mt-3 sm:mt-9 flex flex-col sm:flex-row items-start sm:items-center gap-x-3 sm:gap-x-14">
         <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold ml-2">
           {page.newest}
         </h2>
+        <hr className="w-full sm:hidden my-2" />
         <Link
           href={`/${lang}/products`}
           className="flex items-center gap-x-4 text-lg sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"
@@ -52,10 +53,12 @@ export default async function HomePage({
         })}
       </div>
 
-      <div className="mt-20 flex items-center gap-x-3 sm:gap-x-14">
+      <div className="mt-20 flex flex-col sm:flex-row items-start sm:items-center gap-x-3 sm:gap-x-14">
         <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold ml-2">
           {page.forBidding}
         </h2>
+        <hr className="w-full sm:hidden my-2" />
+
         <Link
           href={`/${lang}/products`}
           className="flex items-center gap-x-4 text-lg sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"
@@ -79,10 +82,11 @@ export default async function HomePage({
         })}
       </div>
 
-      <div className="mt-20 flex items-center gap-x-3 sm:gap-x-14">
+      <div className="mt-20 flex flex-col sm:flex-row items-start sm:items-center gap-x-3 sm:gap-x-14">
         <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold ml-2">
           {page.forSale}
         </h2>
+        <hr className="w-full sm:hidden my-2" />
         <Link
           href={`/${lang}/products`}
           className="flex items-center gap-x-4 text-lg sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"
