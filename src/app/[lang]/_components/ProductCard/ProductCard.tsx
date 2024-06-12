@@ -34,13 +34,13 @@ export async function ProductCard({ product, lang, text }: ProductCardProps) {
       <p className="line-clamp-3 min-h-12 sm:min-h-20 mt-2">
         {product.description}
       </p>
-      <div className="min-h-16">
+      <div className="min-h-16 flex flex-col gap-3 mt-3 sm:block">
         <h4 className="text-gray-500 font-semibold text-xl md:text-lg lg:text-xl">
           {product.openForBidding
             ? `${text.paid} - ${formatCurrency(
                 product.owner?.paidInCents! / 100
               )}`
-            : `${text.price} - ${formatCurrency(product.priceInCents)}`}
+            : `${text.price} - ${formatCurrency(product.priceInCents / 100)}`}
         </h4>
         {product.owner && (
           <h4 className="">
