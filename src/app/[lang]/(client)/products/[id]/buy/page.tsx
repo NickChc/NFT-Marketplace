@@ -38,7 +38,8 @@ export default async function BuyPage({ params }: BuyPageProps) {
       <PageHeader>
         {page.purchaseCap} {product?.name.toUpperCase()}
       </PageHeader>
-      <PurchaseForm lang={params.lang}
+      <PurchaseForm
+        lang={params.lang}
         product={product}
         clientSecret={paymentIntent.client_secret}
       />
