@@ -2,7 +2,7 @@ import { TUser } from "@/@types/general";
 import { usersCollectionRef } from "@/firebase";
 import { getDocs, query, where } from "firebase/firestore";
 
-export async function getUser(email?: string, uid?: string) {
+export async function getUser(email?: string, uid?: string, id?: string) {
   try {
     let data;
     if (email) {
@@ -11,6 +11,8 @@ export async function getUser(email?: string, uid?: string) {
       );
     } else if (uid) {
       data = await getDocs(query(usersCollectionRef, where("uid", "==", uid)));
+    } else if (id) {
+      data = await getDocs(query(usersCollectionRef, where("id", "==", id)));
     } else {
       return null;
     }

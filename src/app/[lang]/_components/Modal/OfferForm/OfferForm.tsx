@@ -7,16 +7,23 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { formatCurrency } from "@/lib/formatters";
 import { useState } from "react";
 import { useFormState } from "react-dom";
-import { OfferSubmitButton } from "./OfferSubmitButton";
+import { OfferSubmitButton } from "@/app/[lang]/_components/Modal/OfferForm/OfferSubmitButton";
+import { useAuthProvider } from "@/providers/AuthProvider";
 
 interface OfferFormProps {
   closeModal: () => void;
   offerItem: TProduct | null;
 }
 
+export interface TSenfOfferEmailReturnData {
+  error?: string;
+  message?: string;
+}
+
 export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
+  const { currentUser } = useAuthProvider();
   const translations = useDictionary();
-  const [data, action] = useFormState(sendOfferEmail, {});
+  const [data, action] = useFormState(sendOfferEmail.bind(null, currentUser, offerItem), {});
 
   const [price, setPrice] = useState<string>(
     `${(offerItem?.owner?.paidInCents || 0) / 100 + 1}`
@@ -24,27 +31,12 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
+    data.error = undefined;
 
     if (/^\d*$/.test(value) && value.length < 7) {
       setPrice(value.replace(/^0+(?!$)/, "") || "0");
     }
   }
-
-  // async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-  //   try {
-  //     e.preventDefault();
-  //     setLoading(true);
-  //     if (offerItem == null || offerItem.owner == null) return;
-  //     if (Number(price) < offerItem.owner.paidInCents) {
-  //       setErrorMessage(translations.page.lowerThanMarketPrice);
-  //       return;
-  //     }
-  //   } catch (error: any) {
-  //     console.log(error.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
 
   if (offerItem == null) return null;
 
@@ -63,22 +55,33 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
         {translations.page.ownerPaid}{" "}
         {formatCurrency((offerItem.owner?.paidInCents || 0) / 100)}
       </div>
-      {data.error !== "" && (
+      {data.error && (
         <div className="text-red-500">
           {data.error === "price_error"
             ? translations.page.lowerThanMarketPrice
             : data.error}
         </div>
       )}
-
-      <OfferSubmitButton error={data.error} price={Number(price)} />
-      <button
-        className="bg-white px-2 py-1 border-solid border rounded-sm border-purple-800 text-purple-800"
-        type="button"
-        onClick={closeModal}
-      >
-        {translations.page.cancel}
-      </button>
+      {data.message === "email_success" ? (
+        <button
+          className="bg-white px-2 py-1 border-solid border rounded-sm border-purple-800 text-purple-800"
+          type="button"
+          onClick={closeModal}
+        >
+          {translations.page.gotIt}
+        </button>
+      ) : (
+        <>
+          <OfferSubmitButton error={data.error} price={Number(price)} />
+          <button
+            className="bg-white px-2 py-1 border-solid border rounded-sm border-purple-800 text-purple-800"
+            type="button"
+            onClick={closeModal}
+          >
+            {translations.page.cancel}
+          </button>
+        </>
+      )}
     </form>
   );
 }
