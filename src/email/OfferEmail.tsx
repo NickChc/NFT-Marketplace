@@ -149,18 +149,28 @@ export default function OfferEmail({
                     Sell For {formatCurrency(priceOffered)}
                   </Text>
                 </Row>
-                <Row>
-                  <Column className="mt-4">
-                    <div className="w-full flex flex-col sm:flex-row` justify-between gap-2">
-                      <Button className="py-2 w-full max-w-20 text-center font-semibold border-solid border border-purple-800 rounded-md bg-purple-800 text-white">
-                        Accept
-                      </Button>
-                      <Button className="py-2 w-full max-w-20 text-center font-semibold text-purple-800 border-solid border border-purple-800 rounded-md">
-                        Decline
-                      </Button>
-                    </div>
-                  </Column>
-                </Row>
+                {/* Buttons for small screen */}
+                <Section className="sm:hidden">
+                  <Row className="mb-4 sm:hidden">
+                    <Button className="py-2 w-full max-w-20 text-center font-semibold border-solid border border-purple-800 rounded-md bg-purple-800 text-white sm:hidden">
+                      Accept
+                    </Button>
+                  </Row>
+                  <Row className="sm:hidden">
+                    <Button className="py-2 w-full max-w-20 text-center font-semibold text-purple-800 border-solid border border-purple-800 rounded-md sm:hidden">
+                      Decline
+                    </Button>
+                  </Row>
+                </Section>
+                <div className="w-full flex justify-center gap-4">
+                  <Button className="w-full py-2 text-center font-semibold border-solid border border-purple-800 rounded-md bg-purple-800 text-white hidden sm:block">
+                    Accept
+                  </Button>
+                  <div className="w-4"></div>
+                  <Button className="w-full py-2 text-center font-semibold text-purple-800 border-solid border border-purple-800 rounded-md hidden sm:block">
+                    Decline
+                  </Button>
+                </div>
               </Row>
             </Section>
           </Container>
