@@ -41,7 +41,7 @@ export async function sendOfferEmail(
   const data = await resend.emails.send({
     from: `Support <${process.env.SENDER_EMAIL}>`,
     to: owner.email,
-    subject: "Order History",
+    subject: "Offer",
     react: (
       <OfferEmail
         createdAt={new Date(Date.now())}
