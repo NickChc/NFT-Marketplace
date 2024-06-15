@@ -23,19 +23,19 @@ export function ConfirmDeleteAcc({
   const [errorMessage, setErrorMessage] = useState<string>("");
   const { handleUserDelete, handleLogOut } = useAuthProvider();
 
+  function onError(error: string) {
+    if (error.includes("requires-recent-login")) {
+      setErrorMessage(translations.page.reLogin);
+    }
+  }
+
   async function handleDelete() {
     try {
       setLoading(true);
       setErrorMessage("");
-      await handleUserDelete(auth.currentUser, () =>
-        setErrorMessage(translations.page.reLoginToDelete)
-      );
-      closeModal();
-      await handleLogOut();
-     } catch (error: any) {
+      await handleUserDelete(auth.currentUser, closeModal, onError);
+    } catch (error: any) {
       console.log(error.message);
-      if (error.message.incluides("requires-recent-login")) {
-      }
     } finally {
       setLoading(false);
     }

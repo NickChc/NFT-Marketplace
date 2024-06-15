@@ -41,7 +41,7 @@ async function isAuthenticated(req: NextRequest) {
 
 export async function middleware(req: NextRequest) {
   const locale = getLocale(req);
-  const protectedRoutes = ["profile", "buy", "bid"];
+  const protectedRoutes = ["profile", "buy", "bid", "stripe"];
 
   const pathname = req.nextUrl.pathname;
   const pathnameisMissingLocale = i18n.locales.every(

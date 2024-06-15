@@ -29,6 +29,7 @@ export async function returnProduct(product: TProduct, email: string) {
       isAvailable: true,
       owner: null,
       priceInCents: originalPrice,
+      openForBidding: false,
     }),
   ]);
 }

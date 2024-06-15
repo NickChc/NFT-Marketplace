@@ -5,7 +5,6 @@ import { useState } from "react";
 import { TProduct } from "@/@types/general";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { returnProduct } from "@/app/[lang]/(client)/_actions/product";
-import { useUserCollection } from "@/hooks/useUserCollection";
 import { useDictionary } from "@/hooks/useDictionary";
 
 interface ConfirmReturnProps {
@@ -20,8 +19,7 @@ export function ConfirmReturn({
   lang,
 }: ConfirmReturnProps) {
   const [loading, setLoading] = useState<boolean>(false);
-  const { currentUser } = useAuthProvider();
-  const { getUserCollection } = useUserCollection();
+  const { currentUser, getCurrentUser } = useAuthProvider();
   const translations = useDictionary();
 
   async function handleReturn() {
@@ -29,7 +27,7 @@ export function ConfirmReturn({
       if (currentUser == null || returnItem == null) return;
       setLoading(true);
       await returnProduct(returnItem, currentUser.email);
-      getUserCollection();
+      getCurrentUser(undefined, currentUser.uid);
     } catch (error: any) {
       console.log(error.message);
     } finally {

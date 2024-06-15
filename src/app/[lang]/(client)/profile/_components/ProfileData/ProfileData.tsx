@@ -14,6 +14,7 @@ export function ProfileData() {
 
   return (
     <div className="flex flex-col gap-3 sm:text-xl md:text-2xl">
+      <hr className="w-full my-3" />
       <h3 className="truncate max-w-[95%]">
         <span className="font-semibold">{translations.page.name} -</span>{" "}
         {currentUser.name}
