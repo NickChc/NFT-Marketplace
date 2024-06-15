@@ -7,3 +7,31 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+ul::-webkit-scrollbar {
+  width: 6px;
+}
+
+ul::-webkit-scrollbar-thumb {
+  width: 4px;
+  border-radius: 8px;
+  background-color: rgb(69, 69, 69);
+}
+
+ul::-webkit-scrollbar-thumb:hover {
+  width: 4px;
+  border-radius: 8px;
+  background-color: rgb(94, 94, 94);
+}
+
+ul::-webkit-scrollbar-thumb:active {
+  width: 4px;
+  border-radius: 8px;
+  background-color: rgb(65, 65, 65);
+}
+
+ul::-webkit-scrollbar-track {
+  border-radius: 8px;
+  width: 4px;
+  background-color: gray;
+}

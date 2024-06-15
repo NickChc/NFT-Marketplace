@@ -37,6 +37,7 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
       if (offer == null) return;
       setLoading(true);
       const product = await getProduct(productId);
+      if (product == null) return closeModal();
       setOfferItem(product);
     } catch (error: any) {
       console.log(error.message);
@@ -53,7 +54,7 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
   if (offer == null) return null;
 
   return (
-    <div className="max-w-[90%] bg-white dark:bg-gray-900 border-solid border border-purple-800 rounded-md p-3 sm:p-6 flex flex-col gap-6">
+    <div className="max-w-[90%] bg-white dark:bg-gray-900 border-solid border border-purple-800 rounded-md p-3 sm:p-6 flex flex-col gap-6 overflow-hidden">
       {loading ? (
         <LoadingIcon className="text-4xl animate-spin mx-auto" />
       ) : offerItem ? (
@@ -77,9 +78,10 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
           ) : (
             <>
               <h3 className="text-lg">
+                <h5 className="max-w-[95%] truncate">{offer.from}</h5>
                 {lang === "ka"
-                  ? `${offer.from} -მ შემოგთავაზათ თანხა ${offerItem.name} -ის სანაცვლოდ`
-                  : `${offer.from} made an offer for ${offerItem.name}`}
+                  ? ` -მ შემოგთავაზათ თანხა ${offerItem.name} -ის სანაცვლოდ`
+                  : ` made an offer for ${offerItem.name}`}
               </h3>
               <div className="font-semibold text-gray-300 text-2xl">
                 {formatCurrency(offer.offeredInCents / 100)}

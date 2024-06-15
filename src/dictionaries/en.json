@@ -136,6 +136,11 @@
     "decline": "Decline",
     "declineAssurance": "Are you sure you want to decline this offer",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "sentAnOffer": "Sent an offer",
+    "viewOffer": "View Offer",
+    "myOffers": "My Offers",
+    "seeAll": "See All",
+    "hide": "Hide"
   }
 }
