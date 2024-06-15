@@ -182,6 +182,7 @@ export async function register(
       isFrozen: false,
       spentInCents: 0,
       ownings: [],
+      offers: [],
     };
     await Promise.all([createUser(newUser), sendEmailVerification(user)]);
     verificationStatusChange();
@@ -196,6 +197,7 @@ export async function register(
         isFrozen: false,
         spentInCents: 0,
         ownings: [],
+        offers: [],
       };
       const result = await handleExistingAccount(
         data,

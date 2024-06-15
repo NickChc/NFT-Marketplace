@@ -7,9 +7,10 @@ import { ConfirmReturn } from "@/app/[lang]/(client)/profile/_components/Confirm
 import { SellForm } from "@/app/[lang]/(client)/profile/_components/SellForm";
 import { ConfirmStopSelling } from "@/app/[lang]/(client)/profile/_components/ConfirmStopSelling";
 import { UpdateUserForm } from "@/app/[lang]/(client)/profile/_components/UpdateUserForm";
-import { ConfirmBiddingToggle } from "../../(client)/profile/_components/ConfirmBiddingToggle";
-import { ConfirmDeleteAcc } from "../../(client)/profile/_components/ConfirmDeleteAcc";
-import { OfferForm } from "./OfferForm";
+import { ConfirmBiddingToggle } from "@/app/[lang]/(client)/profile/_components/ConfirmBiddingToggle";
+import { ConfirmDeleteAcc } from "@/app/[lang]/(client)/profile/_components/ConfirmDeleteAcc";
+import { OfferForm } from "@/app/[lang]/_components/Modal/OfferForm";
+import { OfferView } from "@/app/[lang]/(client)/profile/_components/OfferView";
 
 interface ModalProps {
   lang: TLocale;
@@ -31,6 +32,8 @@ export function Modal({ lang }: ModalProps) {
     setDeleteUser,
     offerItem,
     setOfferItem,
+    offerToView,
+    setOfferToView,
   } = useGlobalProvider();
 
   function closeModal() {
@@ -41,6 +44,7 @@ export function Modal({ lang }: ModalProps) {
     setBidItem(null);
     setDeleteUser(null);
     setOfferItem(null);
+    setOfferToView(null);
   }
 
   const dependencies = [
@@ -51,6 +55,7 @@ export function Modal({ lang }: ModalProps) {
     bidItem,
     deleteUser,
     offerItem,
+    offerToView,
   ];
 
   useEffect(() => {
@@ -98,6 +103,7 @@ export function Modal({ lang }: ModalProps) {
       />
       <SellForm product={sellProduct} closeModal={closeModal} />
       <UpdateUserForm updateUser={updateUser} closeModal={closeModal} />
+      <OfferView offer={offerToView} />
     </div>
   );
 }

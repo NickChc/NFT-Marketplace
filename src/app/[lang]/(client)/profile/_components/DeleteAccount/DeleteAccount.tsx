@@ -17,7 +17,7 @@ export function DeleteAccount({ text }: DeleteAccountProps) {
   if (currentUser == null) return null;
 
   return (
-    <div className="absolute w-1/3 right-0 bottom-9 flex items-center justify-between">
+    <div className="absolute w-full p-3 sm:w-1/3 right-0 bottom-3 sm:bottom-9 flex items-center justify-end gap-4 whitespace-nowrap">
       {text.deleteAccount}
       <button
         disabled={currentUser.ownings?.length > 0}

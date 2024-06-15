@@ -25,11 +25,11 @@ export function Collection({ lang }: CollectionProps) {
         <LoadingIcon className="text-6xl animate-spin mx-auto sm:mt-9 mt-3" />
       ) : (
         <>
-          <h1 className="text-lg sm:text-2xl font-semibold text-center">
+          <h2 className="text-lg sm:text-2xl font-semibold text-center">
             {collection.length > 0
               ? translations.page.myCollection
               : translations.page.noCollection}
-          </h1>
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-4 pb-9">
             {collection.map((item) => {
               return (

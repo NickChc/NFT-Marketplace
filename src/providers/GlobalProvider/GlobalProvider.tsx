@@ -1,4 +1,4 @@
-import { TProduct, TUser } from "@/@types/general";
+import { TOffer, TProduct, TUser } from "@/@types/general";
 import { GlobalContext } from "@/providers/GlobalProvider/GlobalContext";
 import { PropsWithChildren, useState } from "react";
 
@@ -13,6 +13,7 @@ export function GlobalProvider({ children }: PropsWithChildren) {
     null
   );
   const [updateUser, setUpdateUser] = useState<TUser | null>(null);
+  const [offerToView, setOfferToView] = useState<TOffer | null>(null);
 
   return (
     <GlobalContext.Provider
@@ -33,6 +34,8 @@ export function GlobalProvider({ children }: PropsWithChildren) {
         setDeleteUser,
         offerItem,
         setOfferItem,
+        offerToView,
+        setOfferToView,
       }}
     >
       {children}
