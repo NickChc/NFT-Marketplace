@@ -23,7 +23,10 @@ export interface TSenfOfferEmailReturnData {
 export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
   const { currentUser } = useAuthProvider();
   const translations = useDictionary();
-  const [data, action] = useFormState(sendOfferEmail.bind(null, currentUser, offerItem), {});
+  const [data, action] = useFormState(
+    sendOfferEmail.bind(null, currentUser, offerItem),
+    {}
+  );
 
   const [price, setPrice] = useState<string>(
     `${(offerItem?.owner?.paidInCents || 0) / 100 + 1}`
@@ -45,16 +48,22 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
       className="w-[90%] sm:w-[50%] md:w-auto md:min-w-[500px] p-3 sm:p-6 bg-white dark:bg-gray-900 flex flex-col gap-4 border-solid border border-purple-700 rounded-md"
       action={action}
     >
-      <FormInput
-        value={price}
-        onChange={handleChange}
-        name="price"
-        label={translations.page.offerAmount}
-      />
-      <div>
-        {translations.page.ownerPaid}{" "}
-        {formatCurrency((offerItem.owner?.paidInCents || 0) / 100)}
-      </div>
+      {data.message === "email_success" ? (
+        <div className="my-3">{translations.page.offerSent}</div>
+      ) : (
+        <>
+          <FormInput
+            value={price}
+            onChange={handleChange}
+            name="price"
+            label={translations.page.offerAmount}
+          />
+          <div>
+            {translations.page.ownerPaid}{" "}
+            {formatCurrency((offerItem.owner?.paidInCents || 0) / 100)}
+          </div>
+        </>
+      )}
       {data.error && (
         <div className="text-red-500">
           {data.error === "price_error"

@@ -6,6 +6,9 @@ import { Resend } from "resend";
 import { z } from "zod";
 import { TSenfOfferEmailReturnData } from "@/app/[lang]/_components/Modal/OfferForm/OfferForm";
 import { getUser } from "@/app/[lang]/_api/getUser";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "@/firebase";
+import { TOffer } from "@/@types/general";
 
 const priceSchema = z.string().min(1).max(9);
 const resend = new Resend(process.env.RESEND_API_KEY as string);
@@ -55,6 +58,19 @@ export async function sendOfferEmail(
   if (data.error) {
     return { error: "email_error" };
   }
+
+  const userDoc = doc(db, "users", owner.id);
+
+  const newOffer: TOffer = {
+    productId: item.id,
+    from: sender.email,
+    offeredInCents: Number(offeredPrice) * 100,
+    id: crypto.randomUUID(),
+  };
+
+  await updateDoc(userDoc, {
+    offers: [...owner.offers, newOffer],
+  });
 
   return { message: "email_success" };
 }

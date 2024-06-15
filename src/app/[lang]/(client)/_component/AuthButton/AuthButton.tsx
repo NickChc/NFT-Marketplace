@@ -35,24 +35,31 @@ export function AuthButton({ lang }: AuthButtonProps) {
   }
 
   return (
-    <button className="rounded-full overflow-hidden sm:absolute top-1/2 sm:-translate-y-1/2 right-20">
+    <button className="rounded-full sm:absolute top-1/2 sm:-translate-y-1/2 right-20">
       {loadingUser ? (
-        <span className="font-semibold bg-white w-7 sm:w-8 md:w-10 aspect-square grid place-items-center">
+        <span className="font-semibold bg-white w-7 sm:w-8 md:w-10 aspect-square grid place-items-center rounded-full">
           <LoadingIcon className="animate-spin text-xl text-purple-800" />
         </span>
       ) : currentUser ? (
-        <Link
-          href={`/${lang}/profile`}
-          className="bg-white text-purple-800 w-7 sm:w-8 md:w-10 aspect-square grid place-items-center"
-        >
-          {currentUser.name === ""
-            ? currentUser.email[0].toLocaleUpperCase()
-            : currentUser.name[0].toUpperCase()}
-        </Link>
+        <>
+          {currentUser.offers.length > 0 && (
+            <span className="bg-red-500 absolute -top-1 -right-1 text-white z-50 grid place-items-center rounded-full w-5 text-sm aspect-square">
+              {currentUser.offers.length}
+            </span>
+          )}
+          <Link
+            href={`/${lang}/profile`}
+            className="bg-white text-purple-800 w-7 sm:w-8 md:w-10 rounded-full aspect-square grid place-items-center"
+          >
+            {currentUser.name === ""
+              ? currentUser.email[0].toLocaleUpperCase()
+              : currentUser.name[0].toUpperCase()}
+          </Link>
+        </>
       ) : (
         <Link
           href={`/${lang}/auth/sign-in`}
-          className="bg-white text-purple-800 w-7 sm:w-8 md:w-10 aspect-square grid place-items-center"
+          className="bg-white text-purple-800 w-7 sm:w-8 md:w-10 aspect-square rounded-full grid place-items-center"
         >
           <UserIcon />
         </Link>

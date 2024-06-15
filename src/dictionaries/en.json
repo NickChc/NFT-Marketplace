@@ -130,6 +130,9 @@
     "offer": "Offer",
     "ownerPaid": "The owner paid",
     "lowerThanMarketPrice": "That's lower than market price",
-    "gotIt": "Got It"
+    "gotIt": "Got It",
+    "offerSent": "The offer was sent to the owner, please wait for response.",
+    "accept": "Accept",
+    "decline": "Decline"
   }
 }

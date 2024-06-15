@@ -6,6 +6,13 @@ export interface TOrder {
   productId: string;
 }
 
+export interface TOffer {
+  productId: string;
+  from: string;
+  id: string;
+  offeredInCents: number;
+}
+
 export interface TUser {
   spentInCents: number;
   id: string;
@@ -14,6 +21,7 @@ export interface TUser {
   name: string;
   surname: string;
   ownings: TOwnedProduct[];
+  offers: TOffer[];
   isFrozen: boolean;
 }
 

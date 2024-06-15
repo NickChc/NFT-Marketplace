@@ -12,6 +12,7 @@ import {
   Section,
   Tailwind,
   Text,
+  Link,
 } from "@react-email/components";
 import { TProduct, TUser } from "@/@types/general";
 import { formatCurrency } from "@/lib/formatters";
@@ -149,28 +150,16 @@ export default function OfferEmail({
                     Sell For {formatCurrency(priceOffered)}
                   </Text>
                 </Row>
-                {/* Buttons for small screen */}
-                <Section className="sm:hidden">
-                  <Row className="mb-4 sm:hidden">
-                    <Button className="py-2 w-full max-w-20 text-center font-semibold border-solid border border-purple-800 rounded-md bg-purple-800 text-white sm:hidden">
-                      Accept
-                    </Button>
-                  </Row>
-                  <Row className="sm:hidden">
-                    <Button className="py-2 w-full max-w-20 text-center font-semibold text-purple-800 border-solid border border-purple-800 rounded-md sm:hidden">
-                      Decline
-                    </Button>
-                  </Row>
-                </Section>
-                <div className="w-full flex justify-center gap-4">
-                  <Button className="w-full py-2 text-center font-semibold border-solid border border-purple-800 rounded-md bg-purple-800 text-white hidden sm:block">
-                    Accept
-                  </Button>
-                  <div className="w-4"></div>
-                  <Button className="w-full py-2 text-center font-semibold text-purple-800 border-solid border border-purple-800 rounded-md hidden sm:block">
-                    Decline
-                  </Button>
-                </div>
+                <Row>
+                  <Column align="right">
+                    <Link
+                      className="whitespace-nowrap px-2 py-1 w-full max-w-20 text-center font-semibold border-solid border border-purple-800 rounded-md bg-purple-800 text-white"
+                      href={`${process.env.NEXT_PUBLIC_SERVER_URL}/en/profile`}
+                    >
+                      View Offer
+                    </Link>
+                  </Column>
+                </Row>
               </Row>
             </Section>
           </Container>
