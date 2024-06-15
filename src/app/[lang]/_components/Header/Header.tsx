@@ -16,7 +16,7 @@ export async function Header({
   forAdmin,
 }: PropsWithChildren<HeaderProps>) {
   return (
-    <header className="sticky top-0 right-0 left-0 z-50 border-solid border border-purple-400 border-x-0 border-t-0">
+    <header className="sticky top-0 right-0 left-0 z-50 border-solid border border-purple-400 border-x-0 border-t-0 border-b-0 sm:border-b">
       <Navigation>
         <span className="hidden sm:block">
           <LangSelect lang={lang} />
@@ -33,7 +33,7 @@ export async function Header({
           </span>
         )}
       </Navigation>
-      <div className="relative flex justify-between sm:hidden px-4 py-1 sm:p-0 bg-purple-800 w-full items-center">
+      <div className="relative flex justify-between sm:hidden px-4 py-1 sm:p-0 bg-purple-800 w-full items-center border-solid border border-purple-400 border-x-0 border-t-0">
         <div className="flex items-center gap-x-6">
           <LangSelect lang={lang} />
           <ToggleTheme />
