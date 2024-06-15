@@ -133,6 +133,9 @@
     "gotIt": "Got It",
     "offerSent": "The offer was sent to the owner, please wait for response.",
     "accept": "Accept",
-    "decline": "Decline"
+    "decline": "Decline",
+    "declineAssurance": "Are you sure you want to decline this offer",
+    "yes": "Yes",
+    "no": "No"
   }
 }
