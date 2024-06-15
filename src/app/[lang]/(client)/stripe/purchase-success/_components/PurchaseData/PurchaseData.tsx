@@ -33,13 +33,9 @@ export function PurchaseData({ product, isSuccess, lang }: PurchaseDataProps) {
     hasPurchased.current = true;
   }, [currentUser, product, isSuccess]);
 
-  if (auth.currentUser == null && currentUser == null) {
-    router.replace("/");
-  }
-
   return (
     <>
-      <h4 className="text-xl md:text-2xl lg:text-3xl font-semibold px-3 my-4 sm:my-6">
+      <h4 className="text-xl md:text-2xl lg:text-3xl font-semibold px-3 py-6 sm:py-9">
         {isSuccess && translations.page.congratulations} {product.name}
       </h4>
       <div className="flex flex-col sm:flex-row gap-4 items-stretch  p-3 mt-4 mx-auto max-w-7xl">

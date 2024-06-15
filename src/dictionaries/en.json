@@ -141,6 +141,7 @@
     "viewOffer": "View Offer",
     "myOffers": "My Offers",
     "seeAll": "See All",
-    "hide": "Hide"
+    "hide": "Hide",
+    "cantDeleteAcc": "You must return all items to delete Account"
   }
 }

@@ -69,6 +69,7 @@ export function AuthProvider({
           email,
           spentInCents: 0,
           ownings: [],
+          offers: [],
           isFrozen: false,
         };
 
@@ -82,7 +83,11 @@ export function AuthProvider({
     }
   }
 
-  async function handleUserDelete(user: User | null, callback?: () => void) {
+  async function handleUserDelete(
+    user: User | null,
+    callback?: () => void,
+    onError?: (error: string) => void
+  ) {
     try {
       if (user == null) return;
 
@@ -97,10 +102,14 @@ export function AuthProvider({
         await deleteUser(user);
         await deleteDoc(userDoc);
       }
+      if (callback) {
+        callback();
+      }
+      handleLogOut();
     } catch (error: any) {
       console.log(error.message);
-      if (callback && error.message.includes("requires-recent-login")) {
-        callback();
+      if (onError) {
+        onError(error.message);
       }
     }
   }

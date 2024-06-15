@@ -19,13 +19,14 @@ export default async function ProfilePage({
   const { page } = await getDictionaries(lang);
 
   return (
-    <div className="mx-auto md:w-[70%] xl:max-w-4xl min-h-dvh relative pb-20">
+    <div className="mx-auto md:w-[70%] xl:max-w-4xl min-h-dvh relative pb-9">
       <PageHeader>{page.profile}</PageHeader>
       <div className="mt-2 sm:mt-6 p-2 sm:p-3">
         <LogOutButton lang={lang} />
         <OfferList />
         <Collection lang={lang} />
         <ProfileData />
+      <hr className="w-full my-3" />
       </div>
       <DeleteAccount text={{ ...page }} />
     </div>

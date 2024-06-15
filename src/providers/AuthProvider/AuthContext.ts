@@ -8,7 +8,8 @@ interface AuthContextProps {
   loadingUser: boolean;
   handleUserDelete: (
     user: User | null,
-    callback?: () => void
+    callback?: () => void,
+    onError?: (error: string) => void
   ) => Promise<void | [void, void]>;
   handleLogOut: () => Promise<void>;
   getCurrentUser: (email?: string, uid?: string) => Promise<void>;
