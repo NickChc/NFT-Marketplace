@@ -111,14 +111,22 @@ export function UpdateUserForm({
         name="name"
         defaultValue={updateUser?.name}
       />
-      {error?.name && <div>{error.name}</div>}
+      {error?.name && (
+        <div className="text-red-500">
+          {translations.page.authValidation.emptyField}
+        </div>
+      )}
 
       <FormInput
         label={translations.page.surname}
         name="surname"
         defaultValue={updateUser?.surname}
       />
-      {error?.surname && <div>{error.surname}</div>}
+      {error?.surname && (
+        <div className="text-red-500">
+          {translations.page.authValidation.emptyField}
+        </div>
+      )}
 
       <FormInput
         label={translations.page.email}

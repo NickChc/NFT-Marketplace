@@ -13,6 +13,7 @@ import {
 } from "firebase/auth";
 import { TUser } from "@/@types/general";
 import { createUser } from "@/app/[lang]/_api/createUser";
+import { getUser } from "@/app/[lang]/_api/getUser";
 
 function getTranslations() {
   const pathname = window.location.pathname;
@@ -172,10 +173,13 @@ export async function register(
     );
 
     const user = userCredentials.user;
+
+    if (user == null) return;
+
     userId = user.uid;
 
     const newUser: Omit<TUser, "id"> = {
-      uid: user.uid,
+      uid: userId,
       name: data.name,
       surname: data.surname,
       email: data.email,
@@ -189,8 +193,13 @@ export async function register(
   } catch (error: any) {
     console.log(error.message);
     if (error.message.includes("email-already-in-use")) {
+      const user = await getUser(data.email);
+      // HERE
+      if (user == null) return;
+      userId = user.id;
+
       const newUser: Omit<TUser, "id"> = {
-        uid: userId!,
+        uid: userId,
         name: data.name,
         surname: data.surname,
         email: data.email,
