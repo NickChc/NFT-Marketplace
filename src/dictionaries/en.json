@@ -147,6 +147,7 @@
     "invalidEmail": "The email is invalid",
     "couldntReauth": "Couldn't reauthorize with google",
     "confirmId": "Confirm identity",
-    "confirmIdToChange": "Confirm identity to change email"
+    "confirmIdToChange": "Confirm identity to change email",
+    "deleting": "Deleting"
   }
 }

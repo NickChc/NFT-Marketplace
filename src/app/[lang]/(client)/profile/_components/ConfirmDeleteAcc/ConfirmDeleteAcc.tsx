@@ -119,7 +119,7 @@ export function ConfirmDeleteAcc({
               disabled={loading}
             >
               {loading
-                ? `${translations.page.loading}...`
+                ? `${translations.page.deleting}...`
                 : translations.page.delete}
             </button>
             <button
