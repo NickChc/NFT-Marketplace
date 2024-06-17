@@ -10,6 +10,7 @@ interface FormInputProps {
   type?: "text" | "password" | "file" | "email" | "number";
   required?: boolean;
   defaultValue?: string;
+  placeholder?: string;
 }
 
 export function FormInput({
@@ -21,6 +22,7 @@ export function FormInput({
   type,
   required,
   defaultValue,
+  placeholder,
 }: FormInputProps) {
   const [show, setShow] = useState<boolean>(false);
 
@@ -28,7 +30,7 @@ export function FormInput({
     <>
       <label
         htmlFor={name}
-        className="font-semibold text-lg sm:text-xl md:text-2xl lg:text-3xl"
+        className="font-semibold text-lg sm:text-xl md:text-2xl"
       >
         {label}
       </label>
@@ -42,6 +44,7 @@ export function FormInput({
           </span>
         )}
         <input
+          placeholder={placeholder}
           required={required}
           type={type === "password" ? (show ? "text" : "password") : type}
           value={value}

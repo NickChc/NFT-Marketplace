@@ -28,7 +28,9 @@ export function AuthProvider({
   const [loadingUser, setLoadingUser] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<TUser | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [isPasswordAcc, setIsPasswordAcc] = useState<boolean>(false);
+  const [authProvider, setAuthProvider] = useState<
+    "google" | "password" | undefined
+  >(undefined);
 
   const pathname = usePathname();
   const router = useRouter();
@@ -117,14 +119,15 @@ export function AuthProvider({
     }
   }
 
-  async function reauthenticate(user: User | null) {
+  async function reauthenticate(user: User | null, blank?: boolean) {
     if (user == null) return;
 
-    if (user.providerData[0].providerId === "password") {
+    if (user.providerData.some((data) => data.providerId === "password")) {
       const email = user.email;
-      setIsPasswordAcc(true);
+      setAuthProvider("password");
     } else if (user.providerData[0].providerId === "google.com") {
-      setIsPasswordAcc(false);
+      setAuthProvider("google");
+      if (blank) return true;
       try {
         const provider = new GoogleAuthProvider();
         await reauthenticateWithPopup(user, provider);
@@ -133,6 +136,8 @@ export function AuthProvider({
         console.log(error.message);
         return false;
       }
+    } else {
+      setAuthProvider(undefined);
     }
   }
 
@@ -160,7 +165,7 @@ export function AuthProvider({
   async function handleLogOut() {
     try {
       await signOut(auth);
-      router.replace(`/${lang}`);
+      router.replace(`/${lang}/auth/sign-in`);
     } catch (error: any) {
       console.log(error.message);
     }
@@ -216,8 +221,8 @@ export function AuthProvider({
         handleUserDelete,
         handleLogOut,
         getCurrentUser,
-        isPasswordAcc,
-        setIsPasswordAcc,
+        authProvider,
+        setAuthProvider,
         reauthenticate,
       }}
     >
