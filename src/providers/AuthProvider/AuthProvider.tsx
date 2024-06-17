@@ -7,10 +7,12 @@ import { getUser } from "@/app/[lang]/_api/getUser";
 import { auth, db } from "@/firebase";
 import { AuthContext } from "@/providers/AuthProvider";
 import {
+  GoogleAuthProvider,
   User,
   deleteUser,
   onAuthStateChanged,
   onIdTokenChanged,
+  reauthenticateWithPopup,
   signOut,
 } from "firebase/auth";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
@@ -26,6 +28,7 @@ export function AuthProvider({
   const [loadingUser, setLoadingUser] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<TUser | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isPasswordAcc, setIsPasswordAcc] = useState<boolean>(false);
 
   const pathname = usePathname();
   const router = useRouter();
@@ -89,9 +92,9 @@ export function AuthProvider({
     onError?: (error: string) => void
   ) {
     try {
-      if (user == null) return;
+      if (user == null || user.email == null) return;
 
-      const userToDelete = await getUser(user?.email!);
+      const userToDelete = await getUser(user.email);
 
       if (userToDelete && userToDelete.ownings.length > 0) return;
 
@@ -110,6 +113,25 @@ export function AuthProvider({
       console.log(error.message);
       if (onError) {
         onError(error.message);
+      }
+    }
+  }
+
+  async function reauthenticate(user: User | null) {
+    if (user == null) return;
+
+    if (user.providerData[0].providerId === "password") {
+      const email = user.email;
+      setIsPasswordAcc(true);
+    } else if (user.providerData[0].providerId === "google.com") {
+      setIsPasswordAcc(false);
+      try {
+        const provider = new GoogleAuthProvider();
+        await reauthenticateWithPopup(user, provider);
+        return true;
+      } catch (error: any) {
+        console.log(error.message);
+        return false;
       }
     }
   }
@@ -194,6 +216,9 @@ export function AuthProvider({
         handleUserDelete,
         handleLogOut,
         getCurrentUser,
+        isPasswordAcc,
+        setIsPasswordAcc,
+        reauthenticate,
       }}
     >
       {loading ? null : children}
