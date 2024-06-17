@@ -28,7 +28,7 @@ export function ConfirmDeleteAcc({
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { handleUserDelete, handleLogOut, reauthenticate, isPasswordAcc } =
+  const { handleUserDelete, handleLogOut, reauthenticate, authProvider } =
     useAuthProvider();
 
   function onError(error: string) {
@@ -68,7 +68,7 @@ export function ConfirmDeleteAcc({
       setLoading(true);
       if (auth.currentUser == null) return;
 
-      if (isPasswordAcc) {
+      if (authProvider === "password") {
         const result = await checkReauth(auth.currentUser);
         if (result) {
           await handleDelete(auth.currentUser);
@@ -88,7 +88,7 @@ export function ConfirmDeleteAcc({
   return (
     <div className="bg-white p-6 text-black w-[90%] sm:w-auto rounded-sm border-solid border border-purple-800">
       <h4 className="font-semibold sm:text-lg md:text-xl text-center">
-        {isPasswordAcc
+        {authProvider === "password"
           ? lang === "ka"
             ? `დაადასტურეთ თქვენი ვინაობა, რათა წაშალოთ ანგარიში`
             : `Confirm your identity to delete account`
@@ -100,7 +100,7 @@ export function ConfirmDeleteAcc({
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 mt-6 justify-center "
       >
-        {isPasswordAcc ? (
+        {authProvider === "password" ? (
           <>
             <FormInput
               required

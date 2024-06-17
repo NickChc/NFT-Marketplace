@@ -144,6 +144,9 @@
     "hide": "Hide",
     "cantDeleteAcc": "You must return all items to delete Account",
     "invalidPassword": "The password is invalid",
-    "couldntReauth": "Couldn't reauthorize with google"
+    "invalidEmail": "The email is invalid",
+    "couldntReauth": "Couldn't reauthorize with google",
+    "confirmId": "Confirm identity",
+    "confirmIdToChange": "Confirm identity to change email"
   }
 }

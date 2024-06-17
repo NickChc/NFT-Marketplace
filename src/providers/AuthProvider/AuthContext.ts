@@ -13,9 +13,11 @@ interface AuthContextProps {
   ) => Promise<void | [void, void]>;
   handleLogOut: () => Promise<void>;
   getCurrentUser: (email?: string, uid?: string) => Promise<void>;
-  isPasswordAcc: boolean;
-  setIsPasswordAcc: React.Dispatch<React.SetStateAction<boolean>>;
-  reauthenticate: (user: User) => Promise<void | boolean>;
+  authProvider: "google" | "password" | undefined;
+  setAuthProvider: React.Dispatch<
+    React.SetStateAction<"google" | "password" | undefined>
+  >;
+  reauthenticate: (user: User, blank?: boolean) => Promise<void | boolean>;
 }
 
 export const AuthContext = createContext<AuthContextProps>({
@@ -25,7 +27,7 @@ export const AuthContext = createContext<AuthContextProps>({
   handleUserDelete: async () => {},
   handleLogOut: async () => {},
   getCurrentUser: async () => {},
-  isPasswordAcc: false,
-  setIsPasswordAcc: () => {},
+  authProvider: undefined,
+  setAuthProvider: () => {},
   reauthenticate: async () => {},
 });
