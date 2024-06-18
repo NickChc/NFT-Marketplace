@@ -6,8 +6,8 @@ import { Resend } from "resend";
 import { z } from "zod";
 import { TSenfOfferEmailReturnData } from "@/app/[lang]/_components/Modal/OfferForm/OfferForm";
 import { getUser } from "@/app/[lang]/_api/getUser";
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "@/firebase";
+import { addDoc, doc, updateDoc } from "firebase/firestore";
+import { db, salesCollectionRef } from "@/firebase";
 import { TOffer } from "@/@types/general";
 import OfferRejectEmail from "@/email/OfferRejectEmail";
 import { getProduct } from "@/app/[lang]/_api/getProduct";
@@ -97,9 +97,73 @@ export async function declineOffer(offer: TOffer, prevState: unknown) {
     ),
   });
 
-  console.log(data);
-  console.log(data);
-  console.log(data);
+  if (data.error) {
+    console.log(data);
+  }
+
+  return { message: "success" };
+}
+
+export async function acceptOffer(offer: TOffer, prevState: unknown) {
+  const [offerMaker, offerItem] = await Promise.all([
+    getUser(offer.from),
+    getProduct(offer.productId),
+  ]);
+
+  if (offerMaker == null || offerItem == null) return { message: "failure" };
+
+  const currentOwner = await getUser(
+    undefined,
+    undefined,
+    offerItem.owner?.userId
+  );
+
+  if (currentOwner == null) return { message: "failure" };
+
+  const offerItemDoc = doc(db, "product", offerItem.id);
+  const oldOwnerDoc = doc(db, "users", currentOwner.id);
+  const newOnwerDoc = doc(db, "users", offerMaker.id);
+
+  const newOwnerFullName =
+    offerMaker.name !== ""
+      ? `${offerMaker.name} ${offerMaker.surname}`
+      : offerMaker.email;
+
+  await Promise.all([
+    addDoc(salesCollectionRef, {
+      paidInCents: offer.offeredInCents,
+      productId: offer.productId,
+    }),
+    updateDoc(oldOwnerDoc, {
+      ownings: currentOwner.ownings.filter((o) => o.productId !== offerItem.id),
+      offers: currentOwner.offers.filter((off) => off.id !== offer.id),
+    }),
+    updateDoc(offerItemDoc, {
+      owner: {
+        fullName: newOwnerFullName,
+        isFrozen: false,
+        paidInCents: offer.offeredInCents,
+        userId: offerMaker.id,
+      },
+      isAvailable: false,
+      openForBidding: false,
+      priceInCents:
+        currentOwner.ownings.find((o) => o.productId === offerItem.id)
+          ?.paidInCents || offerItem.priceInCents,
+      orders: offerItem.orders + 1,
+    }),
+    updateDoc(newOnwerDoc, {
+      ownings: [
+        ...offerMaker.ownings,
+        {
+          paidInCents: offer.offeredInCents,
+          productId: offerItem.id,
+          productname: offerItem.name,
+        },
+      ],
+      spentInCents: offerMaker.spentInCents + offer.offeredInCents,
+    }),
+  ]);
 
   return { message: "success" };
 }

@@ -103,7 +103,7 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
         <LoadingIcon className="text-4xl animate-spin mx-auto" />
       ) : offerItem ? (
         <>
-          <div className="w-full relative aspect-video">
+          <div className="w-full relative aspect-video select-none">
             <Image
               src={offerItem.imagePath}
               alt={offerItem.name}
@@ -120,7 +120,8 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
             />
           ) : answer === TAnswer_Enum.CONFIRM ? (
             <AcceptView
-              offeredInCents={offer.offeredInCents}
+              closeModal={closeModal}
+              offer={offer}
               onCancel={() => setAnswer(TAnswer_Enum.NONE)}
             />
           ) : (

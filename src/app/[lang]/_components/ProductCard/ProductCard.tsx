@@ -43,7 +43,7 @@ export async function ProductCard({ product, lang, text }: ProductCardProps) {
             : `${text.price} - ${formatCurrency(product.priceInCents / 100)}`}
         </h4>
         {product.owner && (
-          <h4 className="">
+          <h4 className="truncate">
             {text.owner} - {product.owner.fullName}
           </h4>
         )}

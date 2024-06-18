@@ -18,10 +18,6 @@ export async function returnProduct(product: TProduct, email: string) {
     (item) => item.productId !== product.id
   );
 
-  const originalPrice =
-    user.ownings.find((item) => item.productId === product.id)?.paidInCents ||
-    product.priceInCents;
-
   await Promise.all([
     updateDoc(userDoc, {
       ownings: newOwnings,
@@ -29,7 +25,7 @@ export async function returnProduct(product: TProduct, email: string) {
     updateDoc(productDoc, {
       isAvailable: true,
       owner: null,
-      priceInCents: originalPrice,
+      priceInCents: product.originalPriceInCents,
       openForBidding: false,
     }),
   ]);

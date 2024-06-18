@@ -8,13 +8,9 @@ import { db } from "@/firebase";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { doc, updateDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
-import { Resend } from "resend";
-import { SubmitDeclineBtn } from "./SubmitDeclineBtn";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
-
-const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY as string);
+import { SubmitOfferAnswer } from "@/app/[lang]/(client)/profile/_components/OfferView/SubmitOfferAnswer";
 
 interface DeclineViewProps {
   offer: TOffer;
@@ -29,7 +25,6 @@ interface DeclineViewProps {
 
 export function DeclineView({
   offer,
-  offerItem,
   closeModal,
   onCancel,
 }: DeclineViewProps) {
@@ -61,7 +56,7 @@ export function DeclineView({
     <>
       <div>{translations.page.declineAssurance}?</div>
       <form action={action} className="flex items-center justify-between gap-3">
-        <SubmitDeclineBtn
+        <SubmitOfferAnswer
           text={translations.page.yes}
           onClick={handleDecline}
         />

@@ -148,6 +148,7 @@
     "couldntReauth": "Couldn't reauthorize with google",
     "confirmId": "Confirm identity",
     "confirmIdToChange": "Confirm identity to change email",
-    "deleting": "Deleting"
+    "deleting": "Deleting",
+    "acceptAssurance": "Are you sure you want to accept this offer for"
   }
 }
