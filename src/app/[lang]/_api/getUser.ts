@@ -19,5 +19,7 @@ export async function getUser(email?: string, uid?: string, id?: string) {
     const doc = data.docs[0];
     const currentUser = { ...doc.data(), id: doc.id };
     return currentUser as TUser;
-  } catch (error: any) {}
+  } catch (error: any) {
+    console.log(error.message);
+  }
 }

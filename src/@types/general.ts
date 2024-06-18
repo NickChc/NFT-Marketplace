@@ -23,6 +23,7 @@ export interface TUser {
   surname: string;
   ownings: TOwnedProduct[];
   offers: TOffer[];
+  notifications: TNotification[];
   isFrozen: boolean;
 }
 
@@ -58,6 +59,16 @@ export interface TCreateProduct {
   priceInCents: string;
   filePath: File | null;
   imagePath: File | null;
+}
+
+export interface TNotification {
+  acceptedOffer: {
+    acceptPriceInCents: number;
+    productId: string;
+    productName: string;
+  };
+  subject: "offer_accepted";
+  id: string;
 }
 
 export type TTranslations = Awaited<ReturnType<typeof getDictionaries>>;

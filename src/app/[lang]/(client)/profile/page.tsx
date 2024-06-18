@@ -6,6 +6,7 @@ import { ProfileData } from "@/app/[lang]/(client)/profile/_components/ProfileDa
 import { Collection } from "@/app/[lang]/(client)/profile/_components/Collection";
 import { DeleteAccount } from "@/app/[lang]/(client)/profile/_components/DeleteAccount";
 import { OfferList } from "@/app/[lang]/(client)/profile/_components/OfferList";
+import { Notification } from "@/app/[lang]/(client)/profile/_components/Notification";
 
 interface ProfilePageProps {
   params: {
@@ -21,12 +22,13 @@ export default async function ProfilePage({
   return (
     <div className="mx-auto md:w-[70%] xl:max-w-4xl min-h-dvh relative pb-9">
       <PageHeader>{page.profile}</PageHeader>
+      <Notification />
       <div className="mt-2 sm:mt-6 p-2 sm:p-3">
         <LogOutButton lang={lang} />
         <OfferList />
         <Collection lang={lang} />
         <ProfileData />
-      <hr className="w-full my-3" />
+        <hr className="w-full my-3" />
       </div>
       <DeleteAccount text={{ ...page }} />
     </div>

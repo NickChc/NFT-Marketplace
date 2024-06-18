@@ -75,6 +75,7 @@ export function AuthProvider({
           spentInCents: 0,
           ownings: [],
           offers: [],
+          notifications: [],
           isFrozen: false,
         };
 

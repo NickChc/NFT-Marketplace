@@ -2,6 +2,7 @@
 
 import { auth } from "@/firebase";
 import { useDictionary } from "@/hooks/useDictionary";
+import { useUserCollection } from "@/hooks/useUserCollection";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { useGlobalProvider } from "@/providers/GlobalProvider";
 import { useState } from "react";
@@ -18,6 +19,7 @@ export function DeleteAccount({ text }: DeleteAccountProps) {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const { setDeleteUser } = useGlobalProvider();
   const { currentUser, reauthenticate } = useAuthProvider();
+  const { collection } = useUserCollection();
 
   const translations = useDictionary();
 
@@ -45,12 +47,18 @@ export function DeleteAccount({ text }: DeleteAccountProps) {
         onSubmit={handleSubmit}
         className="mx-auto w-full flex flex-col sm:flex-row p-3 pt-9 items-center justify-end gap-4"
       >
-        {currentUser.ownings.length > 0
-          ? text.cantDeleteAcc
-          : text.deleteAccount}
+        {currentUser.ownings.length < 1 &&
+        collection.length < 1 &&
+        currentUser != null
+          ? text.deleteAccount
+          : text.cantDeleteAcc}
         <button
           type="submit"
-          disabled={currentUser.ownings.length > 0}
+          disabled={
+            currentUser.ownings.length > 0 ||
+            currentUser == null ||
+            collection.length < 1
+          }
           className="w-full sm:w-auto border-solid border border-red-500 text-red-500 px-6 py-1 rounded-md hover:bg-red-500 hover:text-white duration-75 disabled:hover:bg-transparent disabled:hover:text-red-500 disabled:opacity-75"
         >
           {text.delete}
