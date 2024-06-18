@@ -187,13 +187,13 @@ export async function register(
       spentInCents: 0,
       ownings: [],
       offers: [],
+      notifications: [],
     };
     await Promise.all([createUser(newUser), sendEmailVerification(user)]);
     verificationStatusChange();
   } catch (error: any) {
     console.log(error.message);
     if (error.message.includes("email-already-in-use")) {
-      
       const user = await getUser(data.email);
       if (user == null) return;
       userId = user.id;
@@ -207,6 +207,7 @@ export async function register(
         spentInCents: 0,
         ownings: [],
         offers: [],
+        notifications: [],
       };
       const result = await handleExistingAccount(
         data,

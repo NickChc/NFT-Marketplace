@@ -68,7 +68,7 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
         <div className="text-red-500">
           {data.error === "price_error"
             ? translations.page.lowerThanMarketPrice
-            : data.error}
+            : translations.page.problemOccuredTryAgain}
         </div>
       )}
       {data.message === "email_success" ? (

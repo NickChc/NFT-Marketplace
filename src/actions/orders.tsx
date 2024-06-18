@@ -161,6 +161,18 @@ export async function acceptOffer(offer: TOffer, prevState: unknown) {
           productname: offerItem.name,
         },
       ],
+      notifications: [
+        ...offerMaker.notifications,
+        {
+          id: crypto.randomUUID(),
+          subject: "offer_accepted",
+          acceptedOffer: {
+            acceptedPriceInCents: offer.offeredInCents,
+            productId: offerItem.id,
+            productName: offerItem.name,
+          },
+        },
+      ],
       spentInCents: offerMaker.spentInCents + offer.offeredInCents,
     }),
   ]);

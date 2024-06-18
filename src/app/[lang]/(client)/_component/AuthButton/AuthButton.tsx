@@ -21,14 +21,17 @@ export function AuthButton({ lang }: AuthButtonProps) {
 
   useEffect(() => {
     setMounted(true);
-    if (currentUser == null || currentUser.offers.length < 1) {
+    if (currentUser == null) {
       return setUnseenOffers(0);
     }
-    setUnseenOffers(
-      currentUser.offers.reduce((acc, curr) => {
-        return curr.seen ? acc : acc + 1;
-      }, 0)
+    const receivedOffers = currentUser.offers.reduce((acc, curr) => {
+      return curr.seen ? acc : acc + 1;
+    }, 0);
+
+    const acceptedOffers = currentUser.notifications.filter(
+      (n) => n.subject === "offer_accepted"
     );
+    setUnseenOffers(acceptedOffers.length + receivedOffers);
   }, [currentUser]);
 
   if (pathname.includes("auth") || pathname.includes("profile")) return <></>;
