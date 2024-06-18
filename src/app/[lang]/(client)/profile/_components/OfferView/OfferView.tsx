@@ -69,6 +69,7 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
           </div>
           {answer === TAnswer_Enum.DECLINE ? (
             <DeclineView
+              offerItem={offerItem}
               onCancel={() => setAnswer(TAnswer_Enum.NONE)}
               closeModal={closeModal}
               offer={offer}

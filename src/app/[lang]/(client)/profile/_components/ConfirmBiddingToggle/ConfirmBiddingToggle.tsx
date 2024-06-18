@@ -53,7 +53,7 @@ export function ConfirmBiddingToggle({
       </h4>
       <div className="flex gap-4 md:gap-9 mt-6 justify-center">
         <button
-          className="w-full px-2 py-1 md:px-3 md:py-2 border-solid border border-purple-800 bg-purple-800 text-white rounded-md disabled:opacity-75 disabled:cursor-default"
+          className="w-full px-2 py-1 md:px-3 md:py-2 border-solid border border-purple-800 bg-purple-800 text-white rounded-md disabled:opacity-50 disabled:cursor-default hover:opacity-75"
           disabled={loading}
           onClick={handleBidToggle}
         >
