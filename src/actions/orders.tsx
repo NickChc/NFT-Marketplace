@@ -9,9 +9,11 @@ import { getUser } from "@/app/[lang]/_api/getUser";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { TOffer } from "@/@types/general";
+import OfferRejectEmail from "@/email/OfferRejectEmail";
+import { getProduct } from "@/app/[lang]/_api/getProduct";
 
 const priceSchema = z.string().min(1).max(9);
-const resend = new Resend(process.env.RESEND_API_KEY as string);
+const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY as string);
 
 export async function sendOfferEmail(
   sender: TUser | null,
@@ -42,7 +44,7 @@ export async function sendOfferEmail(
   }
 
   const data = await resend.emails.send({
-    from: `Support <${process.env.SENDER_EMAIL}>`,
+    from: `Support <${process.env.NEXT_PUBLIC_SENDER_EMAIL}>`,
     to: owner.email,
     subject: "Offer",
     react: (
@@ -56,12 +58,13 @@ export async function sendOfferEmail(
   });
 
   if (data.error) {
-    return { error: "email_error" };
+    console.log(data.error);
   }
 
   const userDoc = doc(db, "users", owner.id);
 
   const newOffer: TOffer = {
+    seen: false,
     productId: item.id,
     from: sender.email,
     offeredInCents: Number(offeredPrice) * 100,
@@ -73,4 +76,30 @@ export async function sendOfferEmail(
   });
 
   return { message: "email_success" };
+}
+
+export async function declineOffer(offer: TOffer, prevState: unknown) {
+  const offerItem = await getProduct(offer.productId);
+
+  if (offerItem == null) return { message: "failure" };
+
+  const data = await resend.emails.send({
+    from: `Support<${process.env.NEXT_PUBLIC_SENDER_EMAIL}>`,
+    to: offer.from,
+    subject: "Offer",
+    react: (
+      <OfferRejectEmail
+        from={`Support - ${process.env.NEXT_PUBLIC_SERVER_URL}`}
+        offer={offer}
+        offerItem={offerItem}
+        createdAt={new Date(Date.now())}
+      />
+    ),
+  });
+
+  console.log(data);
+  console.log(data);
+  console.log(data);
+
+  return { message: "success" };
 }

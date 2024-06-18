@@ -26,7 +26,7 @@ enum TAnswer_Enum {
 }
 
 export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
-  const { currentUser, getCurrentUser } = useAuthProvider();
+  const { currentUser, setCurrentUser } = useAuthProvider();
   const [answer, setAnswer] = useState<TAnswer_Enum>(TAnswer_Enum.NONE);
   const translations = useDictionary();
   const [loading, setLoading] = useState<boolean>(false);
@@ -46,15 +46,49 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
     }
   }
 
+  async function viewOffer(offer: TOffer) {
+    try {
+      if (currentUser == null || offer == null || offer.seen) return;
+
+      const userDoc = doc(db, "users", currentUser.id);
+      await updateDoc(userDoc, {
+        offers: currentUser.offers.map((userOffer) => {
+          if (userOffer.id === offer.id) {
+            return { ...userOffer, seen: true };
+          } else {
+            return userOffer;
+          }
+        }),
+      });
+      setCurrentUser((prev) => {
+        if (prev == null) return null;
+
+        return {
+          ...prev,
+          offers: prev.offers.map((userOffer) => {
+            if (userOffer.id === offer.id) {
+              return { ...userOffer, seen: true };
+            } else {
+              return userOffer;
+            }
+          }),
+        };
+      });
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  }
+
   useEffect(() => {
     if (offer == null) return;
     fetchProduct(offer.productId);
+    viewOffer(offer);
   }, [offer]);
 
   if (offer == null) return null;
 
   return (
-    <div className="max-w-[90%] bg-white dark:bg-gray-900 border-solid border border-purple-800 rounded-md p-3 sm:p-6 flex flex-col gap-6 overflow-hidden">
+    <div className="max-w-[90%] md:max-w-[50%] 2xl:max-w-[40%] bg-white dark:bg-gray-900 border-solid border border-purple-800 rounded-md p-3 sm:p-6 flex flex-col gap-6 overflow-hidden">
       {loading ? (
         <LoadingIcon className="text-4xl animate-spin mx-auto" />
       ) : offerItem ? (
@@ -78,11 +112,11 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
             <></>
           ) : (
             <>
-              <h3 className="text-lg">
-                <h5 className="max-w-[95%] truncate">{offer.from}</h5>
+              {/* <h5 className="max-w-[95%] truncate">{offer.from}</h5> */}
+              <h3 className="text-sm sm:text-lg">
                 {lang === "ka"
-                  ? ` -მ შემოგთავაზათ თანხა ${offerItem.name} -ის სანაცვლოდ`
-                  : ` made an offer for ${offerItem.name}`}
+                  ? `${offer.from} -მ შემოგთავაზათ თანხა ${offerItem.name} -ის სანაცვლოდ`
+                  : `${offer.from} made an offer for ${offerItem.name}`}
               </h3>
               <div className="font-semibold text-gray-300 text-2xl">
                 {formatCurrency(offer.offeredInCents / 100)}

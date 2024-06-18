@@ -4,6 +4,7 @@ import { TProduct, TUser } from "@/@types/general";
 import { db } from "@/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { getUser } from "@/app/[lang]/_api/getUser";
+import { revalidatePath } from "next/cache";
 
 export async function returnProduct(product: TProduct, email: string) {
   const user = await getUser(email);
@@ -21,7 +22,7 @@ export async function returnProduct(product: TProduct, email: string) {
     user.ownings.find((item) => item.productId === product.id)?.paidInCents ||
     product.priceInCents;
 
-  return await Promise.all([
+  await Promise.all([
     updateDoc(userDoc, {
       ownings: newOwnings,
     }),
@@ -32,6 +33,8 @@ export async function returnProduct(product: TProduct, email: string) {
       openForBidding: false,
     }),
   ]);
+
+  revalidatePath(`/*`);
 }
 
 export async function sellProduct(

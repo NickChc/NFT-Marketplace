@@ -1,13 +1,19 @@
 "use client";
 
 import { TOffer } from "@/@types/general";
+import { declineOffer } from "@/actions/orders";
+import { SubmitBtn } from "@/components/SubmitBtn";
 import OfferRejectEmail from "@/email/OfferRejectEmail";
 import { db } from "@/firebase";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { doc, updateDoc } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useFormState } from "react-dom";
 import { Resend } from "resend";
+import { SubmitDeclineBtn } from "./SubmitDeclineBtn";
+
+const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY as string);
 
 interface DeclineViewProps {
   offer: TOffer;
@@ -28,34 +34,14 @@ export function DeclineView({
 }: DeclineViewProps) {
   const translations = useDictionary();
   const { currentUser, getCurrentUser } = useAuthProvider();
-  const [loading, setLoading] = useState<boolean>(false);
 
-  const resend = new Resend(process.env.RESEND_API_KEY as string);
-
-  async function sendRejectEmail() {
-    try {
-      const data = await resend.emails.send({
-        from: `Support <${process.env.SENDER_EMAIL}>`,
-        to: offer.from,
-        subject: "Offer",
-        react: (
-          <OfferRejectEmail
-            from={`Support - NFT_Marketplace@gmail.com`}
-            offer={offer}
-            offerItem={offerItem}
-            createdAt={new Date(Date.now())}
-          />
-        ),
-      });
-    } catch (error: any) {
-      console.log(error.message);
-    }
-  }
+  const [data, action] = useFormState(declineOffer.bind(null, offer), {
+    message: "",
+  });
 
   async function handleDecline() {
     try {
       if (currentUser == null || offer == null) return;
-      setLoading(true);
       const userDoc = doc(db, "users", currentUser.id);
 
       await updateDoc(userDoc, {
@@ -67,29 +53,25 @@ export function DeclineView({
       closeModal();
     } catch (error: any) {
       console.log(error.message);
-    } finally {
-      setLoading(false);
     }
   }
 
   return (
     <>
       <div>{translations.page.declineAssurance}?</div>
-      <div className="flex items-center justify-between gap-3">
-        <button
-          className="disabled:opacity-75 disabled:cursor-default w-full px-2 py-1 rounded-md border-solid border border-purple-800 bg-purple-800 hover:opacity-75 duration-100"
-          disabled={loading}
+      <form action={action} className="flex items-center justify-between gap-3">
+        <SubmitDeclineBtn
+          text={translations.page.yes}
           onClick={handleDecline}
-        >
-          {translations.page.yes}
-        </button>
+        />
         <button
+          type="button"
           className="w-full px-2 py-1 rounded-md border-solid border border-purple-800 hover:opacity-75 duration-100 text-purple-800 bg-white"
           onClick={onCancel}
         >
           {translations.page.no}
         </button>
-      </div>
+      </form>
     </>
   );
 }

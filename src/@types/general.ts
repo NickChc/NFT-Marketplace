@@ -7,6 +7,7 @@ export interface TOrder {
 }
 
 export interface TOffer {
+  seen: boolean;
   productId: string;
   from: string;
   id: string;

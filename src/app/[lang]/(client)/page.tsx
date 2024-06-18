@@ -53,35 +53,38 @@ export default async function HomePage({
         })}
       </div>
 
-      <div className="mt-20 flex flex-col sm:flex-row items-start sm:items-center gap-x-3 sm:gap-x-14">
-        <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold ml-2">
-          {page.forBidding}
-        </h2>
-        <hr className="w-full sm:hidden my-2" />
+      {forBidding && forBidding.length > 0 && (
+        <>
+          <div className="mt-20 flex flex-col sm:flex-row items-start sm:items-center gap-x-3 sm:gap-x-14">
+            <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold ml-2">
+              {page.forBidding}
+            </h2>
+            <hr className="w-full sm:hidden my-2" />
 
-        <Link
-          href={`/${lang}/products`}
-          className="flex items-center gap-x-4 text-lg sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"
-        >
-          {page.viewAll}
-          <span className="duration-200 group-hover:ml-4">
-            <RightArrowIcon />
-          </span>
-        </Link>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-9">
-        {forBidding?.map((product) => {
-          return (
-            <ProductCard
-              key={product.id}
-              product={product}
-              lang={lang}
-              text={{ ...page }}
-            />
-          );
-        })}
-      </div>
-
+            <Link
+              href={`/${lang}/products`}
+              className="flex items-center gap-x-4 text-lg sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"
+            >
+              {page.viewAll}
+              <span className="duration-200 group-hover:ml-4">
+                <RightArrowIcon />
+              </span>
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-9">
+            {forBidding?.map((product) => {
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  lang={lang}
+                  text={{ ...page }}
+                />
+              );
+            })}
+          </div>
+        </>
+      )}
       <div className="mt-20 flex flex-col sm:flex-row items-start sm:items-center gap-x-3 sm:gap-x-14">
         <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold ml-2">
           {page.forSale}

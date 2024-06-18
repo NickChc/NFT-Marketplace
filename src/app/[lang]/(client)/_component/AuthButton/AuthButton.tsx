@@ -6,6 +6,7 @@ import Link from "next/link";
 import { LoadingIcon, UserIcon } from "@/assets/icons";
 import { usePathname } from "next/navigation";
 import { useAuthProvider } from "@/providers/AuthProvider";
+import { TOffer } from "@/@types/general";
 
 interface AuthButtonProps {
   lang: TLocale;
@@ -13,13 +14,22 @@ interface AuthButtonProps {
 
 export function AuthButton({ lang }: AuthButtonProps) {
   const [mounted, setMounted] = useState<boolean>(false);
+  const [unseenOffers, setUnseenOffers] = useState<number>(0);
 
   const pathname = usePathname();
   const { currentUser, loadingUser } = useAuthProvider();
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    if (currentUser == null || currentUser.offers.length < 1) {
+      return setUnseenOffers(0);
+    }
+    setUnseenOffers(
+      currentUser.offers.reduce((acc, curr) => {
+        return curr.seen ? acc : acc + 1;
+      }, 0)
+    );
+  }, [currentUser]);
 
   if (pathname.includes("auth") || pathname.includes("profile")) return <></>;
 
@@ -42,9 +52,9 @@ export function AuthButton({ lang }: AuthButtonProps) {
         </span>
       ) : currentUser ? (
         <>
-          {currentUser.offers.length > 0 && (
+          {unseenOffers > 0 && (
             <span className="bg-red-500 absolute -top-1 -right-1 text-white z-50 grid place-items-center rounded-full w-5 text-sm aspect-square">
-              {currentUser.offers.length}
+              {unseenOffers}
             </span>
           )}
           <Link
