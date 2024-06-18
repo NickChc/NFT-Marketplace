@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { Resend } from "resend";
 import { SubmitDeclineBtn } from "./SubmitDeclineBtn";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY as string);
 
@@ -64,13 +65,9 @@ export function DeclineView({
           text={translations.page.yes}
           onClick={handleDecline}
         />
-        <button
-          type="button"
-          className="w-full px-2 py-1 rounded-md border-solid border border-purple-800 hover:opacity-75 duration-100 text-purple-800 bg-white"
-          onClick={onCancel}
-        >
+        <DualButton variation="secondary" type="button" onClick={onCancel}>
           {translations.page.no}
-        </button>
+        </DualButton>
       </form>
     </>
   );

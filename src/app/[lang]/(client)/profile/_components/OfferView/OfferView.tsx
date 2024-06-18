@@ -3,7 +3,7 @@
 import { TLocale } from "../../../../../../../i18n.config";
 import { TOffer, TProduct } from "@/@types/general";
 import { getProduct } from "@/app/[lang]/_api/getProduct";
-import { LoadingIcon } from "@/assets/icons";
+import { CloseIcon, LoadingIcon } from "@/assets/icons";
 import { useDictionary } from "@/hooks/useDictionary";
 import { formatCurrency } from "@/lib/formatters";
 import Image from "next/image";
@@ -12,6 +12,8 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { DeclineView } from "@/app/[lang]/(client)/profile/_components/OfferView/DeclineView";
+import { AcceptView } from "@/app/[lang]/(client)/profile/_components/OfferView/AcceptView";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 interface OfferViewProps {
   offer: TOffer | null;
@@ -88,7 +90,15 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
   if (offer == null) return null;
 
   return (
-    <div className="max-w-[90%] md:max-w-[50%] 2xl:max-w-[40%] bg-white dark:bg-gray-900 border-solid border border-purple-800 rounded-md p-3 sm:p-6 flex flex-col gap-6 overflow-hidden">
+    <div className="max-w-[90%] md:max-w-[50%] 2xl:max-w-[40%] bg-white dark:bg-gray-900 border-solid border border-purple-800 rounded-md p-3 sm:p-6 pt-7 flex flex-col gap-6 overflow-hidden relative">
+      {!loading && (
+        <span
+          className="absolute top-1 right-1 text-lg sm:text-xl cursor-pointer hover:opacity-75 duration-100 hover:text-purple-700 hover:bg-white bg-purple-800 rounded-full"
+          onClick={closeModal}
+        >
+          <CloseIcon />
+        </span>
+      )}
       {loading ? (
         <LoadingIcon className="text-4xl animate-spin mx-auto" />
       ) : offerItem ? (
@@ -109,10 +119,12 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
               offer={offer}
             />
           ) : answer === TAnswer_Enum.CONFIRM ? (
-            <></>
+            <AcceptView
+              offeredInCents={offer.offeredInCents}
+              onCancel={() => setAnswer(TAnswer_Enum.NONE)}
+            />
           ) : (
             <>
-              {/* <h5 className="max-w-[95%] truncate">{offer.from}</h5> */}
               <h3 className="text-sm sm:text-lg">
                 {lang === "ka"
                   ? `${offer.from} -მ შემოგთავაზათ თანხა ${offerItem.name} -ის სანაცვლოდ`
@@ -122,18 +134,15 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
                 {formatCurrency(offer.offeredInCents / 100)}
               </div>
               <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-                <button
-                  className="px-2 py-1 border-solid border border-purple-800 rounded-md w-full bg-purple-800 hover:opacity-75 duration-100 "
-                  onClick={() => setAnswer(TAnswer_Enum.CONFIRM)}
-                >
+                <DualButton onClick={() => setAnswer(TAnswer_Enum.CONFIRM)}>
                   {translations.page.accept}
-                </button>
-                <button
-                  className="px-2 py-1 border-solid border border-purple-800 rounded-md w-full bg-white text-purple-800 hover:opacity-75 duration-100 "
+                </DualButton>
+                <DualButton
+                  variation="secondary"
                   onClick={() => setAnswer(TAnswer_Enum.DECLINE)}
                 >
                   {translations.page.decline}
-                </button>
+                </DualButton>
               </div>
             </>
           )}
