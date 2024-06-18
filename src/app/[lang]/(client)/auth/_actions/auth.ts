@@ -193,8 +193,8 @@ export async function register(
   } catch (error: any) {
     console.log(error.message);
     if (error.message.includes("email-already-in-use")) {
+      
       const user = await getUser(data.email);
-      // HERE
       if (user == null) return;
       userId = user.id;
 

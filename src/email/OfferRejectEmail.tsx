@@ -1,7 +1,7 @@
-import React from "react";
+import { TOffer, TProduct } from "@/@types/general";
+import { formatCurrency } from "@/lib/formatters";
 import {
   Body,
-  Button,
   Column,
   Container,
   Head,
@@ -12,66 +12,57 @@ import {
   Section,
   Tailwind,
   Text,
-  Link,
 } from "@react-email/components";
-import { TProduct, TUser } from "@/@types/general";
-import { formatCurrency } from "@/lib/formatters";
 
-interface OfferEmailProps {
-  offerItem: TProduct;
-  priceOffered: number;
-  sender: TUser;
+interface OfferRejectEmailProps {
+  offer: TOffer;
+  from: string;
+  offerItem: {
+    imagePath: string;
+    name: string;
+    description: string;
+  };
   createdAt: Date;
 }
 
-OfferEmail.PreviewProps = {
-  offerItem: {
-    createdAt: new Date(Date.now()),
-    name: "Sailor ape NFT card.",
-    description:
-      "Famous sailor ape NFT card with striped shirt and sailor hat.",
-    filePath:
-      "https://firebasestorage.googleapis.com/v0/b/nft-marketplace-1e697.appspot.com/o/NFT's%2Fd2ca1180-f961-4752-896b-744836bcc097_sailor_monkey_NFT.txt?alt=media&token=a310c83a-4ca8-447b-9c6d-56bd1a95b46d",
-    openForBidding: false,
-    priceInCents: 1100000,
-    owner: null,
-    orders: 0,
-    id: "qyATkNRzuHW6ZYfQL65y",
-    imagePath:
-      "https://firebasestorage.googleapis.com/v0/b/nft-marketplace-1e697.appspot.com/o/NFT's%2F0dcdf6b2-eefa-4842-99f1-5581e135e2a2_modalidades-estafa-comunes-nft.jpg?alt=media&token=ccc6c526-a8ec-4c88-abd0-c15f49d4208d",
-    isAvailable: true,
-  },
-  priceOffered: 12000,
-  sender: {
-    name: "Test",
-    surname: "Subject",
-    email: "nikoloz.chichua.1@btu.edu.ge",
-    spentInCents: 0,
-    ownings: [],
-    offers: [],
-    id: "ej8z2eGuxPIBLBxZb5y3",
-    uid: "gVeKNXT6npejh9i3pT65vifPGDt1",
-    isFrozen: false,
-  },
-  createdAt: new Date(Date.now()),
-} satisfies OfferEmailProps;
-
 const dateFormatter = new Intl.DateTimeFormat("en", { dateStyle: "medium" });
 
-export default function OfferEmail({
+OfferRejectEmail.PreviewProps = {
+  from: `Support - NFT_Marketplace@gmail.com`,
+  offer: {
+    from: "nikoloz.chichua.1@btu.edu.ge",
+    id: "81406fe4-01ab-4f21-a553-6ce4029757ce",
+    offeredInCents: 550000,
+    productId: "TsQNg4RgTk8YsrqTay8X",
+  },
+  offerItem: {
+    description: "This mutant ape is crazy! it even has blaster eyes.",
+    name: "Crazy mutant ape NFT",
+    imagePath:
+      "https://firebasestorage.googleapis.com/v0/b/nft-marketplace-1e697.appspot.com/o/NFT's%2F48a45060-2a6d-48db-ae29-0e172097533c_MutantApeNFT.webp?alt=media&token=03d907c6-4ff7-4198-9abe-48ae60f437f7",
+  },
+  createdAt: new Date(Date.now()),
+} satisfies OfferRejectEmailProps;
+
+export default function OfferRejectEmail({
+  from,
+  offer,
   offerItem,
-  priceOffered,
-  sender,
   createdAt,
-}: OfferEmailProps) {
+}: OfferRejectEmailProps) {
   return (
     <Html>
-      <Preview>Offer Received</Preview>
+      <Preview>Your Offer Was Rejected</Preview>
       <Tailwind>
         <Head />
-        <Body className="font-sans bg-white">
+        <Body>
           <Container>
-            <h1 className="px-4">Offer</h1>
+            <h1 className="text-lg sm:text-xl md:text-2xl">
+              You offered {formatCurrency(offer.offeredInCents / 100)} for{" "}
+              {offerItem.name}, the offer was rejected
+            </h1>
+            <Text className="text-lg">Keep up! You will get lucky next time.</Text>
+
             <Section className="block sm:hidden max-w-[90%] overflow-hidden">
               <Row>
                 <Column>
@@ -88,7 +79,9 @@ export default function OfferEmail({
                   <Text className="mb-0 text-gray-500 text-base whitespace-nowrap text-nowrap mr-4">
                     Sender
                   </Text>
-                  <Text className="mt-0 mr-4 text-lg">{sender.email}</Text>
+                  <Text className="mt-0 mr-4 text-lg truncate max-w-20">
+                    {from}
+                  </Text>
                 </Column>
               </Row>
               <Row>
@@ -97,7 +90,7 @@ export default function OfferEmail({
                     Price Offered
                   </Text>
                   <Text className="mt-0 mr-4 text-lg">
-                    {formatCurrency(priceOffered)}
+                    {formatCurrency(offer.offeredInCents / 100)}
                   </Text>
                 </Column>
               </Row>
@@ -113,18 +106,17 @@ export default function OfferEmail({
                   </Text>
                 </Column>
                 <Column>
-                  {" "}
                   <Text className="mb-0 text-gray-500 text-base whitespace-nowrap text-nowrap mr-4">
                     Sender
                   </Text>
-                  <Text className="mt-0 mr-4 text-lg">{sender.email}</Text>
+                  <Text className="mt-0 mr-4 text-lg">{from}</Text>
                 </Column>
                 <Column>
                   <Text className="mb-0 text-gray-500 text-base whitespace-nowrap text-nowrap mr-4">
                     Price Offered
                   </Text>
                   <Text className="mt-0 mr-4 text-lg">
-                    {formatCurrency(priceOffered)}
+                    {formatCurrency(offer.offeredInCents / 100)}
                   </Text>
                 </Column>
               </Row>
@@ -144,21 +136,6 @@ export default function OfferEmail({
                     <Text className="text-lg font-semibold m-0 mr-4 line-clamp-3">
                       {offerItem.description}
                     </Text>
-                  </Column>
-                </Row>
-                <Row>
-                  <Text className="text-xl font-semibold">
-                    Sell For {formatCurrency(priceOffered)}
-                  </Text>
-                </Row>
-                <Row>
-                  <Column align="right">
-                    <Link
-                      className="whitespace-nowrap px-2 py-1 w-full max-w-20 text-center font-semibold border-solid border border-purple-800 rounded-md bg-purple-800 text-white"
-                      href={`${process.env.NEXT_PUBLIC_SERVER_URL}/en/profile`}
-                    >
-                      View Offer
-                    </Link>
                   </Column>
                 </Row>
               </Row>
