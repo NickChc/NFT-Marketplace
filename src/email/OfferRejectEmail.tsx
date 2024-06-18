@@ -5,6 +5,7 @@ import {
   Column,
   Container,
   Head,
+  Hr,
   Html,
   Img,
   Preview,
@@ -30,6 +31,7 @@ const dateFormatter = new Intl.DateTimeFormat("en", { dateStyle: "medium" });
 OfferRejectEmail.PreviewProps = {
   from: `Support - NFT_Marketplace@gmail.com`,
   offer: {
+    seen: true,
     from: "nikoloz.chichua.1@btu.edu.ge",
     id: "81406fe4-01ab-4f21-a553-6ce4029757ce",
     offeredInCents: 550000,
@@ -55,13 +57,15 @@ export default function OfferRejectEmail({
       <Preview>Your Offer Was Rejected</Preview>
       <Tailwind>
         <Head />
-        <Body>
+        <Body className="font-sans text-black">
           <Container>
             <h1 className="text-lg sm:text-xl md:text-2xl">
               You offered {formatCurrency(offer.offeredInCents / 100)} for{" "}
               {offerItem.name}, the offer was rejected
             </h1>
-            <Text className="text-lg">Keep up! You will get lucky next time.</Text>
+            <Text className="text-lg">
+              Keep up! You will get lucky next time.
+            </Text>
 
             <Section className="block sm:hidden max-w-[90%] overflow-hidden">
               <Row>
@@ -133,7 +137,8 @@ export default function OfferRejectEmail({
                     <Text className="text-lg font-bold m-0 mr-4">
                       {offerItem.name}
                     </Text>
-                    <Text className="text-lg font-semibold m-0 mr-4 line-clamp-3">
+                    <Hr className="w-full" />
+                    <Text className="text-lg font-semibold m-0 mr-4  line-clamp-3">
                       {offerItem.description}
                     </Text>
                   </Column>

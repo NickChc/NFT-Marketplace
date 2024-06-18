@@ -1,9 +1,12 @@
 "use client";
 
 import { TOffer } from "@/@types/general";
+import { FilledCircleIcon } from "@/assets/icons";
+import { db } from "@/firebase";
 import { useDictionary } from "@/hooks/useDictionary";
-import { formatCurrency } from "@/lib/formatters";
+import { useAuthProvider } from "@/providers/AuthProvider";
 import { useGlobalProvider } from "@/providers/GlobalProvider";
+import { doc, updateDoc } from "firebase/firestore";
 
 interface OfferItemProps {
   offer: TOffer;
@@ -13,8 +16,18 @@ export function OfferItem({ offer }: OfferItemProps) {
   const translations = useDictionary();
   const { setOfferToView } = useGlobalProvider();
 
+
+
   return (
-    <li className="flex flex-col items-stretch sm:items-center sm:flex-row gap-3 justify-between p-3">
+    <li className="flex flex-col items-stretch sm:items-center sm:flex-row gap-3 justify-between p-3 relative">
+      {!offer.seen && (
+        <>
+          <FilledCircleIcon className="text-green-500 text-2xl rounded-full hidden sm:block absolute  sm:top-1/2 sm:-translate-y-1/2 sm:right-20 md:-left-9" />
+          <span className="absolute right-1/2 translate-x-1/2 -bottom-3 text-sm text-green-500 block sm:hidden">
+            New!
+          </span>
+        </>
+      )}
       <div className="max-w-full truncate flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
         <h5 className="opacity-80 max-w-full truncate">{offer.from}</h5>{" "}
         {translations.page.sentAnOffer}
