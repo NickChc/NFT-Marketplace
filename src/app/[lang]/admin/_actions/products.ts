@@ -83,6 +83,7 @@ export async function createProduct(prevState: unknown, formData: FormData) {
     name,
     description,
     priceInCents,
+    originalPriceInCents: priceInCents,
     filePath: fileURL,
     imagePath: imageURL,
     owner: null,

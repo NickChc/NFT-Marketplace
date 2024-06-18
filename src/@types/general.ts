@@ -39,6 +39,7 @@ export interface TProduct {
   createdAt: Date;
   name: string;
   description: string;
+  originalPriceInCents: number;
   priceInCents: number;
   orders: number;
   owner?: {
