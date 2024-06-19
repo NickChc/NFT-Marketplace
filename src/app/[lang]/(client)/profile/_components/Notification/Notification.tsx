@@ -2,46 +2,62 @@
 
 import { TNotification } from "@/@types/general";
 import { CloseIcon } from "@/assets/icons";
-import { db } from "@/firebase";
+import { db, notificationsCollectionRef } from "@/firebase";
+import { useUserNotifications } from "@/hooks/useUserNotifications";
 import { useAuthProvider } from "@/providers/AuthProvider";
-import { doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
+import { TLocale } from "../../../../../../../i18n.config";
 
-export function Notification() {
-  const { currentUser, getCurrentUser } = useAuthProvider();
+interface NotificationProps {
+  lang: TLocale;
+}
+
+export function Notification({ lang }: NotificationProps) {
+  const { currentUser } = useAuthProvider();
   const [acceptedOfferNotes, setAcceptedOfferNotes] = useState<TNotification[]>(
     []
   );
+  const { notifications, getUserNotes } = useUserNotifications();
 
   const showRef = useRef(false);
 
   async function dismissNotifications() {
     try {
       if (currentUser == null) return;
-        const userDoc = doc(db, "users", currentUser.id);
-        await updateDoc(userDoc, {
-          notifications: currentUser.notifications.filter(
-            (note) => note.subject !== "offer_accepted"
-          ),
-        });
-      getCurrentUser(undefined, currentUser.uid);
+      const toDismiss = notifications.filter(
+        (note) => note.subject === "offer_accepted"
+      );
+      const promises = toDismiss.map((note) => {
+        const noteRef = doc(db, "notifications", note.id);
+        return deleteDoc(noteRef);
+      });
+
+      await Promise.all(promises);
+      getUserNotes(true);
     } catch (error: any) {
       console.log(error.message);
     }
   }
 
+  const congratsOn =
+    acceptedOfferNotes.length === 1
+      ? `${acceptedOfferNotes[0].offer.productName}`
+      : acceptedOfferNotes.map((n) => `${n.offer.productName},`);
+
   useEffect(() => {
-    if (currentUser == null || currentUser.notifications.length < 1) return;
-    showRef.current = true;
+    if (currentUser == null || notifications.length < 1) return;
     setAcceptedOfferNotes(
-      currentUser.notifications.filter(
-        (note) => note.subject === "offer_accepted"
-      )
+      notifications.filter((note) => note.subject === "offer_accepted")
     );
     dismissNotifications();
   }, [currentUser]);
 
-  if (currentUser == null || !showRef.current) {
+  const filteredNotes = notifications.filter(
+    (note) => note.subject === "offer_accepted"
+  );
+
+  if (currentUser == null || (filteredNotes.length < 1 && !showRef.current)) {
     return null;
   }
 
@@ -53,11 +69,13 @@ export function Notification() {
       >
         <CloseIcon />
       </span>
-      Congratulations! Your offer for{" "}
-      {acceptedOfferNotes.length === 1
-        ? `${acceptedOfferNotes[0].acceptedOffer.productName}`
-        : acceptedOfferNotes.map((n) => `${n.acceptedOffer.productName},`)}{" "}
-      got accepted. <br /> You are now owner of these NFT's.
+      {lang === "ka"
+        ? `გილოცავთ! თქვენი შემოთავაზება ${congratsOn} -სთან დაკავშირებით მიიღეს. ${(
+            <br />
+          )} თქვენ ახლა ხართ ამ NFT -ს მფლობელი.`
+        : `Congratulations! Your offer for ${congratsOn} got accepted. ${(
+            <br />
+          )} Now you are owner of these NFT's.`}
     </div>
   );
 }

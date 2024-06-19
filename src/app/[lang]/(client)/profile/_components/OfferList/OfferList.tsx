@@ -5,11 +5,13 @@ import { OfferItem } from "@/app/[lang]/(client)/profile/_components/OfferList/O
 import { useState } from "react";
 import { RightArrowIcon } from "@/assets/icons";
 import { useDictionary } from "@/hooks/useDictionary";
+import { useUserNotifications } from "@/hooks/useUserNotifications";
 
 export function OfferList() {
   const translations = useDictionary();
   const [loadFull, setLoadFull] = useState<boolean>(false);
   const { currentUser } = useAuthProvider();
+  const { notifications } = useUserNotifications();
 
   if (currentUser == null || currentUser?.offers.length < 1) return null;
 

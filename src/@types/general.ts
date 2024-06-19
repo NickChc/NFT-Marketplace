@@ -7,7 +7,6 @@ export interface TOrder {
 }
 
 export interface TOffer {
-  seen: boolean;
   productId: string;
   from: string;
   id: string;
@@ -23,7 +22,6 @@ export interface TUser {
   surname: string;
   ownings: TOwnedProduct[];
   offers: TOffer[];
-  notifications: TNotification[];
   isFrozen: boolean;
 }
 
@@ -62,13 +60,15 @@ export interface TCreateProduct {
 }
 
 export interface TNotification {
-  acceptedOffer: {
-    acceptPriceInCents: number;
+  offer: {
+    offeredPriceInCents: number;
     productId: string;
     productName: string;
+    id: string;
   };
-  subject: "offer_accepted";
+  subject: "offer_accepted" | "offer_received";
   id: string;
+  userId: string;
 }
 
 export type TTranslations = Awaited<ReturnType<typeof getDictionaries>>;

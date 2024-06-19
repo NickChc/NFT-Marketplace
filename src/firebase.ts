@@ -22,3 +22,4 @@ export const storage = getStorage(app);
 export const salesCollectionRef = collection(db, "orders");
 export const usersCollectionRef = collection(db, "users");
 export const productCollectionRef = collection(db, "product");
+export const notificationsCollectionRef = collection(db, "notifications");

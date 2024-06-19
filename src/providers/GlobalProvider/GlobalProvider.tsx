@@ -1,4 +1,4 @@
-import { TOffer, TProduct, TUser } from "@/@types/general";
+import { TNotification, TOffer, TProduct, TUser } from "@/@types/general";
 import { GlobalContext } from "@/providers/GlobalProvider/GlobalContext";
 import { PropsWithChildren, useState } from "react";
 
@@ -14,6 +14,7 @@ export function GlobalProvider({ children }: PropsWithChildren) {
   );
   const [updateUser, setUpdateUser] = useState<TUser | null>(null);
   const [offerToView, setOfferToView] = useState<TOffer | null>(null);
+  const [notifications, setNotifications] = useState<TNotification[]>([]);
 
   return (
     <GlobalContext.Provider
@@ -36,6 +37,8 @@ export function GlobalProvider({ children }: PropsWithChildren) {
         setOfferItem,
         offerToView,
         setOfferToView,
+        notifications,
+        setNotifications,
       }}
     >
       {children}
