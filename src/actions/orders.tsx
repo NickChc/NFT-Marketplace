@@ -1,13 +1,13 @@
 "use server";
 
-import { TProduct, TUser } from "@/@types/general";
+import { TNotification, TProduct, TUser } from "@/@types/general";
 import OfferEmail from "@/email/OfferEmail";
 import { Resend } from "resend";
 import { z } from "zod";
 import { TSenfOfferEmailReturnData } from "@/app/[lang]/_components/Modal/OfferForm/OfferForm";
 import { getUser } from "@/app/[lang]/_api/getUser";
 import { addDoc, doc, updateDoc } from "firebase/firestore";
-import { db, salesCollectionRef } from "@/firebase";
+import { db, notificationsCollectionRef, salesCollectionRef } from "@/firebase";
 import { TOffer } from "@/@types/general";
 import OfferRejectEmail from "@/email/OfferRejectEmail";
 import { getProduct } from "@/app/[lang]/_api/getProduct";
@@ -64,7 +64,6 @@ export async function sendOfferEmail(
   const userDoc = doc(db, "users", owner.id);
 
   const newOffer: TOffer = {
-    seen: false,
     productId: item.id,
     from: sender.email,
     offeredInCents: Number(offeredPrice) * 100,
@@ -74,6 +73,19 @@ export async function sendOfferEmail(
   await updateDoc(userDoc, {
     offers: [...owner.offers, newOffer],
   });
+
+  const newNote: Omit<TNotification, "id"> = {
+    subject: "offer_received",
+    offer: {
+      offeredPriceInCents: Number(offeredPrice) * 100,
+      productId: item.id,
+      productName: item.name,
+      id: newOffer.id,
+    },
+    userId: owner.id,
+  };
+
+  await addDoc(notificationsCollectionRef, newNote);
 
   return { message: "email_success" };
 }
@@ -129,11 +141,23 @@ export async function acceptOffer(offer: TOffer, prevState: unknown) {
       ? `${offerMaker.name} ${offerMaker.surname}`
       : offerMaker.email;
 
+  const newNote: Omit<TNotification, "id"> = {
+    subject: "offer_accepted",
+    offer: {
+      productId: offerItem.id,
+      productName: offerItem.name,
+      offeredPriceInCents: 0,
+      id: offer.id,
+    },
+    userId: offerMaker.id,
+  };
+
   await Promise.all([
     addDoc(salesCollectionRef, {
       paidInCents: offer.offeredInCents,
       productId: offer.productId,
     }),
+    addDoc(notificationsCollectionRef, newNote),
     updateDoc(oldOwnerDoc, {
       ownings: currentOwner.ownings.filter((o) => o.productId !== offerItem.id),
       offers: currentOwner.offers.filter((off) => off.id !== offer.id),
@@ -159,18 +183,6 @@ export async function acceptOffer(offer: TOffer, prevState: unknown) {
           paidInCents: offer.offeredInCents,
           productId: offerItem.id,
           productname: offerItem.name,
-        },
-      ],
-      notifications: [
-        ...offerMaker.notifications,
-        {
-          id: crypto.randomUUID(),
-          subject: "offer_accepted",
-          acceptedOffer: {
-            acceptedPriceInCents: offer.offeredInCents,
-            productId: offerItem.id,
-            productName: offerItem.name,
-          },
         },
       ],
       spentInCents: offerMaker.spentInCents + offer.offeredInCents,

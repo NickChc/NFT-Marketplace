@@ -1,4 +1,4 @@
-import { TOffer, TProduct, TUser } from "@/@types/general";
+import { TNotification, TOffer, TProduct, TUser } from "@/@types/general";
 import { createContext } from "react";
 
 interface GlobalContextProps {
@@ -20,6 +20,8 @@ interface GlobalContextProps {
   setDeleteUser: React.Dispatch<React.SetStateAction<TUser | null>>;
   offerToView: TOffer | null;
   setOfferToView: React.Dispatch<React.SetStateAction<TOffer | null>>;
+  notifications: TNotification[];
+  setNotifications: React.Dispatch<React.SetStateAction<TNotification[]>>;
 }
 
 export const GlobalContext = createContext<GlobalContextProps>({
@@ -41,4 +43,6 @@ export const GlobalContext = createContext<GlobalContextProps>({
   setDeleteUser: () => {},
   offerToView: null,
   setOfferToView: () => {},
+  notifications: [],
+  setNotifications: () => {},
 });

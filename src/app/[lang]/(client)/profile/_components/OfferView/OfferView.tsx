@@ -8,12 +8,13 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { formatCurrency } from "@/lib/formatters";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { DeclineView } from "@/app/[lang]/(client)/profile/_components/OfferView/DeclineView";
 import { AcceptView } from "@/app/[lang]/(client)/profile/_components/OfferView/AcceptView";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
+import { useUserNotifications } from "@/hooks/useUserNotifications";
 
 interface OfferViewProps {
   offer: TOffer | null;
@@ -33,6 +34,7 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
   const translations = useDictionary();
   const [loading, setLoading] = useState<boolean>(false);
   const [offerItem, setOfferItem] = useState<TProduct | undefined>();
+  const { notifications } = useUserNotifications();
 
   async function fetchProduct(productId: string) {
     try {
@@ -50,32 +52,14 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
 
   async function viewOffer(offer: TOffer) {
     try {
-      if (currentUser == null || offer == null || offer.seen) return;
+      const offerNoteId = notifications.find(
+        (note) => note.offer.id === offer.id
+      )?.id;
 
-      const userDoc = doc(db, "users", currentUser.id);
-      await updateDoc(userDoc, {
-        offers: currentUser.offers.map((userOffer) => {
-          if (userOffer.id === offer.id) {
-            return { ...userOffer, seen: true };
-          } else {
-            return userOffer;
-          }
-        }),
-      });
-      setCurrentUser((prev) => {
-        if (prev == null) return null;
+      if (currentUser == null || offer == null || offerNoteId == null) return;
 
-        return {
-          ...prev,
-          offers: prev.offers.map((userOffer) => {
-            if (userOffer.id === offer.id) {
-              return { ...userOffer, seen: true };
-            } else {
-              return userOffer;
-            }
-          }),
-        };
-      });
+      const noteDoc = doc(db, "notifications", offerNoteId);
+      return await deleteDoc(noteDoc);
     } catch (error: any) {
       console.log(error.message);
     }

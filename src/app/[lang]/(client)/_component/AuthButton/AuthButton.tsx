@@ -6,7 +6,7 @@ import Link from "next/link";
 import { LoadingIcon, UserIcon } from "@/assets/icons";
 import { usePathname } from "next/navigation";
 import { useAuthProvider } from "@/providers/AuthProvider";
-import { TOffer } from "@/@types/general";
+import { useUserNotifications } from "@/hooks/useUserNotifications";
 
 interface AuthButtonProps {
   lang: TLocale;
@@ -14,25 +14,14 @@ interface AuthButtonProps {
 
 export function AuthButton({ lang }: AuthButtonProps) {
   const [mounted, setMounted] = useState<boolean>(false);
-  const [unseenOffers, setUnseenOffers] = useState<number>(0);
 
   const pathname = usePathname();
   const { currentUser, loadingUser } = useAuthProvider();
+  const { notifications } = useUserNotifications();
 
   useEffect(() => {
     setMounted(true);
-    if (currentUser == null) {
-      return setUnseenOffers(0);
-    }
-    const receivedOffers = currentUser.offers.reduce((acc, curr) => {
-      return curr.seen ? acc : acc + 1;
-    }, 0);
-
-    const acceptedOffers = currentUser.notifications.filter(
-      (n) => n.subject === "offer_accepted"
-    );
-    setUnseenOffers(acceptedOffers.length + receivedOffers);
-  }, [currentUser]);
+  }, []);
 
   if (pathname.includes("auth") || pathname.includes("profile")) return <></>;
 
@@ -55,10 +44,13 @@ export function AuthButton({ lang }: AuthButtonProps) {
         </span>
       ) : currentUser ? (
         <>
-          {unseenOffers > 0 && (
-            <span className="bg-red-500 absolute -top-1 -right-1 text-white z-50 grid place-items-center rounded-full w-5 text-sm aspect-square">
-              {unseenOffers}
-            </span>
+          {notifications.length > 0 && (
+            <Link
+              href={`/${lang}/profile`}
+              className="bg-red-500 absolute -top-1 -right-1 text-white z-50 grid place-items-center rounded-full w-5 text-sm aspect-square"
+            >
+              {notifications.length}
+            </Link>
           )}
           <Link
             href={`/${lang}/profile`}
