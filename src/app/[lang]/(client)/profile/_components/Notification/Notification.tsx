@@ -1,13 +1,13 @@
 "use client";
 
+import { TLocale } from "../../../../../../../i18n.config";
+import { useEffect, useState } from "react";
 import { TNotification } from "@/@types/general";
 import { CloseIcon } from "@/assets/icons";
-import { db, notificationsCollectionRef } from "@/firebase";
+import { db } from "@/firebase";
 import { useUserNotifications } from "@/hooks/useUserNotifications";
 import { useAuthProvider } from "@/providers/AuthProvider";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { useEffect, useRef, useState } from "react";
-import { TLocale } from "../../../../../../../i18n.config";
+import { deleteDoc, doc } from "firebase/firestore";
 
 interface NotificationProps {
   lang: TLocale;
@@ -15,12 +15,9 @@ interface NotificationProps {
 
 export function Notification({ lang }: NotificationProps) {
   const { currentUser } = useAuthProvider();
-  const [acceptedOfferNotes, setAcceptedOfferNotes] = useState<TNotification[]>(
-    []
-  );
   const { notifications, getUserNotes } = useUserNotifications();
-
-  const showRef = useRef(false);
+  const [filteredNotes, setFilteredNotes] = useState<TNotification[]>([]);
+  const [show, setShow] = useState(false);
 
   async function dismissNotifications() {
     try {
@@ -33,6 +30,8 @@ export function Notification({ lang }: NotificationProps) {
         return deleteDoc(noteRef);
       });
 
+      if (promises.length < 1) return;
+
       await Promise.all(promises);
       getUserNotes(true);
     } catch (error: any) {
@@ -41,23 +40,24 @@ export function Notification({ lang }: NotificationProps) {
   }
 
   const congratsOn =
-    acceptedOfferNotes.length === 1
-      ? `${acceptedOfferNotes[0].offer.productName}`
-      : acceptedOfferNotes.map((n) => `${n.offer.productName},`);
+    filteredNotes.length === 1
+      ? filteredNotes[0].offer.productName
+      : filteredNotes.map((n) => `${n.offer.productName},`);
 
   useEffect(() => {
+    if (currentUser == null) return;
     if (currentUser == null || notifications.length < 1) return;
-    setAcceptedOfferNotes(
-      notifications.filter((note) => note.subject === "offer_accepted")
+    const filteredNotifications = notifications.filter(
+      (note) => note.subject === "offer_accepted"
     );
+
+    if (filteredNotifications.length < 1) return;
+    setShow(true);
+    setFilteredNotes(filteredNotifications);
     dismissNotifications();
-  }, [currentUser]);
+  }, [currentUser, notifications]);
 
-  const filteredNotes = notifications.filter(
-    (note) => note.subject === "offer_accepted"
-  );
-
-  if (currentUser == null || (filteredNotes.length < 1 && !showRef.current)) {
+  if (currentUser == null || filteredNotes.length < 1 || !show) {
     return null;
   }
 
@@ -65,17 +65,21 @@ export function Notification({ lang }: NotificationProps) {
     <div className="rounded-lg bg-green-600 relative p-4 w-full mt-6 text-lg text-center">
       <span
         className="absolute top-1 right-1 cursor-pointer text-xl rounded-full"
-        onClick={() => (showRef.current = false)}
+        onClick={() => setShow(false)}
       >
         <CloseIcon />
       </span>
-      {lang === "ka"
-        ? `გილოცავთ! თქვენი შემოთავაზება ${congratsOn} -სთან დაკავშირებით მიიღეს. ${(
-            <br />
-          )} თქვენ ახლა ხართ ამ NFT -ს მფლობელი.`
-        : `Congratulations! Your offer for ${congratsOn} got accepted. ${(
-            <br />
-          )} Now you are owner of these NFT's.`}
+      {lang === "ka" ? (
+        <>
+          გილოცავთ! თქვენი შემოთავაზება {congratsOn} -სთან დაკავშირებით მიიღეს.{" "}
+          <br /> თქვენ ახლა ხართ ამ NFT -ს მფლობელი.
+        </>
+      ) : (
+        <>
+          Congratulations! Your offer for {congratsOn} got accepted. {<br />}
+          Now you are owner of these NFT's.
+        </>
+      )}
     </div>
   );
 }
