@@ -22,7 +22,7 @@ export default async function ProfilePage({
   return (
     <div className="mx-auto md:w-[70%] xl:max-w-4xl min-h-dvh relative pb-9">
       <PageHeader>{page.profile}</PageHeader>
-      <Notification />
+      <Notification lang={lang} />
       <div className="mt-2 sm:mt-6 p-2 sm:p-3">
         <LogOutButton lang={lang} />
         <OfferList />
