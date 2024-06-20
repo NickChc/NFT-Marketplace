@@ -14,6 +14,8 @@
     "@react-email/components": "^0.0.19",
     "@stripe/react-stripe-js": "^2.7.1",
     "@stripe/stripe-js": "^3.4.1",
+    "engine.io": "^6.5.5",
+    "engine.io-client": "^6.5.4",
     "firebase": "^10.11.1",
     "firebase-admin": "^12.1.1",
     "negotiator": "^0.6.3",
@@ -25,7 +27,9 @@
     "react-email": "^2.1.4",
     "react-icons": "^5.1.0",
     "resend": "^3.2.0",
+    "socket.io-adapter": "^2.5.5",
     "stripe": "^15.8.0",
+    "ws": "^8.17.1",
     "zod": "^3.23.6"
   },
   "devDependencies": {
