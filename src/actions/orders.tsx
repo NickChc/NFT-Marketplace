@@ -21,6 +21,7 @@ import OfferRejectEmail from "@/email/OfferRejectEmail";
 import { getProduct } from "@/app/[lang]/_api/getProduct";
 import OfferAcceptEmail from "@/email/OfferAcceptEmail";
 import { getNotifications } from "@/app/[lang]/_api/getNotifications";
+import { updateUserNotes } from "@/app/[lang]/_api/updateUserNotes";
 
 const priceSchema = z.string().min(1).max(9);
 const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY as string);
@@ -162,36 +163,12 @@ export async function acceptOffer(offer: TOffer, prevState: unknown) {
     userId: offerMaker.id,
   };
 
-  async function updateUserNotes() {
-    if (currentOwner == null) return;
-
-    const q = query(
-      notificationsCollectionRef,
-      where("userId", "==", currentOwner.id),
-      where("offer.productId", "==", offer.productId),
-      where("subject", "==", "offer_received")
-    );
-    const querySnapshot = await getDocs(q);
-
-    const batch = writeBatch(db);
-
-    querySnapshot.forEach((doc) => {
-      batch.delete(doc.ref);
-    });
-
-    const newNoteRef = doc(notificationsCollectionRef);
-
-    batch.set(newNoteRef, newNote);
-
-    await batch.commit();
-  }
-
   await Promise.all([
     addDoc(salesCollectionRef, {
       paidInCents: offer.offeredInCents,
       productId: offer.productId,
     }),
-    updateUserNotes(),
+    updateUserNotes(currentOwner, offer.productId, newNote),
     updateDoc(oldOwnerDoc, {
       ownings: currentOwner.ownings.filter((o) => o.productId !== offerItem.id),
       offers: currentOwner.offers.filter(
