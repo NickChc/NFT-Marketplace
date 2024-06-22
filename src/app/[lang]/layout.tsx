@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { TLocale, i18n } from "../../../i18n.config";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { PropsWithChildren } from "react";
 import { Providers } from "@/providers";
