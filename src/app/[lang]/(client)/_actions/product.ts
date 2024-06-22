@@ -5,6 +5,7 @@ import { db } from "@/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { getUser } from "@/app/[lang]/_api/getUser";
 import { revalidatePath } from "next/cache";
+import { updateUserNotes } from "../../_api/updateUserNotes";
 
 export async function returnProduct(product: TProduct, email: string) {
   const user = await getUser(email);
@@ -21,6 +22,7 @@ export async function returnProduct(product: TProduct, email: string) {
   await Promise.all([
     updateDoc(userDoc, {
       ownings: newOwnings,
+      offers: user.offers.filter((off) => off.productId !== product.id),
     }),
     updateDoc(productDoc, {
       isAvailable: true,
@@ -28,6 +30,7 @@ export async function returnProduct(product: TProduct, email: string) {
       priceInCents: product.originalPriceInCents,
       openForBidding: false,
     }),
+    updateUserNotes(user, product.id),
   ]);
 
   revalidatePath(`/*`);
@@ -44,11 +47,19 @@ export async function sellProduct(
 
   if (user == null || user.isFrozen) return;
 
-  return await updateDoc(productDoc, {
-    priceInCents,
-    isAvailable: true,
-    openForBidding: false,
-  });
+  const userDoc = doc(db, "users", user?.id);
+
+  return await Promise.all([
+    updateDoc(productDoc, {
+      priceInCents,
+      isAvailable: true,
+      openForBidding: false,
+    }),
+    updateUserNotes(user, product.id),
+    updateDoc(userDoc, {
+      offers: user.offers.filter((off) => off.productId !== product.id),
+    }),
+  ]);
 }
 
 export async function stopSelling(product: TProduct, email: string) {
