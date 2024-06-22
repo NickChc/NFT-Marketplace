@@ -15,7 +15,7 @@ export async function PreviewCardsSuspense({
   lang,
 }: PreviewCardsSuspenseProps) {
   const { page } = await getDictionaries(lang);
-  const [newest, forBidding, withoutOwner] = await productsFetcher();
+  const [newest, withoutOwner, forBidding] = await productsFetcher();
   return (
     <>
       <PreviewCards lang={lang} products={newest} title={page.newest} />

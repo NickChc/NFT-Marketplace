@@ -22,8 +22,8 @@ export function OfferList() {
       </h2>
       <hr className="w-full my-3" />
       <ul
-        className={`list-none flex flex-col max-h-fit h-fit ${
-          loadFull ? "overflow-y-auto max-h-40" : ""
+        className={`list-none flex flex-col max-h-fit h-fit md:pl-9 ${
+          loadFull ? "max-h-40 overflow-y-auto" : ""
         }`}
       >
         {loadFull

@@ -26,6 +26,7 @@ interface OfferEmailProps {
 
 OfferEmail.PreviewProps = {
   offerItem: {
+    originalPriceInCents: 1000,
     createdAt: new Date(Date.now()),
     name: "Sailor ape NFT card.",
     description:

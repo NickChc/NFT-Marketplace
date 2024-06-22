@@ -12,6 +12,7 @@ export async function createUser(newUser: Omit<TUser, "id">) {
         ...user,
         name: newUser.name,
         surname: newUser.surname,
+        uid: newUser.uid,
       });
     } else {
       return await addDoc(usersCollectionRef, newUser);

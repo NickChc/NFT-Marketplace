@@ -149,6 +149,7 @@
     "confirmId": "Confirm identity",
     "confirmIdToChange": "Confirm identity to change email",
     "deleting": "Deleting",
-    "acceptAssurance": "Are you sure you want to accept this offer for"
+    "acceptAssurance": "Are you sure you want to accept this offer for",
+    "marketPriceIs": "Market price is"
   }
 }
