@@ -22,7 +22,7 @@ export function OfferItem({ offer }: OfferItemProps) {
     <li className="flex flex-col items-stretch sm:items-center sm:flex-row gap-3 justify-between p-3 relative">
       {notifications.some((note) => note.offer.id === offer.id) && (
         <>
-          <FilledCircleIcon className="text-green-500 text-2xl rounded-full hidden sm:block absolute  sm:top-1/2 sm:-translate-y-1/2 sm:right-20 md:-left-9" />
+          <FilledCircleIcon className="text-green-500 text-2xl rounded-full hidden sm:block absolute sm:top-1/2 sm:-translate-y-1/2 sm:right-20 md:-left-9" />
           <span className="absolute right-1/2 translate-x-1/2 -bottom-3 text-sm text-green-500 block sm:hidden">
             New!
           </span>

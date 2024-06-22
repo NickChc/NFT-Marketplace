@@ -57,7 +57,7 @@ export function DeleteAccount({ text }: DeleteAccountProps) {
           disabled={
             currentUser.ownings.length > 0 ||
             currentUser == null ||
-            collection.length < 1
+            collection.length > 0
           }
           className="w-full sm:w-auto border-solid border border-red-500 text-red-500 px-6 py-1 rounded-md hover:bg-red-500 hover:text-white duration-75 disabled:hover:bg-transparent disabled:hover:text-red-500 disabled:opacity-75"
         >

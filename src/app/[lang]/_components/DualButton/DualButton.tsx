@@ -21,7 +21,7 @@ export function DualButton({
       onClick={onClick}
       disabled={disabled}
       type={type}
-      className={`px-2 py-1 border-solid border border-purple-800 rounded-md w-full bg-purple-800 hover:opacity-75 duration-100 ${
+      className={`px-2 py-1 border-solid border border-purple-800 disabled:pointer-events-none disabled:opacity-75 rounded-md w-full bg-purple-800 hover:opacity-75 duration-100 ${
         variation === "secondary"
           ? "bg-white text-purple-800"
           : "bg-purple-800 text-white"

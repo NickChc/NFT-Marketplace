@@ -4,6 +4,7 @@ import { useAuthProvider } from "@/providers/AuthProvider";
 import { formatCurrency } from "@/lib/formatters";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useGlobalProvider } from "@/providers/GlobalProvider";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 export function ProfileData() {
   const { currentUser } = useAuthProvider();
@@ -23,7 +24,7 @@ export function ProfileData() {
         <span className="font-semibold">{translations.page.surname} -</span>{" "}
         {currentUser.surname}
       </h3>
-      <h3 className="truncate max-w-[95%]">
+      <h3 className="truncate max-w-[95%] mb-6">
         <span className="font-semibold">{translations.page.email} -</span>{" "}
         {currentUser.email}
       </h3>
@@ -33,12 +34,15 @@ export function ProfileData() {
           {translations.page.frozenAccount}
         </div>
       ) : (
-        <button
-          className="text-white p-1 w-full bg-purple-800 font-semibold rounded-md duration-100 hover:opacity-75 mt-3"
-          onClick={() => setUpdateUser(currentUser)}
-        >
+        <DualButton onClick={() => setUpdateUser(currentUser)}>
           {translations.page.edit}
-        </button>
+        </DualButton>
+        // <button
+        //   className="text-white p-1 w-full bg-purple-800 font-semibold rounded-md duration-100 hover:opacity-75 mt-3"
+        //   onClick={() => setUpdateUser(currentUser)}
+        // >
+        //   {translations.page.edit}
+        // </button>
       )}
       <hr className="w-full my-3" />
       <h3 className="truncate max-w-[95%]">

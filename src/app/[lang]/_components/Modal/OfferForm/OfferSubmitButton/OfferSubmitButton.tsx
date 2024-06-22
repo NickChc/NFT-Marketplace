@@ -3,6 +3,7 @@
 import { useDictionary } from "@/hooks/useDictionary";
 import { formatCurrency } from "@/lib/formatters";
 import { useFormStatus } from "react-dom";
+import { DualButton } from "../../../DualButton";
 
 interface OfferSubmitButtonProps {
   price: number;
@@ -14,14 +15,10 @@ export function OfferSubmitButton({ error, price }: OfferSubmitButtonProps) {
   const translations = useDictionary();
 
   return (
-    <button
-      disabled={pending || error != null}
-      className="bg-purple-800 px-2 py-1 w-full rounded-sm text-white hover:opacity-75 disabled:cursor-default disabled:opacity-75"
-      type="submit"
-    >
+    <DualButton disabled={pending || error != null} type="submit">
       {pending
         ? `${translations.page.processing}...`
         : `${translations.page.offer} ${formatCurrency(Number(price) || 0)}`}
-    </button>
+    </DualButton>
   );
 }

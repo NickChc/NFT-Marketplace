@@ -38,7 +38,7 @@ export function Collection({ lang }: CollectionProps) {
             </>
           }
         >
-          {collection.length > 0 ? (
+          {!collectionLoading ? (
             <CollectionSuspense
               encodedEmail={encodedEmail}
               lang={lang}

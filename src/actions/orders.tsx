@@ -6,11 +6,21 @@ import { Resend } from "resend";
 import { z } from "zod";
 import { TSenfOfferEmailReturnData } from "@/app/[lang]/_components/Modal/OfferForm/OfferForm";
 import { getUser } from "@/app/[lang]/_api/getUser";
-import { addDoc, doc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+  writeBatch,
+} from "firebase/firestore";
 import { db, notificationsCollectionRef, salesCollectionRef } from "@/firebase";
 import { TOffer } from "@/@types/general";
 import OfferRejectEmail from "@/email/OfferRejectEmail";
 import { getProduct } from "@/app/[lang]/_api/getProduct";
+import OfferAcceptEmail from "@/email/OfferAcceptEmail";
+import { getNotifications } from "@/app/[lang]/_api/getNotifications";
 
 const priceSchema = z.string().min(1).max(9);
 const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY as string);
@@ -33,7 +43,7 @@ export async function sendOfferEmail(
     return { error: "problem_occured" };
   }
 
-  if (offeredPrice <= item.owner?.paidInCents! / 100) {
+  if (offeredPrice <= item.originalPriceInCents / 100) {
     return { error: "price_error" };
   }
 
@@ -152,15 +162,41 @@ export async function acceptOffer(offer: TOffer, prevState: unknown) {
     userId: offerMaker.id,
   };
 
+  async function updateUserNotes() {
+    if (currentOwner == null) return;
+
+    const q = query(
+      notificationsCollectionRef,
+      where("userId", "==", currentOwner.id),
+      where("offer.productId", "==", offer.productId),
+      where("subject", "==", "offer_received")
+    );
+    const querySnapshot = await getDocs(q);
+
+    const batch = writeBatch(db);
+
+    querySnapshot.forEach((doc) => {
+      batch.delete(doc.ref);
+    });
+
+    const newNoteRef = doc(notificationsCollectionRef);
+
+    batch.set(newNoteRef, newNote);
+
+    await batch.commit();
+  }
+
   await Promise.all([
     addDoc(salesCollectionRef, {
       paidInCents: offer.offeredInCents,
       productId: offer.productId,
     }),
-    addDoc(notificationsCollectionRef, newNote),
+    updateUserNotes(),
     updateDoc(oldOwnerDoc, {
       ownings: currentOwner.ownings.filter((o) => o.productId !== offerItem.id),
-      offers: currentOwner.offers.filter((off) => off.id !== offer.id),
+      offers: currentOwner.offers.filter(
+        (off) => off.productId !== offer.productId
+      ),
     }),
     updateDoc(offerItemDoc, {
       owner: {
@@ -188,6 +224,22 @@ export async function acceptOffer(offer: TOffer, prevState: unknown) {
       spentInCents: offerMaker.spentInCents + offer.offeredInCents,
     }),
   ]);
+
+  const { name, imagePath, description } = offerItem;
+
+  await resend.emails.send({
+    from: `Support <${process.env.NEXT_PUBLIC_SENDER_EMAIL}>`,
+    to: offer.from,
+    subject: "Offer",
+    react: (
+      <OfferAcceptEmail
+        createdAt={new Date(Date.now())}
+        senderEmail={process.env.NEXT_PUBLIC_SENDER_EMAIL as string}
+        offerItem={{ name, imagePath, description }}
+        priceOfferedInCents={offer.offeredInCents}
+      />
+    ),
+  });
 
   return { message: "success" };
 }

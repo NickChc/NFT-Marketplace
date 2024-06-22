@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useFormState } from "react-dom";
 import { OfferSubmitButton } from "@/app/[lang]/_components/Modal/OfferForm/OfferSubmitButton";
 import { useAuthProvider } from "@/providers/AuthProvider";
+import { DualButton } from "../../DualButton";
 
 interface OfferFormProps {
   closeModal: () => void;
@@ -29,7 +30,7 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
   );
 
   const [price, setPrice] = useState<string>(
-    `${(offerItem?.owner?.paidInCents || 0) / 100 + 1}`
+    `${(offerItem?.originalPriceInCents || 0) / 100 + 100}`
   );
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -59,8 +60,8 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
             label={translations.page.offerAmount}
           />
           <div>
-            {translations.page.ownerPaid}{" "}
-            {formatCurrency((offerItem.owner?.paidInCents || 0) / 100)}
+            {translations.page.marketPriceIs}{" "}
+            {formatCurrency((offerItem.originalPriceInCents || 0) / 100)}
           </div>
         </>
       )}
@@ -72,23 +73,15 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
         </div>
       )}
       {data.message === "email_success" ? (
-        <button
-          className="bg-white px-2 py-1 border-solid border rounded-sm border-purple-800 text-purple-800"
-          type="button"
-          onClick={closeModal}
-        >
+        <DualButton variation="secondary" type="button" onClick={closeModal}>
           {translations.page.gotIt}
-        </button>
+        </DualButton>
       ) : (
         <>
           <OfferSubmitButton error={data.error} price={Number(price)} />
-          <button
-            className="bg-white px-2 py-1 border-solid border rounded-sm border-purple-800 text-purple-800"
-            type="button"
-            onClick={closeModal}
-          >
+          <DualButton variation="secondary" type="button" onClick={closeModal}>
             {translations.page.cancel}
-          </button>
+          </DualButton>
         </>
       )}
     </form>

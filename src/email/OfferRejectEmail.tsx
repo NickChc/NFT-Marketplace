@@ -31,7 +31,6 @@ const dateFormatter = new Intl.DateTimeFormat("en", { dateStyle: "medium" });
 OfferRejectEmail.PreviewProps = {
   from: `Support - NFT_Marketplace@gmail.com`,
   offer: {
-    seen: true,
     from: "nikoloz.chichua.1@btu.edu.ge",
     id: "81406fe4-01ab-4f21-a553-6ce4029757ce",
     offeredInCents: 550000,

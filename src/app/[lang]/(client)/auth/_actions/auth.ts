@@ -149,6 +149,7 @@ export async function register(
   redirect: (path: string) => void,
   verificationStatusChange: () => void,
   setVerificationError: React.Dispatch<React.SetStateAction<string>>,
+  setSecondAcc: () => void,
   prevState: unknown,
   formData: FormData
 ) {
@@ -163,7 +164,7 @@ export async function register(
 
   const data = result.data;
 
-  let userId;
+  let userUID;
 
   try {
     const userCredentials = await createUserWithEmailAndPassword(
@@ -176,10 +177,10 @@ export async function register(
 
     if (user == null) return;
 
-    userId = user.uid;
+    userUID = user.uid;
 
     const newUser: Omit<TUser, "id"> = {
-      uid: userId,
+      uid: userUID,
       name: data.name,
       surname: data.surname,
       email: data.email,
@@ -195,10 +196,10 @@ export async function register(
     if (error.message.includes("email-already-in-use")) {
       const user = await getUser(data.email);
       if (user == null) return;
-      userId = user.id;
+      userUID = user.uid;
 
-      const newUser: Omit<TUser, "id"> = {
-        uid: userId,
+      const newUser: Omit<TUser, "uid"> = {
+        id: user.id,
         name: data.name,
         surname: data.surname,
         email: data.email,
@@ -212,6 +213,7 @@ export async function register(
         newUser,
         verificationStatusChange
       );
+      setSecondAcc();
       const translations = getTranslations();
       if (result) return;
       setVerificationError(translations.emailAlreadyUsed);
@@ -229,7 +231,7 @@ interface TData {
 
 async function handleExistingAccount(
   data: TData,
-  newUser: Omit<TUser, "id">,
+  newUser: Omit<TUser, "uid">,
   verificationStatusChange: () => void
 ) {
   try {
@@ -243,7 +245,10 @@ async function handleExistingAccount(
         data.password
       );
       const user = userCredentials.user;
-      await Promise.all([createUser(newUser), sendEmailVerification(user)]);
+      await Promise.all([
+        createUser({ ...newUser, uid: user.uid }),
+        sendEmailVerification(user),
+      ]);
       verificationStatusChange();
       return true;
     }

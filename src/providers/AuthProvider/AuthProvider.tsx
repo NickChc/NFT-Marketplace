@@ -68,14 +68,13 @@ export function AuthProvider({
         return setCurrentUser(user);
       } else {
         const newUser: Omit<TUser, "id"> = {
-          uid: auth.currentUser?.uid!,
+          uid,
           name: "",
           surname: "",
           email,
           spentInCents: 0,
           ownings: [],
           offers: [],
-          notifications: [],
           isFrozen: false,
         };
 
@@ -124,7 +123,6 @@ export function AuthProvider({
     if (user == null) return;
 
     if (user.providerData.some((data) => data.providerId === "password")) {
-      const email = user.email;
       setAuthProvider("password");
     } else if (user.providerData[0].providerId === "google.com") {
       setAuthProvider("google");
@@ -188,15 +186,19 @@ export function AuthProvider({
     if (auth.currentUser == null) {
       setCurrentUser(null);
     }
-    if (auth.currentUser != null && currentUser == null) {
-      getCurrentUser(auth.currentUser?.email!);
+    if (
+      auth.currentUser != null &&
+      auth.currentUser.email != null &&
+      currentUser == null
+    ) {
+      getCurrentUser(auth.currentUser.email);
     }
   }, [auth.currentUser, pathname, loading]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user?.emailVerified) {
-        checkUser(user?.uid, user?.email);
+        checkUser(user.uid, user.email);
       }
     });
 

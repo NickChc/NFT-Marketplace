@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { auth } from "@/firebase";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { RegisterFormPopup } from "@/app/[lang]/(client)/auth/_components/RegisterForm/RegisterFormPopup";
+import { unlink } from "firebase/auth";
 
 interface RegisterFormProps {
   lang: TLocale;
@@ -20,12 +21,14 @@ export function RegisterForm({ lang }: RegisterFormProps) {
   const [loadingVerify, setLoadingVerify] = useState<boolean>(false);
   const [verification, setVerification] = useState<"sent" | "rest">("rest");
   const [verificationError, setVerificationError] = useState("");
+  const [isSecondProvider, setIsSecondProvider] = useState(false);
   const [error, action] = useFormState(
     register.bind(
       null,
       redirectAfterRegister,
       verificationStatuschange,
-      setVerificationError
+      setVerificationError,
+      secondProvider
     ),
     {}
   );
@@ -36,6 +39,10 @@ export function RegisterForm({ lang }: RegisterFormProps) {
 
   function redirectAfterRegister(path: string) {
     router.push(path);
+  }
+
+  function secondProvider() {
+    return setIsSecondProvider(true);
   }
 
   function verificationStatuschange() {
@@ -51,7 +58,11 @@ export function RegisterForm({ lang }: RegisterFormProps) {
       if (verified) {
         router.replace(`/${lang}`);
       } else {
-        await handleUserDelete(auth.currentUser);
+        if (isSecondProvider) {
+          await unlink(auth.currentUser, "password");
+        } else {
+          await handleUserDelete(auth.currentUser);
+        }
         setVerificationError(page.problemOccuredTryAgain);
       }
     } catch (error: any) {
