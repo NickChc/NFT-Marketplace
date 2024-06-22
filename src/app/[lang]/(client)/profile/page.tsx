@@ -7,6 +7,7 @@ import { Collection } from "@/app/[lang]/(client)/profile/_components/Collection
 import { DeleteAccount } from "@/app/[lang]/(client)/profile/_components/DeleteAccount";
 import { OfferList } from "@/app/[lang]/(client)/profile/_components/OfferList";
 import { Notification } from "@/app/[lang]/(client)/profile/_components/Notification";
+import { getProduct } from "../../_api/getProduct";
 
 interface ProfilePageProps {
   params: {

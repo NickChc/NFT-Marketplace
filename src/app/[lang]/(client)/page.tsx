@@ -22,20 +22,11 @@ export default async function HomePage({
   const { page } = await getDictionaries(lang);
 
   async function promiseResolve() {
-    await wait(5000);
     return Promise.all([
       getProducts(3, true),
       getProducts(undefined, false, true),
       getProducts(3, false, false, undefined, true),
     ]);
-  }
-
-  async function wait(dur: number): Promise<void> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, dur);
-    });
   }
 
   return (

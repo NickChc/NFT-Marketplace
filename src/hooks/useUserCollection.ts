@@ -1,4 +1,3 @@
-import { TProduct } from "@/@types/general";
 import { getProducts } from "@/app/[lang]/_api/getProducts";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { useGlobalProvider } from "@/providers/GlobalProvider";

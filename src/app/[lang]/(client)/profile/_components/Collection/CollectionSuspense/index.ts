@@ -1,0 +1,1 @@
+export { CollectionSuspense } from "./CollectionSuspense";
