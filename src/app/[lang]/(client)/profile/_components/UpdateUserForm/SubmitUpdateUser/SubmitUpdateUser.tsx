@@ -1,8 +1,9 @@
 "use client";
 
-import { useAuthProvider } from "@/providers/AuthProvider";
 import { useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
+import { useAuthProvider } from "@/providers/AuthProvider";
 
 interface SubmitUpdateUserProps {
   text: string;
@@ -22,13 +23,16 @@ export function SubmitUpdateUser({ text, pendingText }: SubmitUpdateUserProps) {
   }, [pending, changed]);
 
   return (
-    <button
-      onClick={(e) => setChanged(true)}
-      disabled={pending}
-      className="mt-3 bg-purple-800 p-2 w-full rounded-sm text-white hover:opacity-75 disabled:cursor-default disabled:opacity-75"
-      type="submit"
-    >
-      {pending ? pendingText : text}
-    </button>
+    <>
+      <div className="my-2"></div>
+      <DualButton
+        size="medium"
+        onClick={(e) => setChanged(true)}
+        disabled={pending}
+        type="submit"
+      >
+        {pending ? pendingText : text}
+      </DualButton>
+    </>
   );
 }

@@ -38,7 +38,7 @@ export default async function InfoPage({ params: { lang } }: InfoPageProps) {
 
           <ul className="flex flex-col gap-3 list-disc text-start mt-4 self-center pl-6">
             <li>
-              <span className="font-semibold">{page.gaming}:</span>
+              <span className="font-semibold">{page.gaming}: </span>
               {lang === "ka"
                 ? "მოთამაშეებს შეუძლიათ თამაშში უნიკალური ნივთების: ფლობა, გაცვლა ან გაყიდვა"
                 : "Players can own, trade, and sell unique in-game items."}

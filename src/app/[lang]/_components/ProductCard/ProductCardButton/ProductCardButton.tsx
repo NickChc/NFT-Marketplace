@@ -6,6 +6,7 @@ import { useAuthProvider } from "@/providers/AuthProvider";
 import Link from "next/link";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useGlobalProvider } from "@/providers/GlobalProvider";
+import { DualButton } from "../../DualButton";
 
 interface ProductCardButtonProps {
   product: TProduct;
@@ -27,21 +28,20 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
 
   if (product.owner?.isFrozen || product.openForBidding) {
     return (
-      <button
+      <DualButton
         onClick={handleClick}
         disabled={product.owner?.isFrozen}
-        className="bg-purple-800 text-white w-full mt-4 rounded-md hover:opacity-75 duration-100 disabled:cursor-default disabled:opacity-50 flex justify-center px-2 py-1"
       >
         {product.owner?.isFrozen
           ? translations.page.notAvailable
           : translations.page.bid}
-      </button>
+      </DualButton>
     );
   } else {
     return (
-      <button
+      <DualButton
+        size="asChild"
         disabled={product.owner?.isFrozen}
-        className="bg-purple-800 text-white w-full mt-4 rounded-md hover:opacity-75 duration-100 disabled:cursor-default disabled:opacity-50 disabled:px-2 disabled:py-1 flex justify-center"
       >
         {product.owner?.userId === currentUser?.id ? (
           <a
@@ -62,7 +62,7 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
             {translations.page.buy}
           </Link>
         )}
-      </button>
+      </DualButton>
     );
   }
 }

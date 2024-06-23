@@ -15,6 +15,7 @@ import { DeclineView } from "@/app/[lang]/(client)/profile/_components/OfferView
 import { AcceptView } from "@/app/[lang]/(client)/profile/_components/OfferView/AcceptView";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
 import { useUserNotifications } from "@/hooks/useUserNotifications";
+import { OfferViewSkeleton } from "./OfferViewSkeleton";
 
 interface OfferViewProps {
   offer: TOffer | null;
@@ -84,7 +85,7 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
         </span>
       )}
       {loading ? (
-        <LoadingIcon className="text-4xl animate-spin mx-auto" />
+        <OfferViewSkeleton />
       ) : offerItem ? (
         <>
           <div className="w-full relative aspect-video select-none">

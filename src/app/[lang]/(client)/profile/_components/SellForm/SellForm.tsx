@@ -8,6 +8,7 @@ import { formatCurrency } from "@/lib/formatters";
 import { sellProduct } from "@/app/[lang]/(client)/_actions/product";
 import { auth } from "@/firebase";
 import { useUserCollection } from "@/hooks/useUserCollection";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 interface SellFormProps {
   product: TProduct | null;
@@ -62,24 +63,16 @@ export function SellForm({ product, closeModal }: SellFormProps) {
       />
       {error !== "" && <div className="text-red-500">{error}</div>}
 
-      <button
-        disabled={loading || error !== ""}
-        className="bg-purple-800 px-2 py-1 w-full rounded-sm text-white hover:opacity-75 disabled:cursor-default disabled:opacity-75"
-        type="submit"
-      >
+      <DualButton disabled={loading || error !== ""} type="submit">
         {loading
           ? `${translations.page.processing}...`
           : `${translations.page.sellFor} ${formatCurrency(
               Number(price) || 0
             )}`}
-      </button>
-      <button
-        className="bg-white px-2 py-1 border-solid border rounded-sm border-purple-800 text-purple-800"
-        type="button"
-        onClick={closeModal}
-      >
+      </DualButton>
+      <DualButton variation="secondary" type="button" onClick={closeModal}>
         {translations.page.cancel}
-      </button>
+      </DualButton>
     </form>
   );
 }

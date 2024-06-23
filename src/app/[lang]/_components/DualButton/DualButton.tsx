@@ -3,13 +3,15 @@
 import { PropsWithChildren } from "react";
 
 interface DualButtonProps {
+  size?: "large" | "asChild" | "medium";
   type?: "button" | "submit";
-  variation?: "primary" | "secondary";
+  variation?: "primary" | "secondary" | "warning";
   disabled?: boolean;
-  onClick?: () => any;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
 }
 
 export function DualButton({
+  size,
   children,
   type,
   variation,
@@ -21,10 +23,20 @@ export function DualButton({
       onClick={onClick}
       disabled={disabled}
       type={type}
-      className={`px-2 py-1 border-solid border border-purple-800 disabled:pointer-events-none disabled:opacity-75 rounded-md w-full bg-purple-800 hover:opacity-75 duration-100 ${
+      className={`border-solid border border-purple-800 disabled:pointer-events-none rounded-md w-full bg-purple-800 hover:opacity-75 disabled:opacity-60 duration-100 ${
         variation === "secondary"
           ? "bg-white text-purple-800"
+          : variation === "warning"
+          ? "bg-red-500 text-white border-red-500"
           : "bg-purple-800 text-white"
+      } ${
+        size === "large"
+          ? "p-3"
+          : size === "asChild"
+          ? "flex"
+          : size === "medium"
+          ? "px-2 py-1 md:px-3 md:py-2"
+          : "px-2 py-1"
       }`}
     >
       {children}

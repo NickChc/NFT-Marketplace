@@ -12,6 +12,7 @@ import {
   User,
   reauthenticateWithCredential,
 } from "firebase/auth";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 interface ConfirmDeleteAccProps {
   lang: TLocale;
@@ -113,41 +114,46 @@ export function ConfirmDeleteAcc({
             {errorMessage !== "" && (
               <div className="text-red-500">{errorMessage}</div>
             )}
-            <button
-              className="w-full mt-6 px-2 py-1 md:px-3 md:py-2 border-solid border border-red-500 bg-red-500 text-white rounded-md disabled:opacity-75 disabled:cursor-default hover:opacity-75"
+            <div className="my-2"></div>
+            <DualButton
+              size="medium"
+              variation="warning"
               type="submit"
               disabled={loading}
             >
               {loading
                 ? `${translations.page.deleting}...`
                 : translations.page.delete}
-            </button>
-            <button
+            </DualButton>
+            <DualButton
+              size="medium"
+              variation="secondary"
               type="button"
-              className="w-full px-2 py-1 md:px-3 md:py-2 border-solid border border-purple-800 rounded-md text-purple-800 bg-gray-100"
               onClick={closeModal}
             >
               {translations.page.cancel}
-            </button>
+            </DualButton>
           </>
         ) : (
           <div className="flex items-center jsutify-between gap-3">
             {errorMessage === "" && (
-              <button
+              <DualButton
+                variation="warning"
+                size="medium"
                 disabled={loading}
                 type="submit"
-                className="w-full px-2 py-1 md:px-3 md:py-2 border-solid border border-red-500 bg-red-500 text-white rounded-md disabled:opacity-75 disabled:cursor-default hover:opacity-75"
               >
                 {translations.page.yes}
-              </button>
+              </DualButton>
             )}
-            <button
+            <DualButton
+              variation="secondary"
+              size="medium"
               onClick={closeModal}
               type="button"
-              className="w-full px-2 py-1 md:px-3 md:py-2 border-solid border border-purple-800 rounded-md text-purple-800 bg-gray-100"
             >
               {translations.page.no}
-            </button>
+            </DualButton>
           </div>
         )}
       </form>

@@ -37,12 +37,6 @@ export function ProfileData() {
         <DualButton onClick={() => setUpdateUser(currentUser)}>
           {translations.page.edit}
         </DualButton>
-        // <button
-        //   className="text-white p-1 w-full bg-purple-800 font-semibold rounded-md duration-100 hover:opacity-75 mt-3"
-        //   onClick={() => setUpdateUser(currentUser)}
-        // >
-        //   {translations.page.edit}
-        // </button>
       )}
       <hr className="w-full my-3" />
       <h3 className="truncate max-w-[95%]">

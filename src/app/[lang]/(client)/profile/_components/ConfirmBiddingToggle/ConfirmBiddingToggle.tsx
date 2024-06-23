@@ -7,6 +7,7 @@ import { TProduct } from "@/@types/general";
 import { toggleBidding } from "../../../_actions/product";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { useUserCollection } from "@/hooks/useUserCollection";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 interface ConfirmBiddingToggleProps {
   lang: TLocale;
@@ -52,19 +53,12 @@ export function ConfirmBiddingToggle({
             } be able to offer you money for ${bidItem.name}`}
       </h4>
       <div className="flex gap-4 md:gap-9 mt-6 justify-center">
-        <button
-          className="w-full px-2 py-1 md:px-3 md:py-2 border-solid border border-purple-800 bg-purple-800 text-white rounded-md disabled:opacity-50 disabled:cursor-default hover:opacity-75"
-          disabled={loading}
-          onClick={handleBidToggle}
-        >
+        <DualButton size="large" disabled={loading} onClick={handleBidToggle}>
           {translations.page.agree}
-        </button>
-        <button
-          className="w-full px-2 py-1 md:px-3 md:py-2 border-solid border border-purple-800 rounded-md text-purple-800"
-          onClick={closeModal}
-        >
+        </DualButton>
+        <DualButton size="large" variation="secondary" onClick={closeModal}>
           {translations.page.cancel}
-        </button>
+        </DualButton>
       </div>
     </div>
   );

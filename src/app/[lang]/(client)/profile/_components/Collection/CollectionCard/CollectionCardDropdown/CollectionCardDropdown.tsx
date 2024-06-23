@@ -43,7 +43,7 @@ export function CollectionCardDropdown({
   }, [open]);
 
   return (
-    <div className="relative">
+    <div className="relative mb-3">
       <span
         className={`flex items-center group duration-200 ${
           open ? "gap-6 mr-3 cursor-default" : "gap-3 mr-6 cursor-pointer"

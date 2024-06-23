@@ -16,6 +16,7 @@ import {
 import { useGlobalProvider } from "@/providers/GlobalProvider";
 import { useEffect, useState } from "react";
 import { useAuthProvider } from "@/providers/AuthProvider";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 interface UpdateUserFormProps {
   updateUser: TUser | null;
@@ -179,13 +180,14 @@ export function UpdateUserForm({
         text={translations.page.change}
         pendingText={`${translations.page.processing}...`}
       />
-      <button
-        className="bg-white p-2 border-solid border rounded-sm border-purple-800 text-purple-800"
+      <DualButton
+        size="medium"
+        variation="secondary"
         type="button"
         onClick={closeModal}
       >
         {translations.page.cancel}
-      </button>
+      </DualButton>
     </form>
   );
 }

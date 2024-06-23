@@ -1,0 +1,1 @@
+export { OfferViewSkeleton } from "./OfferViewSkeleton";
