@@ -12,6 +12,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { TLocale } from "../../../../../../../../i18n.config";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 interface FormProps {
   product: TProduct;
@@ -85,17 +86,17 @@ export function Form({ product, lang }: FormProps) {
           </div>
         )}
       </div>
-      <div>
-        <PaymentElement className="bg-blue-500 p-3 rounded-md" />
+      <div className="mb-4">
+        <PaymentElement className="bg-purple-800 p-3 rounded-md" />
       </div>
-      <button
+      <DualButton
+        size="large"
         disabled={loading || stripe == null || elements == null}
-        className="bg-purple-800 rounded-sm p-2 hover:opacity-75 duration-100 disabled:cursor-default disabled:opacity-50 mt-6"
       >
         {loading
           ? `${page.processing}...`
           : `${page.purchase} - ${formatCurrency(product.priceInCents / 100)}`}
-      </button>
+      </DualButton>
     </form>
   );
 }

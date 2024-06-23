@@ -6,6 +6,7 @@ import { TProduct } from "@/@types/general";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { returnProduct } from "@/app/[lang]/(client)/_actions/product";
 import { useDictionary } from "@/hooks/useDictionary";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 interface ConfirmReturnProps {
   returnItem: TProduct | null;
@@ -47,19 +48,12 @@ export function ConfirmReturn({
         you.`}
       </h4>
       <div className="flex gap-4 md:gap-9 mt-6 justify-center">
-        <button
-          className="w-full px-2 py-1 md:px-3 md:py-2 border-solid border border-purple-800 bg-purple-800 text-white rounded-md disabled:opacity-75 disabled:cursor-default"
-          disabled={loading}
-          onClick={handleReturn}
-        >
+        <DualButton size="large" disabled={loading} onClick={handleReturn}>
           {translations.page.agree}
-        </button>
-        <button
-          className="w-full px-2 py-1 md:px-3 md:py-2 border-solid border border-purple-800 rounded-md text-purple-800"
-          onClick={closeModal}
-        >
+        </DualButton>
+        <DualButton size="large" variation="secondary" onClick={closeModal}>
           {translations.page.cancel}
-        </button>
+        </DualButton>
       </div>
     </div>
   );

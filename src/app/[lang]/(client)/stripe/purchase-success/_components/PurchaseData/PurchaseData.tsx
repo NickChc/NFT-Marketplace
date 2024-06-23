@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { auth } from "@/firebase";
 import { useDictionary } from "@/hooks/useDictionary";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 interface PurchaseDataProps {
   product: TProduct;
@@ -35,11 +36,11 @@ export function PurchaseData({ product, isSuccess, lang }: PurchaseDataProps) {
 
   return (
     <>
-      <h4 className="text-xl md:text-2xl lg:text-3xl font-semibold px-3 py-6 sm:py-9">
+      <h4 className="text-xl md:text-2xl lg:text-3xl font-semibold px-3 py-6 sm:py-9 mx-auto max-w-7xl">
         {isSuccess && translations.page.congratulations} {product.name}
       </h4>
       <div className="flex flex-col sm:flex-row gap-4 items-stretch  p-3 mt-4 mx-auto max-w-7xl">
-        <div className="aspect-video flex-shrink-0 w-full sm:w-1/2 md:w-1/3 relative">
+        <div className="aspect-video flex-shrink-0 w-full sm:w-1/2 relative max-w-[700px]">
           <Image
             src={product.imagePath}
             fill
@@ -55,7 +56,7 @@ export function PurchaseData({ product, isSuccess, lang }: PurchaseDataProps) {
           <div className="text-lg">
             {formatCurrency(product.priceInCents / 100)}
           </div>
-          <button className="font-semibold bg-purple-800 rounded-sm overflow-hidden hover:opacity-75 duration-100 disabled:cursor-default disabled:opacity-50 mt-6 w-full flex ">
+          <DualButton size="asChild">
             {isSuccess ? (
               <a
                 className="w-full h-full p-2"
@@ -72,7 +73,7 @@ export function PurchaseData({ product, isSuccess, lang }: PurchaseDataProps) {
                 {translations.page.tryAgain}
               </Link>
             )}
-          </button>
+          </DualButton>
         </div>
       </div>
     </>

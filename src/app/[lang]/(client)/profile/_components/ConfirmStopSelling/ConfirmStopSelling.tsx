@@ -6,8 +6,9 @@ import { useGlobalProvider } from "@/providers/GlobalProvider";
 import { TProduct } from "@/@types/general";
 import { useState } from "react";
 import { auth } from "@/firebase";
-import { stopSelling } from "../../../_actions/product";
+import { stopSelling } from "@/app/[lang]/(client)/_actions/product";
 import { useUserCollection } from "@/hooks/useUserCollection";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 interface ConfirmStopSellingProps {
   lang: TLocale;
@@ -42,26 +43,19 @@ export function ConfirmStopSelling({
   if (stopSellingProduct == null) return null;
 
   return (
-    <div className="bg-[#fff] p-3 text-black w-[90%] sm:w-auto rounded-sm border-solid border border-purple-800">
+    <div className="bg-[#fff] p-3 sm:p-6 text-black w-[90%] sm:w-auto rounded-sm border-solid border border-purple-800">
       <h4 className="font-semibold sm:text-lg md:text-xl text-center">
         {lang === "ka"
           ? `დარწმუნებული ხართ, რომ აღარ გსურთ ${stopSellingProduct.name} -ის გაყიდვა?`
           : `Are you sure you no longer want to sell ${stopSellingProduct.name} ?`}
       </h4>
       <div className="flex gap-4 md:gap-9 mt-6 justify-center">
-        <button
-          className="w-full px-2 py-1 md:px-3 md:py-2 border-solid border border-purple-800 bg-purple-800 text-white rounded-md disabled:opacity-75 disabled:cursor-default"
-          disabled={loading}
-          onClick={handleStopSelling}
-        >
+        <DualButton size="large" disabled={loading} onClick={handleStopSelling}>
           {translations.page.agree}
-        </button>
-        <button
-          className="w-full px-2 py-1 md:px-3 md:py-2 border-solid border border-purple-800 rounded-md text-purple-800"
-          onClick={closeModal}
-        >
+        </DualButton>
+        <DualButton size="large" variation="secondary" onClick={closeModal}>
           {translations.page.cancel}
-        </button>
+        </DualButton>
       </div>
     </div>
   );

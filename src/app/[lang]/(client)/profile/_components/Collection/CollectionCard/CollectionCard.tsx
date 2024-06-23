@@ -5,6 +5,7 @@ import { TProduct } from "@/@types/general";
 import { useDictionary } from "@/hooks/useDictionary";
 import Image from "next/image";
 import { CollectionCardDropdown } from "@/app/[lang]/(client)/profile/_components/Collection/CollectionCard/CollectionCardDropdown";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 interface CollectionCardProps {
   product: TProduct;
@@ -40,7 +41,7 @@ export function CollectionCard({
       </div>
       <div className="flex flex-col gap-3 mt-4 items-end">
         <CollectionCardDropdown product={product} />
-        <button className="bg-purple-800 text-white w-full rounded-md hover:opacity-75 duration-100 disabled:cursor-default disabled:opacity-50 disabled:px-2 disabled:py-1 flex justify-center overflow-hidden">
+        <DualButton size="asChild">
           <a
             className="min-w-full min-h-full px-2 py-1"
             download
@@ -48,7 +49,7 @@ export function CollectionCard({
           >
             {translations.page.download}
           </a>
-        </button>
+        </DualButton>
       </div>
     </div>
   );
