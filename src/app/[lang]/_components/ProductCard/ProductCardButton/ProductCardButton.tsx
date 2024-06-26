@@ -26,12 +26,12 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
     setOfferItem(product);
   }
 
-  if (product.owner?.isFrozen || product.openForBidding) {
+  if (
+    (product.owner?.isFrozen || product.openForBidding) &&
+    product.owner?.userId !== currentUser?.id
+  ) {
     return (
-      <DualButton
-        onClick={handleClick}
-        disabled={product.owner?.isFrozen}
-      >
+      <DualButton onClick={handleClick} disabled={product.owner?.isFrozen}>
         {product.owner?.isFrozen
           ? translations.page.notAvailable
           : translations.page.bid}
@@ -39,10 +39,7 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
     );
   } else {
     return (
-      <DualButton
-        size="asChild"
-        disabled={product.owner?.isFrozen}
-      >
+      <DualButton size="asChild" disabled={product.owner?.isFrozen}>
         {product.owner?.userId === currentUser?.id ? (
           <a
             className="min-w-full min-h-full px-2 py-1 rounded-md"
