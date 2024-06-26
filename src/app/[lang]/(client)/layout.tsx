@@ -5,6 +5,7 @@ import { Header } from "@/app/[lang]/_components/Header";
 import { NavLink } from "@/app/[lang]/_components/NavLink";
 import { BackgroundImage } from "@/app/[lang]/(client)/_component/BackgroundImage";
 import { Modal } from "../_components/Modal";
+import { ProductViewMore } from "./_component/ProductViewMore";
 
 interface ClientLayoutProps {
   params: {
@@ -27,6 +28,7 @@ export default async function ClientLayout({
       </Header>
       <BackgroundImage />
       <Modal lang={lang} />
+      <ProductViewMore lang={lang} />
 
       <div className="mx-auto w-full md:w-[90%] lg:w-[80%] bg-white dark:bg-gray-900 z-20 relative">
         {children}

@@ -9,6 +9,7 @@ import { sellProduct } from "@/app/[lang]/(client)/_actions/product";
 import { auth } from "@/firebase";
 import { useUserCollection } from "@/hooks/useUserCollection";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
+import { useAuthProvider } from "@/providers/AuthProvider";
 
 interface SellFormProps {
   product: TProduct | null;
@@ -22,6 +23,7 @@ export function SellForm({ product, closeModal }: SellFormProps) {
 
   const translations = useDictionary();
   const { getUserCollection } = useUserCollection();
+  const { getCurrentUser } = useAuthProvider();
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
@@ -39,7 +41,7 @@ export function SellForm({ product, closeModal }: SellFormProps) {
       if (Number(price) < 1) return setError(translations.page.priceTooLow);
       setLoading(true);
       await sellProduct(Number(price) * 100, product, auth.currentUser.email);
-      getUserCollection();
+      await getCurrentUser(undefined, auth.currentUser.uid);
       closeModal();
     } catch (error: any) {
       console.log(error.message);

@@ -5,7 +5,8 @@ import { db } from "@/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { getUser } from "@/app/[lang]/_api/getUser";
 import { revalidatePath } from "next/cache";
-import { updateUserNotes } from "../../_api/updateUserNotes";
+import { updateUserNotes } from "@/app/[lang]/_api/updateUserNotes";
+import { getNotifications } from "@/app/[lang]/_api/getNotifications";
 
 export async function returnProduct(product: TProduct, email: string) {
   const user = await getUser(email);
@@ -49,7 +50,7 @@ export async function sellProduct(
 
   const userDoc = doc(db, "users", user?.id);
 
-  return await Promise.all([
+  await Promise.all([
     updateDoc(productDoc, {
       priceInCents,
       isAvailable: true,
@@ -59,7 +60,10 @@ export async function sellProduct(
     updateDoc(userDoc, {
       offers: user.offers.filter((off) => off.productId !== product.id),
     }),
+    updateUserNotes(user, product.id),
   ]);
+
+  revalidatePath("/*");
 }
 
 export async function stopSelling(product: TProduct, email: string) {
