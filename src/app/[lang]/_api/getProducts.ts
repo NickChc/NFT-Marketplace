@@ -16,6 +16,7 @@ export async function getProducts(
         query(
           productCollectionRef,
           where("isAvailable", "==", true),
+          // where("owner.isFrozen", "==", false),
           orderBy("createdAt", "desc"),
           limit(limitAt)
         )
@@ -25,6 +26,7 @@ export async function getProducts(
         query(
           productCollectionRef,
           where("isAvailable", "==", true),
+          // where("owner.isFrozen", "==", false),
           orderBy("createdAt", "desc")
         )
       );

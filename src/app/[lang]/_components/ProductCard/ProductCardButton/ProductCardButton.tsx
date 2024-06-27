@@ -6,7 +6,7 @@ import { useAuthProvider } from "@/providers/AuthProvider";
 import Link from "next/link";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useGlobalProvider } from "@/providers/GlobalProvider";
-import { DualButton } from "../../DualButton";
+import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 interface ProductCardButtonProps {
   product: TProduct;

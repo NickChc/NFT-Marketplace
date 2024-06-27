@@ -150,6 +150,8 @@
     "confirmIdToChange": "დაადასტურეთ ვინაობა, რომ შეცვალოთ ელ. ფოსტა",
     "deleting": "იშლება",
     "acceptAssurance": "დარწმუნებლი ხართ, რომ გსურთ ამ შემოთავაზების მიღება",
-    "marketPriceIs": "საბაზრო ფასია"
+    "marketPriceIs": "საბაზრო ფასია",
+    "all": "ყველა",
+    "filterProducts": "გაფილტრვა"
   }
 }
