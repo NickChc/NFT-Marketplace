@@ -12,6 +12,7 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { auth, googleProvider } from "@/firebase";
 import { GoogleIcon } from "@/assets/icons";
 import { LoginFormPopup } from "@/app/[lang]/(client)/auth/_components/LoginForm/LoginFormPopup";
+import { PROVIDER } from "@/config/storageKeys";
 
 interface FieldErrors {
   email?: string[];
@@ -53,6 +54,7 @@ export function LoginForm({ lang }: LoginFormProps) {
     try {
       setLoading(true);
       await signInWithPopup(auth, googleProvider);
+      localStorage.setItem(PROVIDER, "google");
       router.replace(`/${lang}`);
     } catch (error: any) {
       console.log(error.message);
