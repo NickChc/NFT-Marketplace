@@ -16,6 +16,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { PROVIDER } from "@/config/storageKeys";
 
 interface AuthProviderprops {
   lang: TLocale;
@@ -67,6 +68,9 @@ export function AuthProvider({
         }
         return setCurrentUser(user);
       } else {
+        const provider = localStorage.getItem(PROVIDER);
+        if (provider == null || provider !== "google") return;
+
         const newUser: Omit<TUser, "id"> = {
           uid,
           name: "",
@@ -80,6 +84,7 @@ export function AuthProvider({
 
         await createUser(newUser);
         getCurrentUser(email);
+        localStorage.removeItem(PROVIDER);
       }
     } catch (error: any) {
       console.log(error.message);
