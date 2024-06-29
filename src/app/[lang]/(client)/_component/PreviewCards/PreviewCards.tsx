@@ -9,12 +9,14 @@ interface PreviewCardsProps {
   lang: TLocale;
   products: TProduct[] | undefined;
   title: string;
+  href?: string;
 }
 
 export async function PreviewCards({
   lang,
   products,
   title,
+  href,
 }: PreviewCardsProps) {
   const { page } = await getDictionaries(lang);
 
@@ -28,7 +30,7 @@ export async function PreviewCards({
         </h2>
         <hr className="w-full sm:hidden my-2" />
         <Link
-          href={`/${lang}/products`}
+          href={href || `/${lang}/products`}
           className="flex items-center gap-x-4 text-lg sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"
         >
           {page.viewAll}

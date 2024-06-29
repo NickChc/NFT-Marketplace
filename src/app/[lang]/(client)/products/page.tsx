@@ -48,7 +48,7 @@ export default async function ProductsPage({
         <PageHeader>{page.products}</PageHeader>
         <FilterProducts />
       </div>
-      <div className="p-1 gap-x-3 gap-y-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-14">
+      <div className="p-1 gap-x-3 gap-y-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-14 w-full">
         <Suspense
           fallback={
             <>

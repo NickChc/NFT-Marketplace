@@ -19,8 +19,18 @@ export async function PreviewCardsSuspense({
   return (
     <>
       <PreviewCards lang={lang} products={newest} title={page.newest} />
-      <PreviewCards lang={lang} products={forBidding} title={page.forBidding} />
-      <PreviewCards lang={lang} products={withoutOwner} title={page.forSale} />
+      <PreviewCards
+        lang={lang}
+        products={forBidding}
+        title={page.forBidding}
+        href={`/${lang}/products?filterBy=forBidding`}
+      />
+      <PreviewCards
+        lang={lang}
+        products={withoutOwner}
+        title={page.forSale}
+        href={`/${lang}/products?filterBy=forSale`}
+      />
     </>
   );
 }

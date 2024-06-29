@@ -31,7 +31,7 @@ export function FilterProducts() {
         {translations.page.filterProducts} -{" "}
       </label>
       <select
-        className="p-1 cursor-pointer dark:bg-gray-800 bg-white border-solid border border-purple-800 rounded-md outline-none"
+        className="p-1 cursor-pointer dark:bg-gray-800 text-black dark:text-white border-solid border border-purple-800 rounded-md outline-none"
         value={filterBy}
         onChange={(e) => {
           if (e.target.value === TFilterBy_Enum.ALL) {
@@ -42,13 +42,11 @@ export function FilterProducts() {
           router.refresh();
         }}
       >
-        <option className="hover:bg-red-500 " value={TFilterBy_Enum.ALL}>
-          {translations.page.all}
-        </option>
-        <option className="hover:bg-red-500 " value={TFilterBy_Enum.FORBIDDING}>
+        <option value={TFilterBy_Enum.ALL}>{translations.page.all}</option>
+        <option value={TFilterBy_Enum.FORBIDDING}>
           {translations.page.forBidding}
         </option>
-        <option className="hover:bg-red-500 " value={TFilterBy_Enum.FORSALE}>
+        <option value={TFilterBy_Enum.FORSALE}>
           {translations.page.forSale}
         </option>
       </select>
