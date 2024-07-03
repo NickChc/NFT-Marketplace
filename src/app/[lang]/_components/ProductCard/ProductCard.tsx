@@ -30,7 +30,7 @@ export async function ProductCard({ product, lang, text }: ProductCardProps) {
         {product.description}
       </p>
       <div className="min-h-16 flex flex-col gap-3 my-3 sm:block">
-        <h4 className="text-gray-500 font-semibold text-xl md:text-lg lg:text-xl">
+        <h4 className="text-gray-500 font-semibold text-base md:text-lg xl:text-xl truncate ">
           {product.openForBidding
             ? `${text.paid} - ${formatCurrency(
                 product.owner?.paidInCents! / 100

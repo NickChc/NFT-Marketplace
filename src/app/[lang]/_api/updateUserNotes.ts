@@ -1,6 +1,6 @@
 import { TNotification, TUser } from "@/@types/general";
 import { db, notificationsCollectionRef } from "@/firebase";
-import { doc, getDocs, query, where, writeBatch } from "firebase/firestore";
+import { doc, getDocs, query, updateDoc, where, writeBatch } from "firebase/firestore";
 
 export async function updateUserNotes(
   user: TUser | null,

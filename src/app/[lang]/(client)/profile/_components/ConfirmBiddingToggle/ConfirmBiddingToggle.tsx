@@ -4,9 +4,8 @@ import { TLocale } from "../../../../../../../i18n.config";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useState } from "react";
 import { TProduct } from "@/@types/general";
-import { toggleBidding } from "../../../_actions/product";
+import { toggleBidding } from "@/app/[lang]/(client)/_actions/product";
 import { useAuthProvider } from "@/providers/AuthProvider";
-import { useUserCollection } from "@/hooks/useUserCollection";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
 
 interface ConfirmBiddingToggleProps {
@@ -22,15 +21,16 @@ export function ConfirmBiddingToggle({
 }: ConfirmBiddingToggleProps) {
   const translations = useDictionary();
   const [loading, setLoading] = useState(false);
-  const { currentUser } = useAuthProvider();
-  const { getUserCollection } = useUserCollection();
+  const { currentUser, getCurrentUser } = useAuthProvider();
 
   async function handleBidToggle() {
     try {
       setLoading(true);
+
       if (bidItem == null || currentUser?.email == null) return;
+
       await toggleBidding(bidItem, currentUser.email);
-      getUserCollection();
+      await getCurrentUser(currentUser.email);
       closeModal();
     } catch (error: any) {
       console.log(error.message);
