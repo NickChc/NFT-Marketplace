@@ -34,6 +34,8 @@ export function Form({ product, lang }: FormProps) {
     try {
       e.preventDefault();
 
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+
       if (product.owner?.userId === currentUser?.id) {
         return setErrorMessage(page.alreadyOwn);
       }
@@ -122,9 +124,10 @@ export function Form({ product, lang }: FormProps) {
         )}
       </div>
       <div className="text-red-500">
-        {lang === "ka"
-          ? "თქვენი ანგარიში გაყინულია!"
-          : "Your account is frozen!"}
+        {currentUser?.isFrozen &&
+          (lang === "ka"
+            ? "თქვენი ანგარიში გაყინულია!"
+            : "Your account is frozen!")}
       </div>
       <div className="mb-4">
         <PaymentElement className="bg-purple-800 p-3 rounded-md" />

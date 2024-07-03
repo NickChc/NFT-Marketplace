@@ -17,7 +17,8 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
   const { currentUser } = useAuthProvider();
   const { setOfferItem } = useGlobalProvider();
   const translations = useDictionary();
-
+  const { page } = translations;
+  const isCurrentUsers = currentUser?.id === product.owner?.userId;
   const encodedEmail = currentUser ? encodeURIComponent(currentUser.email) : "";
 
   function handleClick() {
@@ -26,39 +27,39 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
     setOfferItem(product);
   }
 
-  if (
-    (product.owner?.isFrozen || product.openForBidding) &&
-    product.owner?.userId !== currentUser?.id
-  ) {
+  if (product.owner?.isFrozen) {
+    return <DualButton>{page.notAvailable}</DualButton>;
+  } else if (product.openForBidding) {
     return (
-      <DualButton onClick={handleClick} disabled={product.owner?.isFrozen}>
-        {product.owner?.isFrozen
-          ? translations.page.notAvailable
-          : translations.page.bid}
-      </DualButton>
-    );
-  } else {
-    return (
-      <DualButton size="asChild" disabled={product.owner?.isFrozen}>
-        {product.owner?.userId === currentUser?.id ? (
+      <DualButton
+        size={isCurrentUsers ? "asChild" : undefined}
+        onClick={handleClick}
+      >
+        {isCurrentUsers ? (
           <a
             className="min-w-full min-h-full px-2 py-1 rounded-md"
             href={`/${lang}/products/${product.id}/download?email=${encodedEmail}`}
           >
-            {translations.page.download}
+            {page.download}
           </a>
         ) : (
-          <Link
-            href={
-              currentUser
-                ? `/${lang}/products/${product.id}/buy`
-                : `/${lang}/auth/sign-in`
-            }
-            className="min-w-full min-h-full px-2 py-1 rounded-md"
-          >
-            {translations.page.buy}
-          </Link>
+          page.bid
         )}
+      </DualButton>
+    );
+  } else {
+    return (
+      <DualButton size="asChild">
+        <Link
+          className="min-w-full min-h-full px-2 py-1 rounded-md"
+          href={
+            currentUser
+              ? `/${lang}/products/${product.id}/buy`
+              : `/${lang}/auth/sign-in`
+          }
+        >
+          {page.buy}
+        </Link>
       </DualButton>
     );
   }
