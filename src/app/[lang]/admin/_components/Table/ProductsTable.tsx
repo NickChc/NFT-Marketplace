@@ -14,7 +14,7 @@ export async function ProductsTable({ lang }: TableProps) {
   const { page } = await getDictionaries(lang);
 
   return (
-    <table className="max-w-full w-full mt-9 mx-auto text-[.7rem] sm:text-sm md:text-base">
+    <table className="max-w-full w-full mt-4 sm:mt-9 mx-auto text-[.7rem] sm:text-sm md:text-base">
       <thead>
         <tr className="text-sm md:text-xl lg:text-2xl">
           <th className="py-4">
