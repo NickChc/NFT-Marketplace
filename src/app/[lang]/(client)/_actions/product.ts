@@ -60,7 +60,6 @@ export async function sellProduct(
     updateDoc(userDoc, {
       offers: user.offers.filter((off) => off.productId !== product.id),
     }),
-    updateUserNotes(user, product.id),
   ]);
 
   revalidatePath("/*");
@@ -73,13 +72,9 @@ export async function stopSelling(product: TProduct, email: string) {
 
   if (user == null || user.isFrozen) return;
 
-  const originalPrice =
-    user.ownings.find((item) => item.productId === product.id)?.paidInCents ||
-    product.priceInCents;
-
   return await updateDoc(productDoc, {
     isAvailable: false,
-    priceInCents: originalPrice,
+    priceInCents: product.originalPriceInCents,
   });
 }
 
@@ -90,8 +85,22 @@ export async function toggleBidding(product: TProduct, email: string) {
 
   if (user == null || user.isFrozen) return;
 
-  await updateDoc(productDoc, {
-    isAvailable: false,
-    openForBidding: !product.openForBidding,
-  });
+  const userDoc = doc(db, "users", user.id);
+
+  let promises = [];
+  if (product.openForBidding) {
+    promises.push(updateUserNotes(user, product.id));
+  }
+
+  promises.push(
+    updateDoc(productDoc, {
+      isAvailable: false,
+      openForBidding: !product.openForBidding,
+    }),
+    updateDoc(userDoc, {
+      offers: user.offers.filter((offer) => offer.productId !== product.id),
+    })
+  );
+
+  await Promise.all(promises);
 }

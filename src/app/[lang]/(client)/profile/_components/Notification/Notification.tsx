@@ -71,7 +71,7 @@ export function Notification({ lang }: NotificationProps) {
       </span>
       {lang === "ka" ? (
         <>
-          გილოცავთ! თქვენი შემოთავაზება {congratsOn} -სთან დაკავშირებით მიიღეს.{" "}
+          გილოცავთ! თქვენი შემოთავაზება {congratsOn} -თან დაკავშირებით მიიღეს.{" "}
           <br /> თქვენ ახლა ხართ ამ NFT -ს მფლობელი.
         </>
       ) : (
