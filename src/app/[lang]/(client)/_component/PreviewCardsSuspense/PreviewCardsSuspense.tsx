@@ -21,13 +21,13 @@ export async function PreviewCardsSuspense({
       <PreviewCards lang={lang} products={newest} title={page.newest} />
       <PreviewCards
         lang={lang}
-        products={forBidding}
+        products={forBidding?.slice(0, 3)}
         title={page.forBidding}
         href={`/${lang}/products?filterBy=forBidding`}
       />
       <PreviewCards
         lang={lang}
-        products={withoutOwner}
+        products={withoutOwner?.slice(0, 3)}
         title={page.forSale}
         href={`/${lang}/products?filterBy=forSale`}
       />
