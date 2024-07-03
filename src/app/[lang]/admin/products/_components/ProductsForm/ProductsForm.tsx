@@ -29,7 +29,7 @@ export function ProductsForm({ product }: ProductsFormProps) {
   const dictionary = useDictionary();
 
   return (
-    <form action={action} className="flex flex-col gap-y-4 max-w-4xl mt-9">
+    <form action={action} className="flex flex-col gap-y-4 max-w-4xl mt-9 pb-9">
       <FormInput
         label={dictionary.page.name}
         name="name"
@@ -113,6 +113,8 @@ export function ProductsForm({ product }: ProductsFormProps) {
           height={400}
         />
       )}
+
+      <hr className="invisible my-4" />
 
       <SubmitButton isEdit={product != null} />
     </form>
