@@ -1,11 +1,7 @@
-import { TLocale, i18n } from "../../../../../i18n.config";
 import { z } from "zod";
-import en from "@/dictionaries/en.json";
-import ka from "@/dictionaries/ka.json";
 import { getUser } from "@/app/[lang]/_api/getUser";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
-import { User, updateEmail } from "firebase/auth";
 
 const updateValuesSchema = z.object({
   name: z.string().min(1),

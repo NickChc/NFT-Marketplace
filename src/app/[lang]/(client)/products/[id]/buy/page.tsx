@@ -15,6 +15,8 @@ interface BuyPageProps {
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
+
+
 export default async function BuyPage({ params }: BuyPageProps) {
   const [{ page }, product] = await Promise.all([
     getDictionaries(params.lang),

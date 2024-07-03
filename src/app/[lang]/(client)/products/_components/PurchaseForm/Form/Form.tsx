@@ -40,8 +40,14 @@ export function Form({ product, lang }: FormProps) {
 
       setLoading(true);
 
-      if (auth.currentUser == null || stripe == null || elements == null)
+      if (
+        auth.currentUser == null ||
+        stripe == null ||
+        elements == null ||
+        currentUser?.isFrozen
+      ) {
         return;
+      }
 
       stripe
         .confirmPayment({
@@ -115,12 +121,19 @@ export function Form({ product, lang }: FormProps) {
           </div>
         )}
       </div>
-      <div className="mb-4" id="formHolder">
+      <div className="text-red-500">
+        {lang === "ka"
+          ? "თქვენი ანგარიში გაყინულია!"
+          : "Your account is frozen!"}
+      </div>
+      <div className="mb-4">
         <PaymentElement className="bg-purple-800 p-3 rounded-md" />
       </div>
       <DualButton
         size="large"
-        disabled={loading || stripe == null || elements == null}
+        disabled={
+          loading || stripe == null || elements == null || currentUser?.isFrozen
+        }
       >
         {loading
           ? `${page.processing}...`

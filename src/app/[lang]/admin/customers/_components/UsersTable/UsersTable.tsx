@@ -16,26 +16,26 @@ export async function UsersTable({ lang }: UsersTableProps) {
 
   if (users == null) return <h1>{page.noUsersFound}</h1>;
   return (
-    <table className="max-w-full w-full mt-9 mx-auto text-[.7rem] sm:text-sm md:text-base">
+    <table className="w-[90%] sm:w-full mt-9 mx-auto">
       <thead>
         <tr className="text-sm md:text-xl lg:text-2xl">
           <th className="py-4">
             <span className="sr-only">Owns Something</span>
           </th>
-          <th className="py-4">{page.name}</th>
-          <th className="py-4">{page.email}</th>
-          <th className="py-4">{page.totalSpent}</th>
-          <th className="py-4">{page.owns}</th>
-          <th className="py-4">
+          <th className="py-4 whitespace-nowrap`">{page.name}</th>
+          <th className="py-4 whitespace-nowrap">{page.email}</th>
+          <th className="py-4 whitespace-nowrap">{page.totalSpent}</th>
+          <th className="py-4 whitespace-nowrap">{page.owns}</th>
+          <th className="py-4 whitespace-nowrap">
             <span className="sr-only">Actions</span>
           </th>
         </tr>
       </thead>
-      <tbody className="min-h-96">
+      <tbody className="min-h-96 text-[.55rem] sm:text-base lg:text-xl">
         {users?.map((user) => {
           return (
             <tr key={user.id}>
-              <td className="text-base sm:text-lg md:text-2xl py-4">
+              <td className="text-[.65rem] sm:text-base md:text-2xl py-4">
                 {user.isFrozen ? (
                   <FilledCircleIcon className="text-red-500" />
                 ) : user.ownings.length > 0 ? (
@@ -47,13 +47,17 @@ export async function UsersTable({ lang }: UsersTableProps) {
               <td className="truncate text-center py-4">
                 {` ${user.name} ${user.surname}`}
               </td>
-              <td className="truncate text-center py-4">{user.email}</td>
+              <td className="truncate max-w-10 sm:max-w-20 md:max-w-40 text-center py-4">
+                {user.email}
+              </td>
               <td className="truncate text-center py-4">
                 {formatCurrency(user.spentInCents / 100)}
               </td>
-              <td className="truncate text-center py-4">
-                {user.ownings.length > 0
-                  ? user.ownings?.[0].productName
+              <td className="truncate text-center py-4 max-w-10 sm:max-w-20 md:max-w-40">
+                {user.ownings.length > 1
+                  ? user.ownings.length
+                  : user.ownings.length > 0
+                  ? user.ownings[0].productName
                   : page.ownsNothing}
               </td>
               <td className="max-w-30 sm:max-w-auto text-center py-4">

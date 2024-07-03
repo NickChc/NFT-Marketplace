@@ -43,17 +43,20 @@ export default async function AdminDashboard({
       <PageHeader>
         {lang === "en" ? page.dashboard.toUpperCase() : page.dashboard}
       </PageHeader>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mx-auto mt-9 gap-x-4 place-items-center w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-3 mx-auto mt-9 gap-x-4 place-items-center w-full">
         <DashboardCard
           title={page.sales}
           subtitle={`${formatNumber(orders?.length || 0)} ${page.orders}`}
           body={`${formatCurrency((totalPrice || 0) / 100)}`}
         />
+        <hr className="w-full block sm:hidden my-3" />
         <DashboardCard
           title={page.customers}
           subtitle={`${formatCurrency(avarageSpent)} ${page.avarageSpent}`}
           body={`${formatNumber(users?.length || 0)} ${page.users}`}
         />
+        <hr className="w-full block sm:hidden my-3" />
+
         <DashboardCard
           title={page.products}
           subtitle={`${formatNumber(availableProducts)} ${page.available}`}
