@@ -10,9 +10,10 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TLocale } from "../../../../../../../../i18n.config";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
+import { CheckIcon, CopyIcon } from "@/assets/icons";
 
 interface FormProps {
   product: TProduct;
@@ -27,6 +28,7 @@ export function Form({ product, lang }: FormProps) {
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [copied, setCopied] = useState<boolean>(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     try {
@@ -73,20 +75,47 @@ export function Form({ product, lang }: FormProps) {
     }
   }
 
+  useEffect(() => {
+    if (copied) {
+      setTimeout(() => setCopied(false), 1000);
+    }
+  }, [copied]);
+
   return (
     <form
       className="mt-4 flex flex-col gap-4 text-2xl text-white dark:text-white pb-6"
       onSubmit={handleSubmit}
     >
       <div>
-        <h2>{page.checkout}</h2>
+        <div className="flex flex-col sm:flex-row items-start gap-y-3 sm:items-center justify-between px-3">
+          <h2>{page.checkout}</h2>
+          <span
+            className="flex items-center gap-x-3 cursor-pointer hover:text-purple-800 duration-150 hover:underline text-xl md:text-2xl"
+            onClick={() => {
+              navigator.clipboard.writeText("4242 4242 4242 4242");
+              setCopied(true);
+            }}
+          >
+            <CheckIcon
+              className={`duration-200 transition-transform rounded-full ${
+                copied ? "scale-100" : "absolute scale-0"
+              }`}
+            />
+            <CopyIcon
+              className={`duration-200 transition-transform ${
+                copied ? "absolute scale-0" : "scale-100"
+              }`}
+            />{" "}
+            4242 4242 4242 4242
+          </span>
+        </div>
         {errorMessage && (
           <div className="text-red-500 text-lg sm:text-xl md:text-2xl">
             {errorMessage}
           </div>
         )}
       </div>
-      <div className="mb-4">
+      <div className="mb-4" id="formHolder">
         <PaymentElement className="bg-purple-800 p-3 rounded-md" />
       </div>
       <DualButton
