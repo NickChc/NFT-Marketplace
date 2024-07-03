@@ -1,5 +1,6 @@
 "use client";
 
+import { TLocale } from "../../../../../../../i18n.config";
 import { TProduct } from "@/@types/general";
 import { DotsIcon } from "@/assets/icons";
 import { useState, useEffect } from "react";
@@ -8,7 +9,6 @@ import {
   deleteProduct,
   toggleAvailability,
 } from "@/app/[lang]/admin/_actions/products";
-import { TLocale } from "../../../../../../../i18n.config";
 import Link from "next/link";
 import { useDictionary } from "@/hooks/useDictionary";
 
@@ -25,6 +25,8 @@ export function DropdownMenu({ product, lang }: DropdownMenuProps) {
 
   async function toggleAvailable() {
     try {
+      if (product.owner != null) return;
+
       await toggleAvailability(product, !product.isAvailable);
     } catch (error: any) {
       console.log(error.message);
@@ -68,26 +70,30 @@ export function DropdownMenu({ product, lang }: DropdownMenuProps) {
       {open && (
         <div className="absolute top-6 right-6 p-1 flex flex-col items-start z-50 bg-white rounded-md">
           <button
-            className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 rounded-t-md dark:text-black"
+            disabled={product.owner != null}
+            className="w-full cursor-pointer disabled:pointer-events-none disabled:opacity-75 text-left p-1 hover:bg-gray-300 rounded-t-md dark:text-black"
             onClick={toggleAvailable}
           >
             {product.isAvailable
               ? translations.page.deactivate
               : translations.page.activate}
           </button>
-          <button className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 dark:text-black">
+          <button
+            disabled={product.owner != null}
+            className="w-full cursor-pointer disabled:pointer-events-none disabled:opacity-75 text-left p-1 hover:bg-gray-300 dark:text-black"
+          >
             <Link href={`/${lang}/admin/products/${product.id}/edit`}>
               {translations.page.edit}
             </Link>
           </button>
-          <button className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 dark:text-black">
+          <button className="w-full cursor-pointer disabled:pointer-events-none disabled:opacity-75 text-left p-1 hover:bg-gray-300 dark:text-black">
             <Link href={`/${lang}/admin/products/${product.id}/download`}>
               {translations.page.download}
             </Link>
           </button>
           <button
             disabled={product.owner?.userId != null}
-            className="w-full cursor-pointer disabled:cursor-default bg-red-300 text-left p-1 hover:text-red-800 disabled:hover:text-black dark:disabled:hover:text-black rounded-b-md dark:text-black dark:hover:text-red-800"
+            className="w-full cursor-pointer disabled:pointer-events-none disabled:opacity-75 bg-red-300 text-left p-1 hover:text-red-800 disabled:hover:text-black dark:disabled:hover:text-black rounded-b-md dark:text-black dark:hover:text-red-800"
             onClick={handleDelete}
           >
             {translations.page.delete}
