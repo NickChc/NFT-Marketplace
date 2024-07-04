@@ -25,6 +25,7 @@ export default async function ProductsPage({
   const { page } = await getDictionaries(params.lang);
 
   const filter = searchParams.filterBy;
+  const query = filter ? (filter as TFilterBy_Enum) : ("all" as TFilterBy_Enum);
 
   async function productsFetcher(): Promise<TProduct[] | undefined> {
     if (filter === "forBidding") {
@@ -62,9 +63,7 @@ export default async function ProductsPage({
           }
         >
           <ProductSuspense
-            query={
-              filter ? (filter as TFilterBy_Enum) : ("all" as TFilterBy_Enum)
-            }
+            query={query}
             productsFetcher={productsFetcher}
             lang={params.lang}
           />

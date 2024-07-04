@@ -49,8 +49,7 @@ export function ProductViewMore() {
 
   return (
     <div
-      className="fixed min-h-dvh top-0 bottom-0 right-0 left-0 z-50 grid place-items-center backdrop-blur-sm
-      "
+      className="fixed min-h-dvh top-0 bottom-0 right-0 left-0 z-50 grid place-items-center backdrop-blur-sm"
       onMouseDown={() => {
         if (withoutImageParam !== "") {
           router.push(`${pathname}?${withoutImageParam}`);
@@ -60,7 +59,7 @@ export function ProductViewMore() {
       }}
     >
       <div
-        className="w-1/2 bg-white py-6 relative"
+        className="w-1/2 bg-white py-6 relative border-solid border border-purple-700 rounded-md"
         onMouseDown={(e) => e.stopPropagation()}
       >
         <span

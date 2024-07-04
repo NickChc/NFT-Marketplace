@@ -152,6 +152,7 @@
     "acceptAssurance": "Are you sure you want to accept this offer for",
     "marketPriceIs": "Market price is",
     "all": "All",
-    "filterProducts": "Filter Products"
+    "filterProducts": "Filter Products",
+    "noProducts": "No Products"
   }
 }

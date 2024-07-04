@@ -1,1 +1,1 @@
-export { FilterProducts } from "./FilterProducts";
+export { FilterProducts, TFilterBy_Enum } from "./FilterProducts";
