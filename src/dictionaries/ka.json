@@ -152,6 +152,7 @@
     "acceptAssurance": "დარწმუნებლი ხართ, რომ გსურთ ამ შემოთავაზების მიღება",
     "marketPriceIs": "საბაზრო ფასია",
     "all": "ყველა",
-    "filterProducts": "გაფილტრვა"
+    "filterProducts": "გაფილტრვა",
+    "noProducts": "ცარიელია"
   }
 }
