@@ -64,7 +64,7 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
 
   return (
     <div
-      className="fixed min-h-dvh top-0 bottom-0 right-0 left-0 z-50 grid place-items-center backdrop-blur-sm"
+      className="fixed min-h-dvh top-0 bottom-0 right-0 left-0 z-50 grid text-black place-items-center backdrop-blur-sm"
       onMouseDown={closeModal}
     >
       <div
