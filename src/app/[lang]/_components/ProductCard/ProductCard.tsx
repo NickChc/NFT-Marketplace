@@ -1,7 +1,7 @@
 import { TLocale } from "../../../../../i18n.config";
 import { TProduct } from "@/@types/general";
 import { formatCurrency } from "@/lib/formatters";
-import { ProductCardButton } from "@/app/[lang]/_components/ProductCard/ProductCardButton";
+import { ProductCardButton } from "@/app/[lang]/_components/ProductCardButton";
 import { ProductCardImage } from "@/app/[lang]/_components/ProductCard/ProductCardImage";
 
 interface ProductCardProps {
