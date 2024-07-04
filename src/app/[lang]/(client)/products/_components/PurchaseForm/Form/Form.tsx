@@ -95,7 +95,7 @@ export function Form({ product, lang }: FormProps) {
       onSubmit={handleSubmit}
     >
       <div>
-        <div className="flex flex-col sm:flex-row items-start gap-y-3 sm:items-center justify-between px-3">
+        <div className="flex flex-col sm:flex-row items-start gap-y-3 sm:items-center justify-between px-3 text-black dark:text-white">
           <h2>{page.checkout}</h2>
           <span
             className="flex items-center gap-x-3 cursor-pointer hover:text-purple-800 duration-150 hover:underline text-xl md:text-2xl"
