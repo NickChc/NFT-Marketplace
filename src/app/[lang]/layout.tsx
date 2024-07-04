@@ -29,7 +29,7 @@ export default async function RootLayout({
   return (
     <html lang={params.lang} suppressHydrationWarning>
       <body
-        className={`bg-white dark:bg-gray-900 relative  ${inter.className}`}
+        className={`bg-custom-white dark:bg-gray-900 relative ${inter.className}`}
       >
         <Providers lang={params.lang} dictionary={{ page }}>
           {children}

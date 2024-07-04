@@ -30,7 +30,7 @@ export default async function ClientLayout({
       <Modal lang={lang} />
       <ProductViewMore />
 
-      <div className="mx-auto w-full md:w-[90%] lg:w-[80%] bg-white dark:bg-gray-900 z-20 relative">
+      <div className="mx-auto w-full md:w-[90%] lg:w-[80%] bg-custom-white dark:bg-gray-900 z-20 relative">
         {children}
       </div>
     </div>
