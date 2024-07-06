@@ -68,7 +68,7 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
       onMouseDown={closeModal}
     >
       <div
-        className="w-[70%] bg-white py-6 relative border-solid border border-purple-700 rounded-md"
+        className="w-[80%] sm:w-[70%] bg-white py-6 relative border-solid border border-purple-700 rounded-md"
         onMouseDown={(e) => e.stopPropagation()}
       >
         <span
@@ -81,7 +81,7 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
           <div
             className={`relative aspect-video pt-4 overflow-hidden w-full md:w-1/2 duration-200 ${
               zoom
-                ? "cursor-zoom-out scale-150 translate-x-1/2"
+                ? "cursor-zoom-out scale-125 md:scale-150 translate-y-10 md:translate-y-0 md:translate-x-1/2"
                 : "cursor-zoom-in"
             } `}
             onClick={() => setZoom(!zoom)}
