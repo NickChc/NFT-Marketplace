@@ -153,6 +153,8 @@
     "marketPriceIs": "Market price is",
     "all": "All",
     "filterProducts": "Filter Products",
-    "noProducts": "No Products"
+    "noProducts": "No Products",
+    "noSenderAcc": "Sender's account doesn't seem to exist anymore",
+    "ok": "Ok"
   }
 }

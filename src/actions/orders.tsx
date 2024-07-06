@@ -133,7 +133,7 @@ export async function acceptOffer(offer: TOffer, prevState: unknown) {
     getProduct(offer.productId),
   ]);
 
-  if (offerMaker == null || offerItem == null) return { message: "failure" };
+  if (offerItem == null) return { message: "failure" };
 
   const currentOwner = await getUser(
     undefined,
@@ -141,7 +141,17 @@ export async function acceptOffer(offer: TOffer, prevState: unknown) {
     offerItem.owner?.userId
   );
 
-  if (currentOwner == null) return { message: "failure" };
+  if (offerMaker == null) {
+    if (currentOwner == null) return { message: "failure" };
+    const oldOwnerDoc = doc(db, "users", currentOwner?.id);
+
+    await updateDoc(oldOwnerDoc, {
+      offers: currentOwner.offers.filter((off) => off.from !== offer.from),
+    });
+    return { message: "no_owner" };
+  }
+
+  if (currentOwner == null) return { message: "no_owner" };
 
   const offerItemDoc = doc(db, "product", offerItem.id);
   const oldOwnerDoc = doc(db, "users", currentOwner.id);
