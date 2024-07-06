@@ -155,6 +155,8 @@
     "filterProducts": "Filter Products",
     "noProducts": "No Products",
     "noSenderAcc": "Sender's account doesn't seem to exist anymore",
-    "ok": "Ok"
+    "ok": "Ok",
+    "done": "Done",
+    "sendAgain": "Send Again"
   }
 }
