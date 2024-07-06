@@ -29,6 +29,11 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
   }
 
   useEffect(() => {
+    if (currentUser == null) {
+      setIsCurrentUsers(false);
+      return;
+    }
+
     setIsCurrentUsers(currentUser?.id === product.owner?.userId);
   }, [currentUser]);
 

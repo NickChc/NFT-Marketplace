@@ -30,9 +30,9 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
   function closeModal() {
     setZoom(false);
     if (withoutImageParam !== "") {
-      router.push(`${pathname}?${withoutImageParam}`);
+      router.push(`${pathname}?${withoutImageParam}`, { scroll: false });
     } else {
-      router.push(`${pathname}/?`);
+      router.push(`${pathname}/?`, { scroll: false });
     }
   }
 

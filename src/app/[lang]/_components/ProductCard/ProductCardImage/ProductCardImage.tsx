@@ -21,6 +21,7 @@ export function ProductCardImage({ product }: ProductCardImageProps) {
 
   return (
     <Link
+      scroll={false}
       href={`${pathname}${
         withoutImageParams !== "" ? `?${withoutImageParams}&` : "?"
       }image=${product.id}`}

@@ -21,10 +21,10 @@ export async function ProductCard({ product, lang, text }: ProductCardProps) {
   return (
     <div className="p-2">
       <ProductCardImage product={product} />
-      <h3 className="text-2xl md:text-xl lg:text-2xl font-semibold my-1 truncate">
+      <h3 className="text-xl xl:text-2xl font-semibold my-1 truncate">
         {product.name}
       </h3>
-      <p className="line-clamp-3 min-h-12 sm:min-h-20 mt-2">
+      <p className="line-clamp-3 min-h-12 sm:min-h-[4.5rem] mt-2">
         {product.description}
       </p>
       <div className="min-h-16 flex flex-col gap-3 my-3 sm:block">
