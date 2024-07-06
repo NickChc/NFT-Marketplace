@@ -99,7 +99,7 @@
     "checkout": "Checkout",
     "alreadyOwn": "You already own this product",
     "cardNumberInvalid": "Your card number is invalid",
-    "congratulations": "Congratulations! You are now the proud owner of the",
+    "congratulations": "You are now the proud owner of the",
     "cost": "Cost",
     "processing": "Processing",
     "noCollection": "Your collection is empty.",
@@ -157,6 +157,7 @@
     "noSenderAcc": "Sender's account doesn't seem to exist anymore",
     "ok": "Ok",
     "done": "Done",
-    "sendAgain": "Send Again"
+    "sendAgain": "Send Again",
+    "congrats": "Congratulations"
   }
 }

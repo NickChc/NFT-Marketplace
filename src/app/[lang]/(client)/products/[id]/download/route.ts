@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "@/firebase";
 import { getUser } from "@/app/[lang]/_api/getUser";
+import { i18n } from "../../../../../../../i18n.config";
 
 interface GETProps {
   params: {
@@ -25,7 +26,11 @@ export async function GET(req: NextRequest, { params }: GETProps) {
   if (product == null) return notFound();
 
   if (user == null || product.owner?.userId !== user.id) {
-    return redirect("/");
+    const locale = url.pathname
+      .split("/")
+      .find((el: any) => i18n.locales.includes(el));
+
+    return redirect(`/${locale}`);
   }
 
   const decodedFileUrl = decodeURIComponent(product.filePath);

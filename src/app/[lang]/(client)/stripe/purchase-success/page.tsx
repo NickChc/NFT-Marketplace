@@ -37,9 +37,9 @@ export default async function PurchaseSuccessPage({
 
   return (
     <div className="min-h-dvh">
-      {/* <PageHeader>
-        {isSuccess ? `${page.success}!` : `${page.error}!`}
-      </PageHeader> */}
+      <PageHeader>
+        {isSuccess ? `${page.congrats}!` : `${page.error}!`}
+      </PageHeader>
       <PurchaseData
         product={product}
         isSuccess={isSuccess}

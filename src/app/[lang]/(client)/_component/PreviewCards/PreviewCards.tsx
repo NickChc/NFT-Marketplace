@@ -1,6 +1,6 @@
+import { TLocale } from "../../../../../../i18n.config";
 import { getDictionaries } from "@/lib/dictionary";
 import Link from "next/link";
-import { TLocale } from "../../../../../../i18n.config";
 import { RightArrowIcon } from "@/assets/icons";
 import { ProductCard } from "@/app/[lang]/_components/ProductCard";
 import { TProduct } from "@/@types/general";
