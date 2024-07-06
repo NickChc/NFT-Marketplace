@@ -21,6 +21,7 @@ export function ForgotPasswordFormPopup({
 }: ForgotPasswordFormPopupProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const translations = useDictionary();
+  const { page } = translations;
 
   async function handleResend() {
     try {
@@ -55,7 +56,7 @@ export function ForgotPasswordFormPopup({
               onClick={handleResend}
               className="border-solid border border-purple-800 text-purple-800 rounded-md px-2 py-0.5 font-semibold disabled:opacity-75"
             >
-              {loading ? "Sending" : "Send Again"}
+              {loading ? `${page.sending}...` : page.sendAgain}
             </button>
             <button
               type="button"
@@ -65,7 +66,7 @@ export function ForgotPasswordFormPopup({
                 className="px-2 py-0.5 w-full"
                 href={`/${lang}/auth/sign-in`}
               >
-                Done
+                {page.done}
               </Link>
             </button>
           </div>
