@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { TLocale, i18n } from "../../../i18n.config";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { PropsWithChildren } from "react";
