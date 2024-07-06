@@ -9,7 +9,8 @@ interface AuthContextProps {
   handleUserDelete: (
     user: User | null,
     callback?: () => void,
-    onError?: (error: string) => void
+    onError?: (error: string) => void,
+    stay?: boolean
   ) => Promise<void | [void, void]>;
   handleLogOut: () => Promise<void>;
   getCurrentUser: (email?: string, uid?: string) => Promise<void>;

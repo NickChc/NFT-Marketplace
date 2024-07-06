@@ -22,7 +22,7 @@ export function LogOutButton({ lang }: LogOutButtonProps) {
     try {
       setLoading(true);
       await handleLogOut();
-      router.refresh();
+      router.replace(`/${lang}/auth/sign-in`);
     } catch (error: any) {
       console.log(error.message);
     }
