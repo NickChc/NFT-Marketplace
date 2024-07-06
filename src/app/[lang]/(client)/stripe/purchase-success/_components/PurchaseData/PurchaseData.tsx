@@ -7,9 +7,7 @@ import { formatCurrency } from "@/lib/formatters";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { auth } from "@/firebase";
 import { useDictionary } from "@/hooks/useDictionary";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
 
@@ -23,8 +21,6 @@ export function PurchaseData({ product, isSuccess, lang }: PurchaseDataProps) {
   const hasPurchased = useRef(false);
   const translations = useDictionary();
   const { currentUser } = useAuthProvider();
-  const router = useRouter();
-
   const encodedEmail = encodeURIComponent(currentUser?.email || "");
 
   useEffect(() => {
@@ -53,7 +49,7 @@ export function PurchaseData({ product, isSuccess, lang }: PurchaseDataProps) {
           <div className="line-clamp-5 text-muted-foreground">
             {product.description}
           </div>
-          <div className="text-lg">
+          <div className="text-lg mb-4 sm:mb-0">
             {formatCurrency(product.priceInCents / 100)}
           </div>
           <DualButton size="asChild">
