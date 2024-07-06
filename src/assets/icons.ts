@@ -21,3 +21,4 @@ export { IoEye as OpenEyeIcon } from "react-icons/io5";
 export { IoEyeOff as ClosedEyeIcon } from "react-icons/io5";
 export { GrCircleQuestion as QuestionMarkIcon } from "react-icons/gr";
 export { FaCopy as CopyIcon } from "react-icons/fa";
+export { FaPlus as PlusIcon } from "react-icons/fa";
