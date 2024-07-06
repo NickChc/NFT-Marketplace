@@ -1,10 +1,10 @@
 "use client";
 
+import { TLocale } from "../../../../../../../i18n.config";
 import { useState } from "react";
 import { useFormState } from "react-dom";
 import { useRouter } from "next/navigation";
 import { signInWithPopup } from "firebase/auth";
-import { TLocale } from "../../../../../../../i18n.config";
 import { FormInput } from "@/components/FormInput";
 import { SubmitBtn } from "@/components/SubmitBtn";
 import { login } from "@/app/[lang]/(client)/auth/_actions/auth";
@@ -87,6 +87,8 @@ export function LoginForm({ lang }: LoginFormProps) {
       {isAuthError(error) && (
         <div className="text-red-700 mt-6">{error.auth}</div>
       )}
+
+      <hr className="invisible my-3" />
 
       <SubmitBtn pendingText={`${page.loggingIn}...`}>{page.login}</SubmitBtn>
       <button

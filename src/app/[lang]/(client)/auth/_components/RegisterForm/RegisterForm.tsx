@@ -1,8 +1,8 @@
 "use client";
 
+import { TLocale } from "../../../../../../../i18n.config";
 import { useState } from "react";
 import { useFormState } from "react-dom";
-import { TLocale } from "../../../../../../../i18n.config";
 import { FormInput } from "@/components/FormInput";
 import { SubmitBtn } from "@/components/SubmitBtn";
 import { register } from "@/app/[lang]/(client)/auth/_actions/auth";
@@ -61,7 +61,7 @@ export function RegisterForm({ lang }: RegisterFormProps) {
         if (isSecondProvider) {
           await unlink(auth.currentUser, "password");
         } else {
-          await handleUserDelete(auth.currentUser);
+          await handleUserDelete(auth.currentUser, undefined, undefined, true);
         }
         setVerificationError(page.problemOccuredTryAgain);
       }
@@ -106,7 +106,7 @@ export function RegisterForm({ lang }: RegisterFormProps) {
         {error?.repeatPassword && (
           <div className="text-red-700">{error.repeatPassword}</div>
         )}
-
+        <hr className="invisible my-3" />
         <SubmitBtn
           disabled={verificationError !== "" || verification === "sent"}
           pendingText={`${page.registering}...`}

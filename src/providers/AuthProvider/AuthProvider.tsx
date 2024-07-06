@@ -96,7 +96,8 @@ export function AuthProvider({
   async function handleUserDelete(
     user: User | null,
     callback?: () => void,
-    onError?: (error: string) => void
+    onError?: (error: string) => void,
+    stay?: boolean
   ) {
     try {
       if (user == null || user.email == null) return;
@@ -115,7 +116,11 @@ export function AuthProvider({
       if (callback) {
         callback();
       }
-      handleLogOut();
+      await handleLogOut();
+
+      if (stay) return;
+
+      router.replace(`/${lang}/auth/sign-in`);
     } catch (error: any) {
       console.log(error.message);
       if (onError) {
@@ -169,7 +174,6 @@ export function AuthProvider({
   async function handleLogOut() {
     try {
       await signOut(auth);
-      router.replace(`/${lang}/auth/sign-in`);
     } catch (error: any) {
       console.log(error.message);
     }

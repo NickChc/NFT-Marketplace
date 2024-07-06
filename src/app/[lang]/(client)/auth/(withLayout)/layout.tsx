@@ -1,6 +1,6 @@
+import { TLocale } from "../../../../../../i18n.config";
 import { PropsWithChildren } from "react";
 import { AuthHeader } from "@/app/[lang]/(client)/auth/(withLayout)/_components/AuthHeader";
-import { TLocale } from "../../../../../../i18n.config";
 
 interface ClientAuthLayoutProps {
   params: {

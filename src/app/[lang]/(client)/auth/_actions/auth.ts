@@ -157,7 +157,6 @@ export async function register(
   const result = registerSchema.safeParse(
     Object.fromEntries(formData.entries())
   );
-
   if (result.success === false) {
     return result.error.formErrors.fieldErrors;
   }

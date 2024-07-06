@@ -5,9 +5,9 @@ import { PropsWithChildren } from "react";
 interface DualButtonProps {
   size?: "large" | "asChild" | "medium";
   type?: "button" | "submit";
-  variation?: "primary" | "secondary" | "warning";
+  variation?: "primary" | "secondary" | "warning" | "blue";
   disabled?: boolean;
-  onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
 }
 
 export function DualButton({
@@ -28,10 +28,12 @@ export function DualButton({
           ? "bg-white text-purple-800"
           : variation === "warning"
           ? "bg-red-500 text-white border-red-500"
+          : variation === "blue"
+          ? "bg-blue-500 text-white"
           : "bg-purple-800 text-white"
       } ${
         size === "large"
-          ? "p-3"
+          ? "p-3 font-semibold"
           : size === "asChild"
           ? "flex"
           : size === "medium"
