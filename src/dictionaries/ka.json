@@ -153,6 +153,8 @@
     "marketPriceIs": "საბაზრო ფასია",
     "all": "ყველა",
     "filterProducts": "გაფილტრვა",
-    "noProducts": "ცარიელია"
+    "noProducts": "ცარიელია",
+    "noSenderAcc": "გამომგზავნის ანგარიში აღარ არსებობს",
+    "ok": "გასაგებია"
   }
 }
