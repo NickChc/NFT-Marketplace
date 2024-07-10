@@ -1,6 +1,6 @@
 "use client";
 
-import BackgroundImg from "@/assets/images/BackgroundImage.jpg";
+import BackgroundImg from "@/assets/images/WallpaperX.jpg";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
@@ -10,11 +10,10 @@ export function BackgroundImage() {
   if (pathname.includes("auth")) return null;
 
   return (
-    <div className="absolute z-0 inset-0 pointer-events-none select-none">
+    <div className="fixed z-0 inset-0 pointer-events-none select-nonebg-repeat ">
       <Image
         src={BackgroundImg}
         alt="background image"
-        objectFit="cover"
         layout="fill"
         className="pointer-events-none"
       />
