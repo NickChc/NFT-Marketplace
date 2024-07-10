@@ -15,8 +15,6 @@ interface BuyPageProps {
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
-
-
 export default async function BuyPage({ params }: BuyPageProps) {
   const [{ page }, product] = await Promise.all([
     getDictionaries(params.lang),
@@ -37,9 +35,7 @@ export default async function BuyPage({ params }: BuyPageProps) {
 
   return (
     <div className="w-full max-w-5xl mx-auto p-1 min-h-dvh">
-      <PageHeader>
-        {page.purchaseCap} {product?.name.toUpperCase()}
-      </PageHeader>
+      <PageHeader>{page.purchaseCap}</PageHeader>
       <PurchaseForm
         lang={params.lang}
         product={product}

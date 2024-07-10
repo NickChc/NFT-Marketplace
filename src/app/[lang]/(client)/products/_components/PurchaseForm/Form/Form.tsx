@@ -123,15 +123,17 @@ export function Form({ product, lang }: FormProps) {
           </div>
         )}
       </div>
-      <div className="text-red-500">
-        {currentUser?.isFrozen &&
-          (lang === "ka"
+      {currentUser?.isFrozen ? (
+        <div className="text-red-500">
+          {lang === "ka"
             ? "თქვენი ანგარიში გაყინულია!"
-            : "Your account is frozen!")}
-      </div>
-      <div className="mb-4">
-        <PaymentElement className="bg-purple-800 p-3 rounded-md" />
-      </div>
+            : "Your account is frozen!"}
+        </div>
+      ) : (
+        <div className="mb-4">
+          <PaymentElement className="bg-purple-800 p-3 rounded-md" />
+        </div>
+      )}
       <DualButton
         size="large"
         disabled={

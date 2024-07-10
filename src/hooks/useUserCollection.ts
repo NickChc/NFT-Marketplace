@@ -3,14 +3,16 @@ import { useAuthProvider } from "@/providers/AuthProvider";
 import { useGlobalProvider } from "@/providers/GlobalProvider";
 import { useCallback, useEffect, useState } from "react";
 
-export function useUserCollection() {
+export function useUserCollection(noLoading?: boolean) {
   const [loading, setLoading] = useState<boolean>(false);
   const { setCollection, collection } = useGlobalProvider();
   const { currentUser } = useAuthProvider();
 
   const getUserCollection = useCallback(async () => {
     try {
-      setLoading(true);
+      if (!noLoading) {
+        setLoading(true);
+      }
       if (currentUser == null) return;
       const ownings = await getProducts(
         undefined,
