@@ -20,6 +20,10 @@ const config: Config = {
       color: {
         "custom-white": "#e8e8e8",
       },
+      fontFamily: {
+        sans: ["var(--font-opensans)"],
+        poppins: ["var(--font-poppins)"],
+      },
     },
   },
   plugins: [],

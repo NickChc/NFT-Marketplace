@@ -4,8 +4,9 @@ import { getDictionaries } from "@/lib/dictionary";
 import { Header } from "@/app/[lang]/_components/Header";
 import { NavLink } from "@/app/[lang]/_components/NavLink";
 import { BackgroundImage } from "@/app/[lang]/(client)/_component/BackgroundImage";
-import { Modal } from "../_components/Modal";
-import { ProductViewMore } from "./_component/ProductViewMore";
+import { Modal } from "@/app/[lang]/_components/Modal";
+import { ProductViewMore } from "@/app/[lang]/(client)/_component/ProductViewMore";
+import { Logo } from "@/app/[lang]/_components/Logo";
 
 interface ClientLayoutProps {
   params: {
@@ -31,6 +32,7 @@ export default async function ClientLayout({
       <ProductViewMore lang={lang} />
 
       <div className="mx-auto w-full md:w-[90%] lg:w-[80%] bg-custom-white dark:bg-gray-900 z-20 relative">
+        <Logo />
         {children}
       </div>
     </div>

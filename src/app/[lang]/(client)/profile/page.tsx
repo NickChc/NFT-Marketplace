@@ -28,7 +28,7 @@ export default async function ProfilePage({
         <LogOutButton lang={lang} />
         <OfferList />
         <Collection lang={lang} />
-        <ProfileData />
+        <ProfileData lang={lang} />
         <hr className="w-full my-3" />
       </div>
       <DeleteAccount text={{ ...page }} />

@@ -6,7 +6,6 @@ import { useState } from "react";
 import { RightArrowIcon } from "@/assets/icons";
 import { useDictionary } from "@/hooks/useDictionary";
 
-
 export function OfferList() {
   const translations = useDictionary();
   const [loadFull, setLoadFull] = useState<boolean>(false);
