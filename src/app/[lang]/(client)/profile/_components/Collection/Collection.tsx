@@ -4,7 +4,7 @@ import { TLocale } from "../../../../../../../i18n.config";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useUserCollection } from "@/hooks/useUserCollection";
 import { useAuthProvider } from "@/providers/AuthProvider";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { ProductSkeleton } from "@/app/[lang]/(client)/_component/ProductSkeleton";
 import { CollectionSuspense } from "@/app/[lang]/(client)/profile/_components/Collection/CollectionSuspense";
 
@@ -13,11 +13,16 @@ interface CollectionProps {
 }
 
 export function Collection({ lang }: CollectionProps) {
-  const { collection, collectionLoading } = useUserCollection();
+  const [mounted, setMounted] = useState(false);
+  const { collection, collectionLoading } = useUserCollection(mounted);
   const { currentUser } = useAuthProvider();
   const translations = useDictionary();
 
   const encodedEmail = encodeURIComponent(currentUser?.email || "");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <>

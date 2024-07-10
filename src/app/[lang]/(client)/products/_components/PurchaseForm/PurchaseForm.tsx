@@ -1,5 +1,6 @@
 "use client";
 
+import { TLocale } from "../../../../../../../i18n.config";
 import { TProduct } from "@/@types/general";
 import { formatCurrency } from "@/lib/formatters";
 import { Elements } from "@stripe/react-stripe-js";
@@ -7,7 +8,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import { Form } from "@/app/[lang]/(client)/products/_components/PurchaseForm/Form";
 import { useDictionary } from "@/hooks/useDictionary";
-import { TLocale } from "../../../../../../../i18n.config";
 
 interface PurchaseFormProps {
   product: TProduct;
@@ -19,7 +19,11 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string
 );
 
-export function PurchaseForm({ product, clientSecret, lang }: PurchaseFormProps) {
+export function PurchaseForm({
+  product,
+  clientSecret,
+  lang,
+}: PurchaseFormProps) {
   const translations = useDictionary();
 
   return (

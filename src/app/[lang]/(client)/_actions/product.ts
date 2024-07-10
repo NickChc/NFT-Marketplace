@@ -7,7 +7,6 @@ import { getUser } from "@/app/[lang]/_api/getUser";
 import { revalidatePath } from "next/cache";
 import { updateUserNotes } from "@/app/[lang]/_api/updateUserNotes";
 
-
 export async function returnProduct(product: TProduct, email: string) {
   const user = await getUser(email);
 
@@ -20,11 +19,12 @@ export async function returnProduct(product: TProduct, email: string) {
     (item) => item.productId !== product.id
   );
 
+  await updateDoc(userDoc, {
+    ownings: newOwnings,
+    offers: user.offers.filter((off) => off.productId !== product.id),
+  });
+
   await Promise.all([
-    updateDoc(userDoc, {
-      ownings: newOwnings,
-      offers: user.offers.filter((off) => off.productId !== product.id),
-    }),
     updateDoc(productDoc, {
       isAvailable: true,
       owner: null,

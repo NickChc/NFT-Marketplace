@@ -17,7 +17,7 @@ export default async function AdminProductsPage({
   const { page } = await getDictionaries(lang);
 
   return (
-    <div className="w-full sm:w-[90%] md:w-[80%] flex flex-col mx-auto min-h-[50dvh] ">
+    <div className="w-full sm:w-[90%] md:w-[80%] flex flex-col mx-auto min-h-[50dvh]  pb-40">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <PageHeader>{page.products}</PageHeader>
         <button className="rounded-md bg-purple-800 dark:bg-white dark:text-black text-white  font-semibold whitespace-nowrap text-xs sm:text-sm">
