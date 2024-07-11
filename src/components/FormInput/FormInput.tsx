@@ -11,6 +11,7 @@ interface FormInputProps {
   required?: boolean;
   defaultValue?: string;
   placeholder?: string;
+  disabled?: boolean;
 }
 
 export function FormInput({
@@ -23,6 +24,7 @@ export function FormInput({
   required,
   defaultValue,
   placeholder,
+  disabled,
 }: FormInputProps) {
   const [show, setShow] = useState<boolean>(false);
 
@@ -44,6 +46,7 @@ export function FormInput({
           </span>
         )}
         <input
+          disabled={disabled}
           placeholder={placeholder}
           required={required}
           type={type === "password" ? (show ? "text" : "password") : type}
@@ -53,7 +56,7 @@ export function FormInput({
           onFocus={onFocus}
           id={name}
           defaultValue={defaultValue}
-          className={`p-2 outline-none border border-solid border-blue-300 rounded-md bg-white text-black dark:bg-gray-900 dark:text-white ${
+          className={`p-2 outline-none border border-solid border-blue-300 rounded-md bg-white text-black dark:bg-gray-900 dark:text-white disabled:opacity-75 ${
             type === "number" ? "appearance-none" : ""
           }`}
         />

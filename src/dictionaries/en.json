@@ -158,6 +158,7 @@
     "ok": "Ok",
     "done": "Done",
     "sendAgain": "Send Again",
-    "congrats": "Congratulations"
+    "congrats": "Congratulations",
+    "registerToChangeEmail": "Register using current email to change it."
   }
 }
