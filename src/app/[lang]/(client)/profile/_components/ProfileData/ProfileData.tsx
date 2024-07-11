@@ -6,7 +6,6 @@ import { formatCurrency } from "@/lib/formatters";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useGlobalProvider } from "@/providers/GlobalProvider";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
-import { useRouter } from "next/navigation";
 
 interface ProfileDataProps {
   lang: TLocale;
@@ -16,12 +15,8 @@ export function ProfileData({ lang }: ProfileDataProps) {
   const { currentUser } = useAuthProvider();
   const { setUpdateUser } = useGlobalProvider();
   const translations = useDictionary();
-  const router = useRouter();
 
-  if (currentUser == null) {
-    router.replace(`/${lang}/auth/sign-in`);
-    return null;
-  }
+  if (currentUser == null) return null;
 
   return (
     <div className="flex flex-col gap-3 sm:text-xl md:text-2xl">

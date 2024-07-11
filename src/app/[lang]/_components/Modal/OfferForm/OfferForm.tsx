@@ -78,7 +78,14 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
         </DualButton>
       ) : (
         <>
-          <OfferSubmitButton error={data.error} price={Number(price)} />
+          <OfferSubmitButton
+            error={
+              data.error?.toLowerCase().includes("try again")
+                ? data.error
+                : undefined
+            }
+            price={Number(price)}
+          />
           <DualButton variation="secondary" type="button" onClick={closeModal}>
             {translations.page.cancel}
           </DualButton>
