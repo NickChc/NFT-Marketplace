@@ -135,21 +135,31 @@ export function UpdateUserForm({
         </div>
       )}
 
-      {authProvider?.includes("password") && (
-        <>
-          <FormInput
-            label={translations.page.email}
+      <>
+        {authProvider !== "password" ? (
+          <input
             name="email"
             defaultValue={updateUser?.email}
+            className="invisible"
           />
-          {error?.email && (
-            <div className="text-red-500">
-              {error.email[0] === "Invalid email"
-                ? translations.page.invalidEmail
-                : error.email}
-            </div>
-          )}
-
+        ) : (
+          <>
+            <FormInput
+              disabled={authProvider !== "password"}
+              label={translations.page.email}
+              name="email"
+              defaultValue={updateUser?.email}
+            />
+            {error?.email && (
+              <div className="text-red-500">
+                {error.email[0] === "Invalid email"
+                  ? translations.page.invalidEmail
+                  : error.email}
+              </div>
+            )}
+          </>
+        )}
+        {authProvider === "password" && (
           <FormInput
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -157,13 +167,15 @@ export function UpdateUserForm({
             type="password"
             label="password"
           />
-          <div className={errorMessage === "" ? "" : "text-red-500"}>
-            {errorMessage === ""
-              ? translations.page.confirmIdToChange
-              : errorMessage}
-          </div>
-        </>
-      )}
+        )}
+        <div className={errorMessage === "" ? "" : "text-red-500"}>
+          {authProvider !== "password"
+            ? translations.page.registerToChangeEmail
+            : errorMessage === ""
+            ? translations.page.confirmIdToChange
+            : errorMessage}
+        </div>
+      </>
 
       {emailError !== "" && <div className="text-red-500">{emailError}</div>}
       {emailMessage !== "" && (
