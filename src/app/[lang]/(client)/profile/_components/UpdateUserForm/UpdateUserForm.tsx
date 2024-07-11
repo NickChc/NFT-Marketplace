@@ -168,13 +168,15 @@ export function UpdateUserForm({
             label="password"
           />
         )}
-        <div className={errorMessage === "" ? "" : "text-red-500"}>
-          {authProvider !== "password"
-            ? translations.page.registerToChangeEmail
-            : errorMessage === ""
-            ? translations.page.confirmIdToChange
-            : errorMessage}
-        </div>
+        {emailMessage === "" && (
+          <div className={errorMessage === "" ? "" : "text-red-500"}>
+            {authProvider !== "password"
+              ? translations.page.registerToChangeEmail
+              : errorMessage === ""
+              ? translations.page.confirmIdToChange
+              : errorMessage}
+          </div>
+        )}
       </>
 
       {emailError !== "" && <div className="text-red-500">{emailError}</div>}

@@ -45,31 +45,35 @@ export function PurchaseData({ product, isSuccess, lang }: PurchaseDataProps) {
           />
         </div>
         <div className="w-full flex flex-col justify-between">
-          <h1 className="text-2xl font-bold">{product.name}</h1>
-          <div className="line-clamp-5 text-muted-foreground">
-            {product.description}
+          <div>
+            <h1 className="text-2xl font-bold mb-2">{product.name}</h1>
+            <div className="line-clamp-5 text-muted-foreground">
+              {product.description}
+            </div>
           </div>
-          <div className="text-lg mb-4 sm:mb-0">
-            {formatCurrency(product.priceInCents / 100)}
+          <div>
+            <div className="text-lg md:text-2xl xl:text-4xl pb-4 sm:mb-0">
+              {formatCurrency(product.priceInCents / 100)}
+            </div>
+            <DualButton size="asChild">
+              {isSuccess ? (
+                <a
+                  className="w-full h-full p-2"
+                  download
+                  href={`/${lang}/products/${product.id}/download?email=${encodedEmail}`}
+                >
+                  {translations.page.download}
+                </a>
+              ) : (
+                <Link
+                  className="w-full h-full p-2"
+                  href={`/products/${product.id}/buy`}
+                >
+                  {translations.page.tryAgain}
+                </Link>
+              )}
+            </DualButton>
           </div>
-          <DualButton size="asChild">
-            {isSuccess ? (
-              <a
-                className="w-full h-full p-2"
-                download
-                href={`/${lang}/products/${product.id}/download?email=${encodedEmail}`}
-              >
-                {translations.page.download}
-              </a>
-            ) : (
-              <Link
-                className="w-full h-full p-2"
-                href={`/products/${product.id}/buy`}
-              >
-                {translations.page.tryAgain}
-              </Link>
-            )}
-          </DualButton>
         </div>
       </div>
     </>

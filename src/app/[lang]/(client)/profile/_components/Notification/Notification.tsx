@@ -42,7 +42,12 @@ export function Notification({ lang }: NotificationProps) {
   const congratsOn =
     filteredNotes.length === 1
       ? filteredNotes[0].offer.productName
-      : filteredNotes.map((n) => `${n.offer.productName},`);
+      : filteredNotes.map((n, index) => {
+          if (filteredNotes[filteredNotes.length - 1] === n) {
+            return `${n.offer.productName}`;
+          }
+          return `${n.offer.productName}, `;
+        });
 
   useEffect(() => {
     if (currentUser == null) return;
@@ -62,7 +67,7 @@ export function Notification({ lang }: NotificationProps) {
   }
 
   return (
-    <div className="rounded-lg bg-green-600 relative p-4 w-full mt-6 text-lg text-center">
+    <div className="rounded-lg bg-green-600 relative p-4 md:px-9 w-[90%] md:w-full mx-auto mt-6 text-sm sm:text-lg text-center">
       <span
         className="absolute top-1 right-1 cursor-pointer text-xl rounded-full"
         onClick={() => setShow(false)}
