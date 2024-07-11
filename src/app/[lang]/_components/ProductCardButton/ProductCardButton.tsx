@@ -23,7 +23,7 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
   const encodedEmail = currentUser ? encodeURIComponent(currentUser.email) : "";
 
   function handleClick() {
-    if (product.owner?.isFrozen) return;
+    if (product.owner?.isFrozen || currentUser == null) return;
 
     setOfferItem(product);
   }
@@ -42,7 +42,7 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
   } else if (product.openForBidding) {
     return (
       <DualButton
-        size={isCurrentUsers ? "asChild" : undefined}
+        size={isCurrentUsers || currentUser == null ? "asChild" : undefined}
         onClick={handleClick}
       >
         {isCurrentUsers ? (
@@ -52,6 +52,13 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
           >
             {page.download}
           </a>
+        ) : currentUser == null ? (
+          <Link
+            className="min-w-full min-h-full px-2 py-1 rounded-md"
+            href={`/${lang}/auth/sign-in`}
+          >
+            {page.bid}
+          </Link>
         ) : (
           page.bid
         )}
