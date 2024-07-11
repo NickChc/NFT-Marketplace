@@ -1,5 +1,6 @@
 "use client";
 
+import { TLocale } from "../../../../../../../i18n.config";
 import { TUser } from "@/@types/general";
 import { FormInput } from "@/components/FormInput";
 import { useDictionary } from "@/hooks/useDictionary";
@@ -17,15 +18,18 @@ import { useGlobalProvider } from "@/providers/GlobalProvider";
 import { useEffect, useState } from "react";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
+import { useRouter } from "next/navigation";
 
 interface UpdateUserFormProps {
   updateUser: TUser | null;
   closeModal: () => void;
+  lang: TLocale;
 }
 
 export function UpdateUserForm({
   updateUser,
   closeModal,
+  lang,
 }: UpdateUserFormProps) {
   const translations = useDictionary();
   const [emailError, setEmailError] = useState<string>("");
@@ -38,6 +42,8 @@ export function UpdateUserForm({
   );
   const { handleLogOut, reauthenticate, authProvider } = useAuthProvider();
   const { setUpdateUser } = useGlobalProvider();
+
+  const router = useRouter();
 
   function onFinish() {
     setUpdateUser(null);
@@ -129,21 +135,21 @@ export function UpdateUserForm({
         </div>
       )}
 
-      <FormInput
-        label={translations.page.email}
-        name="email"
-        defaultValue={updateUser?.email}
-      />
-      {error?.email && (
-        <div className="text-red-500">
-          {error.email[0] === "Invalid email"
-            ? translations.page.invalidEmail
-            : error.email}
-        </div>
-      )}
-
-      {authProvider === "password" && (
+      {authProvider?.includes("password") && (
         <>
+          <FormInput
+            label={translations.page.email}
+            name="email"
+            defaultValue={updateUser?.email}
+          />
+          {error?.email && (
+            <div className="text-red-500">
+              {error.email[0] === "Invalid email"
+                ? translations.page.invalidEmail
+                : error.email}
+            </div>
+          )}
+
           <FormInput
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -168,6 +174,7 @@ export function UpdateUserForm({
             className="border-solid border border-purple-900 text-purple-800 px-2 py-1 bg-white rounded-md"
             onClick={async () => {
               await handleLogOut();
+              router.replace(`/${lang}/auth/sign-in`);
               closeModal();
             }}
           >

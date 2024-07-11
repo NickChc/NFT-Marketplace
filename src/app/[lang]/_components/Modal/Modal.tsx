@@ -102,7 +102,11 @@ export function Modal({ lang }: ModalProps) {
         bidItem={bidItem}
       />
       <SellForm product={sellProduct} closeModal={closeModal} />
-      <UpdateUserForm updateUser={updateUser} closeModal={closeModal} />
+      <UpdateUserForm
+        lang={lang}
+        updateUser={updateUser}
+        closeModal={closeModal}
+      />
       <OfferView offer={offerToView} lang={lang} closeModal={closeModal} />
     </div>
   );

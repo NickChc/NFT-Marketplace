@@ -22,6 +22,7 @@ import { getProduct } from "@/app/[lang]/_api/getProduct";
 import OfferAcceptEmail from "@/email/OfferAcceptEmail";
 import { getNotifications } from "@/app/[lang]/_api/getNotifications";
 import { updateUserNotes } from "@/app/[lang]/_api/updateUserNotes";
+import { revalidatePath } from "next/cache";
 
 const priceSchema = z.string().min(1).max(9);
 const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY as string);
@@ -210,6 +211,8 @@ export async function acceptOffer(offer: TOffer, prevState: unknown) {
       ],
       spentInCents: offerMaker.spentInCents + offer.offeredInCents,
     }),
+
+    revalidatePath("/*"),
   ]);
 
   const { name, imagePath, description } = offerItem;
