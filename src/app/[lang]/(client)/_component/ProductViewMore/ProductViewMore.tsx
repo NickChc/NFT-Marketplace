@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { CloseIcon } from "@/assets/icons";
 import { TProduct } from "@/@types/general";
 import { ProductCardButton } from "@/app/[lang]/_components/ProductCardButton";
+import { formatCurrency } from "@/lib/formatters";
+import { useDictionary } from "@/hooks/useDictionary";
 
 interface ProductViewMoreProps {
   lang: TLocale;
@@ -20,6 +22,7 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
   const pathname = usePathname();
   const router = useRouter();
   const productId = searchParams.get("image");
+  const translations = useDictionary();
 
   const withoutImageParam = searchParams
     .toString()
@@ -79,7 +82,7 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
         </span>
         <div className="flex flex-col md:flex-row items-center md:items-stretch justify-center gap-x-3 p-3">
           <div
-            className={`relative aspect-video pt-4 overflow-hidden w-full md:w-1/2 duration-200 ${
+            className={`relative aspect-video pt-4 overflow-hidden w-full md:w-1/2 duration-200 z-50 ${
               zoom
                 ? "cursor-zoom-out scale-125 md:scale-150 translate-y-10 md:translate-y-0 md:translate-x-1/2"
                 : "cursor-zoom-in"
@@ -95,11 +98,17 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
           </div>
           <div className="flex flex-col items-start justify-between w-full mt-3 md:mt-0 md:w-1/2 ">
             <div className="flex flex-col min-h-40">
-              <h2 className="font-semibold mb-3 text-xl md:text-2xl">
+              <h2 className="font-semibold mb-1 text-xl md:text-2xl">
                 {product.name}
               </h2>
-              <p>{product.description}</p>
+              <p className="max-h-28 overflow-auto pr-1 scrollbar-small ">
+                {product.description}
+              </p>
             </div>
+            <strong className="text-xl my-1">
+              {translations.page.price} -{" "}
+              {formatCurrency(product.priceInCents / 100)}
+            </strong>
             <ProductCardButton product={product} lang={lang} />
           </div>
         </div>

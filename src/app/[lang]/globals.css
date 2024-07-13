@@ -8,6 +8,38 @@
   box-sizing: border-box;
 }
 
+@layer {
+  .scrollbar-small {
+  }
+  .scrollbar-small::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-small::-webkit-scrollbar-thumb {
+    width: 4px;
+    border-radius: 8px;
+    background-color: rgb(69, 69, 69);
+  }
+
+  .scrollbar-small::-webkit-scrollbar-thumb:hover {
+    width: 4px;
+    border-radius: 8px;
+    background-color: rgb(94, 94, 94);
+  }
+
+  .scrollbar-small::-webkit-scrollbar-thumb:active {
+    width: 4px;
+    border-radius: 8px;
+    background-color: rgb(65, 65, 65);
+  }
+
+  .scrollbar-small::-webkit-scrollbar-track {
+    border-radius: 8px;
+    width: 4px;
+    background-color: gray;
+  }
+}
+
 ul::-webkit-scrollbar {
   width: 6px;
 }

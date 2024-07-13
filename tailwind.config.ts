@@ -17,7 +17,7 @@ const config: Config = {
       backgroundColor: {
         "custom-white": "#e8e8e8",
       },
-      color: {
+      textColor: {
         "custom-white": "#e8e8e8",
       },
       fontFamily: {
