@@ -14,23 +14,10 @@ interface ProductsSuspenseProps {
 export async function ProductSuspense({
   productsFetcher,
   lang,
-  query,
 }: ProductsSuspenseProps) {
   const { page } = await getDictionaries(lang);
 
-  const allProducts = await productsFetcher();
-
-  const products = allProducts?.filter((product) => {
-    if (!product.isAvailable && !product.openForBidding) return;
-
-    if (query === "all" || query == null) {
-      return product;
-    } else {
-      if (product.owner?.isFrozen) return;
-
-      return product;
-    }
-  });
+  const products = await productsFetcher();
 
   if (products == null || products.length < 1) {
     return (
