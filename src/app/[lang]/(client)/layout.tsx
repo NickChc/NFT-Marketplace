@@ -32,7 +32,7 @@ export default async function ClientLayout({
       <ProductViewMore lang={lang} />
 
       <div className="mx-auto w-full md:w-[90%] lg:w-[80%] bg-custom-white dark:bg-gray-900 z-20 relative">
-        <Logo />
+        <Logo lang={lang} />
         {children}
       </div>
     </div>

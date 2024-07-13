@@ -30,7 +30,7 @@ export default async function HomePage({
   }
 
   return (
-    <div className="mx-auto flex flex-col w-full sm:w-[90%] md:w-[80%] pb-4 sm:py-9 min-h-dvh">
+    <div className="mx-auto flex flex-col w-full sm:w-[90%] md:w-[80%] pb-4 sm:pb-9 min-h-dvh">
       <PageHeader>{page.homeCap}</PageHeader>
 
       <Suspense

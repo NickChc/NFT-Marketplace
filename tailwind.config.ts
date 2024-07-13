@@ -21,8 +21,9 @@ const config: Config = {
         "custom-white": "#e8e8e8",
       },
       fontFamily: {
-        sans: ["var(--font-opensans)"],
-        poppins: ["var(--font-poppins)"],
+        monoton: ["var(--font-monoton)"],
+        bodoniModa: ["var(--font-bodoni-moda)"],
+        permaMarker: ["var(--font-permanent-marker)"],
       },
     },
   },
