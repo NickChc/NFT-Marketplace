@@ -28,7 +28,7 @@ export async function PreviewCards({
         <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold ml-2">
           {title}
         </h2>
-        <hr className="w-full sm:hidden my-2" />
+        <hr className="w-full sm:hidden my-2 bg-black dark:bg-white" />
         <Link
           href={href || `/${lang}/products`}
           className="flex items-center gap-x-4 text-lg sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"

@@ -1,24 +1,18 @@
 import { TLocale, i18n } from "../../../i18n.config";
+import "@/app/[lang]/globals.css";
 import type { Metadata } from "next";
-import { Inter, Open_Sans, Poppins } from "next/font/google";
-import "./globals.css";
+import { Inter, Monoton } from "next/font/google";
 import { PropsWithChildren } from "react";
 import { Providers } from "@/providers";
 import { getDictionaries } from "@/lib/dictionary";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const openSans = Open_Sans({
+const monoton = Monoton({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-opensans",
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-opensans",
-  weight: "600",
+  variable: "--font-monoton",
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -42,7 +36,7 @@ export default async function RootLayout({
   return (
     <html lang={params.lang} suppressHydrationWarning>
       <body
-        className={`bg-custom-white dark:bg-gray-900 relative ${poppins.variable} ${openSans.variable} ${inter.className}`}
+        className={`bg-custom-white dark:bg-gray-900 relative ${monoton.variable} ${inter.className}`}
       >
         <Providers lang={params.lang} dictionary={{ page }}>
           {children}
