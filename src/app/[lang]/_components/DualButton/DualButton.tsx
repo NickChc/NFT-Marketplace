@@ -23,7 +23,7 @@ export function DualButton({
       onClick={onClick}
       disabled={disabled}
       type={type}
-      className={`border-solid border border-purple-800 disabled:pointer-events-none rounded-md w-full bg-purple-800 hover:opacity-75 disabled:opacity-60 duration-100 ${
+      className={`border-solid border border-purple-800 disabled:z-10 disabled:pointer-events-none rounded-md w-full bg-purple-800 hover:opacity-75 disabled:opacity-60 duration-100 ${
         variation === "secondary"
           ? "bg-white text-purple-800"
           : variation === "warning"

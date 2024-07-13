@@ -67,7 +67,7 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
   } else {
     return (
       <DualButton
-        disabled={!product.isAvailable}
+        disabled={!product.isAvailable && !isCurrentUsers}
         size={product.isAvailable ? "asChild" : undefined}
       >
         {isCurrentUsers ? (

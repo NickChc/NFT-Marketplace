@@ -13,6 +13,13 @@ export async function ProductsTable({ lang }: TableProps) {
   const products = await getProducts();
   const { page } = await getDictionaries(lang);
 
+  console.log(products);
+
+  const sortedProducts = products?.sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+  console.log(sortedProducts);
+
   return (
     <table className="max-w-full w-full mt-4 sm:mt-9 mx-auto text-[.7rem] sm:text-sm md:text-base">
       <thead>
@@ -29,7 +36,7 @@ export async function ProductsTable({ lang }: TableProps) {
         </tr>
       </thead>
       <tbody className="min-h-96">
-        {products?.map((product) => {
+        {sortedProducts?.map((product) => {
           return (
             <tr key={product.id}>
               <td className="text-base sm:text-lg md:text-2xl py-4">
