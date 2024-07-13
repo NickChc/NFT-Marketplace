@@ -8,18 +8,28 @@ import { useUserNotifications } from "@/hooks/useUserNotifications";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { useGlobalProvider } from "@/providers/GlobalProvider";
 import { doc, updateDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 interface OfferItemProps {
   offer: TOffer;
 }
 
 export function OfferItem({ offer }: OfferItemProps) {
+  const [show, setShow] = useState(false);
   const translations = useDictionary();
   const { setOfferToView } = useGlobalProvider();
   const { notifications } = useUserNotifications();
 
+  useEffect(() => {
+    setShow(true);
+  }, []);
+
   return (
-    <li className="flex flex-col items-stretch sm:items-center sm:flex-row gap-3 justify-between p-3 relative">
+    <li
+      className={`flex flex-col items-stretch sm:items-center sm:flex-row gap-3 justify-between p-3 relative transition-all duration-500 ${
+        show ? "scale-y-100" : "scale-y-0"
+      } `}
+    >
       {notifications.some((note) => note.offer.id === offer.id) && (
         <>
           <FilledCircleIcon className="text-green-500 text-2xl rounded-full hidden sm:block absolute sm:top-1/2 sm:-translate-y-1/2 sm:right-20 md:-left-9" />
