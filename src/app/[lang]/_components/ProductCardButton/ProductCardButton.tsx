@@ -29,13 +29,13 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
   }
 
   useEffect(() => {
-    if (currentUser == null) {
+    if (currentUser == null || product.owner == null) {
       setIsCurrentUsers(false);
       return;
     }
 
-    setIsCurrentUsers(currentUser?.id === product.owner?.userId);
-  }, [currentUser]);
+    setIsCurrentUsers(currentUser.id === product.owner.userId);
+  }, [currentUser, product]);
 
   if (product.owner?.isFrozen) {
     return <DualButton>{page.notAvailable}</DualButton>;
