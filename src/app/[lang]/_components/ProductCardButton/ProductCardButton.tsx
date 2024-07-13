@@ -66,7 +66,10 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
     );
   } else {
     return (
-      <DualButton size="asChild">
+      <DualButton
+        disabled={!product.isAvailable}
+        size={product.isAvailable ? "asChild" : undefined}
+      >
         {isCurrentUsers ? (
           <a
             className="min-w-full min-h-full px-2 py-1 rounded-md"
@@ -74,7 +77,7 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
           >
             {page.download}
           </a>
-        ) : (
+        ) : product.isAvailable ? (
           <Link
             className="min-w-full min-h-full px-2 py-1 rounded-md"
             href={
@@ -85,6 +88,8 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
           >
             {page.buy}
           </Link>
+        ) : (
+          page.notAvailable
         )}
       </DualButton>
     );
