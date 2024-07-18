@@ -88,13 +88,13 @@ export function LoginForm({ lang }: LoginFormProps) {
         <div className="text-red-700 mt-6">{error.auth}</div>
       )}
 
-      <hr className="invisible my-3" />
+      <hr className="invisible sm:my-3" />
 
       <SubmitBtn pendingText={`${page.loggingIn}...`}>{page.login}</SubmitBtn>
       <button
         type="button"
         disabled={loading}
-        className="bg-white border border-solid border-blue-500 text-black font-semibold rounded-md p-3 my-2 hover:opacity-75 duration-150 disabled:bg-blue-500 disabled:hover:opacity-50 disabled:opacity-50 disabled:text-blue-300 disabled:hover:text-blue-300 flex items-center justify-center gap-x-3"
+        className="bg-white border border-solid border-blue-500 text-black font-semibold rounded-md p-3 my-2 hover:opacity-75 duration-150 disabled:bg-blue-500 disabled:hover:opacity-50 disabled:opacity-50 disabled:text-blue-300 disabled:hover:text-blue-300 flex items-center justify-center gap-x-3 whitespace-nowrap text-sm sm:text-base"
         onClick={handleGoogleLogin}
       >
         {loading ? `${page.loading}...` : page.signInWithGoogle}{" "}

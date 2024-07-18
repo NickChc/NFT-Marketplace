@@ -6,8 +6,13 @@ import { usePathname } from "next/navigation";
 
 export function Logo() {
   const pathname = usePathname();
+  const { locales } = i18n;
 
-  const logoViews = ["products", "info", ...i18n.locales.map((loc) => loc)];
+  const logoViews = [
+    "info",
+    ...locales,
+    ...locales.map((loc) => `${loc}/products`),
+  ];
 
   if (!logoViews.some((view) => pathname.endsWith(view))) return null;
 
