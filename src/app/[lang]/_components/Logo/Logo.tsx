@@ -13,8 +13,8 @@ export function Logo() {
 
   return (
     <div className="flex items-end justify-end text-purple-800 gap-x-3 select-none">
-      <MonkeyIcon className="text-4xl md:text-5xl" />
-      <h2 className="text-2xl md:text-3xl font-bold font-monoton whitespace-nowrap">
+      <MonkeyIcon className="text-3xl sm:text-4xl md:text-5xl 2xl:text-7xl" />
+      <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl 2xl:text-5xl font-bold font-monoton whitespace-nowrap">
         NFT Marketplace
       </h2>
     </div>
