@@ -44,31 +44,33 @@ export default async function ProductsPage({
   }
 
   return (
-    <div className="container mx-auto xl:w-[90%] xl:mx-auto pb-9 min-h-dvh flex flex-col items-center">
-      <div className="w-full flex flex-col sm:flex-row items-start sm:items-end sm:justify-between ">
-        <PageHeader>{page.products}</PageHeader>
-        <FilterProducts />
+    <>
+      <PageHeader>{page.products}</PageHeader>
+      <div className="container mx-auto xl:w-[90%] xl:mx-auto pb-9 min-h-dvh flex flex-col items-center">
+        <div className="w-full flex flex-col items-start pt-4">
+          <FilterProducts />
+        </div>
+        <div className="p-1 gap-x-3 gap-y-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-14 w-full">
+          <Suspense
+            fallback={
+              <>
+                <ProductSkeleton />
+                <ProductSkeleton />
+                <ProductSkeleton />
+                <ProductSkeleton />
+                <ProductSkeleton />
+                <ProductSkeleton />
+              </>
+            }
+          >
+            <ProductSuspense
+              query={query}
+              productsFetcher={productsFetcher}
+              lang={params.lang}
+            />
+          </Suspense>
+        </div>
       </div>
-      <div className="p-1 gap-x-3 gap-y-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-14 w-full">
-        <Suspense
-          fallback={
-            <>
-              <ProductSkeleton />
-              <ProductSkeleton />
-              <ProductSkeleton />
-              <ProductSkeleton />
-              <ProductSkeleton />
-              <ProductSkeleton />
-            </>
-          }
-        >
-          <ProductSuspense
-            query={query}
-            productsFetcher={productsFetcher}
-            lang={params.lang}
-          />
-        </Suspense>
-      </div>
-    </div>
+    </>
   );
 }

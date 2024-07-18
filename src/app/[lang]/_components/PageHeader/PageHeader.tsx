@@ -1,12 +1,16 @@
 import { PropsWithChildren } from "react";
+import { Logo } from "@/app/[lang]/_components/Logo";
 
 export function PageHeader({ children }: PropsWithChildren) {
   return (
-    <h1
-      className="mx-6 pt-4 font-semibold text-2xl sm:text-3xl 
-    md:text-4xl lg:text-5xl"
-    >
-      {children}
-    </h1>
+    <div className="flex flex-col-reverse gap-y-4 sm:flex-row items-start sm:items-center justify-between mx-6 pt-4 ">
+      <h1
+        className="font-semibold text-2xl 
+      md:text-3xl lg:text-4xl"
+      >
+        {children}
+      </h1>
+      <Logo />
+    </div>
   );
 }
