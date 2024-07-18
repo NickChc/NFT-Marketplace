@@ -5,7 +5,7 @@ import { sendOfferEmail } from "@/actions/orders";
 import { FormInput } from "@/components/FormInput";
 import { useDictionary } from "@/hooks/useDictionary";
 import { formatCurrency } from "@/lib/formatters";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { OfferSubmitButton } from "@/app/[lang]/_components/Modal/OfferForm/OfferSubmitButton";
 import { useAuthProvider } from "@/providers/AuthProvider";
@@ -22,6 +22,7 @@ export interface TSenfOfferEmailReturnData {
 }
 
 export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
+  const [mounted, setMounted] = useState<boolean>(false);
   const { currentUser } = useAuthProvider();
   const translations = useDictionary();
   const [data, action] = useFormState(
@@ -42,11 +43,19 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
     }
   }
 
+  useEffect(() => {
+    if (offerItem == null) return;
+
+    setMounted(true);
+  }, [offerItem]);
+
   if (offerItem == null) return null;
 
   return (
     <form
-      className="w-[90%] sm:w-[50%] md:w-auto md:min-w-[500px] p-3 sm:p-6 bg-white dark:bg-gray-900 flex flex-col gap-4 border-solid border border-purple-700 rounded-md"
+      className={`w-[90%] sm:w-[50%] md:w-auto md:min-w-[500px] p-3 sm:p-6 bg-white dark:bg-gray-900 flex-col gap-4 border-solid border border-purple-700 rounded-md transition-display duration-300 start-style-b-t ${
+        mounted ? "flex" : "hidden"
+      }`}
       action={action}
     >
       {data.message === "email_success" ? (

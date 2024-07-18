@@ -16,6 +16,7 @@ interface ProductViewMoreProps {
 }
 
 export function ProductViewMore({ lang }: ProductViewMoreProps) {
+  const [mounted, setMounted] = useState<boolean>(false);
   const [zoom, setZoom] = useState<boolean>(false);
   const [product, setProduct] = useState<TProduct | null>(null);
   const searchParams = useSearchParams();
@@ -58,8 +59,10 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
   useEffect(() => {
     if (product) {
       document.body.style.overflow = "hidden";
+      setMounted(true);
     } else {
       document.body.style.overflow = "auto";
+      setMounted(false);
     }
   }, [product]);
 
@@ -67,7 +70,9 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
 
   return (
     <div
-      className="fixed min-h-dvh top-0 bottom-0 right-0 left-0 z-50 grid text-black place-items-center backdrop-blur-sm"
+      className={`fixed min-h-dvh top-0 bottom-0 right-0 left-0 z-50 text-black place-items-center backdrop-blur-sm transition-display duration-300 start-style-b-t ${
+        mounted ? "grid" : "hidden"
+      }`}
       onMouseDown={closeModal}
     >
       <div

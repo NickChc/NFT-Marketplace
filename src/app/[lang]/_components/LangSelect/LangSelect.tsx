@@ -52,36 +52,38 @@ export function LangSelect({ lang }: LangSelectProps) {
       >
         {lang.toUpperCase()}
       </button>
-      {openSelect && (
-        <ul className="z-50 flex flex-col gap-y-2 absolute top-[130%] sm:top-[110%] left-1 sm:left-4 bg-white border-solid border border-purple-500 p-1.5 rounded-md">
-          {i18n.locales.map((loc) => {
-            return (
-              <li
-                key={loc}
-                className="w-full first:rounded-t-md first:rounded-b-none last:rounded-b-md last:rounded-t-none overflow-hidden"
+      <ul
+        className={`z-50 flex-col gap-y-2 absolute top-[130%] sm:top-[110%] left-1 sm:left-4 bg-white border-solid border border-purple-500 p-1.5 rounded-md transition-display start-style-x ${
+          openSelect ? "flex" : "hidden translate-x-[20px] opacity-0"
+        } `}
+      >
+        {i18n.locales.map((loc) => {
+          return (
+            <li
+              key={loc}
+              className="w-full first:rounded-t-md first:rounded-b-none last:rounded-b-md last:rounded-t-none overflow-hidden"
+            >
+              <Link
+                href={redirectPathname(loc)}
+                className={`px-2 py-1 flex items-center gap-x-3 text-black dark:text-black  ${
+                  lang === loc
+                    ? "cursor-default opacity-50 brightness-20"
+                    : "hover:bg-purple-300"
+                }`}
               >
-                <Link
-                  href={redirectPathname(loc)}
-                  className={`px-2 py-1 flex items-center gap-x-3 text-black dark:text-black  ${
-                    lang === loc
-                      ? "cursor-default opacity-50 brightness-20"
-                      : "hover:bg-purple-300"
-                  }`}
-                >
-                  {loc.toUpperCase()}
-                  <div className="rounded-full overflow-hidden aspect-square w-5 relative">
-                    {loc === "en" ? (
-                      <Image src={UKFlagImage} alt="UK Flag" fill />
-                    ) : loc === "ka" ? (
-                      <Image src={GeoFlagImage} alt="Geo Flag" fill />
-                    ) : null}
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+                {loc.toUpperCase()}
+                <div className="rounded-full overflow-hidden aspect-square w-5 relative">
+                  {loc === "en" ? (
+                    <Image src={UKFlagImage} alt="UK Flag" fill />
+                  ) : loc === "ka" ? (
+                    <Image src={GeoFlagImage} alt="Geo Flag" fill />
+                  ) : null}
+                </div>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
