@@ -7,7 +7,7 @@ import { CloseIcon, LoadingIcon } from "@/assets/icons";
 import { useDictionary } from "@/hooks/useDictionary";
 import { formatCurrency } from "@/lib/formatters";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useAuthProvider } from "@/providers/AuthProvider";
@@ -30,7 +30,7 @@ enum TAnswer_Enum {
 }
 
 export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
-  const { currentUser, setCurrentUser } = useAuthProvider();
+  const { currentUser } = useAuthProvider();
   const [answer, setAnswer] = useState<TAnswer_Enum>(TAnswer_Enum.NONE);
   const translations = useDictionary();
   const [loading, setLoading] = useState<boolean>(false);
@@ -75,7 +75,13 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
   if (offer == null) return null;
 
   return (
-    <div className="max-w-[90%] md:max-w-[50%] 2xl:max-w-[40%] bg-white dark:bg-gray-900 border-solid border border-purple-800 rounded-md p-3 sm:p-6 pt-7 flex flex-col gap-6 overflow-hidden relative">
+    <div
+      className={`max-w-[90%] md:max-w-[50%] 2xl:max-w-[40%] bg-white dark:bg-gray-900 border-solid border border-purple-800 rounded-md p-3 sm:p-6 pt-7 flex flex-col gap-6 overflow-hidden relative transition-all ease-linear duration-300 ${
+        answer === TAnswer_Enum.CONFIRM || answer === TAnswer_Enum.DECLINE
+          ? `${window.screen.height > 700 ? "h-[400px]" : "h-[80dvh]"}`
+          : `${window.screen.height > 700 ? "h-[500px]" : "h-[90dvh]"}`
+      }`}
+    >
       {!loading && (
         <span
           className="absolute top-1 right-1 text-lg sm:text-xl cursor-pointer hover:opacity-75 duration-100 hover:text-purple-700 hover:bg-white bg-purple-800 rounded-full"

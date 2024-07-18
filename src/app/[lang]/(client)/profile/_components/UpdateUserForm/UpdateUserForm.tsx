@@ -32,6 +32,7 @@ export function UpdateUserForm({
   lang,
 }: UpdateUserFormProps) {
   const translations = useDictionary();
+  const [mounted, setMounted] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<string>("");
   const [emailMessage, setEmailMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -103,12 +104,20 @@ export function UpdateUserForm({
     onRender();
   }, []);
 
+  useEffect(() => {
+    if (updateUser == null) return;
+
+    setMounted(true);
+  }, [updateUser]);
+
   if (updateUser == null) return null;
 
   return (
     <form
       action={action}
-      className=" flex flex-col p-3 bg-white dark:bg-gray-900 border-solid border border-purple-700 rounded-md w-[90%] sm:w-auto gap-3"
+      className={`flex-col p-3 bg-white dark:bg-gray-900 border-solid border border-purple-700 rounded-md w-[90%] max-h-[95dvh] text-sm sm:text-base sm:w-auto gap-3 transition-display duration-300 start-style-x-100 overflow-auto ${
+        mounted ? "flex" : "hidden"
+      }`}
     >
       <h3 className="text-sm sm:text-lg text-center">
         {translations.page.noChangeFields}

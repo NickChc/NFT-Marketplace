@@ -3,7 +3,7 @@
 import { TLocale } from "../../../../../../../i18n.config";
 import { TUser } from "@/@types/general";
 import { useDictionary } from "@/hooks/useDictionary";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { auth } from "@/firebase";
 import { FormInput } from "@/components/FormInput";
@@ -26,11 +26,11 @@ export function ConfirmDeleteAcc({
   deleteUser,
 }: ConfirmDeleteAccProps) {
   const translations = useDictionary();
+  const [mounted, setMounted] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { handleUserDelete, handleLogOut, reauthenticate, authProvider } =
-    useAuthProvider();
+  const { handleUserDelete, authProvider } = useAuthProvider();
 
   function onError(error: string) {
     if (error.includes("requires-recent-login")) {
@@ -84,10 +84,20 @@ export function ConfirmDeleteAcc({
     }
   }
 
+  useEffect(() => {
+    if (deleteUser == null) return;
+
+    setMounted(true);
+  }, [deleteUser]);
+
   if (deleteUser == null) return null;
 
   return (
-    <div className="bg-white p-6 text-black w-[90%] sm:w-auto rounded-sm border-solid border border-purple-800">
+    <div
+      className={`bg-white p-6 text-black w-[90%] sm:w-auto rounded-sm border-solid border border-purple-800 transition-display duration-300 start-style-x-100 ${
+        mounted ? "block" : "hidden"
+      }`}
+    >
       <h4 className="font-semibold sm:text-lg md:text-xl text-center">
         {authProvider === "password"
           ? lang === "ka"
