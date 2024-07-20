@@ -114,7 +114,11 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
               {translations.page.price} -{" "}
               {formatCurrency(product.priceInCents / 100)}
             </strong>
-            <ProductCardButton product={product} lang={lang} />
+            <ProductCardButton
+              product={product}
+              lang={lang}
+              onClick={closeModal}
+            />
           </div>
         </div>
       </div>

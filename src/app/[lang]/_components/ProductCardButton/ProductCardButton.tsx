@@ -12,9 +12,14 @@ import { useEffect, useState } from "react";
 interface ProductCardButtonProps {
   product: TProduct;
   lang: TLocale;
+  onClick?: () => void;
 }
 
-export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
+export function ProductCardButton({
+  product,
+  lang,
+  onClick,
+}: ProductCardButtonProps) {
   const [isCurrentUsers, setIsCurrentUsers] = useState(false);
   const { currentUser } = useAuthProvider();
   const { setOfferItem } = useGlobalProvider();
@@ -24,6 +29,10 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
 
   function handleClick() {
     if (product.owner?.isFrozen || currentUser == null) return;
+
+    if (onClick) {
+      onClick();
+    }
 
     setOfferItem(product);
   }
