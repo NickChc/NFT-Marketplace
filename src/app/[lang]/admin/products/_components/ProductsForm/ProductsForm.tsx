@@ -61,7 +61,11 @@ export function ProductsForm({ product }: ProductsFormProps) {
         label={dictionary.page.priceInCents}
         name="priceInCents"
         value={priceInCents}
-        onChange={(e) => setPriceInCents(e.target.value)}
+        onChange={(e) => {
+          if (isNaN(Number(e.target.value))) return;
+
+          setPriceInCents(e.target.value);
+        }}
         onFocus={() => {}}
         required={product == null}
       />

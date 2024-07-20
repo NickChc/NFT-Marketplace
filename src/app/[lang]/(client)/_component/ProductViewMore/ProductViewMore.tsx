@@ -76,7 +76,7 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
       onMouseDown={closeModal}
     >
       <div
-        className="w-[80%] sm:w-[70%] bg-white py-6 relative border-solid border border-purple-700 rounded-md"
+        className="w-[80%] bg-white py-6 relative border-solid border border-purple-700 rounded-md"
         onMouseDown={(e) => e.stopPropagation()}
       >
         <span
@@ -103,7 +103,7 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
           </div>
           <div className="flex flex-col items-start justify-between w-full mt-3 md:mt-0 md:w-1/2 ">
             <div className="flex flex-col min-h-40">
-              <h2 className="font-semibold mb-1 text-xl md:text-2xl">
+              <h2 className="font-semibold mb-3 text-xl md:text-2xl">
                 {product.name}
               </h2>
               <p className="max-h-28 overflow-auto pr-1 scrollbar-small ">
