@@ -10,6 +10,7 @@ import { useFormState } from "react-dom";
 import { OfferSubmitButton } from "@/app/[lang]/_components/Modal/OfferForm/OfferSubmitButton";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { DualButton } from "../../DualButton";
+import Image from "next/image";
 
 interface OfferFormProps {
   closeModal: () => void;
@@ -53,7 +54,7 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
 
   return (
     <form
-      className={`w-[90%] sm:w-[50%] md:w-auto md:min-w-[500px] p-3 sm:p-6 bg-white dark:bg-gray-900 flex-col gap-4 border-solid border border-purple-700 rounded-md transition-display duration-300 start-style-b-t ${
+      className={`w-[90%] sm:w-[50%] md:w-auto md:min-w-[500px] p-3 sm:p-6 bg-white dark:bg-gray-900 flex-col gap-4 border-solid border border-purple-700 rounded-md transition-display duration-300 start-style-b-t max-h-[90dvh] overflow-auto z-50 ${
         mounted ? "flex" : "hidden"
       }`}
       action={action}
@@ -62,6 +63,15 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
         <div className="my-3">{translations.page.offerSent}</div>
       ) : (
         <>
+          <h2 className="font-semibold text-xl">{offerItem.name}</h2>
+          <div className="relative w-full aspect-video mx-auto shrink-0">
+            <Image
+              src={offerItem.imagePath}
+              alt={offerItem.name}
+              fill
+              objectFit="cover"
+            />
+          </div>
           <FormInput
             value={price}
             onChange={handleChange}

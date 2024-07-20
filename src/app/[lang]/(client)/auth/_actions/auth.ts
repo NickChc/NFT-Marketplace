@@ -113,7 +113,7 @@ function createLoginSchema() {
 const loginSchema = createLoginSchema();
 
 export async function login(
-  redirect: (path: string) => void,
+  redirect: () => void,
   prevState: unknown,
   formData: FormData
 ) {
@@ -130,12 +130,12 @@ export async function login(
   try {
     await signInWithEmailAndPassword(auth, data.email, data.password);
 
-    const pathname = window.location.pathname;
-    const segments = pathname.split("/");
+    // const pathname = window.location.pathname;
+    // const segments = pathname.split("/");
 
-    const locale: TLocale = i18n.locales.find((loc) => segments.includes(loc))!;
+    // const locale: TLocale = i18n.locales.find((loc) => segments.includes(loc))!;
 
-    redirect(`/${locale}`);
+    redirect();
   } catch (error: any) {
     if (error.message.includes("invalid-credential")) {
       return { auth: [translations.invalidCredentials] };
