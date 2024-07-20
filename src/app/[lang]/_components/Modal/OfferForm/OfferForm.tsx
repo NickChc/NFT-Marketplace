@@ -63,7 +63,9 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
         <div className="my-3">{translations.page.offerSent}</div>
       ) : (
         <>
-          <h2 className="font-semibold text-xl">{offerItem.name}</h2>
+          <h2 className="font-semibold text-lg sm:text-xl lg:text-2xl truncate shrink-0">
+            {offerItem.name}
+          </h2>
           <div className="relative w-full aspect-video mx-auto shrink-0">
             <Image
               src={offerItem.imagePath}

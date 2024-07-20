@@ -50,7 +50,7 @@ export default async function ProductsPage({
         <div className="w-full flex flex-col items-start pt-4">
           <FilterProducts />
         </div>
-        <div className="p-1 gap-x-3 gap-y-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-14 w-full">
+        <div className="p-1 gap-x-3 gap-y-6 sm:gap-y-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-14 w-full">
           <Suspense
             fallback={
               <>

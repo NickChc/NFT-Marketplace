@@ -93,9 +93,8 @@ export function LoginForm({ lang }: LoginFormProps) {
       router.replace(`/${lang}`);
     } catch (error: any) {
       console.log(error.message);
-      setLoginError(translations.page.problemOccuredTryAgain);
-    } finally {
       setLoading(false);
+      setLoginError(translations.page.problemOccuredTryAgain);
     }
   }
 
