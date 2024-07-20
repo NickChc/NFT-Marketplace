@@ -3,7 +3,7 @@
 import { TLocale } from "../../../../../../../i18n.config";
 import { useState } from "react";
 import { useFormState } from "react-dom";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signInWithPopup } from "firebase/auth";
 import { FormInput } from "@/components/FormInput";
 import { SubmitBtn } from "@/components/SubmitBtn";
@@ -13,6 +13,8 @@ import { auth, googleProvider } from "@/firebase";
 import { GoogleIcon } from "@/assets/icons";
 import { LoginFormPopup } from "@/app/[lang]/(client)/auth/_components/LoginForm/LoginFormPopup";
 import { PROVIDER } from "@/config/storageKeys";
+import { useGlobalProvider } from "@/providers/GlobalProvider";
+import { getProduct } from "@/app/[lang]/_api/getProduct";
 
 interface FieldErrors {
   email?: string[];
@@ -36,6 +38,8 @@ interface LoginFormProps {
 }
 
 export function LoginForm({ lang }: LoginFormProps) {
+  const searchParams = useSearchParams();
+  const { setOfferItem } = useGlobalProvider();
   const [loginError, setLoginError] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, action] = useFormState(
@@ -46,8 +50,28 @@ export function LoginForm({ lang }: LoginFormProps) {
   const { page } = translations;
   const router = useRouter();
 
-  function redirectAfterLogin(path: string) {
-    router.replace(path);
+  async function getOfferAfter(productId: string) {
+    const bidAfterItem = await getProduct(productId);
+
+    if (bidAfterItem == null) return;
+
+    setOfferItem(bidAfterItem);
+  }
+
+  function redirectAfterLogin() {
+    const purchase = searchParams.get("purchase");
+    const offerAfter = searchParams.get("offerAfter");
+
+    if (purchase) {
+      router.replace(`/${lang}/products/${purchase}/buy`);
+      return;
+    }
+
+    if (offerAfter) {
+      getOfferAfter(offerAfter);
+    }
+
+    router.replace(`/${lang}`);
   }
 
   async function handleGoogleLogin() {
@@ -55,6 +79,17 @@ export function LoginForm({ lang }: LoginFormProps) {
       setLoading(true);
       await signInWithPopup(auth, googleProvider);
       localStorage.setItem(PROVIDER, "google");
+      const purchase = searchParams.get("purchase");
+      const offerAfter = searchParams.get("offerAfter");
+      if (purchase) {
+        router.replace(`/${lang}/products/${purchase}/buy`);
+        return;
+      }
+
+      if (offerAfter) {
+        getOfferAfter(offerAfter);
+      }
+
       router.replace(`/${lang}`);
     } catch (error: any) {
       console.log(error.message);

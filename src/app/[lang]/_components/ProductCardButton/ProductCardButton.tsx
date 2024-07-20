@@ -55,7 +55,7 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
         ) : currentUser == null ? (
           <Link
             className="min-w-full min-h-full px-2 py-1 rounded-md"
-            href={`/${lang}/auth/sign-in`}
+            href={`/${lang}/auth/sign-in?offerAfter=${product.id}`}
           >
             {page.bid}
           </Link>
@@ -83,7 +83,7 @@ export function ProductCardButton({ product, lang }: ProductCardButtonProps) {
             href={
               currentUser
                 ? `/${lang}/products/${product.id}/buy`
-                : `/${lang}/auth/sign-in`
+                : `/${lang}/auth/sign-in?purchase=${product.id}`
             }
           >
             {page.buy}
