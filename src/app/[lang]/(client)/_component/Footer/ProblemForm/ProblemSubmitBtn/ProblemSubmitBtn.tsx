@@ -1,13 +1,25 @@
+import { REPORTS } from "@/config/storageKeys";
 import { PropsWithChildren } from "react";
 import { useFormStatus } from "react-dom";
 
-export function ProblemSubmitBtn({ children }: PropsWithChildren) {
+interface ProblemSubmitBtnProps {
+  disabled?: boolean;
+  onClick: () => void;
+}
+
+export function ProblemSubmitBtn({
+  children,
+  disabled,
+  onClick,
+}: PropsWithChildren<ProblemSubmitBtnProps>) {
   const { pending } = useFormStatus();
 
   return (
     <button
+      onClick={onClick}
+      disabled={pending || disabled}
       type="submit"
-      className={`rounded-md px-2 py-1 outline-none bg-white text-purple-900 font-semibold transition-all duration-150 ease-in active:scale-[90%] xl:text-xl ${
+      className={`rounded-md p-3 min-h-14 outline-none bg-white text-purple-900 font-semibold transition-all duration-150 ease-in active:scale-[90%] xl:text-xl disabled:pointer-events-none flex items-center justify-center ${
         pending ? "scale-[90%] opacity-75" : ""
       } `}
     >
