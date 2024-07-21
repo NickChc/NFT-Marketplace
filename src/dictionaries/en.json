@@ -159,6 +159,7 @@
     "done": "Done",
     "sendAgain": "Send Again",
     "congrats": "Congratulations",
-    "registerToChangeEmail": "Register using current email to change it."
+    "registerToChangeEmail": "Register using current email to change it.",
+    "reportAProblem": "REPORT A PROBLEM"
   }
 }

@@ -22,8 +22,6 @@ const config: Config = {
       },
       fontFamily: {
         monoton: ["var(--font-monoton)"],
-        bodoniModa: ["var(--font-bodoni-moda)"],
-        permaMarker: ["var(--font-permanent-marker)"],
       },
     },
   },
