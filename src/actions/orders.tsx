@@ -6,21 +6,12 @@ import { Resend } from "resend";
 import { z } from "zod";
 import { TSenfOfferEmailReturnData } from "@/app/[lang]/_components/Modal/OfferForm/OfferForm";
 import { getUser } from "@/app/[lang]/_api/getUser";
-import {
-  addDoc,
-  doc,
-  getDocs,
-  query,
-  updateDoc,
-  where,
-  writeBatch,
-} from "firebase/firestore";
+import { addDoc, doc, updateDoc } from "firebase/firestore";
 import { db, notificationsCollectionRef, salesCollectionRef } from "@/firebase";
 import { TOffer } from "@/@types/general";
 import OfferRejectEmail from "@/email/OfferRejectEmail";
 import { getProduct } from "@/app/[lang]/_api/getProduct";
 import OfferAcceptEmail from "@/email/OfferAcceptEmail";
-import { getNotifications } from "@/app/[lang]/_api/getNotifications";
 import { updateUserNotes } from "@/app/[lang]/_api/updateUserNotes";
 import { revalidatePath } from "next/cache";
 
