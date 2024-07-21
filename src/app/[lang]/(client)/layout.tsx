@@ -3,6 +3,7 @@ import { PropsWithChildren } from "react";
 import { getDictionaries } from "@/lib/dictionary";
 import { Header } from "@/app/[lang]/_components/Header";
 import { NavLink } from "@/app/[lang]/_components/NavLink";
+import { Footer } from "@/app/[lang]/(client)/_component/Footer";
 import { BackgroundImage } from "@/app/[lang]/(client)/_component/BackgroundImage";
 import { Modal } from "@/app/[lang]/_components/Modal";
 import { ProductViewMore } from "@/app/[lang]/(client)/_component/ProductViewMore";
@@ -32,6 +33,7 @@ export default async function ClientLayout({
 
       <div className="mx-auto w-full md:w-[90%] lg:w-[80%] bg-custom-white dark:bg-gray-900 z-20 relative">
         {children}
+        <Footer lang={lang} />
       </div>
     </div>
   );

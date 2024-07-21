@@ -10,7 +10,7 @@ export function BackgroundImage() {
   if (pathname.includes("auth")) return null;
 
   return (
-    <div className="fixed z-0 inset-0 pointer-events-none select-nonebg-repeat ">
+    <div className="fixed z-0 inset-0 pointer-events-none select-none">
       <Image
         src={BackgroundImg}
         alt="background image"
