@@ -33,6 +33,7 @@ export function PriceFilter() {
       {ranges.map((range) => {
         return (
           <button
+            key={`${range.min}${range.max}`}
             onClick={() => handleClick([range.min, range.max])}
             className={`px-2 py-1 border-solid border border-purple-800 rounded-md ${
               Number(min) === range.min ? "bg-purple-800 text-white" : ""
