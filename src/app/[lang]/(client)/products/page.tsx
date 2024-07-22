@@ -16,6 +16,8 @@ interface ProductsPageProps {
   };
   searchParams: {
     filterBy: string;
+    min: string;
+    max: string;
   };
 }
 
@@ -25,7 +27,7 @@ export default async function ProductsPage({
 }: ProductsPageProps) {
   const { page } = await getDictionaries(params.lang);
 
-  const filter = searchParams.filterBy;
+  const { min, max, filterBy: filter } = searchParams;
   const query = filter ? (filter as TFilterBy_Enum) : ("all" as TFilterBy_Enum);
 
   async function productsFetcher(): Promise<TProduct[] | undefined> {
@@ -66,6 +68,7 @@ export default async function ProductsPage({
             }
           >
             <ProductSuspense
+              priceRange={min && max ? [Number(min), Number(max)] : null}
               query={query}
               productsFetcher={productsFetcher}
               lang={params.lang}

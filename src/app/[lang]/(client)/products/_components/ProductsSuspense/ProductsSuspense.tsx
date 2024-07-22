@@ -9,11 +9,13 @@ interface ProductsSuspenseProps {
   lang: TLocale;
   productsFetcher: () => Promise<TProduct[] | undefined>;
   query?: TFilterBy_Enum;
+  priceRange?: [number, number] | null;
 }
 
 export async function ProductSuspense({
   productsFetcher,
   lang,
+  priceRange,
 }: ProductsSuspenseProps) {
   const { page } = await getDictionaries(lang);
 
@@ -30,14 +32,36 @@ export async function ProductSuspense({
     );
   }
 
-  return products?.map((product) => {
-    return (
-      <ProductCard
-        key={product.id}
-        product={product}
-        text={{ ...page }}
-        lang={lang}
-      />
-    );
-  });
+  if (priceRange) {
+    const [min, max] = priceRange;
+
+    return products
+      .filter((product) => {
+        const price = product.priceInCents / 100;
+        if (price < max && price > min) {
+          return product;
+        }
+      })
+      .map((product) => {
+        return (
+          <ProductCard
+            key={product.id}
+            product={product}
+            text={{ ...page }}
+            lang={lang}
+          />
+        );
+      });
+  } else {
+    return products.map((product) => {
+      return (
+        <ProductCard
+          key={product.id}
+          product={product}
+          text={{ ...page }}
+          lang={lang}
+        />
+      );
+    });
+  }
 }
