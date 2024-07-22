@@ -8,6 +8,7 @@ import { ProductSkeleton } from "@/app/[lang]/(client)/_component/ProductSkeleto
 import { TProduct } from "@/@types/general";
 import { FilterProducts } from "@/app/[lang]/(client)/products/_components/FilterProducts";
 import { TFilterBy_Enum } from "./_components/FilterProducts/FilterProducts";
+import { PriceFilter } from "./_components/PriceFilter";
 
 interface ProductsPageProps {
   params: {
@@ -47,8 +48,9 @@ export default async function ProductsPage({
     <div className="container mx-auto xl:w-[90%] xl:mx-auto pb-9 sm:pb-20">
       <PageHeader>{page.products}</PageHeader>
       <div className=" pb-9 min-h-dvh flex flex-col items-center">
-        <div className="w-full flex flex-col items-start pt-4">
+        <div className="w-full flex items-center justify-between pt-4 mt-3">
           <FilterProducts />
+          <PriceFilter />
         </div>
         <div className="p-1 gap-x-3 gap-y-6 sm:gap-y-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-14 w-full">
           <Suspense
