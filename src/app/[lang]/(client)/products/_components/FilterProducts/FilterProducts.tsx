@@ -27,8 +27,9 @@ export function FilterProducts() {
 
   return (
     <div className="w-full sm:w-fit px-6 sm:px-9 mt-3 text-lg flex flex-col items-stretch sm:flex-row gap-4 sm:items-center gap-x-3 whitespace-nowrap sm:text-xl">
-      <label className="font-semibold">
-        {translations.page.filterProducts} -{" "}
+      <label className="font-semibold flex items-center gap-x-3">
+        {translations.page.filterProducts}{" "}
+        <span className="hidden sm:block">-</span>{" "}
       </label>
       <select
         className="p-1 cursor-pointer dark:bg-gray-800 text-black dark:text-white border-solid border border-purple-800 rounded-md outline-none"
