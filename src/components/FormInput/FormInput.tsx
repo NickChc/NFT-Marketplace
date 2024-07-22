@@ -12,6 +12,7 @@ interface FormInputProps {
   defaultValue?: string;
   placeholder?: string;
   disabled?: boolean;
+  autoComplete?: boolean;
 }
 
 export function FormInput({
@@ -25,6 +26,7 @@ export function FormInput({
   defaultValue,
   placeholder,
   disabled,
+  autoComplete,
 }: FormInputProps) {
   const [show, setShow] = useState<boolean>(false);
 
@@ -46,6 +48,7 @@ export function FormInput({
           </span>
         )}
         <input
+          autoComplete={autoComplete ? "on" : "off"}
           disabled={disabled}
           placeholder={placeholder}
           required={required}

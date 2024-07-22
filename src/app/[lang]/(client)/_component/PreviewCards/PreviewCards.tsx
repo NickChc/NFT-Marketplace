@@ -39,7 +39,7 @@ export async function PreviewCards({
           </span>
         </Link>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-9 mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-9 mx-auto">
         {products.map((product) => {
           return (
             <ProductCard

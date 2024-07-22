@@ -44,7 +44,7 @@ export default async function ProductsPage({
   }
 
   return (
-    <div className="container mx-auto xl:w-[90%] xl:mx-auto">
+    <div className="container mx-auto xl:w-[90%] xl:mx-auto pb-9 sm:pb-20">
       <PageHeader>{page.products}</PageHeader>
       <div className=" pb-9 min-h-dvh flex flex-col items-center">
         <div className="w-full flex flex-col items-start pt-4">
