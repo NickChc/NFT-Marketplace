@@ -97,6 +97,7 @@ export async function getProducts(
     } else {
       data = await getDocs(productCollectionRef);
     }
+
     const products = data.docs.map((doc) => {
       const productData = doc.data();
       const createdAt = productData.createdAt.toDate();
