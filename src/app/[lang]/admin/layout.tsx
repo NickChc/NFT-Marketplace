@@ -1,12 +1,9 @@
 import { TLocale } from "../../../../i18n.config";
 import { PropsWithChildren } from "react";
-import { Navigation } from "@/app/[lang]/_components/Navigation";
 import { Metadata } from "next";
 import { getDictionaries } from "@/lib/dictionary";
-import { LangSelect } from "@/app/[lang]/_components/LangSelect";
 import { NavLink } from "@/app/[lang]/_components/NavLink";
-import { ToggleTheme } from "@/app/[lang]/_components/ToggleTheme";
-import { Header } from "../_components/Header";
+import { Header } from "@/app/[lang]/_components/Header";
 
 interface AdminLayoutProps {
   params: {
