@@ -1,6 +1,7 @@
 "use client";
 
 import { filterSearchParams } from "@/lib/filterSearchParams";
+import { revalidatePath } from "next/cache";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export function PriceFilter() {

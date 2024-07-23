@@ -1,22 +1,23 @@
 import { TProduct } from "@/@types/general";
 import { productCollectionRef } from "@/firebase";
-import { getDocs, orderBy, query, limit, where } from "firebase/firestore";
+import { getDocs, orderBy, query, limit, where, and } from "firebase/firestore";
 
 export async function getProducts(
   limitAt?: number,
   activeOnly?: boolean,
   withoutOwner?: boolean,
   userId?: string,
-  forBidding?: boolean
+  forBidding?: boolean,
+  priceRange?: [number, number]
 ) {
   try {
     let data;
+
     if (limitAt && activeOnly) {
       data = await getDocs(
         query(
           productCollectionRef,
           where("isAvailable", "==", true),
-          // where("owner.isFrozen", "==", false),
           orderBy("createdAt", "desc"),
           limit(limitAt)
         )
@@ -25,8 +26,11 @@ export async function getProducts(
       data = await getDocs(
         query(
           productCollectionRef,
-          where("isAvailable", "==", true),
-          // where("owner.isFrozen", "==", false),
+          and(
+            where("isAvailable", "==", true),
+            where("priceInCents", "<", (priceRange?.[1] || Infinity) * 100),
+            where("priceInCents", ">", priceRange ? priceRange[0] * 100 : 0)
+          ),
           orderBy("createdAt", "desc")
         )
       );
@@ -34,7 +38,11 @@ export async function getProducts(
       data = await getDocs(
         query(
           productCollectionRef,
-          where("owner", "==", null),
+          and(
+            where("owner", "==", null),
+            where("priceInCents", "<", (priceRange?.[1] || Infinity) * 100),
+            where("priceInCents", ">", priceRange ? priceRange[0] * 100 : 0)
+          ),
           orderBy("createdAt", "desc")
         )
       );
@@ -42,7 +50,11 @@ export async function getProducts(
       data = await getDocs(
         query(
           productCollectionRef,
-          where("owner.userId", "==", userId),
+          and(
+            where("owner.userId", "==", userId),
+            where("priceInCents", "<", (priceRange?.[1] || Infinity) * 100),
+            where("priceInCents", ">", priceRange ? priceRange[0] * 100 : 0)
+          ),
           orderBy("createdAt", "desc")
         )
       );
@@ -50,7 +62,11 @@ export async function getProducts(
       data = await getDocs(
         query(
           productCollectionRef,
-          where("openForBidding", "==", true),
+          and(
+            where("openForBidding", "==", true),
+            where("priceInCents", "<", (priceRange?.[1] || Infinity) * 100),
+            where("priceInCents", ">", priceRange ? priceRange[0] * 100 : 0)
+          ),
           orderBy("createdAt", "desc"),
           limit(limitAt)
         )
@@ -59,8 +75,23 @@ export async function getProducts(
       data = await getDocs(
         query(
           productCollectionRef,
-          where("openForBidding", "==", true),
+          and(
+            where("openForBidding", "==", true),
+            where("priceInCents", "<", (priceRange?.[1] || Infinity) * 100),
+            where("priceInCents", ">", priceRange ? priceRange[0] * 100 : 0)
+          ),
           orderBy("createdAt", "desc")
+        )
+      );
+    } else if (priceRange) {
+      data = await getDocs(
+        query(
+          productCollectionRef,
+          and(
+            where("priceInCents", "<", (priceRange?.[1] || Infinity) * 100),
+            where("priceInCents", ">", priceRange ? priceRange[0] * 100 : 0)
+          ),
+          orderBy("priceInCents", "asc")
         )
       );
     } else {

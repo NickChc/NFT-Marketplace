@@ -28,21 +28,38 @@ export default async function ProductsPage({
   const { page } = await getDictionaries(params.lang);
 
   const { min, max, filterBy: filter } = searchParams;
-  const query = filter ? (filter as TFilterBy_Enum) : ("all" as TFilterBy_Enum);
 
   async function productsFetcher(): Promise<TProduct[] | undefined> {
+    const priceRange: [number, number] | undefined =
+      min && max ? [Number(min), Number(max)] : undefined;
+
     if (filter === "forBidding") {
       return await getProducts(
         undefined,
         undefined,
         undefined,
         undefined,
-        true
+        true,
+        priceRange
       );
     } else if (filter === "forSale") {
-      return await getProducts(undefined, true);
+      return await getProducts(
+        undefined,
+        true,
+        undefined,
+        undefined,
+        undefined,
+        priceRange
+      );
     } else {
-      return await getProducts();
+      return await getProducts(
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        priceRange
+      );
     }
   }
 
@@ -68,8 +85,6 @@ export default async function ProductsPage({
             }
           >
             <ProductSuspense
-              priceRange={min && max ? [Number(min), Number(max)] : null}
-              query={query}
               productsFetcher={productsFetcher}
               lang={params.lang}
             />
