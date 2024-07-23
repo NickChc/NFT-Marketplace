@@ -82,7 +82,7 @@ export function Notification({ lang }: NotificationProps) {
       ) : (
         <>
           Congratulations! Your offer for {congratsOn} got accepted. {<br />}
-          Now you are owner of these NFT's.
+          Now you are owner of these NFT&apos;s.
         </>
       )}
     </div>
