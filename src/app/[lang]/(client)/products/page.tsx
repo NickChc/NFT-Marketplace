@@ -7,8 +7,7 @@ import { ProductSuspense } from "@/app/[lang]/(client)/products/_components/Prod
 import { ProductSkeleton } from "@/app/[lang]/(client)/_component/ProductSkeleton";
 import { TProduct } from "@/@types/general";
 import { FilterProducts } from "@/app/[lang]/(client)/products/_components/FilterProducts";
-import { TFilterBy_Enum } from "./_components/FilterProducts/FilterProducts";
-import { PriceFilter } from "./_components/PriceFilter";
+import { PriceFilter } from "@/app/[lang]/(client)/products/_components/PriceFilter";
 
 interface ProductsPageProps {
   params: {
