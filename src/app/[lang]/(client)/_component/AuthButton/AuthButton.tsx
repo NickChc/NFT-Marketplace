@@ -37,7 +37,7 @@ export function AuthButton({ lang }: AuthButtonProps) {
   }
 
   return (
-    <button className="rounded-full sm:absolute top-1/2 sm:-translate-y-1/2 right-20">
+    <button className="rounded-full sm:absolute top-1/2 sm:-translate-y-1/2 right-20 active:scale-90 transition-all duration-200">
       {loadingUser ? (
         <span className="font-semibold bg-white w-7 sm:w-8 md:w-10 aspect-square grid place-items-center rounded-full">
           <LoadingIcon className="animate-spin text-xl text-purple-800" />
