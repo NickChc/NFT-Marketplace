@@ -1,1 +1,1 @@
-export { Navigation } from "./Navigation";
+export { Navigation } from "@/app/[lang]/_components/Navigation/Navigation";
