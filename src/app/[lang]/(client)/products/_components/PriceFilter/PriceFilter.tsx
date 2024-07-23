@@ -13,7 +13,8 @@ export function PriceFilter() {
   const ranges = [
     { min: 100, max: 1000 },
     { min: 1000, max: 5000 },
-    { min: 5000, max: Infinity },
+    { min: 5000, max: 40000 },
+    { min: 40000, max: Infinity },
   ];
 
   function handleClick(range: [number, number]) {
@@ -30,13 +31,13 @@ export function PriceFilter() {
   }
 
   return (
-    <div className="flex items-center gap-x-4">
+    <div className="grid grid-cols-auto min-w-full sm:min-w-fit sm:grid-cols-2 max-w-fit gap-y-4 gap-x-3 sm:gap-x-6">
       {ranges.map((range) => {
         return (
           <button
             key={`${range.min}${range.max}`}
             onClick={() => handleClick([range.min, range.max])}
-            className={`px-2 py-1 border-solid border border-purple-800 rounded-md ${
+            className={`px-1 sm:px-2 py-1 border-solid border border-purple-800 rounded-md text-[0.6rem] whitespace-nowrap overflow-hidden sm:text-sm text-center ${
               Number(min) === range.min ? "bg-purple-800 text-white" : ""
             }`}
           >

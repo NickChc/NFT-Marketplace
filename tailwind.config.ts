@@ -23,6 +23,9 @@ const config: Config = {
       fontFamily: {
         monoton: ["var(--font-monoton)"],
       },
+      gridTemplateColumns: {
+        auto: "repeat(auto-fit, minmax(100px, 1fr))",
+      },
     },
   },
   plugins: [],
