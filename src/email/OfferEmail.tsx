@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Body,
-  Button,
   Column,
   Container,
   Head,
@@ -134,7 +133,7 @@ export default function OfferEmail({
               <Img
                 width={"100%"}
                 alt={offerItem.name}
-                src={`${process.env.NEXT_PUBLIC_SERVER_URL}${offerItem.imagePath}`}
+                src={offerItem.imagePath}
               />
               <Row className="mt-8">
                 <Row>

@@ -1,4 +1,4 @@
-import { TOffer, TProduct } from "@/@types/general";
+import { TOffer } from "@/@types/general";
 import { formatCurrency } from "@/lib/formatters";
 import {
   Body,
@@ -128,7 +128,7 @@ export default function OfferRejectEmail({
               <Img
                 width={"100%"}
                 alt={offerItem.name}
-                src={`${process.env.NEXT_PUBLIC_SERVER_URL}${offerItem.imagePath}`}
+                src={offerItem.imagePath}
               />
               <Row className="mt-8">
                 <Row>
