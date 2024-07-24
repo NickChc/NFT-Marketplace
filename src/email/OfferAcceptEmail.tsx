@@ -78,7 +78,7 @@ export default function OfferAcceptEmail({
               <Img
                 width={"100%"}
                 alt={offerItem.name}
-                src={`${process.env.NEXT_PUBLIC_SERVER_URL}${offerItem.imagePath}`}
+                src={offerItem.imagePath}
               />
               <Row className="mt-8">
                 <Row>
