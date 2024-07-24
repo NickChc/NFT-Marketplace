@@ -37,8 +37,10 @@ export function PriceFilter() {
           <button
             key={`${range.min}${range.max}`}
             onClick={() => handleClick([range.min, range.max])}
-            className={`px-1 sm:px-2 py-1 border-solid border border-purple-800 rounded-md text-[0.6rem] whitespace-nowrap overflow-hidden sm:text-sm text-center ${
-              Number(min) === range.min ? "bg-purple-800 text-white" : ""
+            className={`px-1 sm:px-2 py-1 border-solid border border-purple-800 rounded-md text-[0.7rem] whitespace-nowrap overflow-hidden sm:text-sm text-center font-semibold duration-150 ${
+              Number(min) === range.min
+                ? "bg-purple-800 text-white"
+                : "dark:hover:bg-gray-700 hover:bg-gray-300 text-purple-800"
             }`}
           >
             {`${range.min}$ - ${
