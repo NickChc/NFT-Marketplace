@@ -21,7 +21,7 @@ export async function Header({
         <span className="hidden sm:block">
           <LangSelect lang={lang} />
         </span>
-        <div className="flex flex-shrink justify-around mx-auto w-full sm:w-auto">
+        <div className="grid grid-cols-3 mx-auto w-full sm:w-auto">
           {children}
         </div>
         <span className="hidden sm:block">
@@ -33,7 +33,7 @@ export async function Header({
           </span>
         )}
       </HeaderNav>
-      <div className="relative flex justify-between sm:hidden px-4 py-1 sm:p-0 bg-purple-800 w-full items-center ">
+      <div className="relative flex justify-between sm:hidden px-4 pb-1 pt-2 sm:p-0 bg-purple-800 w-full items-center ">
         <div className="flex items-center gap-x-6">
           <LangSelect lang={lang} />
           <ToggleTheme />

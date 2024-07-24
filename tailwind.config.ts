@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 const config: Config = {
   darkMode: "class",
@@ -25,9 +26,15 @@ const config: Config = {
       },
       gridTemplateColumns: {
         auto: "repeat(auto-fit, minmax(100px, 1fr))",
+        fill: "repeat(auto-fill, minmax(100px, 1fr))",
       },
     },
+    screens: {
+      xs: "340px",
+      ...defaultTheme.screens,
+    },
   },
+
   plugins: [],
 };
 export default config;
