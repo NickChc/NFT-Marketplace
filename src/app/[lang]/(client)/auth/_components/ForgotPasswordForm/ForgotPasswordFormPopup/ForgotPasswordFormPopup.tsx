@@ -40,7 +40,7 @@ export function ForgotPasswordFormPopup({
         <div className="text-red-500 text-center">
           {error}
           <span
-            className="absolute top-1 right-1 text-red-500 cursor-pointer text-xl"
+            className="absolute top-1 right-1 text-red-500 cursor-pointer text-2xl"
             onClick={closePopup}
           >
             <CloseIcon />

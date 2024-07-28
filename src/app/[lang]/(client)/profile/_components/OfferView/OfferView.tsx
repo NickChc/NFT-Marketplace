@@ -15,7 +15,7 @@ import { DeclineView } from "@/app/[lang]/(client)/profile/_components/OfferView
 import { AcceptView } from "@/app/[lang]/(client)/profile/_components/OfferView/AcceptView";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
 import { useUserNotifications } from "@/hooks/useUserNotifications";
-import { OfferViewSkeleton } from "./OfferViewSkeleton";
+import { OfferViewSkeleton } from "@/app/[lang]/(client)/profile/_components/OfferView/OfferViewSkeleton";
 
 interface OfferViewProps {
   offer: TOffer | null;
@@ -76,15 +76,15 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
 
   return (
     <div
-      className={`max-w-[90%] md:max-w-[50%] 2xl:max-w-[40%] bg-white dark:bg-gray-900 border-solid border border-purple-800 rounded-md p-3 sm:p-6 pt-7 flex flex-col gap-6 overflow-hidden relative transition-all ease-linear duration-300 ${
+      className={`max-w-[90%] md:max-w-[50%] 2xl:max-w-[40%] bg-white dark:bg-gray-900 border-solid border border-purple-800 rounded-md px-3 sm:px-6 py-9 flex flex-col gap-6 overflow-x-hidden overflow-y-auto scroll-sm relative transition-all ease-linear duration-200 ${
         answer === TAnswer_Enum.CONFIRM || answer === TAnswer_Enum.DECLINE
-          ? `${window.screen.height > 700 ? "h-[400px]" : "h-[80dvh]"}`
+          ? `${window.screen.height > 700 ? "h-[420px]" : "h-[80dvh]"}`
           : `${window.screen.height > 700 ? "h-[500px]" : "h-[90dvh]"}`
       }`}
     >
       {!loading && (
         <span
-          className="absolute top-1 right-1 text-lg sm:text-xl cursor-pointer hover:opacity-75 duration-100 hover:text-purple-700 hover:bg-white bg-purple-800 rounded-full"
+          className="absolute top-1 right-1 text-2xl cursor-pointer hover:opacity-75 duration-100 hover:text-purple-700 hover:bg-white bg-purple-800 rounded-full"
           onClick={closeModal}
         >
           <CloseIcon />
@@ -94,7 +94,7 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
         <OfferViewSkeleton />
       ) : offerItem ? (
         <>
-          <div className="w-full relative aspect-video select-none">
+          <div className="w-full relative aspect-video select-none shrink-0">
             <Image
               src={offerItem.imagePath}
               alt={offerItem.name}
@@ -110,22 +110,26 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
               offer={offer}
             />
           ) : answer === TAnswer_Enum.CONFIRM ? (
-            <AcceptView
-              closeModal={closeModal}
-              offer={offer}
-              onCancel={() => setAnswer(TAnswer_Enum.NONE)}
-            />
+            <div className="h-full flex items-end">
+              <AcceptView
+                closeModal={closeModal}
+                offer={offer}
+                onCancel={() => setAnswer(TAnswer_Enum.NONE)}
+              />
+            </div>
           ) : (
-            <>
-              <h3 className="text-sm sm:text-lg">
-                {lang === "ka"
-                  ? `${offer.from} -მ შემოგთავაზათ თანხა ${offerItem.name} -ის სანაცვლოდ`
-                  : `${offer.from} made an offer for ${offerItem.name}`}
-              </h3>
-              <div className="font-semibold text-gray-300 text-2xl">
-                {formatCurrency(offer.offeredInCents / 100)}
+            <div className="flex flex-col justify-between h-full">
+              <div className="flex flex-col gap-y-3">
+                <h3 className="text-sm sm:text-lg">
+                  {lang === "ka"
+                    ? `${offer.from} -მ შემოგთავაზათ თანხა "${offerItem.name}" -ის სანაცვლოდ`
+                    : `${offer.from} made an offer for "${offerItem.name}"`}
+                </h3>
+                <div className="font-semibold text-gray-300 text-2xl">
+                  {formatCurrency(offer.offeredInCents / 100)}
+                </div>
               </div>
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-4">
                 <DualButton onClick={() => setAnswer(TAnswer_Enum.CONFIRM)}>
                   {translations.page.accept}
                 </DualButton>
@@ -136,7 +140,7 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
                   {translations.page.decline}
                 </DualButton>
               </div>
-            </>
+            </div>
           )}
         </>
       ) : null}

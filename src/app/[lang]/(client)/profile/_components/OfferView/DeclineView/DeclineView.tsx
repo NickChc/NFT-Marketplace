@@ -23,11 +23,7 @@ interface DeclineViewProps {
   onCancel: () => void;
 }
 
-export function DeclineView({
-  offer,
-  closeModal,
-  onCancel,
-}: DeclineViewProps) {
+export function DeclineView({ offer, closeModal, onCancel }: DeclineViewProps) {
   const translations = useDictionary();
   const { currentUser, getCurrentUser } = useAuthProvider();
 
@@ -53,9 +49,12 @@ export function DeclineView({
   }
 
   return (
-    <>
+    <div className="h-full flex flex-col justify-between">
       <div>{translations.page.declineAssurance}?</div>
-      <form action={action} className="flex items-center justify-between gap-3">
+      <form
+        action={action}
+        className="flex items-center justify-between gap-3 mt-3"
+      >
         <SubmitOfferAnswer
           text={translations.page.yes}
           onClick={handleDecline}
@@ -64,6 +63,6 @@ export function DeclineView({
           {translations.page.no}
         </DualButton>
       </form>
-    </>
+    </div>
   );
 }

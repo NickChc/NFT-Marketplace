@@ -26,7 +26,7 @@ export function RegisterFormPopup({
         <div className="text-red-500 text-center">
           {verificationError}
           <span
-            className="absolute top-1 right-1 text-red-500 cursor-pointer text-xl"
+            className="absolute top-1 right-1 text-red-500 cursor-pointer text-2xl"
             onClick={() => setVerificationError("")}
           >
             <CloseIcon />

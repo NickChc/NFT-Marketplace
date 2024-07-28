@@ -6,7 +6,7 @@ import { DualButton } from "@/app/[lang]/_components/DualButton";
 import { useDictionary } from "@/hooks/useDictionary";
 import { formatCurrency } from "@/lib/formatters";
 import { useFormState } from "react-dom";
-import { SubmitOfferAnswer } from "../SubmitOfferAnswer";
+import { SubmitOfferAnswer } from "@/app/[lang]/(client)/profile/_components/OfferView/SubmitOfferAnswer";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { useEffect, useState } from "react";
 
@@ -38,11 +38,13 @@ export function AcceptView({ offer, onCancel, closeModal }: AcceptViewProps) {
   }, [data]);
 
   return (
-    <form action={action}>
-      <div>{translations.page.acceptAssurance}? </div>
-      <h3 className="font-semibold opacity-80 text-2xl my-2">
-        {formatCurrency(offer.offeredInCents / 100)}
-      </h3>
+    <form action={action} className="flex flex-col justify-between h-full">
+      <div className="flex flex-col gap-y-3">
+        <div>{translations.page.acceptAssurance}? </div>
+        <h3 className="font-semibold opacity-80 text-2xl my-2">
+          {formatCurrency(offer.offeredInCents / 100)}
+        </h3>
+      </div>
       {message !== "" ? (
         <>
           <div className="text-red-500">{message}</div>
