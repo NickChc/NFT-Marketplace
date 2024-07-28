@@ -84,6 +84,11 @@
       opacity: 0;
     }
   }
+
+  .backdrop-blur-custom {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
 }
 
 ul::-webkit-scrollbar {

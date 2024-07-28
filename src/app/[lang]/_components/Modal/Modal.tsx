@@ -73,7 +73,7 @@ export function Modal({ lang }: ModalProps) {
 
   return (
     <div
-      className="fixed min-h-dvh top-0 bottom-0 right-0 left-0 grid place-items-center backdrop-blur-sm z-50"
+      className="fixed min-h-dvh top-0 bottom-0 right-0 left-0 grid place-items-center backdrop-blur-custom z-50"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) {
           closeModal();
