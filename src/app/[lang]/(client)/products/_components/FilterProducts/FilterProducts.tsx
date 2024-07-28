@@ -28,7 +28,7 @@ export function FilterProducts() {
 
   return (
     <div className="text-lg flex flex-col items-start sm:items-center sm:flex-row gap-4 gap-x-3 whitespace-nowrap sm:text-xl">
-      <label className="font-semibold flex items-center gap-x-3 text-base sm:text-xl">
+      <label className="font-semibold flex items-center gap-x-3 text-base sm:text-lg md:text-xl">
         {translations.page.filterProducts}{" "}
         <span className="hidden sm:block">-</span>{" "}
       </label>

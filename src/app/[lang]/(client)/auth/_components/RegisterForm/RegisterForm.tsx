@@ -77,14 +77,20 @@ export function RegisterForm({ lang }: RegisterFormProps) {
     <>
       <form
         action={action}
-        className="flex flex-col gap-y-4 mx-auto mt-4 p-3 relative"
+        className="flex flex-col gap-y-4 mx-auto mt-4 p-3 relative "
       >
         <FormInput name="name" label={page.name} required />
         {error?.name && <div className="text-red-700">{error.name}</div>}
         <FormInput name="surname" label={page.surname} required />
         {error?.surname && <div className="text-red-700">{error.surname}</div>}
 
-        <FormInput name="email" label={page.email} type="email" required />
+        <FormInput
+          name="email"
+          label={page.email}
+          type="email"
+          autoComplete
+          required
+        />
         {error?.email && <div className="text-red-700">{error.email}</div>}
 
         <FormInput

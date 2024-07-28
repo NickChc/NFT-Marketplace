@@ -21,7 +21,7 @@ export function RegisterFormPopup({
   const translations = useDictionary();
 
   return (
-    <div className="z-40 bg-gray-300 flex flex-col items-stretch gap-y-4 absolute bottom-14 right-0 left-0 p-4 overflow-hidden rounded-sm border-solid border border-purple-800 mx-2">
+    <div className="z-40 bg-gray-300 flex flex-col items-stretch gap-y-4 fixed bottom-6 sm:bottom-9 md:bottom-12 right-1/2 translate-x-1/2 mx-auto w-[90%] md:w-[70%] xl:w-[80%] max-w-[840px] brightness-125 p-4 overflow-hidden rounded-sm border-solid border border-purple-800 ">
       {verificationError !== "" && (
         <div className="text-red-500 text-center">
           {verificationError}

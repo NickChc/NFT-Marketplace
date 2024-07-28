@@ -63,10 +63,10 @@ export default async function ProductsPage({
   }
 
   return (
-    <div className="container mx-auto xl:w-[90%] xl:mx-auto pb-9 sm:pb-20">
+    <div className="mx-auto xl:w-[90%] xl:mx-auto pb-9 sm:pb-20">
       <PageHeader>{page.products}</PageHeader>
       <div className="pb-9 min-h-dvh flex flex-col items-center">
-        <div className="w-full flex flex-col sm:flex-row sm:justify-between gap-x-3 gap-y-6 pt-4 px-3 sm:px-6 mt-1">
+        <div className="w-full flex flex-col items-start sm:flex-row sm:justify-between gap-x-3 gap-y-6 pt-4 px-3 sm:px-6 mt-1">
           <FilterProducts />
           <PriceFilter />
         </div>
