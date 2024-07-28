@@ -47,7 +47,7 @@ export function AuthButton({ lang }: AuthButtonProps) {
           {notifications.length > 0 && (
             <Link
               href={`/${lang}/profile`}
-              className="bg-red-500 absolute -top-1 -right-1 text-white z-50 grid place-items-center rounded-full w-5 text-xs xs:text-sm aspect-square"
+              className="bg-red-500 absolute -top-1 -right-1 text-white z-50 grid place-items-center rounded-full w-4 md:w-5 text-xs md:text-sm aspect-square"
             >
               {notifications.length}
             </Link>
