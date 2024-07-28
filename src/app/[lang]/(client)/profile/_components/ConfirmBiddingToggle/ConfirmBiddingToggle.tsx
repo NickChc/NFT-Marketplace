@@ -64,8 +64,13 @@ export function ConfirmBiddingToggle({
             } be able to offer you money for ${bidItem?.name}`}
       </h4>
       <div className="flex gap-4 md:gap-9 mt-6 justify-center">
-        <DualButton size="large" disabled={loading} onClick={handleBidToggle}>
-          {translations.page.agree}
+        <DualButton
+          size="large"
+          disabled={loading}
+          loadSpinnerText={loading ? translations.page.loading : undefined}
+          onClick={handleBidToggle}
+        >
+          {translations.page.agree}{" "}
         </DualButton>
         <DualButton size="large" variation="secondary" onClick={closeModal}>
           {translations.page.cancel}

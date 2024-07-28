@@ -161,6 +161,8 @@
     "congrats": "Congratulations",
     "registerToChangeEmail": "Register using current email to change it.",
     "reportAProblem": "REPORT A PROBLEM",
-    "reportThankYou": "The problem will be reviewed, thank you."
+    "reportThankYou": "The problem will be reviewed, thank you.",
+    "itemWasPurchasedFor": "This item was purchased for",
+    "returnForOgPrice": "Item can be returned for it's original price"
   }
 }

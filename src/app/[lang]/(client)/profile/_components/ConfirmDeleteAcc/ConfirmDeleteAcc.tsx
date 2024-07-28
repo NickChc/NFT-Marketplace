@@ -130,10 +130,9 @@ export function ConfirmDeleteAcc({
               variation="warning"
               type="submit"
               disabled={loading}
+              loadSpinnerText={loading ? translations.page.deleting : undefined}
             >
-              {loading
-                ? `${translations.page.deleting}...`
-                : translations.page.delete}
+              {translations.page.delete}
             </DualButton>
             <DualButton
               size="medium"

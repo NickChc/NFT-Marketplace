@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingIcon } from "@/assets/icons";
 import { PropsWithChildren } from "react";
 
 interface DualButtonProps {
@@ -8,6 +9,7 @@ interface DualButtonProps {
   variation?: "primary" | "secondary" | "warning" | "blue";
   disabled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
+  loadSpinnerText?: string;
 }
 
 export function DualButton({
@@ -17,6 +19,7 @@ export function DualButton({
   variation,
   disabled,
   onClick,
+  loadSpinnerText,
 }: PropsWithChildren<DualButtonProps>) {
   return (
     <button
@@ -41,7 +44,14 @@ export function DualButton({
           : "px-2 py-1"
       }`}
     >
-      {children}
+      {loadSpinnerText ? (
+        <div className="flex items-center justify-center gap-x-3">
+          {loadSpinnerText}
+          <LoadingIcon className="animate-spin" />
+        </div>
+      ) : (
+        children
+      )}
     </button>
   );
 }

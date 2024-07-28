@@ -9,6 +9,7 @@ import { sellProduct } from "@/app/[lang]/(client)/_actions/product";
 import { auth } from "@/firebase";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
 import { useAuthProvider } from "@/providers/AuthProvider";
+import Image from "next/image";
 
 interface SellFormProps {
   product: TProduct | null;
@@ -64,11 +65,19 @@ export function SellForm({ product, closeModal }: SellFormProps) {
 
   return (
     <form
-      className={`w-[90%] sm:w-[50%] md:w-auto md:min-w-80 p-3 bg-white dark:bg-gray-900 flex-col gap-4 border-solid border border-purple-700 rounded-md transition-display duration-300 start-style-b-t ${
+      className={`w-[90%] sm:w-[50%] md:w-auto md:min-w-80 p-3 bg-white dark:bg-gray-900 flex-col gap-4 border-solid border border-purple-700 rounded-md transition-display duration-300 start-style-b-t max-h-[90vh] overflow-y-auto ${
         mounted ? "flex" : "hidden"
       }`}
       onSubmit={handleSubmit}
     >
+      <div className="relative aspect-video w-[85%] mt-1 mx-auto shrink-0">
+        <Image
+          src={product.imagePath}
+          alt={product.name}
+          fill
+          objectFit="cover"
+        />
+      </div>
       <FormInput
         value={price}
         onChange={handleChange}
@@ -76,13 +85,24 @@ export function SellForm({ product, closeModal }: SellFormProps) {
         label={translations.page.selectPrice}
       />
       {error !== "" && <div className="text-red-500">{error}</div>}
+      <div>
+        {translations.page.itemWasPurchasedFor} -{" "}
+        {formatCurrency(product.owner?.paidInCents || 0)}
+      </div>
 
-      <DualButton disabled={loading || error !== ""} type="submit">
-        {loading
-          ? `${translations.page.processing}...`
-          : `${translations.page.sellFor} ${formatCurrency(
-              Number(price) || 0
-            )}`}
+      {product.originalPriceInCents !== product.owner?.paidInCents && (
+        <div>
+          {translations.page.returnForOgPrice} -{" "}
+          {formatCurrency(product.originalPriceInCents)}
+        </div>
+      )}
+
+      <DualButton
+        disabled={loading || error !== ""}
+        loadSpinnerText={loading ? translations.page.processing : undefined}
+        type="submit"
+      >
+        {translations.page.sellFor} {formatCurrency(Number(price) || 0)}
       </DualButton>
       <DualButton variation="secondary" type="button" onClick={closeModal}>
         {translations.page.cancel}

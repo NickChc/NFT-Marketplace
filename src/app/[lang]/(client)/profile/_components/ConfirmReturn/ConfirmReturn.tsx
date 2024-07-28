@@ -59,7 +59,12 @@ export function ConfirmReturn({
         you.`}
       </h4>
       <div className="flex gap-4 md:gap-9 mt-6 justify-center">
-        <DualButton size="large" disabled={loading} onClick={handleReturn}>
+        <DualButton
+          size="large"
+          disabled={loading}
+          loadSpinnerText={loading ? translations.page.loading : undefined}
+          onClick={handleReturn}
+        >
           {translations.page.agree}
         </DualButton>
         <DualButton size="large" variation="secondary" onClick={closeModal}>

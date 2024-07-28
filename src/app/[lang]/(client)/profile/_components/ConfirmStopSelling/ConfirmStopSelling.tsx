@@ -60,7 +60,12 @@ export function ConfirmStopSelling({
           : `Are you sure you no longer want to sell ${stopSellingProduct?.name} ?`}
       </h4>
       <div className="flex gap-4 md:gap-9 mt-6 justify-center">
-        <DualButton size="large" disabled={loading} onClick={handleStopSelling}>
+        <DualButton
+          size="large"
+          disabled={loading}
+          loadSpinnerText={loading ? translations.page.loading : undefined}
+          onClick={handleStopSelling}
+        >
           {translations.page.agree}
         </DualButton>
         <DualButton size="large" variation="secondary" onClick={closeModal}>
