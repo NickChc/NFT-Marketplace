@@ -64,7 +64,7 @@ export function AuthButton({ lang }: AuthButtonProps) {
       ) : (
         <Link
           href={`/${lang}/auth/sign-in`}
-          className="bg-white text-purple-800 w-7 sm:w-8 md:w-10 aspect-square rounded-full grid place-items-center"
+          className="bg-white text-purple-800 w-8 md:w-10 aspect-square rounded-full grid place-items-center"
         >
           <UserIcon />
         </Link>
