@@ -31,7 +31,7 @@ export function PriceFilter() {
   }
 
   return (
-    <div className="grid grid-cols-auto min-w-full sm:min-w-fit sm:grid-cols-2 max-w-fit gap-y-4 gap-x-3 sm:gap-x-6">
+    <div className="grid grid-cols-auto min-w-full sm:min-w-fit sm:grid-cols-2 max-w-fit gap-y-4 gap-x-3 sm:gap-x-6 overflow-auto">
       {ranges.map((range) => {
         return (
           <button
