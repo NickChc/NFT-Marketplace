@@ -33,8 +33,7 @@ export function ProductCardImage({ product }: ProductCardImageProps) {
           blurDataURL={blurDataImage}
           onError={(e) => {
             console.log("Failed to load image", e);
-            e.currentTarget.src =
-              "../../../../../assets/images/PlaceholderImg.webp";
+            e.currentTarget.src = blurDataImage;
           }}
           src={product.imagePath}
           alt={`${product.name} image`}
