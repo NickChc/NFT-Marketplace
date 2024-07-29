@@ -21,7 +21,7 @@ export default async function ClientLayout({
   const { page } = await getDictionaries(lang);
 
   return (
-    <div className="overflow-hidden">
+    <div>
       <Header lang={lang}>
         <NavLink title={page.home} path={`/${lang}`} />
         <NavLink title={page.products} path={`/${lang}/products`} />
