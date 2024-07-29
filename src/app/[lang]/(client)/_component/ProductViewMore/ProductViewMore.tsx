@@ -10,6 +10,7 @@ import { TProduct } from "@/@types/general";
 import { ProductCardButton } from "@/app/[lang]/_components/ProductCardButton";
 import { formatCurrency } from "@/lib/formatters";
 import { useDictionary } from "@/hooks/useDictionary";
+import { blurDataImage } from "@/config/general";
 
 interface ProductViewMoreProps {
   lang: TLocale;
@@ -106,6 +107,13 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
             onClick={() => setZoom(!zoom)}
           >
             <Image
+              placeholder="blur"
+              blurDataURL={blurDataImage}
+              onError={(e) => {
+                console.log("Failed to load image", e);
+                e.currentTarget.src =
+                  "../../../../../assets/images/PlaceholderImg.webp";
+              }}
               src={product.imagePath}
               alt="Image for NFT"
               fill

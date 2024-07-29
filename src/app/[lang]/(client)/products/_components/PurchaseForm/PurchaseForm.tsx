@@ -8,6 +8,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import { Form } from "@/app/[lang]/(client)/products/_components/PurchaseForm/Form";
 import { useDictionary } from "@/hooks/useDictionary";
+import { blurDataImage } from "@/config/general";
 
 interface PurchaseFormProps {
   product: TProduct;
@@ -31,6 +32,13 @@ export function PurchaseForm({
       <div className="flex flex-col md:flex-row gap-4 mt-6">
         <div className="aspect-video flex-shrink-0 w-full md:w-1/2 relative">
           <Image
+            placeholder="blur"
+            blurDataURL={blurDataImage}
+            onError={(e) => {
+              console.log("Failed to load image", e);
+              e.currentTarget.src =
+                "../../../../../assets/images/PlaceholderImg.webp";
+            }}
             src={product.imagePath}
             alt={`Image for ${product.name}`}
             fill

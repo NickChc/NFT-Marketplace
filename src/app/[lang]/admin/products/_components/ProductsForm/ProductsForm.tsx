@@ -12,6 +12,7 @@ import { SubmitButton } from "@/app/[lang]/admin/products/_components/ProductsFo
 import { TProduct } from "@/@types/general";
 import Image from "next/image";
 import { useDictionary } from "@/hooks/useDictionary";
+import { blurDataImage } from "@/config/general";
 
 interface ProductsFormProps {
   product?: TProduct;
@@ -111,6 +112,13 @@ export function ProductsForm({ product }: ProductsFormProps) {
       )}
       {product && (
         <Image
+          placeholder="blur"
+          blurDataURL={blurDataImage}
+          onError={(e) => {
+            console.log("Failed to load image", e);
+            e.currentTarget.src =
+              "../../../../../assets/images/PlaceholderImg.webp";
+          }}
           src={product.imagePath}
           alt="Product Image"
           width={500}

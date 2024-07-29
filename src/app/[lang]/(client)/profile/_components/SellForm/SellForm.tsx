@@ -10,6 +10,7 @@ import { auth } from "@/firebase";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
 import { useAuthProvider } from "@/providers/AuthProvider";
 import Image from "next/image";
+import { blurDataImage } from "@/config/general";
 
 interface SellFormProps {
   product: TProduct | null;
@@ -72,6 +73,13 @@ export function SellForm({ product, closeModal }: SellFormProps) {
     >
       <div className="relative aspect-video w-[85%] mt-1 mx-auto shrink-0">
         <Image
+          placeholder="blur"
+          blurDataURL={blurDataImage}
+          onError={(e) => {
+            console.log("Failed to load image", e);
+            e.currentTarget.src =
+              "../../../../../assets/images/PlaceholderImg.webp";
+          }}
           src={product.imagePath}
           alt={product.name}
           fill

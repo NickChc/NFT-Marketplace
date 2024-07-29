@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useDictionary } from "@/hooks/useDictionary";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
+import { blurDataImage } from "@/config/general";
 
 interface PurchaseDataProps {
   product: TProduct;
@@ -38,6 +39,13 @@ export function PurchaseData({ product, isSuccess, lang }: PurchaseDataProps) {
       <div className="flex flex-col sm:flex-row gap-4 items-stretch  p-3 mt-4 mx-auto max-w-7xl">
         <div className="aspect-video flex-shrink-0 w-full sm:w-1/2 relative max-w-[700px]">
           <Image
+            placeholder="blur"
+            blurDataURL={blurDataImage}
+            onError={(e) => {
+              console.log("Failed to load image", e);
+              e.currentTarget.src =
+                "../../../../../assets/images/PlaceholderImg.webp";
+            }}
             src={product.imagePath}
             fill
             alt={product.name}

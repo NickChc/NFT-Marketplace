@@ -16,6 +16,7 @@ import { AcceptView } from "@/app/[lang]/(client)/profile/_components/OfferView/
 import { DualButton } from "@/app/[lang]/_components/DualButton";
 import { useUserNotifications } from "@/hooks/useUserNotifications";
 import { OfferViewSkeleton } from "@/app/[lang]/(client)/profile/_components/OfferView/OfferViewSkeleton";
+import { blurDataImage } from "@/config/general";
 
 interface OfferViewProps {
   offer: TOffer | null;
@@ -96,6 +97,13 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
         <>
           <div className="w-full relative aspect-video select-none shrink-0">
             <Image
+              placeholder="blur"
+              blurDataURL={blurDataImage}
+              onError={(e) => {
+                console.log("Failed to load image", e);
+                e.currentTarget.src =
+                  "../../../../../assets/images/PlaceholderImg.webp";
+              }}
               src={offerItem.imagePath}
               alt={offerItem.name}
               fill

@@ -8,6 +8,7 @@ import { CollectionCardDropdown } from "@/app/[lang]/(client)/profile/_component
 import { DualButton } from "@/app/[lang]/_components/DualButton";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { blurDataImage } from "@/config/general";
 
 interface CollectionCardProps {
   product: TProduct;
@@ -43,6 +44,13 @@ export function CollectionCard({
         >
           <div className="relative aspect-video after:duration-300 after:content-[''] after:block after:w-0 [@media(hover:hover){&:hover}]:after:w-full after:h-[90%] after:border-solid after:border-2 after:border-purple-400 after:border-x-0 after:absolute after:top-1/2 after:right-1/2 after:-translate-y-1/2 after:translate-x-1/2 before:duration-300 before:content-[''] before:block before:h-0 [@media(hover:hover){&:hover}]:before:h-full before:w-[90%] before:border-2 before:border-solid before:border-purple-400 before:border-y-0 before:absolute before:top-1/2 before:right-1/2 before:translate-x-1/2 before:-translate-y-1/2 before:z-50 cursor-pointer active:brightness-75">
             <Image
+              placeholder="blur"
+              blurDataURL={blurDataImage}
+              onError={(e) => {
+                console.log("Failed to load image", e);
+                e.currentTarget.src =
+                  "../../../../../assets/images/PlaceholderImg.webp";
+              }}
               src={product.imagePath}
               alt={`${product.name} image`}
               fill

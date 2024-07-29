@@ -11,6 +11,7 @@ import { OfferSubmitButton } from "@/app/[lang]/_components/Modal/OfferForm/Offe
 import { useAuthProvider } from "@/providers/AuthProvider";
 import { DualButton } from "../../DualButton";
 import Image from "next/image";
+import { blurDataImage } from "@/config/general";
 
 interface OfferFormProps {
   closeModal: () => void;
@@ -68,6 +69,13 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
           </h2>
           <div className="relative w-full aspect-video mx-auto shrink-0">
             <Image
+              placeholder="blur"
+              blurDataURL={blurDataImage}
+              onError={(e) => {
+                console.log("Failed to load image", e);
+                e.currentTarget.src =
+                  "../../../../../assets/images/PlaceholderImg.webp";
+              }}
               src={offerItem.imagePath}
               alt={offerItem.name}
               fill
