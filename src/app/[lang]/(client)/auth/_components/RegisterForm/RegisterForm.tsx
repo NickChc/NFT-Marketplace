@@ -57,6 +57,7 @@ export function RegisterForm({ lang }: RegisterFormProps) {
       const verified = auth.currentUser?.emailVerified;
       if (verified) {
         router.replace(`/${lang}`);
+        router.refresh();
       } else {
         if (isSecondProvider) {
           await unlink(auth.currentUser, "password");
