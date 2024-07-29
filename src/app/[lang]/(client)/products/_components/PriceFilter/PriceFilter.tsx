@@ -1,6 +1,7 @@
 "use client";
 
 import { filterSearchParams } from "@/lib/filterSearchParams";
+import { formatCurrency } from "@/lib/formatters";
 import { revalidatePath } from "next/cache";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -31,7 +32,7 @@ export function PriceFilter() {
   }
 
   return (
-    <div className="grid grid-cols-auto min-w-full sm:min-w-fit sm:grid-cols-2 max-w-fit gap-y-4 gap-x-3 sm:gap-x-6 overflow-auto">
+    <div className="grid grid-cols-auto min-w-full sm:min-w-fit sm:grid-cols-2 max-w-fit xs:max-w-full gap-y-4 gap-x-3 sm:gap-x-6 overflow-auto">
       {ranges.map((range) => {
         return (
           <button
@@ -43,8 +44,8 @@ export function PriceFilter() {
                 : "dark:hover:bg-gray-700 hover:bg-gray-300 text-purple-800"
             }`}
           >
-            {`${range.min}$ - ${
-              range.max === Infinity ? "&" : range.max + "$"
+            {`${formatCurrency(range.min)} - ${
+              range.max === Infinity ? "&" : formatCurrency(range.max)
             }`}
           </button>
         );
