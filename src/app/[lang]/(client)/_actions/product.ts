@@ -102,5 +102,7 @@ export async function toggleBidding(product: TProduct, email: string) {
     })
   );
 
+  revalidatePath("/*");
+
   await Promise.all(promises);
 }

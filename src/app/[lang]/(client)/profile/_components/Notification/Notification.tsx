@@ -67,9 +67,9 @@ export function Notification({ lang }: NotificationProps) {
   }
 
   return (
-    <div className="rounded-lg bg-green-600 relative p-4 md:px-9 w-[90%] md:w-full mx-auto mt-6 text-sm sm:text-lg text-center">
+    <div className="rounded-lg bg-green-600 relative px-6 pb-3 pt-6 md:px-9 w-[90%] md:w-full mx-auto mt-6 text-sm sm:text-lg text-center">
       <span
-        className="absolute top-1 right-1 cursor-pointer text-2xl rounded-full"
+        className="absolute top-1 right-1 cursor-pointer text-xl sm:text-2xl rounded-full"
         onClick={() => setShow(false)}
       >
         <CloseIcon />

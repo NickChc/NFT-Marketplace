@@ -30,7 +30,7 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
     .toString()
     .split("&")
     .filter((param) => param.split("=")[0] !== "image")
-    .join();
+    .join("&");
 
   function closeModal() {
     setZoom(false);
@@ -86,8 +86,8 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
         ></div>
       )}
       <div
-        className={`w-[95%] xs:w-[90%] min-h-fit bg-white py-6 relative border-solid border border-purple-700 rounded-md ${
-          zoom ? "" : "overflow-y-visible overflow-x-hidden"
+        className={`bg-white w-[95%] xs:w-[90%] md:w-[80%] xl:max-w-[900px] 2xl:max-w-[1100px] py-6 relative border-solid border border-purple-700 rounded-md max-h-[90vh] ${
+          zoom ? "overflow-y-visible" : "overflow-y-auto overflow-x-hidden"
         }`}
         onMouseDown={(e) => e.stopPropagation()}
       >
@@ -99,9 +99,9 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
         </span>
         <div className="flex flex-col sm:flex-row items-center sm:items-stretch justify-center gap-x-3 pt-3 px-3">
           <div
-            className={`relative aspect-video pt-4 w-full sm:w-1/2 duration-200 z-50 ${
+            className={`relative w-full sm:w-1/2 md:w-1/3 aspect-video bg-red-500 sm:aspect-square pt-4 duration-200 transition-all z-50 ${
               zoom
-                ? "cursor-zoom-out scale-125 sm:scale-150 translate-y-10 sm:translate-y-0 sm:translate-x-1/2"
+                ? "cursor-zoom-out translate-y-10 sm:translate-y-0 sm:translate-x-1/2"
                 : "cursor-zoom-in"
             } `}
             onClick={() => setZoom(!zoom)}
@@ -118,6 +118,7 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
               alt="Image for NFT"
               fill
               objectFit="contain"
+              className={zoom ? "" : ""}
             />
           </div>
           <div className="flex flex-col items-start justify-between w-full mt-3 sm:mt-0 sm:w-1/2 ">
@@ -125,8 +126,13 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
               <h2 className="font-semibold mb-3 text-xl sm:text-2xl">
                 {product.name}
               </h2>
-              <p className="max-h-28 overflow-auto pr-1 scrollbar-small my-3">
+              <p className="max-h-32 lg:max-h-40 overflow-auto pr-1 scrollbar-small my-3">
                 {product.description}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
+                illum voluptatibus deserunt optio, tempore quaerat! Lorem ipsum
+                dolor sit amet. Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Culpa, provident. Lorem ipsum dolor sit amet
+                consectetur, adipisicing elit. Maiores, omnis.
               </p>
             </div>
             <div className="flex flex-col items-stretch w-full">

@@ -18,13 +18,13 @@ export function ProductCardImage({ product }: ProductCardImageProps) {
     .toString()
     .split("&")
     .filter((param) => param.split("=")[0] !== "image")
-    .join();
+    .join("&");
 
   return (
     <Link
       scroll={false}
-      href={`${pathname}${
-        withoutImageParams !== "" ? `?${withoutImageParams}&` : "?"
+      href={`?${
+        withoutImageParams !== "" ? `${withoutImageParams}&` : "?"
       }image=${product.id}`}
     >
       <div className="relative aspect-video after:duration-300 after:content-[''] after:block after:w-0 [@media(hover:hover){&:hover}]:after:w-full after:h-[90%] after:border-solid after:border-2 after:border-purple-400 after:border-x-0 after:absolute after:top-1/2 after:right-1/2 after:-translate-y-1/2 after:translate-x-1/2 before:duration-300 before:content-[''] before:block before:h-0 [@media(hover:hover){&:hover}]:before:h-full before:w-[90%] before:border-2 before:border-solid before:border-purple-400 before:border-y-0 before:absolute before:top-1/2 before:right-1/2 before:translate-x-1/2 before:-translate-y-1/2 before:z-50 cursor-pointer active:brightness-75">
