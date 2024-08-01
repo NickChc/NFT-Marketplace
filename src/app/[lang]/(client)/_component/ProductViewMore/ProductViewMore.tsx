@@ -87,7 +87,7 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
       )}
       <div
         className={`bg-white w-[95%] xs:w-[90%] md:w-[80%] xl:max-w-[900px] 2xl:max-w-[1100px] py-6 relative border-solid border border-purple-700 rounded-md max-h-[90vh] ${
-          zoom ? "overflow-y-visible" : "overflow-y-auto overflow-x-hidden"
+          zoom ? "overflow-hidden" : "overflow-y-auto overflow-x-hidden"
         }`}
         onMouseDown={(e) => e.stopPropagation()}
       >
@@ -98,11 +98,14 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
           <CloseIcon />
         </span>
         <div className="flex flex-col sm:flex-row items-center sm:items-stretch justify-center gap-x-3 pt-3 px-3">
+          {zoom && (
+            <div className="sm:w-1/2 md:w-1/3 aspect-video sm:aspect-square pt-4 duration-200 transition-all z-50 w-[90vw] max-h-[90vh]"></div>
+          )}
           <div
-            className={`relative w-full sm:w-1/2 md:w-1/3 aspect-video bg-red-500 sm:aspect-square pt-4 duration-200 transition-all z-50 ${
+            className={`sm:aspect-square pt-4 z-50 w-[90vw] max-h-[90vh] ${
               zoom
-                ? "cursor-zoom-out translate-y-10 sm:translate-y-0 sm:translate-x-1/2"
-                : "cursor-zoom-in"
+                ? "cursor-zoom-out min-w-[50vw] fixed top-1/2 -translate-y-1/2 aspect-square duration-200 transition-all"
+                : "relative cursor-zoom-in sm:w-1/2 md:w-1/3 aspect-video "
             } `}
             onClick={() => setZoom(!zoom)}
           >
