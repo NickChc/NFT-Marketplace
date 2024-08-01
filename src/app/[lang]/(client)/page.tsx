@@ -2,13 +2,9 @@ import { TLocale } from "../../../../i18n.config";
 import { getProducts } from "@/app/[lang]/_api/getProducts";
 import { PageHeader } from "@/app/[lang]/_components/PageHeader";
 import { getDictionaries } from "@/lib/dictionary";
-import { ProductCard } from "@/app/[lang]/_components/ProductCard";
-import { RightArrowIcon } from "@/assets/icons";
-import Link from "next/link";
-import { PreviewCards } from "./_component/PreviewCards";
 import { Suspense } from "react";
-import { PreviewCardsSuspense } from "./_component/PreviewCardsSuspense";
-import { PreviewCardsSkeleton } from "./_component/PreviewCards/PreviewCardsSkeleton";
+import { PreviewCardsSuspense } from "@/app/[lang]/(client)/_component/PreviewCardsSuspense";
+import { PreviewCardsSkeleton } from "@/app/[lang]/(client)/_component/PreviewCards/PreviewCardsSkeleton";
 
 interface AdminProductsPageProps {
   params: {

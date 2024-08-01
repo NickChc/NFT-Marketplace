@@ -27,7 +27,11 @@ export function PriceFilter() {
     if (searchParams.get("min") === range[0].toString()) {
       router.push(`?${newSearchParams}`);
     } else {
-      router.push(`?${newSearchParams}&min=${range[0]}&max=${range[1]}`);
+      router.push(
+        `?${newSearchParams.length > 0 ? newSearchParams + "&" : ""}min=${
+          range[0]
+        }&max=${range[1]}`
+      );
     }
   }
 
