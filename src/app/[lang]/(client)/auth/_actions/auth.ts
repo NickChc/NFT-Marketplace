@@ -14,6 +14,7 @@ import {
 import { TUser } from "@/@types/general";
 import { createUser } from "@/app/[lang]/_api/createUser";
 import { getUser } from "@/app/[lang]/_api/getUser";
+import { updateNameOnProducts } from "../../_actions/user";
 
 function getTranslations() {
   const pathname = window.location.pathname;
@@ -242,6 +243,7 @@ async function handleExistingAccount(
       await Promise.all([
         createUser({ ...newUser, uid: user.uid }),
         sendEmailVerification(user),
+        updateNameOnProducts(`${newUser.name} ${newUser.surname}`, newUser.id),
       ]);
       verificationStatusChange();
       return true;

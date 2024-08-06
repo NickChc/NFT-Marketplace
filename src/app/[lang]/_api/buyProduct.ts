@@ -7,7 +7,10 @@ export async function buyProduct(product: TProduct, currentUser: TUser) {
     const userDoc = doc(db, "users", currentUser.id);
     const productDoc = doc(db, "product", product.id);
     const { name, surname, email } = currentUser;
-    const fullName = name !== "" ? `${name} ${surname}` : email;
+    const fullName =
+      name !== ""
+        ? `${name} ${surname}`
+        : email[0] + "...@" + email.split("@")[1];
 
     if (currentUser.ownings.map((o) => o.productId).includes(product.id)) {
       return;

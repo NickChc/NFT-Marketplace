@@ -2,6 +2,7 @@ import { z } from "zod";
 import { getUser } from "@/app/[lang]/_api/getUser";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
+import { getProducts } from "@/app/[lang]/_api/getProducts";
 
 const updateValuesSchema = z.object({
   name: z.string().min(1),
@@ -13,6 +14,32 @@ const updateValuesSchema = z.object({
       message: "lowercase_email",
     }),
 });
+
+export async function updateNameOnProducts(newName: string, userId: string) {
+  const productsUpdate: Promise<void>[] = [];
+
+  const userProducts = await getProducts(
+    undefined,
+    undefined,
+    undefined,
+    userId
+  );
+
+  userProducts?.forEach((product) => {
+    const productDoc = doc(db, "product", product.id);
+
+    productsUpdate.push(
+      updateDoc(productDoc, {
+        owner: {
+          ...product.owner,
+          fullName: newName,
+        },
+      })
+    );
+  });
+
+  await Promise.all(productsUpdate);
+}
 
 export async function changeUser(
   updateEmail: (email: string) => void,
@@ -45,6 +72,9 @@ export async function changeUser(
     valuesToUpdate.surname = data.surname;
   }
 
+  if (user.name !== data.name || user.surname !== data.surname) {
+    await updateNameOnProducts(`${data.name} ${data.surname}`, user.id);
+  }
   const userDoc = doc(db, "users", user.id);
 
   if (Object.keys(valuesToUpdate).length > 0) {
