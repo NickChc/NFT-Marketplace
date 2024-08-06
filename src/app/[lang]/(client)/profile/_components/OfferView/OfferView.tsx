@@ -91,7 +91,7 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
           <CloseIcon />
         </span>
       )}
-      {!loading ? (
+      {loading ? (
         <OfferViewSkeleton />
       ) : offerItem ? (
         <>
