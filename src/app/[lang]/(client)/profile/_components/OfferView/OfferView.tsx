@@ -77,10 +77,10 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
 
   return (
     <div
-      className={`max-w-[90%] md:max-w-[50%] 2xl:max-w-[40%] bg-white dark:bg-gray-900 border-solid border border-purple-800 rounded-md px-3 sm:px-6 py-9 flex flex-col gap-6 overflow-x-hidden overflow-y-auto scroll-sm relative transition-all ease-linear duration-200 ${
+      className={`max-w-[90%] md:max-w-[50%] 2xl:max-w-[40%] max-h-[90vh] bg-white dark:bg-gray-900 border-solid border border-purple-800 rounded-md px-3 sm:px-6 pt-9 pb-4 flex flex-col gap-6 overflow-x-hidden overflow-y-auto scroll-sm relative transition-all ease-linear duration-200 ${
         answer === TAnswer_Enum.CONFIRM || answer === TAnswer_Enum.DECLINE
-          ? `${window.screen.height > 700 ? "h-[420px]" : "h-[80dvh]"}`
-          : `${window.screen.height > 700 ? "h-[500px]" : "h-[90dvh]"}`
+          ? `${window.screen.height > 700 ? "h-[460px]" : "h-[80dvh]"}`
+          : `${window.screen.height > 700 ? "h-[600px]" : "h-[90dvh]"}`
       }`}
     >
       {!loading && (
@@ -91,7 +91,7 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
           <CloseIcon />
         </span>
       )}
-      {loading ? (
+      {!loading ? (
         <OfferViewSkeleton />
       ) : offerItem ? (
         <>
