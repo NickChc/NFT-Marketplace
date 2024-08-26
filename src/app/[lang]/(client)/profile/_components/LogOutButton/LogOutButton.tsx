@@ -30,7 +30,7 @@ export function LogOutButton({ lang }: LogOutButtonProps) {
 
   return (
     <button
-      className="p-2 hover:text-red-500 flex items-center gap-3 text-lg ml-auto disabled:hover:text-black dark:disabled:hover:text-white disabled:opacity-75"
+      className="p-2 hover:text-red-500 flex items-center gap-3 text-lg ml-auto disabled:hover:text-black dark:disabled:hover:text-custom-white disabled:opacity-75"
       onClick={logOut}
       disabled={loading}
     >

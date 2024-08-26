@@ -12,7 +12,7 @@ export function LoginFormPopup({ error, closePopup }: LoginFormPopupProps) {
   const translations = useDictionary();
 
   return (
-    <div className="bg-gray-300 relative flex flex-col items-stretch gap-y-4 w-full mt-4 sm:mt-9 p-4 overflow-hidden rounded-sm border-solid border border-purple-800">
+    <div className="bg-gray-300 relative flex flex-col items-stretch gap-y-4 w-full mt-4 sm:mt-9 p-4 overflow-hidden rounded-sm border-solid border border-add">
       {error !== "" && (
         <div className="text-red-500 text-center">
           {error}

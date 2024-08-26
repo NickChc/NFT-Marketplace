@@ -47,13 +47,13 @@ export function LangSelect({ lang }: LangSelectProps) {
   return (
     <div className="relative sm:static">
       <button
-        className="w-9 md:w-10 sm:aspect-square py-0.5 px-0 sm:py-0 rounded-md bg-white text-black dark:bg-gray-900 dark:text-white font-semibold text-sm sm:text-base flex items-center justify-center sm:absolute sm:top-1/2 sm:-translate-y-1/2 sm:left-4"
+        className="w-9 md:w-10 sm:aspect-square py-0.5 px-0 sm:py-0 rounded-md bg-custom-white text-black dark:bg-add-2 dark:text-custom-white font-semibold text-sm sm:text-base flex items-center justify-center sm:absolute sm:top-1/2 sm:-translate-y-1/2 sm:left-4"
         onClick={() => setOpenSelect((prev) => !prev)}
       >
         {lang.toUpperCase()}
       </button>
       <ul
-        className={`z-50 flex-col gap-y-2 absolute top-[130%] sm:top-[110%] left-1 sm:left-4 bg-white border-solid border border-purple-500 p-1.5 rounded-md transition-display start-style-x ${
+        className={`z-50 flex-col gap-y-2 absolute top-[130%] sm:top-[110%] left-1 sm:left-4 bg-custom-white border-solid border border-purple-500 p-1.5 rounded-md transition-display start-style-x ${
           openSelect ? "flex" : "hidden translate-x-[20px] opacity-0"
         } `}
       >

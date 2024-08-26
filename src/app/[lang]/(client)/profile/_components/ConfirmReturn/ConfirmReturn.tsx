@@ -48,7 +48,7 @@ export function ConfirmReturn({
 
   return (
     <div
-      className={`bg-[#fff] p-6 text-black w-[90%] sm:w-auto rounded-sm border-solid border border-purple-800 transition-display duration-300 start-style-b-t ${
+      className={`bg-[#fff] p-6 text-black w-[90%] sm:w-auto rounded-sm border-solid border border-add transition-display duration-300 start-style-b-t ${
         mounted ? "block" : "hidden"
       }`}
     >

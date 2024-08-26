@@ -21,7 +21,7 @@ export function RegisterFormPopup({
   const translations = useDictionary();
 
   return (
-    <div className="z-40 bg-gray-300 flex flex-col items-stretch gap-y-4 fixed bottom-6 sm:bottom-9 md:bottom-12 right-1/2 translate-x-1/2 mx-auto w-[90%] md:w-[70%] xl:w-[80%] max-w-[840px] brightness-125 p-4 overflow-hidden rounded-sm border-solid border border-purple-800 ">
+    <div className="z-40 bg-gray-300 flex flex-col items-stretch gap-y-4 fixed bottom-6 sm:bottom-9 md:bottom-12 right-1/2 translate-x-1/2 mx-auto w-[90%] md:w-[70%] xl:w-[80%] max-w-[840px] brightness-125 p-4 overflow-hidden rounded-sm border-solid border border-add ">
       {verificationError !== "" && (
         <div className="text-red-500 text-center">
           {verificationError}
@@ -34,10 +34,10 @@ export function RegisterFormPopup({
         </div>
       )}
       {verification === "sent" && (
-        <div className="text-purple-800 flex flex-col sm:flex-row gap-y-2 text-center items-center justify-around gap-x-4">
+        <div className="text-add flex flex-col sm:flex-row gap-y-2 text-center items-center justify-around gap-x-4">
           {translations.page.authValidation.verificationSent}
           <button
-            className="border-solid border border-purple-800 text-purple-800 rounded-md px-2 py-0.5 font-semibold disabled:opacity-75"
+            className="border-solid border border-add text-add rounded-md px-2 py-0.5 font-semibold disabled:opacity-75"
             disabled={loadingVerify}
             onClick={(e) => {
               e.stopPropagation();

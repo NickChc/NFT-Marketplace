@@ -124,7 +124,7 @@ export default function OfferRejectEmail({
                 </Column>
               </Row>
             </Section>
-            <Section className="border border-solid border-purple-800 rounded-lg p-4 md:p-6 my-4">
+            <Section className="border border-solid border-add rounded-lg p-4 md:p-6 my-4">
               <Img
                 width={"100%"}
                 alt={offerItem.name}

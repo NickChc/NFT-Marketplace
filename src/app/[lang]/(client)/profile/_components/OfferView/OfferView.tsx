@@ -77,7 +77,7 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
 
   return (
     <div
-      className={`max-w-[90%] md:max-w-[50%] 2xl:max-w-[40%] max-h-[90vh] bg-white dark:bg-gray-900 border-solid border border-purple-800 rounded-md px-3 sm:px-6 pt-9 pb-4 flex flex-col gap-6 overflow-x-hidden overflow-y-auto scroll-sm relative transition-all ease-linear duration-200 ${
+      className={`max-w-[90%] md:max-w-[50%] 2xl:max-w-[40%] max-h-[90vh] bg-custom-white dark:bg-add-2 border-solid border border-add rounded-md px-3 sm:px-6 pt-9 pb-4 flex flex-col gap-6 overflow-x-hidden overflow-y-auto scroll-sm relative transition-all ease-linear duration-200 ${
         answer === TAnswer_Enum.CONFIRM || answer === TAnswer_Enum.DECLINE
           ? `${window.screen.height > 700 ? "h-[460px]" : "h-[80dvh]"}`
           : `${window.screen.height > 700 ? "h-[600px]" : "h-[90dvh]"}`
@@ -85,7 +85,7 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
     >
       {!loading && (
         <span
-          className="absolute top-1 right-1 text-2xl cursor-pointer hover:opacity-75 duration-100 hover:text-purple-700 hover:bg-white bg-purple-800 rounded-full"
+          className="absolute top-1 right-1 text-2xl cursor-pointer hover:opacity-75 duration-100 hover:text-add hover:bg-custom-white bg-add rounded-full"
           onClick={closeModal}
         >
           <CloseIcon />

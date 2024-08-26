@@ -33,7 +33,7 @@ export function FilterProducts() {
         <span className="hidden sm:block">-</span>{" "}
       </label>
       <select
-        className="sm:p-1 cursor-pointer dark:bg-gray-800 text-black dark:text-white border-solid border border-purple-800 rounded-md outline-none"
+        className="sm:p-1 cursor-pointer dark:bg-gray-800 text-black dark:text-custom-white border-solid border border-add rounded-md outline-none"
         value={filterBy}
         onChange={(e) => {
           const filteredSearchParams = filterSearchParams(

@@ -26,7 +26,7 @@ export function Collection({ lang }: CollectionProps) {
 
   return (
     <>
-      <hr className="my-4 w-full border-black dark:border-white" />
+      <hr className="my-4 w-full border-black dark:border-custom-white" />
       <h2 className="text-lg sm:text-2xl font-semibold text-center">
         {!collectionLoading &&
           (collection.length > 0

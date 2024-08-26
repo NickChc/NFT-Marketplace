@@ -1,10 +1,7 @@
 "use client";
 
-import { TLocale } from "../../../../../../i18n.config";
-import { getDictionaries } from "@/lib/dictionary";
 import { ProblemForm } from "@/app/[lang]/(client)/_component/Footer/ProblemForm";
 import { useDictionary } from "@/hooks/useDictionary";
-import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
 
 export function Footer() {
@@ -16,7 +13,7 @@ export function Footer() {
   if (pathname.includes("auth")) return null;
 
   return (
-    <footer className="w-full px-6 min-h-60 sm:min-h-80 py-6 bg-purple-900 text-custom-white flex flex-col justify-between ">
+    <footer className="w-full px-6 min-h-60 sm:min-h-80 py-6 bg-add text-custom-white flex flex-col justify-between ">
       <div>
         <h3 className="text-xl text-center mb-4 font-semibold">
           {page.reportAProblem}

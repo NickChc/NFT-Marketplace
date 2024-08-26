@@ -20,7 +20,7 @@ export default async function AdminProductsPage({
     <div className="w-full sm:w-[90%] md:w-[80%] flex flex-col mx-auto min-h-[50dvh]  pb-40">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <PageHeader>{page.products}</PageHeader>
-        <button className="rounded-md bg-purple-800 dark:bg-white dark:text-black text-white  font-semibold whitespace-nowrap text-xs sm:text-sm">
+        <button className="rounded-md bg-add dark:bg-custom-white dark:text-black text-custom-white  font-semibold whitespace-nowrap text-xs sm:text-sm">
           <Link
             className="flex items-center gap-x-3  px-2 py-1 rounded-md"
             href={`/${lang}/admin/products/new`}

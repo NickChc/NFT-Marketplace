@@ -40,7 +40,7 @@ export function OfferItem({ offer }: OfferItemProps) {
         {translations.page.sentAnOffer}
       </div>
       <button
-        className="bg-purple-800 rounded-md px-2 py-1 hover:opacity-75 text-white duration-100"
+        className="bg-add rounded-md px-2 py-1 hover:opacity-75 text-custom-white duration-100"
         onClick={() => setOfferToView(offer)}
       >
         {translations.page.viewOffer}

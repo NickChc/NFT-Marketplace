@@ -115,7 +115,7 @@ export function UpdateUserForm({
   return (
     <form
       action={action}
-      className={`flex-col p-3 bg-white dark:bg-gray-900 border-solid border border-purple-700 rounded-md w-[90%] max-h-[95dvh] text-sm sm:text-base sm:w-auto gap-3 transition-display duration-300 start-style-x-100 overflow-auto ${
+      className={`flex-col p-3 bg-custom-white dark:bg-add-2 border-solid border border-add rounded-md w-[90%] max-h-[95dvh] text-sm sm:text-base sm:w-auto gap-3 transition-display duration-300 start-style-x-100 overflow-auto ${
         mounted ? "flex" : "hidden"
       }`}
     >
@@ -194,7 +194,7 @@ export function UpdateUserForm({
           <h3>{emailMessage}.</h3>
           <button
             type="button"
-            className="border-solid border border-purple-900 text-purple-800 px-2 py-1 bg-white rounded-md"
+            className="border-solid border border-add text-add px-2 py-1 bg-custom-white rounded-md"
             onClick={async () => {
               await handleLogOut();
               router.replace(`/${lang}/auth/sign-in`);

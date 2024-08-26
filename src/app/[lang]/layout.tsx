@@ -36,7 +36,7 @@ export default async function RootLayout({
   return (
     <html lang={params.lang} suppressHydrationWarning>
       <body
-        className={`bg-custom-white dark:bg-gray-900 relative ${monoton.variable} ${inter.className}`}
+        className={`bg-custom-white dark:bg-add-2 relative ${monoton.variable} ${inter.className}`}
       >
         <Providers lang={params.lang} dictionary={{ page }}>
           {children}

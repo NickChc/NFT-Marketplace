@@ -17,9 +17,17 @@ const config: Config = {
       },
       backgroundColor: {
         "custom-white": "#e8e8e8",
+        add: "#663399",
+        "add-2": "#111827",
       },
       textColor: {
         "custom-white": "#e8e8e8",
+        add: "#663399",
+        "add-2": "#111827",
+      },
+      borderColor: {
+        add: "#663399",
+        "add-2": "#111827",
       },
       fontFamily: {
         monoton: ["var(--font-monoton)"],

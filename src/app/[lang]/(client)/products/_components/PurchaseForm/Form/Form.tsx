@@ -91,14 +91,14 @@ export function Form({ product, lang }: FormProps) {
 
   return (
     <form
-      className="mt-4 flex flex-col gap-4 text-2xl text-white dark:text-white pb-6"
+      className="mt-4 flex flex-col gap-4 text-2xl text-custom-white dark:text-custom-white pb-6"
       onSubmit={handleSubmit}
     >
       <div>
-        <div className="flex flex-col sm:flex-row items-start gap-y-3 sm:items-center justify-between px-3 text-black dark:text-white">
+        <div className="flex flex-col sm:flex-row items-start gap-y-3 sm:items-center justify-between px-3 text-black dark:text-custom-white">
           <h2>{page.checkout}</h2>
           <span
-            className="flex items-center gap-x-3 cursor-pointer hover:text-purple-800 duration-150 hover:underline text-xl md:text-2xl"
+            className="flex items-center gap-x-3 cursor-pointer hover:text-add duration-150 hover:underline text-xl md:text-2xl"
             onClick={() => {
               navigator.clipboard.writeText("4242 4242 4242 4242");
               setCopied(true);
@@ -131,7 +131,7 @@ export function Form({ product, lang }: FormProps) {
         </div>
       ) : (
         <div className="mb-4">
-          <PaymentElement className="bg-purple-800 p-3 rounded-md" />
+          <PaymentElement className="bg-add p-3 rounded-md" />
         </div>
       )}
       <DualButton

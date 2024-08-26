@@ -94,7 +94,7 @@ export function ConfirmDeleteAcc({
 
   return (
     <div
-      className={`bg-white p-6 text-black w-[90%] sm:w-auto rounded-sm border-solid border border-purple-800 transition-display duration-300 start-style-x-100 ${
+      className={`bg-custom-white p-6 text-black w-[90%] sm:w-auto rounded-sm border-solid border border-add transition-display duration-300 start-style-x-100 ${
         mounted ? "block" : "hidden"
       }`}
     >

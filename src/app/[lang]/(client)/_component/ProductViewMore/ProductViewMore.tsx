@@ -86,13 +86,13 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
         ></div>
       )}
       <div
-        className={`bg-white w-[95%] xs:w-[90%] md:w-[80%] xl:max-w-[900px] 2xl:max-w-[1100px] py-6 relative border-solid border border-purple-700 rounded-md max-h-[90vh] ${
+        className={`bg-custom-white w-[95%] xs:w-[90%] md:w-[80%] xl:max-w-[900px] 2xl:max-w-[1100px] py-6 relative border-solid border border-add rounded-md max-h-[90vh] ${
           zoom ? "overflow-hidden" : "overflow-y-auto overflow-x-hidden"
         }`}
         onMouseDown={(e) => e.stopPropagation()}
       >
         <span
-          className="hover:opacity-75 text-2xl text-purple-800 cursor-pointer absolute top-1 right-1 z-50"
+          className="hover:opacity-75 text-2xl text-add cursor-pointer absolute top-1 right-1 z-50"
           onClick={closeModal}
         >
           <CloseIcon />

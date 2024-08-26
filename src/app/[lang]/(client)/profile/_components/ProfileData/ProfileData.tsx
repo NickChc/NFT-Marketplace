@@ -20,7 +20,7 @@ export function ProfileData({ lang }: ProfileDataProps) {
 
   return (
     <div className="flex flex-col gap-3 sm:text-xl md:text-2xl">
-      <hr className="w-full my-3 border-black dark:border-white" />
+      <hr className="w-full my-3 border-black dark:border-custom-white" />
       <h3 className="truncate max-w-[95%]">
         <span className="font-semibold">{translations.page.name} -</span>{" "}
         {currentUser.name}

@@ -35,7 +35,7 @@ export function ForgotPasswordFormPopup({
   }
 
   return (
-    <div className="bg-gray-300 relative flex flex-col items-stretch gap-y-4 w-full sm:mt-9 p-4 overflow-hidden rounded-sm border-solid border border-purple-800">
+    <div className="bg-gray-300 relative flex flex-col items-stretch gap-y-4 w-full sm:mt-9 p-4 overflow-hidden rounded-sm border-solid border border-add">
       {error !== "" ? (
         <div className="text-red-500 text-center">
           {error}
@@ -47,20 +47,20 @@ export function ForgotPasswordFormPopup({
           </span>
         </div>
       ) : (
-        <div className="text-purple-800 flex flex-col gap-y-2 sm:flex-row text-center items-center justify-between">
+        <div className="text-add flex flex-col gap-y-2 sm:flex-row text-center items-center justify-between">
           {translations.page.passwordRecoverySent}
           <div className="flex flex-col gap-y-2 items-stretch w-40">
             <button
               type="button"
               disabled={loading}
               onClick={handleResend}
-              className="border-solid border border-purple-800 text-purple-800 rounded-md px-2 py-0.5 font-semibold disabled:opacity-75"
+              className="border-solid border border-add text-add rounded-md px-2 py-0.5 font-semibold disabled:opacity-75"
             >
               {loading ? `${page.sending}...` : page.sendAgain}
             </button>
             <button
               type="button"
-              className="flex border-solid border border-purple-800 text-purple-800 rounded-md  font-semibold disabled:opacity-75 overflow-hidden"
+              className="flex border-solid border border-add text-add rounded-md  font-semibold disabled:opacity-75 overflow-hidden"
             >
               <Link
                 className="px-2 py-0.5 w-full"

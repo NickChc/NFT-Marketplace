@@ -69,7 +69,7 @@ export default function OfferEmail({
       <Preview>Offer Received</Preview>
       <Tailwind>
         <Head />
-        <Body className="font-sans bg-white">
+        <Body className="font-sans bg-custom-white">
           <Container>
             <h1 className="px-4">Offer</h1>
             <Section className="block sm:hidden max-w-[90%] overflow-hidden">
@@ -129,7 +129,7 @@ export default function OfferEmail({
                 </Column>
               </Row>
             </Section>
-            <Section className="border border-solid border-purple-800 rounded-lg p-4 md:p-6 my-4">
+            <Section className="border border-solid border-add rounded-lg p-4 md:p-6 my-4">
               <Img
                 width={"100%"}
                 alt={offerItem.name}
@@ -154,7 +154,7 @@ export default function OfferEmail({
                 <Row>
                   <Column align="right">
                     <Link
-                      className="whitespace-nowrap px-2 py-1 w-full max-w-20 text-center font-semibold border-solid border border-purple-800 rounded-md bg-purple-800 text-white"
+                      className="whitespace-nowrap px-2 py-1 w-full max-w-20 text-center font-semibold border-solid border border-add rounded-md bg-add text-custom-white"
                       href={`${process.env.NEXT_PUBLIC_SERVER_URL}/en/profile`}
                     >
                       View Offer

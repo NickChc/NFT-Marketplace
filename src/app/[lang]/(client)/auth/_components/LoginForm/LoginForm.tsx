@@ -128,7 +128,7 @@ export function LoginForm({ lang }: LoginFormProps) {
       <button
         type="button"
         disabled={loading}
-        className="bg-white border border-solid border-blue-500 text-black font-semibold rounded-md p-3 my-2 hover:opacity-75 duration-150 disabled:bg-blue-500 disabled:hover:opacity-50 disabled:opacity-50 disabled:text-blue-300 disabled:hover:text-blue-300 flex items-center justify-center gap-x-3 whitespace-nowrap text-sm sm:text-base"
+        className="bg-custom-white border border-solid border-blue-500 text-black font-semibold rounded-md p-3 my-2 hover:opacity-75 duration-150 disabled:bg-blue-500 disabled:hover:opacity-50 disabled:opacity-50 disabled:text-blue-300 disabled:hover:text-blue-300 flex items-center justify-center gap-x-3 whitespace-nowrap text-sm sm:text-base"
         onClick={handleGoogleLogin}
       >
         {loading ? `${page.loading}...` : page.signInWithGoogle}{" "}

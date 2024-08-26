@@ -51,7 +51,7 @@ export function UsersDropdownMenu({ user }: UsersDropdownMenuProps) {
         <DotsIcon />
       </button>
       {open && (
-        <div className="absolute top-6 right-6 p-1 flex flex-col items-start z-50 bg-white rounded-md">
+        <div className="absolute top-6 right-6 p-1 flex flex-col items-start z-50 bg-custom-white rounded-md">
           <button
             className="w-full cursor-pointer disabled:cursor-default text-left p-1 hover:bg-gray-300 rounded-t-md dark:text-black whitespace-nowrap"
             onClick={handleToggleFreeze}

@@ -55,7 +55,7 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
 
   return (
     <form
-      className={`w-[90%] sm:w-[50%] md:w-auto md:min-w-[500px] p-3 sm:p-6 bg-white dark:bg-gray-900 flex-col gap-4 border-solid border border-purple-700 rounded-md transition-display duration-300 start-style-b-t max-h-[90dvh] overflow-auto z-50 ${
+      className={`w-[90%] sm:w-[50%] md:w-auto md:min-w-[500px] p-3 sm:p-6 bg-custom-white dark:bg-add-2 flex-col gap-4 border-solid border border-add rounded-md transition-display duration-300 start-style-b-t max-h-[90dvh] overflow-auto z-50 ${
         mounted ? "flex" : "hidden"
       }`}
       action={action}

@@ -33,7 +33,7 @@ export async function Header({
           </span>
         )}
       </HeaderNav>
-      <div className="relative flex justify-between sm:hidden px-4 pb-1 pt-2 sm:p-0 bg-purple-800 w-full items-center ">
+      <div className="relative flex justify-between sm:hidden px-4 pb-1 pt-2 sm:p-0 bg-add w-full items-center ">
         <div className="flex items-center gap-x-6">
           <LangSelect lang={lang} />
           <ToggleTheme />

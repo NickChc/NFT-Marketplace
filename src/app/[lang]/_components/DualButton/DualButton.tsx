@@ -26,14 +26,14 @@ export function DualButton({
       onClick={onClick}
       disabled={disabled}
       type={type}
-      className={`border-solid border border-purple-800 disabled:z-10 disabled:pointer-events-none rounded-md w-full bg-purple-800 hover:opacity-75 disabled:opacity-60 duration-100 ${
+      className={`border border-add disabled:z-10 disabled:pointer-events-none rounded-md w-full bg-add hover:opacity-75 disabled:opacity-60 duration-100 ${
         variation === "secondary"
-          ? "bg-white text-purple-800"
+          ? "bg-custom-white text-add"
           : variation === "warning"
-          ? "bg-red-500 text-white border-red-500"
+          ? "bg-red-500 text-custom-white border-red-500"
           : variation === "blue"
-          ? "bg-blue-500 text-white"
-          : "bg-purple-800 text-white"
+          ? "bg-blue-500 text-custom-white"
+          : "bg-add text-custom-white"
       } ${
         size === "large"
           ? "p-3 font-semibold"

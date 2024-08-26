@@ -41,7 +41,7 @@ export function FormInput({
       <div className="relative flex items-stretch flex-col">
         {type === "password" && (
           <span
-            className="absolute top-1/2 right-3 -translate-y-1/2 text-xl md:text-2xl text-white cursor-pointer active:opacity-75"
+            className="absolute top-1/2 right-3 -translate-y-1/2 text-xl md:text-2xl text-custom-white cursor-pointer active:opacity-75"
             onClick={() => setShow((prev) => !prev)}
           >
             {show ? <ClosedEyeIcon /> : <OpenEyeIcon />}
@@ -59,7 +59,7 @@ export function FormInput({
           onFocus={onFocus}
           id={name}
           defaultValue={defaultValue}
-          className={`p-2 outline-none border border-solid border-blue-300 rounded-md bg-white text-black dark:bg-gray-900 dark:text-white disabled:opacity-75 ${
+          className={`p-2 outline-none border border-solid border-blue-300 rounded-md bg-custom-white text-black dark:bg-add-2 dark:text-custom-white disabled:opacity-75 ${
             type === "number" ? "appearance-none" : ""
           }`}
         />

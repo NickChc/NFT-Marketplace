@@ -66,7 +66,7 @@ export function SellForm({ product, closeModal }: SellFormProps) {
 
   return (
     <form
-      className={`w-[90%] sm:w-[50%] md:w-auto md:min-w-80 p-3 bg-white dark:bg-gray-900 flex-col gap-4 border-solid border border-purple-700 rounded-md transition-display duration-300 start-style-b-t max-h-[90vh] overflow-y-auto ${
+      className={`w-[90%] sm:w-[50%] md:w-auto md:min-w-80 p-3 bg-custom-white dark:bg-add-2 flex-col gap-4 border-solid border border-add rounded-md transition-display duration-300 start-style-b-t max-h-[90vh] overflow-y-auto ${
         mounted ? "flex" : "hidden"
       }`}
       onSubmit={handleSubmit}

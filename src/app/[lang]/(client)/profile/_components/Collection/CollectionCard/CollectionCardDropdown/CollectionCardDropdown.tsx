@@ -56,13 +56,13 @@ export function CollectionCardDropdown({
 
       {/* shows if open === true */}
       <div
-        className={`absolute bottom-6 right-9 sm:-right-9 p-1 flex flex-col items-start z-50 bg-white border-solid border border-purple-800 rounded-md transition-display start-style-y ${
+        className={`absolute bottom-6 right-9 sm:-right-9 p-1 flex flex-col items-start z-50 bg-custom-white border-solid border border-add rounded-md transition-display start-style-y ${
           open ? "block" : "hidden translate-y-[-20px] opacity-0"
         }`}
       >
         <button
           disabled={currentUser?.isFrozen}
-          className="w-full cursor-pointer disabled:opacity-50 disabled:hover:bg-white disabled:pointer-events-none text-left p-1 hover:bg-purple-300 rounded-t-md dark:text-black whitespace-nowrap"
+          className="w-full cursor-pointer disabled:opacity-50 disabled:hover:bg-custom-white disabled:pointer-events-none text-left p-1 hover:bg-purple-300 rounded-t-md dark:text-black whitespace-nowrap"
           onClick={handleSellButton}
         >
           {product.isAvailable
@@ -71,7 +71,7 @@ export function CollectionCardDropdown({
         </button>
         <button
           disabled={currentUser?.isFrozen}
-          className="whitespace-nowrap w-full cursor-pointer disabled:opacity-50 disabled:hover:bg-white disabled:pointer-events-none text-left p-1 hover:bg-purple-300 dark:text-black"
+          className="whitespace-nowrap w-full cursor-pointer disabled:opacity-50 disabled:hover:bg-custom-white disabled:pointer-events-none text-left p-1 hover:bg-purple-300 dark:text-black"
           onClick={() => setBidItem(product)}
         >
           {product.openForBidding
@@ -80,7 +80,7 @@ export function CollectionCardDropdown({
         </button>
         <button
           disabled={currentUser?.isFrozen}
-          className="w-full cursor-pointer disabled:opacity-50 disabled:hover:bg-white disabled:pointer-events-none text-left p-1 hover:bg-red-300 hover:text-red-700 dark:hover:text-red-700 dark:text-black rounded-b-md"
+          className="w-full cursor-pointer disabled:opacity-50 disabled:hover:bg-custom-white disabled:pointer-events-none text-left p-1 hover:bg-red-300 hover:text-red-700 dark:hover:text-red-700 dark:text-black rounded-b-md"
           onClick={() => setReturnItem(product)}
         >
           {translations.page.return}

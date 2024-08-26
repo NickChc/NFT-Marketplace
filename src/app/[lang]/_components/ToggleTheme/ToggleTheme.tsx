@@ -34,7 +34,7 @@ export function ToggleTheme() {
     return (
       <span
         suppressHydrationWarning
-        className="opacity-50 relative sm:absolute top-1/2 sm:-translate-y-1/2 right-3 text-sm sm:text-lg md:text-xl bg-white rounded-full w-8 md:w-10 aspect-square text-purple-700"
+        className="opacity-50 relative sm:absolute top-1/2 sm:-translate-y-1/2 right-3 text-sm sm:text-lg md:text-xl bg-custom-white rounded-full w-8 md:w-10 aspect-square text-add"
       >
         <MoonIcon className="absolute right-1/2 top-1/2 -translate-y-1/2 translate-x-1/2 " />
       </span>
@@ -44,7 +44,7 @@ export function ToggleTheme() {
   return (
     <span
       suppressHydrationWarning
-      className={`relative sm:absolute top-1/2 sm:-translate-y-1/2 right-3 text-sm sm:text-lg md:text-xl bg-white rounded-full w-8 md:w-10 aspect-square text-purple-700 cursor-pointer `}
+      className={`relative sm:absolute top-1/2 sm:-translate-y-1/2 right-3 text-sm sm:text-lg md:text-xl bg-custom-white rounded-full w-8 md:w-10 aspect-square text-add cursor-pointer `}
       onClick={memoizeToggleTheme}
     >
       <SunIcon

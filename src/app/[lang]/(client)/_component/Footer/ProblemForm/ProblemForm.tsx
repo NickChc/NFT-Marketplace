@@ -55,7 +55,7 @@ export function ProblemForm() {
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="w-full min-h-28 resize-none rounded-md text-black dark:text-white outline-none px-2 py-1 scrollbar-small"
+        className="w-full min-h-28 resize-none rounded-md text-black dark:text-custom-white outline-none px-2 py-1 scrollbar-small"
         name="text"
         id="text"
       />

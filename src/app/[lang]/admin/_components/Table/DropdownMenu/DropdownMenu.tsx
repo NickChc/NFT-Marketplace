@@ -68,7 +68,7 @@ export function DropdownMenu({ product, lang }: DropdownMenuProps) {
         <DotsIcon />
       </button>
       {open && (
-        <div className="absolute top-6 right-6 p-1 flex flex-col items-start z-50 bg-white rounded-md">
+        <div className="absolute top-6 right-6 p-1 flex flex-col items-start z-50 bg-custom-white rounded-md">
           <button
             disabled={product.owner != null}
             className="w-full cursor-pointer disabled:pointer-events-none disabled:opacity-75 text-left p-1 hover:bg-gray-300 rounded-t-md dark:text-black"
