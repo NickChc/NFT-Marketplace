@@ -28,6 +28,7 @@ const config: Config = {
         alert: "#dc143c",
       },
       borderColor: {
+        "custom-white": "#e8e8e8",
         add: "#663399",
         "add-2": "#111827",
         alert: "#dc143c",

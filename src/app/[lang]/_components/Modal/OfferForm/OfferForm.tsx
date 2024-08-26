@@ -79,7 +79,7 @@ export function OfferForm({ closeModal, offerItem }: OfferFormProps) {
               src={offerItem.imagePath}
               alt={offerItem.name}
               fill
-              objectFit="cover"
+              className="object-cover"
             />
           </div>
           <FormInput

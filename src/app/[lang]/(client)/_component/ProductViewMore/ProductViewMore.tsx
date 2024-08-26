@@ -120,8 +120,7 @@ export function ProductViewMore({ lang }: ProductViewMoreProps) {
               src={product.imagePath}
               alt="Image for NFT"
               fill
-              objectFit="contain"
-              className={zoom ? "" : ""}
+              className="object-contain"
             />
           </div>
           <div className="flex flex-col items-start justify-between w-full mt-3 sm:mt-0 sm:w-1/2 ">

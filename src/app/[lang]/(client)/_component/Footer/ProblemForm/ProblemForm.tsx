@@ -1,11 +1,11 @@
 "use client";
 
-import { useDictionary } from "@/hooks/useDictionary";
+import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
+import { useDictionary } from "@/hooks/useDictionary";
 import { reportProblem } from "@/app/[lang]/(client)/_actions/general";
 import { ProblemSubmitBtn } from "@/app/[lang]/(client)/_component/Footer/ProblemForm/ProblemSubmitBtn";
-import { useEffect, useState } from "react";
-import { CheckIcon } from "@/assets/icons";
+import { CheckIcon, SendIcon } from "@/assets/icons";
 import { REPORTS } from "@/config/storageKeys";
 
 export function ProblemForm() {
@@ -54,7 +54,9 @@ export function ProblemForm() {
     >
       <textarea
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => {
+          setText(e.target.value);
+        }}
         className="w-full min-h-28 resize-none rounded-md text-black dark:text-custom-white outline-none px-2 py-1 scrollbar-small"
         name="text"
         id="text"
@@ -80,7 +82,10 @@ export function ProblemForm() {
             status === "success" ? "scale-0 absolute invisible" : ""
           }`}
         >
-          {translations.page.send}
+          <div className="inline-flex text-lg xs:text-xl sm:text-2xl items-center gap-x-4">
+            {translations.page.send}
+            <SendIcon className="-rotate-45 mb-1 sm:mb-2" />
+          </div>
         </div>
       </ProblemSubmitBtn>
     </form>

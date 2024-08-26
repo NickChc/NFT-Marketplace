@@ -8,6 +8,7 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { useGlobalProvider } from "@/providers/GlobalProvider";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
 import { useEffect, useState } from "react";
+import { ExchangeIcon, PayIcon } from "@/assets/icons";
 
 interface ProductCardButtonProps {
   product: TProduct;
@@ -63,13 +64,19 @@ export function ProductCardButton({
           </a>
         ) : currentUser == null ? (
           <Link
-            className="min-w-full min-h-full px-2 py-1 rounded-md"
+            className="min-w-full min-h-full px-2 py-1 rounded-md whitespace-nowrap "
             href={`/${lang}/auth/sign-in?offerAfter=${product.id}`}
           >
-            {page.bid}
+            <div className="inline-flex items-center gap-x-4">
+              {page.bid}
+              <ExchangeIcon className="text-2xl" />
+            </div>
           </Link>
         ) : (
-          page.bid
+          <div className="inline-flex items-center gap-x-4">
+            {page.bid}
+            <ExchangeIcon className="text-xl" />
+          </div>
         )}
       </DualButton>
     );
@@ -95,7 +102,10 @@ export function ProductCardButton({
                 : `/${lang}/auth/sign-in?purchase=${product.id}`
             }
           >
-            {page.buy}
+            <div className="inline-flex items-center gap-x-4">
+              {page.buy}
+              <PayIcon className="text-xl" />
+            </div>
           </Link>
         ) : (
           page.notAvailable

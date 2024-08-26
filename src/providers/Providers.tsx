@@ -29,7 +29,7 @@ export function Providers({
     <GlobalProvider>
       <AuthProvider lang={lang}>
         <LocaleProvider dictionary={dictionary}>
-          <ThemeProvider attribute="class" defaultTheme="system">
+          <ThemeProvider attribute="class" defaultTheme="dark">
             {children}
           </ThemeProvider>
         </LocaleProvider>

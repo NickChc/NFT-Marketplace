@@ -1,5 +1,6 @@
 "use client";
 
+import { DeleteIcon } from "@/assets/icons";
 import { auth } from "@/firebase";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useUserCollection } from "@/hooks/useUserCollection";
@@ -61,7 +62,10 @@ export function DeleteAccount({ text }: DeleteAccountProps) {
           }
           className="w-full sm:w-auto border-solid border border-alert text-alert px-6 py-1 rounded-md hover:bg-alert hover:text-custom-white duration-75 disabled:hover:bg-transparent disabled:hover:text-alert disabled:opacity-75"
         >
-          {text.delete}
+          <div className="inline-flex items-center gap-x-3">
+            {text.delete}
+            <DeleteIcon className="text-xl" />
+          </div>
         </button>
       </form>
       {errorMessage !== "" && (

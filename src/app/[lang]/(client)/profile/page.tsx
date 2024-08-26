@@ -28,7 +28,7 @@ export default async function ProfilePage({
         <OfferList />
         <Collection lang={lang} />
         <ProfileData lang={lang} />
-        <hr className="w-full my-3" />
+        <hr className="w-full my-3 border-black dark:border-custom-white" />
       </div>
       <DeleteAccount text={{ ...page }} />
     </div>

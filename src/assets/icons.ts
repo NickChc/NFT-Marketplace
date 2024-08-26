@@ -23,3 +23,8 @@ export { GrCircleQuestion as QuestionMarkIcon } from "react-icons/gr";
 export { FaCopy as CopyIcon } from "react-icons/fa";
 export { FaPlus as PlusIcon } from "react-icons/fa";
 export { GiMonkey as MonkeyIcon } from "react-icons/gi";
+export { MdEdit as EditIcon } from "react-icons/md";
+export { MdDelete as DeleteIcon } from "react-icons/md";
+export { IoSend as SendIcon } from "react-icons/io5";
+export { MdPayment as PayIcon } from "react-icons/md";
+export { FaExchangeAlt as ExchangeIcon } from "react-icons/fa";

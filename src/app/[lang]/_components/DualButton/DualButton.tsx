@@ -26,7 +26,7 @@ export function DualButton({
       onClick={onClick}
       disabled={disabled}
       type={type}
-      className={`border border-add disabled:z-10 disabled:pointer-events-none rounded-md w-full bg-add hover:opacity-75 disabled:opacity-60 duration-100 ${
+      className={`border border-add disabled:z-10 disabled:pointer-events-none rounded-md w-full bg-add hover:opacity-75 disabled:opacity-60 duration-100 whitespace-nowrap truncate ${
         variation === "secondary"
           ? "bg-custom-white text-add"
           : variation === "warning"

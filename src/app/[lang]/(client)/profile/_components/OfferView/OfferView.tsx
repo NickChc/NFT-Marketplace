@@ -107,7 +107,7 @@ export function OfferView({ offer, lang, closeModal }: OfferViewProps) {
               src={offerItem.imagePath}
               alt={offerItem.name}
               fill
-              objectFit="cover"
+              className="object-cover"
             />
           </div>
           {answer === TAnswer_Enum.DECLINE ? (

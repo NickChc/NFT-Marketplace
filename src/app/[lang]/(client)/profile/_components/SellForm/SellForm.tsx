@@ -83,7 +83,7 @@ export function SellForm({ product, closeModal }: SellFormProps) {
           src={product.imagePath}
           alt={product.name}
           fill
-          objectFit="cover"
+          className="object-cover"
         />
       </div>
       <FormInput

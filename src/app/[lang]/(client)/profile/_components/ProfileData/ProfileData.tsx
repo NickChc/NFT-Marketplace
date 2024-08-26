@@ -6,6 +6,7 @@ import { formatCurrency } from "@/lib/formatters";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useGlobalProvider } from "@/providers/GlobalProvider";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
+import { EditIcon } from "@/assets/icons";
 
 interface ProfileDataProps {
   lang: TLocale;
@@ -20,7 +21,7 @@ export function ProfileData({ lang }: ProfileDataProps) {
 
   return (
     <div className="flex flex-col gap-3 sm:text-xl md:text-2xl">
-      <hr className="w-full my-3 border-black dark:border-custom-white" />
+      <hr className="w-full my-3 border-black dark:border-custom-white hidden" />
       <h3 className="truncate max-w-[95%]">
         <span className="font-semibold">{translations.page.name} -</span>{" "}
         {currentUser.name}
@@ -40,10 +41,13 @@ export function ProfileData({ lang }: ProfileDataProps) {
         </div>
       ) : (
         <DualButton onClick={() => setUpdateUser(currentUser)}>
-          {translations.page.edit}
+          <div className="inline-flex items-center gap-x-4">
+            {translations.page.edit}
+            <EditIcon />
+          </div>
         </DualButton>
       )}
-      <hr className="w-full my-3" />
+      <hr className="w-full my-3 border-black dark:border-custom-white" />
       <h3 className="truncate max-w-[95%]">
         <span className="font-semibold">{translations.page.totalSpent}</span> -{" "}
         {formatCurrency((currentUser?.spentInCents || 0) / 100)}
