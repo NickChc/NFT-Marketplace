@@ -122,7 +122,7 @@ export function ConfirmDeleteAcc({
               onChange={(e) => setPassword(e.target.value)}
             />
             {errorMessage !== "" && (
-              <div className="text-red-500">{errorMessage}</div>
+              <div className="text-alert">{errorMessage}</div>
             )}
             <div className="my-2"></div>
             <DualButton

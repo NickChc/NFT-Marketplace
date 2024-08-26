@@ -18,6 +18,7 @@ export function SubmitBtn({
 
   return (
     <DualButton
+      type="submit"
       variation="blue"
       disabled={pending || disabled}
       size="large"

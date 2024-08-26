@@ -59,13 +59,13 @@ export function DeleteAccount({ text }: DeleteAccountProps) {
             currentUser == null ||
             collection.length > 0
           }
-          className="w-full sm:w-auto border-solid border border-red-500 text-red-500 px-6 py-1 rounded-md hover:bg-red-500 hover:text-custom-white duration-75 disabled:hover:bg-transparent disabled:hover:text-red-500 disabled:opacity-75"
+          className="w-full sm:w-auto border-solid border border-alert text-alert px-6 py-1 rounded-md hover:bg-alert hover:text-custom-white duration-75 disabled:hover:bg-transparent disabled:hover:text-alert disabled:opacity-75"
         >
           {text.delete}
         </button>
       </form>
       {errorMessage !== "" && (
-        <div className="text-red-500 p-1 text-center sm:text-end">
+        <div className="text-alert p-1 text-center sm:text-end">
           {errorMessage}
         </div>
       )}

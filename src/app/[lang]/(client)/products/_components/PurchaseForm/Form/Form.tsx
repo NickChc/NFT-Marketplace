@@ -118,13 +118,13 @@ export function Form({ product, lang }: FormProps) {
           </span>
         </div>
         {errorMessage && (
-          <div className="text-red-500 text-lg sm:text-xl md:text-2xl">
+          <div className="text-alert text-lg sm:text-xl md:text-2xl">
             {errorMessage}
           </div>
         )}
       </div>
       {currentUser?.isFrozen ? (
-        <div className="text-red-500">
+        <div className="text-alert">
           {lang === "ka"
             ? "თქვენი ანგარიში გაყინულია!"
             : "Your account is frozen!"}

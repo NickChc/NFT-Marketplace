@@ -128,7 +128,7 @@ export function UpdateUserForm({
         defaultValue={updateUser?.name}
       />
       {error?.name && (
-        <div className="text-red-500">
+        <div className="text-alert">
           {translations.page.authValidation.emptyField}
         </div>
       )}
@@ -139,7 +139,7 @@ export function UpdateUserForm({
         defaultValue={updateUser?.surname}
       />
       {error?.surname && (
-        <div className="text-red-500">
+        <div className="text-alert">
           {translations.page.authValidation.emptyField}
         </div>
       )}
@@ -160,7 +160,7 @@ export function UpdateUserForm({
               defaultValue={updateUser?.email}
             />
             {error?.email && (
-              <div className="text-red-500">
+              <div className="text-alert">
                 {error.email[0] === "Invalid email"
                   ? translations.page.invalidEmail
                   : error.email}
@@ -178,7 +178,7 @@ export function UpdateUserForm({
           />
         )}
         {emailMessage === "" && (
-          <div className={errorMessage === "" ? "" : "text-red-500"}>
+          <div className={errorMessage === "" ? "" : "text-alert"}>
             {authProvider !== "password"
               ? translations.page.registerToChangeEmail
               : errorMessage === ""
@@ -188,7 +188,7 @@ export function UpdateUserForm({
         )}
       </>
 
-      {emailError !== "" && <div className="text-red-500">{emailError}</div>}
+      {emailError !== "" && <div className="text-alert">{emailError}</div>}
       {emailMessage !== "" && (
         <div className="flex items-center gap-3 justify-around">
           <h3>{emailMessage}.</h3>

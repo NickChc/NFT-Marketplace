@@ -43,7 +43,7 @@ export async function ProductsTable({ lang }: TableProps) {
                 {product.isAvailable ? (
                   <CheckIcon className="text-green-500" />
                 ) : (
-                  <CrossIcon className="text-red-500" />
+                  <CrossIcon className="text-alert" />
                 )}
               </td>
               <td className="truncate max-w-14 sm:max-w-24 text-center py-4">

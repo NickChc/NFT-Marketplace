@@ -14,8 +14,9 @@ export function BackgroundImage() {
       <Image
         src={BackgroundImg}
         alt="background image"
-        layout="fill"
-        className="pointer-events-none"
+        fill
+        sizes="100vw 100vh"
+        className="pointer-events-none object-cover"
       />
     </div>
   );

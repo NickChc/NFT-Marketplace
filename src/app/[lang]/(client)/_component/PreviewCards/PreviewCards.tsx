@@ -24,14 +24,14 @@ export async function PreviewCards({
 
   return (
     <>
-      <div className="mt-3 sm:mt-9 flex flex-col sm:flex-row items-start sm:items-center gap-x-3 sm:gap-x-14">
-        <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold ml-2">
+      <div className="mt-3 sm:mt-9 flex flex-row items-center gap-x-0 xs:gap-x-3 sm:gap-x-14 overflow-hidden ">
+        <h2 className="text-base xs:text-lg sm:text-2xl md:text-3xl font-semibold ml-2">
           {title}
         </h2>
-        <hr className="w-full sm:hidden my-2 bg-black dark:bg-custom-white" />
+        <hr className="rotate-90 w-10 h-[1px] sm:hidden my-2 bg-black dark:bg-custom-white" />
         <Link
           href={href || `/${lang}/products`}
-          className="flex items-center gap-x-4 text-lg sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"
+          className="flex items-center gap-x-4 text-base xs:text-lg sm:text-2xl md:text-3xl font-semibold ml-2 group whitespace-nowrap"
         >
           {page.viewAll}
           <span className="duration-200 group-hover:ml-4">

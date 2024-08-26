@@ -17,8 +17,8 @@ export default async function InfoPage({ params: { lang } }: InfoPageProps) {
 
   return (
     <>
-      <PageHeader>{page.learnAboutNFT}</PageHeader>
       <div className="container xl:w-[80%] xl:mx-auto pb-9 px-1 mx-auto">
+        <PageHeader>{page.learnAboutNFT}</PageHeader>
         <div className="mt-14 flex flex-col gap-6">
           <InfoPageCard image={WhatIsNFTImage} title={page.whatIsNFT}>
             {lang === "ka"

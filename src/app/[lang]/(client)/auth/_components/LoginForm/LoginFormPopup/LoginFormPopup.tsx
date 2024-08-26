@@ -14,10 +14,10 @@ export function LoginFormPopup({ error, closePopup }: LoginFormPopupProps) {
   return (
     <div className="bg-gray-300 relative flex flex-col items-stretch gap-y-4 w-full mt-4 sm:mt-9 p-4 overflow-hidden rounded-sm border-solid border border-add">
       {error !== "" && (
-        <div className="text-red-500 text-center">
+        <div className="text-alert text-center">
           {error}
           <span
-            className="absolute top-1 right-1 text-red-500 cursor-pointer text-2xl"
+            className="absolute top-1 right-1 text-alert cursor-pointer text-2xl"
             onClick={closePopup}
           >
             <CloseIcon />

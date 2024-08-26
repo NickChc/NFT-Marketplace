@@ -47,7 +47,7 @@ export function AcceptView({ offer, onCancel, closeModal }: AcceptViewProps) {
       </div>
       {message !== "" ? (
         <>
-          <div className="text-red-500">{message}</div>
+          <div className="text-alert">{message}</div>
           <div className="mt-4">
             <DualButton onClick={closeModal}>{translations.page.ok}</DualButton>
           </div>

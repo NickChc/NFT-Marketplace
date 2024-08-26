@@ -4,6 +4,7 @@ import { LangSelect } from "@/app/[lang]/_components/LangSelect";
 import { HeaderNav } from "@/app/[lang]/_components/HeaderNav";
 import { ToggleTheme } from "@/app/[lang]/_components/ToggleTheme";
 import { AuthButton } from "@/app/[lang]/(client)/_component/AuthButton";
+import { Logo } from "@/app/[lang]/_components/Logo";
 
 interface HeaderProps {
   lang: TLocale;
@@ -38,7 +39,14 @@ export async function Header({
           <LangSelect lang={lang} />
           <ToggleTheme />
         </div>
-        {!forAdmin && <AuthButton lang={lang} />}
+        {!forAdmin && (
+          <>
+            <div className="hidden xs:block absolute top-1/2 right-14 -translate-y-1/2">
+              <Logo isForHeader />
+            </div>
+            <AuthButton lang={lang} />
+          </>
+        )}
       </div>
     </header>
   );

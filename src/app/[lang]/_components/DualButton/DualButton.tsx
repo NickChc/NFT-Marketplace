@@ -30,9 +30,9 @@ export function DualButton({
         variation === "secondary"
           ? "bg-custom-white text-add"
           : variation === "warning"
-          ? "bg-red-500 text-custom-white border-red-500"
+          ? "bg-alert text-custom-white border-alert"
           : variation === "blue"
-          ? "bg-blue-500 text-custom-white"
+          ? "bg-add-3 text-custom-white"
           : "bg-add text-custom-white"
       } ${
         size === "large"

@@ -35,7 +35,7 @@ export function ProfileData({ lang }: ProfileDataProps) {
       </h3>
 
       {currentUser.isFrozen ? (
-        <div className="text-red-500 mt-4 text-base sm:text-lg">
+        <div className="text-alert mt-4 text-base sm:text-lg">
           {translations.page.frozenAccount}
         </div>
       ) : (

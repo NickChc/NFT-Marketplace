@@ -92,7 +92,7 @@ export function SellForm({ product, closeModal }: SellFormProps) {
         name="price"
         label={translations.page.selectPrice}
       />
-      {error !== "" && <div className="text-red-500">{error}</div>}
+      {error !== "" && <div className="text-alert">{error}</div>}
       <div>
         {translations.page.itemWasPurchasedFor} -{" "}
         {formatCurrency(product.owner?.paidInCents || 0)}
