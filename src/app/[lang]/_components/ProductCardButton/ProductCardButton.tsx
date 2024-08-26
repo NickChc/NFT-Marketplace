@@ -8,7 +8,7 @@ import { useDictionary } from "@/hooks/useDictionary";
 import { useGlobalProvider } from "@/providers/GlobalProvider";
 import { DualButton } from "@/app/[lang]/_components/DualButton";
 import { useEffect, useState } from "react";
-import { ExchangeIcon, PayIcon } from "@/assets/icons";
+import { DownloadIcon, ExchangeIcon, PayIcon } from "@/assets/icons";
 
 interface ProductCardButtonProps {
   product: TProduct;
@@ -60,7 +60,10 @@ export function ProductCardButton({
             className="min-w-full min-h-full px-2 py-1 rounded-md"
             href={`/${lang}/products/${product.id}/download?email=${encodedEmail}`}
           >
-            {page.download}
+            <div className="inline-flex items-center gap-x-3">
+              {page.download}
+              <DownloadIcon className="text-xl" />
+            </div>
           </a>
         ) : currentUser == null ? (
           <Link
@@ -91,7 +94,10 @@ export function ProductCardButton({
             className="min-w-full min-h-full px-2 py-1 rounded-md"
             href={`/${lang}/products/${product.id}/download?email=${encodedEmail}`}
           >
-            {page.download}
+            <div className="inline-flex items-center gap-x-3">
+              {page.download}
+              <DownloadIcon className="text-xl" />
+            </div>
           </a>
         ) : product.isAvailable ? (
           <Link
