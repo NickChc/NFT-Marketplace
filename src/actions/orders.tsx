@@ -208,10 +208,6 @@ export async function acceptOffer(offer: TOffer, prevState: unknown) {
 
   const { name, imagePath, description } = offerItem;
 
-  console.log(imagePath);
-  console.log(imagePath);
-  console.log(imagePath);
-
   await resend.emails.send({
     from: `Support <${process.env.NEXT_PUBLIC_SENDER_EMAIL}>`,
     to: offer.from,
