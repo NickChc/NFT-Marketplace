@@ -48,7 +48,7 @@ export function ProductCardButton({
   }, [currentUser, product]);
 
   if (product.owner?.isFrozen) {
-    return <DualButton>{page.notAvailable}</DualButton>;
+    return <DualButton>{page.notAvailable.toLocaleUpperCase()}</DualButton>;
   } else if (product.openForBidding) {
     return (
       <DualButton
@@ -61,7 +61,7 @@ export function ProductCardButton({
             href={`/${lang}/products/${product.id}/download?email=${encodedEmail}`}
           >
             <div className="inline-flex items-center gap-x-3">
-              {page.download}
+              {page.download.toLocaleUpperCase()}
               <DownloadIcon className="text-xl" />
             </div>
           </a>
@@ -71,13 +71,13 @@ export function ProductCardButton({
             href={`/${lang}/auth/sign-in?offerAfter=${product.id}`}
           >
             <div className="inline-flex items-center gap-x-4">
-              {page.bid}
+              {page.bid.toLocaleUpperCase()}
               <ExchangeIcon className="text-2xl" />
             </div>
           </Link>
         ) : (
           <div className="inline-flex items-center gap-x-4">
-            {page.bid}
+            {page.bid.toLocaleUpperCase()}
             <ExchangeIcon className="text-xl" />
           </div>
         )}
@@ -95,7 +95,7 @@ export function ProductCardButton({
             href={`/${lang}/products/${product.id}/download?email=${encodedEmail}`}
           >
             <div className="inline-flex items-center gap-x-3">
-              {page.download}
+              {page.download.toLocaleUpperCase()}
               <DownloadIcon className="text-xl" />
             </div>
           </a>
@@ -109,12 +109,12 @@ export function ProductCardButton({
             }
           >
             <div className="inline-flex items-center gap-x-4">
-              {page.buy}
+              {page.buy.toLocaleUpperCase()}
               <PayIcon className="text-xl" />
             </div>
           </Link>
         ) : (
-          page.notAvailable
+          page.notAvailable.toLocaleUpperCase()
         )}
       </DualButton>
     );

@@ -23,9 +23,12 @@ export default async function ClientLayout({
   return (
     <div>
       <Header lang={lang}>
-        <NavLink title={page.home} path={`/${lang}`} />
-        <NavLink title={page.products} path={`/${lang}/products`} />
-        <NavLink title={page.info} path={`/${lang}/info`} />
+        <NavLink title={page.home.toLocaleUpperCase()} path={`/${lang}`} />
+        <NavLink
+          title={page.products.toLocaleUpperCase()}
+          path={`/${lang}/products`}
+        />
+        <NavLink title={page.info.toLocaleUpperCase()} path={`/${lang}/info`} />
       </Header>
       <BackgroundImage />
       <Modal lang={lang} />

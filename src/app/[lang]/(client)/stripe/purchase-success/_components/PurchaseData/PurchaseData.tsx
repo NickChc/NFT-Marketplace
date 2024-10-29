@@ -70,14 +70,14 @@ export function PurchaseData({ product, isSuccess, lang }: PurchaseDataProps) {
                   download
                   href={`/${lang}/products/${product.id}/download?email=${encodedEmail}`}
                 >
-                  {translations.page.download}
+                  {translations.page.download.toLocaleUpperCase()}
                 </a>
               ) : (
                 <Link
                   className="w-full h-full p-2"
                   href={`/products/${product.id}/buy`}
                 >
-                  {translations.page.tryAgain}
+                  {translations.page.tryAgain.toLocaleUpperCase()}
                 </Link>
               )}
             </DualButton>
