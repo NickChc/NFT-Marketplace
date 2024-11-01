@@ -25,9 +25,18 @@ export default async function AdminLayout({
   return (
     <>
       <Header lang={lang} forAdmin>
-        <NavLink path={`/${lang}/admin`} title={page.dashboard} />
-        <NavLink path={`/${lang}/admin/products`} title={page.products} />
-        <NavLink path={`/${lang}/admin/customers`} title={page.customers} />
+        <NavLink
+          path={`/${lang}/admin`}
+          title={page.dashboard.toLocaleUpperCase()}
+        />
+        <NavLink
+          path={`/${lang}/admin/products`}
+          title={page.products.toLocaleUpperCase()}
+        />
+        <NavLink
+          path={`/${lang}/admin/customers`}
+          title={page.customers.toLocaleUpperCase()}
+        />
       </Header>
       {children}
     </>
